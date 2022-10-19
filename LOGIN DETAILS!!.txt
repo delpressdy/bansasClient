@@ -1,0 +1,10 @@
+
+**Database Name: resultgrading**
+
+**Admin Login Details** 
+
+Username: press
+Password: press
+
+
+
