@@ -48,7 +48,11 @@ if(isset($_POST['submit'])){
   ?>
 
 <!doctype html>
+<<<<<<< HEAD
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+=======
+<html class="no-js" lang="">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -70,6 +74,7 @@ if(isset($_POST['submit'])){
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+<<<<<<< HEAD
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
@@ -82,6 +87,12 @@ if(isset($_POST['submit'])){
     <!-- Left Panel -->
 
     <!-- Right Panel -->
+=======
+</head>
+<body>
+    <?php $page="faculty"; include 'includes/leftMenu.php';?>
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <div id="right-panel" class="right-panel">
 
@@ -105,8 +116,13 @@ if(isset($_POST['submit'])){
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
                                     <li><a href="#">Dashboard</a></li>
+<<<<<<< HEAD
                                     <li><a href="#">Faculty</a></li>
                                     <li class="active">Edit Faculty</li>
+=======
+                                    <li><a href="#">Classroom</a></li>
+                                    <li class="active">Edit Classroom</li>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                 </ol>
                             </div>
                         </div>
@@ -121,10 +137,16 @@ if(isset($_POST['submit'])){
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
+<<<<<<< HEAD
                                 <strong class="card-title"><h2 align="center">Edit Faculty</h2></strong>
                             </div>
                             <div class="card-body">
                                 <!-- Credit Card -->
+=======
+                                <strong class="card-title"><h2 align="center">Edit Classroom</h2></strong>
+                            </div>
+                            <div class="card-body">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                 <div id="pay-invoice">
                                     <div class="card-body">
                                        <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
@@ -132,15 +154,24 @@ if(isset($_POST['submit'])){
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
+<<<<<<< HEAD
                                                         <label for="cc-exp" class="control-label mb-1">Faculty</label>
                                                         <input id="" name="facultyName" type="tel" class="form-control cc-exp" value="<?php echo $rowi['facultyName']?>" placeholder="Faculty Name">
+=======
+                                                        <label for="cc-exp" class="control-label mb-1">Classroom</label>
+                                                        <input id="" name="facultyName" type="tel" class="form-control cc-exp" value="<?php echo $rowi['facultyName']?>" placeholder="Room Name">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                     </div>
                                                 </div>
                                                 
                                                     </div>
                                                     <div>
 
+<<<<<<< HEAD
                                                 <button type="submit" name="submit" class="btn btn-primary">Update Faculty</button>
+=======
+                                                <button type="submit" name="submit" class="btn btn-primary">Update</button>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             </div>
                                         </form>
                                     </div>
@@ -154,14 +185,22 @@ if(isset($_POST['submit'])){
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
+<<<<<<< HEAD
                                 <strong class="card-title"><h2 align="center">All Faculty</h2></strong>
+=======
+                                <strong class="card-title"><h2 align="center">All Rooms</h2></strong>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>#</th>
+<<<<<<< HEAD
                                             <th>Faculty</th>
+=======
+                                            <th>Name</th>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             <th>Date</th>
                                             <th>Edit</th>
                                             <th>Delete</th>                                           
@@ -190,18 +229,29 @@ if(isset($_POST['submit'])){
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
 <!-- end of datatable -->
 
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
+=======
+
+            </div>
+        </div>
+    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <div class="clearfix"></div>
 
         <?php include 'includes/footer.php';?>
 
 
+<<<<<<< HEAD
 </div><!-- /#right-panel -->
+=======
+</div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 <!-- Right Panel -->
 

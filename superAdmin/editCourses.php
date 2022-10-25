@@ -77,8 +77,11 @@ if(isset($_POST['submit'])){
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+<<<<<<< HEAD
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <script>
 
 function isNumber(evt) {
@@ -97,10 +100,15 @@ function showValues(str) {
         return;
     } else { 
         if (window.XMLHttpRequest) {
+<<<<<<< HEAD
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
         } else {
             // code for IE6, IE5
+=======
+            xmlhttp = new XMLHttpRequest();
+        } else {
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function() {
@@ -119,10 +127,15 @@ function showLecturer(str) {
         return;
     } else { 
         if (window.XMLHttpRequest) {
+<<<<<<< HEAD
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
         } else {
             // code for IE6, IE5
+=======
+            xmlhttp = new XMLHttpRequest();
+        } else {
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function() {
@@ -137,6 +150,7 @@ function showLecturer(str) {
 </script>
 </head>
 <body>
+<<<<<<< HEAD
     <!-- Left Panel -->
     <?php $page="courses"; include 'includes/leftMenu.php';?>
 
@@ -145,14 +159,21 @@ function showLecturer(str) {
     <!-- Left Panel -->
 
     <!-- Right Panel -->
+=======
+    <?php $page="courses"; include 'includes/leftMenu.php';?>
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
             <?php include 'includes/header.php';?>
+<<<<<<< HEAD
         <!-- /header -->
         <!-- Header-->
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
         <div class="breadcrumbs">
             <div class="breadcrumbs-inner">
                 <div class="row m-0">
@@ -168,8 +189,13 @@ function showLecturer(str) {
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
                                     <li><a href="#">Dashboard</a></li>
+<<<<<<< HEAD
                                     <li><a href="#">Courses</a></li>
                                     <li class="active">Add Courses</li>
+=======
+                                    <li><a href="#">Subjects</a></li>
+                                    <li class="active">Add Subs</li>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                 </ol>
                             </div>
                         </div>
@@ -184,10 +210,16 @@ function showLecturer(str) {
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
+<<<<<<< HEAD
                                 <strong class="card-title"><h2 align="center">Add New Course</h2></strong>
                             </div>
                             <div class="card-body">
                                 <!-- Credit Card -->
+=======
+                                <strong class="card-title"><h2 align="center">Add New</h2></strong>
+                            </div>
+                            <div class="card-body">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                 <div id="pay-invoice">
                                     <div class="card-body">
                                        <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
@@ -195,24 +227,37 @@ function showLecturer(str) {
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
+<<<<<<< HEAD
                                                         <label for="cc-exp" class="control-label mb-1">Course Title</label>
+=======
+                                                        <label for="cc-exp" class="control-label mb-1">Title</label>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                         <input id="" name="courseTitle" type="text" class="form-control cc-exp" value="<?php echo $rowi['courseTitle'];?>" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Course Title">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
+<<<<<<< HEAD
                                                     <label for="x_card_code" class="control-label mb-1">Course Code</label>
                                                         <input id="" name="courseCode" type="text" class="form-control cc-exp" value="<?php echo $rowi['courseCode'];?>" Required placeholder="Course Code">
                                                         <!-- <input id="" maxlength="4" onkeypress="return isNumber(event)" name="courseId" type="text" class="form-control cc-cvc" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Course ID should start from 0001"> -->
+=======
+                                                    <label for="x_card_code" class="control-label mb-1">Sbuject Code</label>
+                                                        <input id="" name="courseCode" type="text" class="form-control cc-exp" value="<?php echo $rowi['courseCode'];?>" Required placeholder="Course Code">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                         </div>
                                                     </div>
                                                     <div>
                                                 <div class="row">
+<<<<<<< HEAD
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="cc-exp" class="control-label mb-1">Course Unit</label>
                                                         <input id="" name="courseUnit" type="text" class="form-control cc-exp" value="<?php echo $rowi['courseUnit'];?>" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Course Unit">
                                                     </div>
                                                 </div>
+=======
+                                                
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                      <label for="x_card_code" class="control-label mb-1">Level</label>
@@ -230,8 +275,11 @@ function showLecturer(str) {
                                                     ?>   
                                                 </div>
                                                 </div>
+<<<<<<< HEAD
                                             </div>
                                              <div class="row">
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="cc-exp" class="control-label mb-1">Semester</label>
@@ -249,6 +297,12 @@ function showLecturer(str) {
                                                     ?>                                                       
                                                     </div>
                                                 </div>
+<<<<<<< HEAD
+=======
+                                            </div>
+                                             <div class="row">
+                                                
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                      <label for="x_card_code" class="control-label mb-1">Faculty</label>
@@ -267,8 +321,11 @@ function showLecturer(str) {
                                                                
                                                 </div>
                                                 </div>
+<<<<<<< HEAD
                                             </div>
                                              <div class="row">
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                     <?php
@@ -277,23 +334,37 @@ function showLecturer(str) {
                                                                                                             
                                                 </div>
                                                 </div>
+<<<<<<< HEAD
                                                
                                             </div>
                                                 <button type="submit" name="submit" class="btn btn-primary">Update Course</button>
+=======
+                                            </div>
+                                                <button type="submit" name="submit" class="btn btn-primary">Update</button>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
                         </div> <!-- .card -->
                     </div><!--/.col-->
+=======
+                        </div>
+                    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                
 
                 <br><br>
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
+<<<<<<< HEAD
                                 <strong class="card-title"><h2 align="center">All Courses</h2></strong>
+=======
+                                <strong class="card-title"><h2 align="center">All Subjects</h2></strong>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
@@ -302,11 +373,18 @@ function showLecturer(str) {
                                             <th>#</th>
                                             <th>Title</th>
                                             <th>Code</th>
+<<<<<<< HEAD
                                             <th>Unit</th>
                                             <th>Level</th>
                                             <th>Faculty</th>
                                             <th>Department</th>
                                              <th>Semester</th>
+=======
+                                            <th>Class lvl</th>
+                                            <th>Classroom</th>
+                                            <th>Sectiom</th>
+                                             <th>Grading</th>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             <th>Date</th>
                                             <th>Actions</th>
                                         </tr>
@@ -329,7 +407,10 @@ function showLecturer(str) {
                 <td><?php echo $cnt;?></td>
                 <td><?php  echo $row['courseTitle'];?></td>
                 <td><?php  echo $row['courseCode'];?></td>
+<<<<<<< HEAD
                 <td><?php  echo $row['courseUnit'];?></td>
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                 <td><?php  echo $row['levelName'];?></td>
                 <td><?php  echo $row['facultyName'];?></td>
                 <td><?php  echo $row['departmentName'];?></td>
@@ -347,10 +428,16 @@ function showLecturer(str) {
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
 <!-- end of datatable -->
 
             </div>
         </div><!-- .animated -->
+=======
+
+            </div>
+        </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
     </div><!-- .content -->
 
     <div class="clearfix"></div>

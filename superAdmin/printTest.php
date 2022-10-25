@@ -1,10 +1,14 @@
 <?php
 namespace Dompdf;
 require_once 'dompdf/autoload.inc.php';
+<<<<<<< HEAD
 // session_start();
 // include('includes/config.php');
 ob_start();
 // require_once('includes/configpdo.php');
+=======
+ob_start();
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 error_reporting(0);
 
 ?>
@@ -54,7 +58,10 @@ while($rows = mysql_fetch_array($query)){
 <p><b>Matric No:</b> <?php echo $rows['matricno'];?>
 <p><b>Sex:</b> <?php echo $rows['sex'];?>
 </div>
+<<<<<<< HEAD
 <!-- <div align="right" style="margin-top:-2000px;"><img src="./<?php echo $rows['pic'];?>" alt="<?php echo $rows['surname'];?>" style="width:100px;height:100px;" class="img-circle profile-img"></div> -->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <?php 
 }
 ?>    
@@ -105,6 +112,9 @@ $dompdf = new DOMPDF();
 $dompdf->setPaper('A4', 'landscape');
 $dompdf->load_html($html);
 $dompdf->render();
+<<<<<<< HEAD
 //dompdf->stream("",array("Attachment" => false));
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 $dompdf->stream("Clearance.pdf");
 ?>

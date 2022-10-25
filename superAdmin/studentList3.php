@@ -8,7 +8,11 @@
   ?>
 
 <!doctype html>
+<<<<<<< HEAD
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+=======
+ <html class="no-js" lang="">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,20 +32,31 @@
     <link rel="stylesheet" href="../assets/css/lib/datatable/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/style2.css">
 
+<<<<<<< HEAD
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 <script>
+=======
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'><script>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 function showValues(str) {
     if (str == "") {
         document.getElementById("txtHint").innerHTML = "";
         return;
     } else { 
+<<<<<<< HEAD
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
         } else {
             // code for IE6, IE5
+=======
+        // AYAW NI USBA PARA RANI SA VERSION SA WEB BROWSER NGA GAMITON
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        } else {
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function() {
@@ -56,6 +71,7 @@ function showValues(str) {
 </script>
 </head>
 <body>
+<<<<<<< HEAD
     <!-- Left Panel -->
     <?php $page="result"; include 'includes/leftMenu.php';?>
 
@@ -64,6 +80,10 @@ function showValues(str) {
     <!-- Left Panel -->
 
     <!-- Right Panel -->
+=======
+    <?php $page="result"; include 'includes/leftMenu.php';?>
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <div id="right-panel" class="right-panel">
 
@@ -103,10 +123,16 @@ function showValues(str) {
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
+<<<<<<< HEAD
                                 <strong class="card-title"><h3 align="center">Select Student to View Result</h3></strong>
                             </div>
                             <div class="card-body">
                                 <!-- Credit Card -->
+=======
+                                <strong class="card-title"><h3 align="center">Search</h3></strong>
+                            </div>
+                            <div class="card-body">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                 <div id="pay-invoice">
                                     <div class="card-body">
                                        <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
@@ -132,13 +158,21 @@ function showValues(str) {
                                                 </div>
                                             <div class="col-6">
                                                 <div class="form-group">
+<<<<<<< HEAD
                                                      <label for="x_card_code" class="control-label mb-1">Session</label>
+=======
+                                                     <label for="x_card_code" class="control-label mb-1">School Year</label>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                     <?php 
                                                     $query=mysqli_query($con,"select * from tblsession where isActive = 1");                        
                                                     $count = mysqli_num_rows($query);
                                                     if($count > 0){                       
                                                         echo ' <select required name="sessionId" class="custom-select form-control">';
+<<<<<<< HEAD
                                                         echo'<option value="">--Select Session--</option>';
+=======
+                                                        echo'<option value="">--Select--</option>';
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                         while ($row = mysqli_fetch_array($query)) {
                                                         echo'<option value="'.$row['Id'].'" >'.$row['sessionName'].'</option>';
                                                             }
@@ -151,13 +185,21 @@ function showValues(str) {
                                          <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
+<<<<<<< HEAD
                                                     <label for="x_card_code" class="control-label mb-1">Faculty</label>
+=======
+                                                    <label for="x_card_code" class="control-label mb-1">Classroom</label>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                     <?php 
                                                     $query=mysqli_query($con,"select * from tblfaculty ORDER BY facultyName ASC");                        
                                                     $count = mysqli_num_rows($query);
                                                     if($count > 0){                       
                                                         echo ' <select required name="facultyId" onchange="showValues(this.value)" class="custom-select form-control">';
+<<<<<<< HEAD
                                                         echo'<option value="">--Select Faculty--</option>';
+=======
+                                                        echo'<option value="">--Select Room--</option>';
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                         while ($row = mysqli_fetch_array($query)) {
                                                         echo'<option value="'.$row['Id'].'" >'.$row['facultyName'].'</option>';
                                                             }
@@ -175,14 +217,23 @@ function showValues(str) {
                                                 </div>
                                              </div>
                                                 <div>
+<<<<<<< HEAD
                                                 <button type="submit" name="submit" class="btn btn-success">View Student</button>
+=======
+                                                <button type="submit" name="submit" class="btn btn-success">View Pupils</button>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
                         </div> <!-- .card -->
                     </div><!--/.col-->
+=======
+                        </div> 
+                    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                
 
                 <br><br>
@@ -190,13 +241,18 @@ function showValues(str) {
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
+<<<<<<< HEAD
                                 <strong class="card-title"><h3 align="center">All Student</h3></strong>
+=======
+                                <strong class="card-title"><h3 align="center">All Pupils</h3></strong>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                      <thead>
                                         <tr>
                                             <th>#</th>
+<<<<<<< HEAD
                                             <th>FullName</th>
                                             <th>MatricNo</th>
                                             <th>Level</th>
@@ -206,6 +262,19 @@ function showValues(str) {
                                             <th>Date Added</th>
                                             <th>First semester</th>
                                             <th>Second Semester</th>
+=======
+                                            <th>Name</th>
+                                            <th>ID #</th>
+                                            <th>Class</th>
+                                            <th>Classrom</th>
+                                            <th>Section</th>
+                                            <th>S.Y</th>
+                                            <th>Date Added</th>
+                                            <th>1st Grading</th>
+                                            <th>2nd Grading</th>
+                                            <th>3rd Grading</th>
+                                            <th>4th Grading</th>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             <th>Final Result</th>
                                         </tr>
                                     </thead>
@@ -241,9 +310,43 @@ function showValues(str) {
                     <td><?php  echo $row['departmentName'];?></td>
                      <td><?php  echo $row['sessionName'];?></td>
                     <td><?php  echo $row['dateCreated'];?></td>
+<<<<<<< HEAD
                     <td><a href="viewSemesterResult.php?semesterId=1&matricNo=<?php echo $row['matricNo'];?>&levelId=<?php echo $row['levelId'];?>&sessionId=<?php echo $row['sessionId'];?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
                     <td><a href="viewSemesterResult.php?semesterId=2&matricNo=<?php echo $row['matricNo'];?>&levelId=<?php echo $row['levelId'];?>&sessionId=<?php echo $row['sessionId'];?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
                     <td><a href="viewFinalResult.php?matricNo=<?php echo $row['matricNo'];?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+=======
+
+                    <td>
+                        <a href="viewSemesterResult.php?semesterId=1&matricNo=<?php echo $row['matricNo'];?>&levelId=<?php echo $row['levelId'];?>&sessionId=<?php echo $row['sessionId'];?>" title="View Details">
+                            <i class="fa fa-eye fa-1x"></i> View
+                        </a>
+                    </td>
+
+                    <td>
+                        <a href="viewSemesterResult.php?semesterId=2&matricNo=<?php echo $row['matricNo'];?>&levelId=<?php echo $row['levelId'];?>&sessionId=<?php echo $row['sessionId'];?>" title="View Details">
+                            <i class="fa fa-eye fa-1x"></i> View
+                        </a>
+                    </td>
+
+                    <td>
+                        <a href="viewSemesterResult.php?semesterId=3&matricNo=<?php echo $row['matricNo'];?>&levelId=<?php echo $row['levelId'];?>&sessionId=<?php echo $row['sessionId'];?>" title="View Details">
+                            <i class="fa fa-eye fa-1x"></i> View
+                        </a>
+                    </td>
+
+                    <td>
+                        <a href="viewSemesterResult.php?semesterId=4&matricNo=<?php echo $row['matricNo'];?>&levelId=<?php echo $row['levelId'];?>&sessionId=<?php echo $row['sessionId'];?>" title="View Details">
+                            <i class="fa fa-eye fa-1x"></i> View
+                        </a>
+                    </td>
+
+                    <td>
+                        <a href="viewFinalResult.php?matricNo=<?php echo $row['matricNo'];?>" title="View Details">
+                            <i class="fa fa-eye fa-1x"></i> View
+                        </a>
+                    </td>
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                     </tr>
                     <?php 
                     $cnt=$cnt+1;
@@ -255,18 +358,29 @@ function showValues(str) {
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 <!-- end of datatable -->
 
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
 
+=======
+
+            </div>
+        </div>
+    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
     <div class="clearfix"></div>
 
         <?php include 'includes/footer.php';?>
 
 
+<<<<<<< HEAD
 </div><!-- /#right-panel -->
+=======
+</div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 <!-- Right Panel -->
 

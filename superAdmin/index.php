@@ -8,7 +8,10 @@
 ?>
 <!doctype html>
 <html class="no-js" lang="">
+<<<<<<< HEAD
 <!--<![endif]-->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 <head>
     <meta charset="utf-8">
@@ -28,8 +31,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="../assets/css/style2.css">
+<<<<<<< HEAD
     <!-- <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css"> -->
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
 
@@ -81,6 +87,10 @@
 </head>
 
 <body>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
     <!-- Left Panel -->
     <?php $page="dashboard"; include 'includes/leftMenu.php';?>
     <!-- /#left-panel -->
@@ -104,6 +114,7 @@
                             </div>
                             
                         </div>
+<<<<<<< HEAD
                     </div><!-- /# column -->
 
 
@@ -150,23 +161,40 @@
 
                 <div class="col-sm-6 col-lg-3">
                         <div class="card text-white bg-flat-color-5">
+=======
+                    </div>
+
+
+                <div class="col-sm-6 col-lg-3">
+                        <div class="card text-white bg-flat-color-6">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
                                     <h3 class="mb-0 fw-r">
                                         <span class="currency float-left mr-1"></span>
                                         <span class="count"><?php echo $countAllStudent;?></span>
                                     </h3>
+<<<<<<< HEAD
                                     <p class="text-light mt-1 m-0">Student</p><!-- Log on to codeastro.com for more projects! -->
                                 </div><!-- /.card-left -->
 
                                 <div class="card-right float-right text-right">
                                     <i class="icon fade-5 icon-lg pe-7s-users"></i>
                                 </div><!-- /.card-right -->
+=======
+                                    <p class="text-light mt-1 m-0">Student</p>
+                                </div?
+
+                                <div class="card-right float-right text-right">
+                                    <i class="icon fade-5 icon-lg pe-7s-users"></i>
+                                </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
                             </div>
 
                         </div>
                     </div>
+<<<<<<< HEAD
 
 
                     <div class="col-sm-6 col-lg-3">
@@ -361,6 +389,15 @@
                         <div class="card">
                             <div class="card-body">
                                 <h3 align="center"><marquee direction="left">Current Session: <?php 
+=======
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 align="center"><marquee direction="left">Current School year: <?php 
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                 $result = mysqli_query($con, 'SELECT (sessionName) AS sessname FROM tblsession WHERE isActive = 1'); 
                                 $row = mysqli_fetch_assoc($result); 
                                 $sum = $row['sessname'];
@@ -370,6 +407,7 @@
                         </div>
                          </div>
                           </div>
+<<<<<<< HEAD
                 <!--  /Traffic -->
                 <div class="clearfix"></div>
                 <!-- Orders -->
@@ -397,13 +435,27 @@
         <!-- /.site-footer -->
     </div>
     <!-- /#right-panel -->
+=======
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <!-- Footer -->
+      <?php include 'includes/footer.php';?>
+    </div>
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+<<<<<<< HEAD
     <!-- <script src="../assets/js/main.js"></script> -->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
     <script src="../assets/js/main.js"></script>
 
     <!--  Chart js -->
@@ -424,11 +476,16 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
     <script src="../assets/js/init/fullcalendar-init.js"></script>
 
+<<<<<<< HEAD
     <!--Local Stuff-->
+=======
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
     <script>
         jQuery(document).ready(function ($) {
             "use strict";
 
+<<<<<<< HEAD
             // Pie chart flotPie1
             var piedata = [
                 { label: "Desktop visits", data: [[1, 32]], color: '#5c6bc0' },
@@ -616,6 +673,8 @@
             // Bar Chart #flotBarChart End
         });
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
         // Menu Trigger
 $('#menuToggle').on('click', function(event) {
   var windowWidth = $(window).width();   		 

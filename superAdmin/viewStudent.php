@@ -7,7 +7,11 @@
   ?>
 
 <!doctype html>
+<<<<<<< HEAD
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+=======
+<html class="no-js" lang=""> -
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,6 +33,7 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+<<<<<<< HEAD
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
@@ -42,6 +47,12 @@
 
     <!-- Right Panel -->
 
+=======
+</head>
+<body>
+    <?php $page="student"; include 'includes/leftMenu.php';?>
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
@@ -81,8 +92,13 @@
                         <div class="card">
                           
                            
+<<<<<<< HEAD
                         </div> <!-- .card -->
                     </div><!--/.col-->
+=======
+                        </div>
+                    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                
                     <div class="col-md-12">
                         <div class="card">
@@ -94,12 +110,21 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+<<<<<<< HEAD
                                             <th>FullName</th>
                                             <th>MatricNo</th>
                                             <th>Level</th>
                                             <th>Faculty</th>
                                             <th>Department</th>
                                             <th>Session</th>
+=======
+                                            <th>Name</th>
+                                            <th>ID #</th>
+                                            <th>Class</th>
+                                            <th>Classroom</th>
+                                            <th>Section</th>
+                                            <th>S.Y</th>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             <th>Date Added</th>
                                             <th>Actions</th>
                                         </tr>
@@ -141,17 +166,27 @@
 <!-- end of datatable -->
 
             </div>
+<<<<<<< HEAD
         </div><!-- .animated -->
     </div><!-- .content -->
+=======
+        </div>
+    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <div class="clearfix"></div>
 
         <?php include 'includes/footer.php';?>
 
 
+<<<<<<< HEAD
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
+=======
+</div>
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 <!-- Scripts -->
 <script src="../assets/js/main.js"></script>

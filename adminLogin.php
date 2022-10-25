@@ -7,7 +7,10 @@
     if(isset($_POST['login']))
     {
         $staffId=$_POST['staffId'];
+<<<<<<< HEAD
         // $password=md5($_POST['password']);
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
         $password=$_POST['password'];
         $password = md5($password);
         $query = mysqli_query($con,"select * from tbladmin where  staffId='$staffId' && password='$password'");
@@ -29,7 +32,11 @@
                 </script>";  
             }
 
+<<<<<<< HEAD
             else if($_SESSION['adminTypeId'] == 2) // Administrator
+=======
+            else if($_SESSION['adminTypeId'] == 2) // Administrator same rani sila sa SuperAdmin
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
             {
                 echo "<script type = \"text/javascript\">
                 window.location = (\"admin/index.php\")
@@ -45,16 +52,27 @@
 
 
 <!doctype html>
+<<<<<<< HEAD
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Student Grading PHP</title>
+=======
+ <html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Student Grading Online</title>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon">
+<<<<<<< HEAD
     <!-- <link rel="shortcut icon" href="img/favicon2.jpeg" /> -->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -66,8 +84,11 @@
     <link rel="stylesheet" href="assets/css/style2.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+<<<<<<< HEAD
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 </head>
 <body class="bg-light">
 
@@ -76,7 +97,10 @@
             <div class="login-content">
                 <div class="login-logo">
                     <a href="index.html">
+<<<<<<< HEAD
                         <!-- <img class="align-content" src="images/adminGreen.jpg" alt=""> -->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                     </a>
                 </div>
                 <div class="login-form">
@@ -84,22 +108,37 @@
                             <?php echo $errorMsg; ?>
                                <strong><h2 align="center">Administrator Login</h2></strong><hr>
                         <div class="form-group">
+<<<<<<< HEAD
                             <label>Staff ID</label>
+=======
+                            <label>Admin ID</label>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                             <input type="text" name="staffId" Required class="form-control" placeholder="Staff ID">
                         </div>
                         <div class="form-group">
                             <label>Password</label>
                             <input type="password" name="password" Required class="form-control" placeholder="Password">
+<<<<<<< HEAD
                         </div><!-- Log on to codeastro.com for more projects! -->
                         <div class="checkbox">
                            <label class="pull-left">
                                 <a href="index.php">Go Back</a>
                             </label>
                             <label class="pull-right">
+=======
+                        <div class="checkbox">
+                           <label class="pull-left">
+                            <br>
+                                <a href="index.php">Go Back</a>
+                            </label>
+                            <label class="pull-right">
+                            <br>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                 <a href="#">Forgot Password?</a>
                             </label>
                         </div>
                         <br>
+<<<<<<< HEAD
 						<!-- Log on to codeastro.com for more projects! -->
                         <button type="submit" name="login" class="btn btn-success btn-flat m-b-30 m-t-30">Log in</button>
 						
@@ -117,6 +156,12 @@
                     </form>
                 </div>
             </div><!-- Log on to codeastro.com for more projects! -->
+=======
+                        <button type="submit" name="login" class="btn btn-success btn-flat m-b-30 m-t-30">Log in</button>
+                    </form>
+                </div>
+            </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
         </div>
     </div>
 

@@ -37,10 +37,18 @@
 
 //------------------------------------ COMPUTE RESULT -----------------------------------------------
 
+<<<<<<< HEAD
 if (isset($_POST['compute'])){
 
 
 }//end of POST
+=======
+
+if (isset($_POST['compute'])){
+
+
+}
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 
 ?>
@@ -48,7 +56,11 @@ if (isset($_POST['compute'])){
 
 
 <!doctype html>
+<<<<<<< HEAD
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+=======
+    <html class="no-js" lang="">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -70,8 +82,11 @@ if (isset($_POST['compute'])){
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+<<<<<<< HEAD
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 </head>
 <body>
     <!-- Left Panel -->
@@ -91,13 +106,22 @@ if (isset($_POST['compute'])){
                     <div class="col-lg-12">
                         <div class="card">
                           
+<<<<<<< HEAD
                         </div> <!-- .card -->
                     </div><!--/.col-->
+=======
+                        </div>
+                    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
+<<<<<<< HEAD
                                 <strong class="card-title"><h4 align="center"><?php echo  $rowStd['firstName'].' '.$rowStd['lastName']?>&nbsp;<?php echo $rowLevel['levelName'];?>&nbsp;<?php echo $rowSemester['semesterName'];?> Semester Result</h></strong>
+=======
+                                <strong class="card-title"><h4 align="center"><?php echo  $rowStd['firstName'].' '.$rowStd['lastName']?>&nbsp;<strong class="text-danger">[<?php echo $rowLevel['levelName'];?>]</strong><strong class="text-success">[<?php echo $rowSemester['semesterName'];?>]</strong> Result</h></strong>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                             </div>
                             <div class="card-body">
                              <div class="<?php if(isset($alertStyle)){echo $alertStyle;}?>" role="alert"><?php if(isset($statusMsg)){echo $statusMsg;}?></div>
@@ -107,6 +131,7 @@ if (isset($_POST['compute'])){
                                             <th>#</th>
                                             <th>Course</th>
                                             <th>Code</th>
+<<<<<<< HEAD
                                             <th>Unit</th>
                                             <th>Score</th>
                                             <th>Grade</th>
@@ -116,6 +141,16 @@ if (isset($_POST['compute'])){
                                     </thead>
                                     <tbody>
                             <?php
+=======
+                                            <th>Grade</th>
+                                            <th>Letter Grade</th>
+                                    </thead>
+                                    <tbody>
+
+
+                <!-- QUERY NI FOR GETTING THE DATA SA KADA ROW SA TABLE NGA tblresult og tblcourse, tblsemester, tblsession -->
+                <?php
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
                 $ret=mysqli_query($con,"SELECT tblresult.matricNo,tblresult.levelId,tblresult.courseCode,tblresult.courseUnit,tblresult.score,tblresult.scoreGradePoint,
                 tblresult.scoreLetterGrade,tblresult.totalScoreGradePoint,tblresult.dateAdded,tblcourse.courseTitle,
@@ -135,11 +170,16 @@ if (isset($_POST['compute'])){
                 <td bgcolor="<?php echo $color;?>"><?php  echo $cnt;?></td>
                 <td bgcolor="<?php echo $color;?>"><?php  echo $row['courseTitle'];?></td>
                 <td bgcolor="<?php echo $color;?>"><?php  echo $row['courseCode'];?></td>
+<<<<<<< HEAD
                 <td bgcolor="<?php echo $color;?>"><?php  echo $row['courseUnit'];?></td>
                 <td bgcolor="<?php echo $color;?>"><?php  echo $row['score'];?></td>
                 <td bgcolor="<?php echo $color;?>"><?php  echo $row['scoreLetterGrade'];?></td>
                 <td bgcolor="<?php echo $color;?>"><?php  echo $row['scoreGradePoint'];?></td>
                 <td bgcolor="<?php echo $color;?>"><?php  echo $row['totalScoreGradePoint'];?></td>
+=======
+                <td bgcolor="<?php echo $color;?>"><?php  echo $row['score'];?></td>
+                <td bgcolor="<?php echo $color;?>"><?php  echo $row['scoreLetterGrade'];?></td>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                 </tr>
                 <?php 
                     $cnt=$cnt+1;
@@ -147,6 +187,7 @@ if (isset($_POST['compute'])){
                     $scoreGradePoint = $row['totalScoreGradePoint'];
                     $totalCourseUnit += $courseUnit;
                     $totalScoreGradePoint += $scoreGradePoint;
+<<<<<<< HEAD
                 }?>
                 <tr>
                 <td bgcolor=""> </td>
@@ -160,20 +201,35 @@ if (isset($_POST['compute'])){
                 </tr>                                                          
                 </tbody>
             </table>
+=======
+                }?>                                                          
+                </tbody>
+            </table>
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <!-------------------------- FROM THE FINAL RESULT TABLE --------------------------->
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
+<<<<<<< HEAD
                     <th>Total Course Unit</th>
                     <th>Total Grade Point</th>
                     <th>GPA</th>
                     <th>Class of Diploma</th>
+=======
+                    <th>Average</th>
+                    <th>Results</th>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                 </tr>
             </thead>
             <tbody>
         <?php
 
+<<<<<<< HEAD
         $ret=mysqli_query($con,"SELECT tblfinalresult.matricNo,tblfinalresult.levelId,tblfinalresult.totalCourseUnit,tblfinalresult.totalScoreGradePoint,tblfinalresult.gpa,
+=======
+        $ret=mysqli_query($con,"SELECT tblfinalresult.matricNo,tblfinalresult.levelId,tblfinalresult.totalCourseUnit,tblfinalresult.totalScoreGradePoint,tblfinalresult.avg,
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
         tblfinalresult.classOfDiploma,tblfinalresult.dateAdded,
         tbllevel.levelName,tblsemester.semesterName,tblsession.sessionName
         from tblfinalresult
@@ -186,9 +242,13 @@ if (isset($_POST['compute'])){
         while ($row=mysqli_fetch_array($ret)) {
         ?>
         <tr>
+<<<<<<< HEAD
         <td bgcolor="#F9D342"><?php  echo $row['totalCourseUnit'];?></td>
         <td bgcolor="#F9D342"><?php  echo $row['totalScoreGradePoint'];?></td>
         <td bgcolor="#F9D342"><?php  echo $row['gpa'];?></td>
+=======
+        <td bgcolor="#F9D342"><?php  echo $row['avg'] . " %";?></td>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
         <td bgcolor="#F9D342"><?php  echo $row['classOfDiploma'];?></td>
         </tr>
         <?php 
@@ -202,21 +262,32 @@ if (isset($_POST['compute'])){
             </div>
         </div>
     </div>
+<<<<<<< HEAD
                     
 <!-- end of datatable -->
 
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
+=======
+
+            </div>
+        </div>
+    </div><
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <div class="clearfix"></div>
 
         <?php include 'includes/footer.php';?>
 
 
+<<<<<<< HEAD
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
+=======
+</div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>

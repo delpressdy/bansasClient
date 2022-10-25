@@ -5,6 +5,7 @@
 function getScoreLetterGrade($score){
 
     $letterGrade = "";
+<<<<<<< HEAD
      if($score >= 75)
      {
         $letterGrade = "AA";
@@ -32,12 +33,30 @@ function getScoreLetterGrade($score){
      }
      else if($score <= 39){
          $letterGrade = "F";
+=======
+     if($score >= 90)
+     {
+        $letterGrade = "A+";
+     }
+     else if($score >= 80){
+        $letterGrade = "A";
+     }
+     else if($score >= 75){
+        $letterGrade = "B";
+     }
+     else if($score < 74){
+         $letterGrade = "Fail";
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
      }
 
      return $letterGrade;
 }
 
+<<<<<<< HEAD
 // -------------------------- Score Grade Point -------------------------
+=======
+// -------------------------- Score Grade Point Incase og naay GPA ang school Mao ni e call -------------------------
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 function getScoreGradePoint($score){
 
@@ -75,6 +94,7 @@ function getScoreGradePoint($score){
      return $gradePoint;
 }
 
+<<<<<<< HEAD
 // -------------------------- Class of Diploma -------------------------
 
 function getClassOfDiploma($gpa){
@@ -96,11 +116,38 @@ function getClassOfDiploma($gpa){
      }
      else if($gpa < 2.00){
         $classOfDiploma = "Fail";
+=======
+// -------------------------- syntax sa passing grade-------------------------
+
+function getClassOfDiploma($avg){
+
+    $classOfDiploma = "";
+
+     if($avg >= 90)
+     {
+        $classOfDiploma = "Excellent";
+     }
+     else if($avg >= 85){
+        $classOfDiploma = "Very Nice";
+     }
+     else if($avg >= 80){
+       $classOfDiploma = "Nice";
+     }
+     else if($avg >= 75){
+         $classOfDiploma = "Good";
+     }
+     else if($avg < 74){
+        $classOfDiploma = "Failed";
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
      }
 
      return $classOfDiploma;
 }
 
 
+<<<<<<< HEAD
 ?>
 <!-- Log on to codeastro.com for more projects! -->
+=======
+?>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2

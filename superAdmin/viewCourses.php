@@ -7,7 +7,11 @@
   ?>
 
 <!doctype html>
+<<<<<<< HEAD
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+=======
+    <html class="no-js" lang="">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,6 +33,7 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+<<<<<<< HEAD
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
@@ -40,6 +45,11 @@
 
     <!-- Left Panel -->
 
+=======
+</head>
+<body>
+    <?php $page="courses"; include 'includes/leftMenu.php';?>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
     <!-- Right Panel -->
 
     <div id="right-panel" class="right-panel">
@@ -64,8 +74,13 @@
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
                                     <li><a href="#">Dashboard</a></li>
+<<<<<<< HEAD
                                     <li><a href="#">Courses</a></li>
                                     <li class="active">View Courses</li>
+=======
+                                    <li><a href="#">Subject</a></li>
+                                    <li class="active">View Subs</li>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                 </ol>
                             </div>
                         </div>
@@ -81,13 +96,22 @@
                         <div class="card">
                           
                            
+<<<<<<< HEAD
                         </div> <!-- .card -->
                     </div><!--/.col-->
+=======
+                        </div> 
+                    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
+<<<<<<< HEAD
                                 <strong class="card-title"><h2 align="center">All Courses</h2></strong>
+=======
+                                <strong class="card-title"><h2 align="center">Subjects List</h2></strong>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
@@ -96,18 +120,31 @@
                                             <th>#</th>
                                             <th>Title</th>
                                             <th>Code</th>
+<<<<<<< HEAD
                                             <th>Unit</th>
                                             <th>Level</th>
                                             <th>Faculty</th>
                                             <th>Department</th>
                                              <th>Semester</th>
+=======
+                                            <th>Grade lvl</th>
+                                            <th>Classroom</th>
+                                            <th>Section</th>
+                                             <th>Grading</th>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             <th>Date Added</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                       
+<<<<<<< HEAD
                             <?php
+=======
+
+                <!-- QUERY SA DB -->
+                <?php
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                 $ret=mysqli_query($con,"SELECT tblcourse.courseCode,tblcourse.courseTitle,tblcourse.dateAdded,
                 tblcourse.courseUnit,tbllevel.levelName,tblfaculty.facultyName,tbldepartment.departmentName,tblsemester.semesterName
                 from tblcourse 
@@ -118,18 +155,33 @@
 
                 $cnt=1;
                 while ($row=mysqli_fetch_array($ret)) {
+<<<<<<< HEAD
                             ?>
+=======
+                ?>
+
+
+                <!-- E SHOW AND DATA FROM QUERY SA DB -->
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                 <tr>
                 <td><?php echo $cnt;?></td>
                 <td><?php  echo $row['courseTitle'];?></td>
                 <td><?php  echo $row['courseCode'];?></td>
+<<<<<<< HEAD
                 <td><?php  echo $row['courseUnit'];?></td>
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                 <td><?php  echo $row['levelName'];?></td>
                 <td><?php  echo $row['facultyName'];?></td>
                 <td><?php  echo $row['departmentName'];?></td>
                 <td><?php  echo $row['semesterName'];?></td>
                 <td><?php  echo $row['dateAdded'];?></td>
                 <td><a href="editCourses.php?editCourseId=<?php echo $row['courseCode'];?>" title="Edit Details"><i class="fa fa-edit fa-1x"></i></a>
+<<<<<<< HEAD
+=======
+
+                <!-- JS WARNING NI -->
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                 <a onclick="return confirm('Are you sure you want to delete?')" href="deleteCourse.php?delid=<?php echo $row['courseCode'];?>" title="Delete Course"><i class="fa fa-trash fa-1x"></i></a></td>
                 </tr>
                 <?php 
@@ -141,21 +193,33 @@
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
 <!-- end of datatable -->
 
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
+=======
+            </div>
+        </div>
+    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <div class="clearfix"></div>
 
         <?php include 'includes/footer.php';?>
 
 
+<<<<<<< HEAD
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
 
+=======
+</div>
+
+<!-- Right Panel -->
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>

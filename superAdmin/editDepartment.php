@@ -50,7 +50,12 @@ if(isset($_POST['submit'])){
   ?>
 
 <!doctype html>
+<<<<<<< HEAD
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+=======
+
+<html class="no-js" lang="">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -72,12 +77,16 @@ if(isset($_POST['submit'])){
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+<<<<<<< HEAD
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 </head>
 <body>
     <!-- Left Panel -->
     <?php $page="department"; include 'includes/leftMenu.php';?>
+<<<<<<< HEAD
 
    <!-- /#left-panel -->
 
@@ -85,6 +94,8 @@ if(isset($_POST['submit'])){
 
     <!-- Right Panel -->
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
@@ -107,8 +118,13 @@ if(isset($_POST['submit'])){
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
                                     <li><a href="#">Dashboard</a></li>
+<<<<<<< HEAD
                                     <li><a href="#">Deaprtment</a></li>
                                     <li class="active">Edit Department</li>
+=======
+                                    <li><a href="#">Section</a></li>
+                                    <li class="active">Edit Section</li>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                 </ol>
                             </div>
                         </div>
@@ -123,7 +139,11 @@ if(isset($_POST['submit'])){
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
+<<<<<<< HEAD
                                 <strong class="card-title"><h2 align="center">Edit Department</h2></strong>
+=======
+                                <strong class="card-title"><h2 align="center">Edit Sections</h2></strong>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                             </div>
                             <div class="card-body">
                                 <!-- Credit Card -->
@@ -134,13 +154,21 @@ if(isset($_POST['submit'])){
                                             <div class="row">
                                                 <div class="col-6">
                                                    <div class="form-group">
+<<<<<<< HEAD
                                                 <label for="x_card_code" class="control-label mb-1">Faculty</label>
+=======
+                                                <label for="x_card_code" class="control-label mb-1">Classroom</label>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                 <?php 
                                                 $query=mysqli_query($con,"select * from tblfaculty ORDER BY facultyName ASC");                        
                                                 $count = mysqli_num_rows($query);
                                                 if($count > 0){                       
                                                     echo ' <select required name="facultyId" class="custom-select form-control">';
+<<<<<<< HEAD
                                                     echo'<option value="">--Select Faculty--</option>';
+=======
+                                                    echo'<option value="">--Select Rooms--</option>';
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                     while ($row = mysqli_fetch_array($query)) {
                                                     echo'<option value="'.$row['Id'].'" >'.$row['facultyName'].'</option>';
                                                         }
@@ -151,13 +179,22 @@ if(isset($_POST['submit'])){
                                                  </div>
                                                 </div>
                                                 <div class="col-6">
+<<<<<<< HEAD
                                                     <label for="x_card_code" class="control-label mb-1">Department</label>
                                                         <input id="" name="departmentName" type="tel" class="form-control cc-cvc" value="<?php echo $rowi['departmentName'];?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Department">
+=======
+                                                    <label for="x_card_code" class="control-label mb-1">Sections</label>
+                                                        <input id="" name="departmentName" type="tel" class="form-control cc-cvc" value="<?php echo $rowi['departmentName'];?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Sections">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                         </div>
                                                     </div>
                                                     <div>
 
+<<<<<<< HEAD
                                                 <button type="submit" name="submit" class="btn btn-primary">Update Department</button>
+=======
+                                                <button type="submit" name="submit" class="btn btn-primary">Update</button>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             </div>
                                         </form>
                                     </div>
@@ -171,15 +208,24 @@ if(isset($_POST['submit'])){
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
+<<<<<<< HEAD
                                 <strong class="card-title"><h2 align="center">All Department</h2></strong>
+=======
+                                <strong class="card-title"><h2 align="center">All Sections</h2></strong>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>#</th>
+<<<<<<< HEAD
                                             <th>Department</th>
                                             <th>Faculty</th>
+=======
+                                            <th>Name</th>
+                                            <th>Classroom</th>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             <th>Date</th>
                                             <th>Edit</th>
                                             <th>Delete</th>                                            
@@ -211,18 +257,29 @@ if(isset($_POST['submit'])){
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
 <!-- end of datatable -->
 
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
+=======
+
+            </div>
+        </div>
+    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <div class="clearfix"></div>
 
         <?php include 'includes/footer.php';?>
 
 
+<<<<<<< HEAD
 </div><!-- /#right-panel -->
+=======
+</div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 <!-- Right Panel -->
 

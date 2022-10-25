@@ -60,6 +60,7 @@ if (isset($_POST['compute'])){
     for($i = 0; $i < $N; $i++)
     {
 
+<<<<<<< HEAD
       $score[$i]; //each scores entered
       $courseCode[$i]; // each course codes 
       $courseUnit[$i]; //each course units
@@ -70,6 +71,20 @@ if (isset($_POST['compute'])){
      
     
             //Checks if result has been computed (MatricNo, level, semester and session)
+=======
+      $score[$i]; 
+      $courseCode[$i];
+      $courseUnit[$i];
+      $letterGrade =  getScoreLetterGrade($score[$i]); 
+      $gradePoint =  getScoreGradePoint($score[$i]); 
+
+      $scoreGradePoint = $courseUnit[$i] * $gradePoint;
+  
+
+
+
+            //Checks if ang result has been computed (MatricNo, level, semester and session)
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
             $que=mysqli_query($con,"select * from tblfinalresult where matricNo ='$matricNo' and levelId = '$levelId' and semesterId = '$semesterId' and sessionId = '$sessionId'");
             $ret=mysqli_fetch_array($que); 
 
@@ -78,6 +93,7 @@ if (isset($_POST['compute'])){
                 $query=mysqli_query($con,"insert into tblresult(matricNo,levelId,semesterId,sessionId,courseCode,courseUnit,score,scoreGradePoint,scoreLetterGrade,totalScoreGradePoint,dateAdded) 
                 value('$matricNo','$levelId','$semesterId','$sessionId','$courseCode[$i]','$courseUnit[$i]','$score[$i]','$gradePoint','$letterGrade','$scoreGradePoint','$dateAdded')");
 
+<<<<<<< HEAD
                 if ($query) {
 
                     $totalCourseUnit += $courseUnit[$i]; //adds up all the course units
@@ -86,6 +102,18 @@ if (isset($_POST['compute'])){
                     //computes the gpa by dividing the total course unit by the total score grade point
                     $gpa = round(($totalScoreGradePoint / $totalCourseUnit), 2);
                     $classOfDiploma = getClassOfDiploma($gpa); //gets the class of diploma (Distinction, Upper, Lower etc)
+=======
+
+
+                if ($query) {
+
+                    $totalCourseUnit += $courseUnit[$i]; //adds up all the course units e ignore rani
+                    $totalScoreGradePoint += $scoreGradePoint; //adds up all the score grade points
+
+                    $totalGrade += $score[$i];
+
+                    
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                 }
                 else
                 {
@@ -93,6 +121,7 @@ if (isset($_POST['compute'])){
                     $statusMsg="An error Occurred!";
                 }
 
+<<<<<<< HEAD
             }//end of check 
 
        
@@ -102,18 +131,51 @@ if (isset($_POST['compute'])){
 
 
            //Checks if result has been computed (MatricNo, level, semester and session)
+=======
+            }
+
+    }//end sa loop
+
+
+            // QUERY PARA COMPUTE OG AVERAGE 
+
+            $qry = "select * from tblresult where matricNo = '$matricNo' and semesterId = '$semesterId'";
+            if($res = mysqli_query($con, $qry)){
+                $rows = mysqli_num_rows($res);
+
+                $avg = $totalGrade / $rows;
+
+                //E ignore ni para ni e compute ang gpa by dividing the total course unit by the total score grade point
+                // $gpa = round(($totalScoreGradePoint / $totalCourseUnit), 2);
+                $classOfDiploma = getClassOfDiploma($avg); //gets the class of diploma (Distinction, Upper, Lower etc)
+
+            };
+
+
+
+           //Check if ang result kay computed (MatricNo, level, semester and session)
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
             $que=mysqli_query($con,"select * from tblfinalresult where matricNo ='$matricNo' and levelId = '$levelId' and semesterId = '$semesterId' and sessionId = '$sessionId'");
             $ret=mysqli_fetch_array($que);
 
             if($ret > 0){
 
                 $alertStyle ="alert alert-danger";
+<<<<<<< HEAD
                 $statusMsg="The result has been computed for this student for this semester, level and session!";
             }
             else{
 
                 $querys = mysqli_query($con,"insert into tblfinalresult(matricNo,levelId,semesterId,sessionId,totalCourseUnit,totalScoreGradePoint,gpa,classOfDiploma,dateAdded) 
                 value('$matricNo','$levelId','$semesterId','$sessionId','$totalCourseUnit','$totalScoreGradePoint','$gpa','$classOfDiploma','$dateAdded')");
+=======
+                $statusMsg="Grades are already computed for this student!";
+            }
+            else{
+
+                $querys = mysqli_query($con,"insert into tblfinalresult(matricNo,levelId,semesterId,sessionId,totalCourseUnit,totalScoreGradePoint,gpa,avg,classOfDiploma,dateAdded) 
+                value('$matricNo','$levelId','$semesterId','$sessionId','$totalCourseUnit','$totalScoreGradePoint','$gpa','$avg','$classOfDiploma','$dateAdded')");
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
                 if ($querys) {
 
@@ -128,15 +190,23 @@ if (isset($_POST['compute'])){
             }
 
     
+<<<<<<< HEAD
 }//end of POST
 
+=======
+}
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 ?>
 
 
 
 <!doctype html>
+<<<<<<< HEAD
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+=======
+<html class="no-js" lang="">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -158,7 +228,10 @@ if (isset($_POST['compute'])){
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+<<<<<<< HEAD
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <script>
 
 //Only allows Numbers
@@ -171,7 +244,11 @@ function isNumber(evt) {
     return true;
 }
 
+<<<<<<< HEAD
 //Check if the value entered is greater than 100 and not less than 0
+=======
+//Check if ang value na entered is greater than 100 and not less than 0
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 function myFunction() {
   var x, text;
   // Get the value of the input field with id="numb"
@@ -189,16 +266,23 @@ function myFunction() {
 </script>
 </head>
 <body>
+<<<<<<< HEAD
     <!-- Left Panel -->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
      
          <?php include 'includes/leftMenu.php';?>
 
     <div id="right-panel" class="right-panel">
+<<<<<<< HEAD
 
         <!-- Header-->
                     <?php include 'includes/header.php';?>
         <!-- Header-->
 
+=======
+    <?php include 'includes/header.php';?>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
         <div class="content">
             <div class="animated fadeIn">
@@ -206,13 +290,23 @@ function myFunction() {
                     <div class="col-lg-12">
                         <div class="card">
                           
+<<<<<<< HEAD
                         </div> <!-- .card -->
                     </div><!--/.col-->
+=======
+                        </div> 
+                    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
+<<<<<<< HEAD
                                 <strong class="card-title"><h4 align="center">Compute <?php echo  $rowStd['firstName'].' '.$rowStd['lastName']?>'s&nbsp;<?php echo $rowLevel['levelName'];?>&nbsp;[<?php echo $rowSemester['semesterName'];?>] - Semester Result</h></strong>
+=======
+                                <strong class="card-title"><h4 align="center"><?php echo  $rowStd['firstName'].' '.$rowStd['lastName']?>'s&nbsp;
+                                <strong class="text-success">[<?php echo $rowSemester['semesterName'];?>]</strong> - Result</h></strong>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                             </div>
                             <form method="post">
                             <div class="card-body">
@@ -222,10 +316,16 @@ function myFunction() {
                                        <thead>
                                         <tr>
                                             <th>#</th>
+<<<<<<< HEAD
                                             <th>Course</th>
                                             <th>Code</th>
                                             <th>Unit</th>
                                             <th>Score</th>
+=======
+                                            <th>Subject</th>
+                                            <th>Code</th>
+                                            <th>Grade</th>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -248,8 +348,12 @@ function myFunction() {
                 <td><?php echo $cnt;?></td>
                 <td><?php  echo $row['courseTitle'];?></td>
                 <td><?php  echo $row['courseCode'];?></td>
+<<<<<<< HEAD
                 <td><?php  echo $row['courseUnit'];?></td>
                 <td><input  name="score[]" id="score" type="text" class="form-control" maxlength="3" onkeypress="return isNumber(event)" ></td>
+=======
+                <td><input  name="score[]" id="score" type="text" class="form-control" maxlength="3" onkeypress="return isNumber(event)" autofocus></td>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                 <input id="" value="<?php echo $row['courseCode'];?>" name="courseCode[]"  type="hidden" class="form-control" >
                 <input id="" value="<?php echo $row['courseUnit'];?>" name="courseUnit[]"  type="hidden" class="form-control" >
                 <input id="" name="" value="<?php echo $row['Id'];?>" type="hidden" class="form-control" >
@@ -260,26 +364,41 @@ function myFunction() {
                                                                                 
                                     </tbody>
                                 </table>
+<<<<<<< HEAD
                             <button type="submit" onclick="myFunction()" name="compute" class="btn btn-success">Compute Result</button>
+=======
+                            <button type="submit" onclick="myFunction()" name="compute" class="btn btn-success">Compute</button>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                              </form>
                             </div>
                         </div>
                     </div>
                     
+<<<<<<< HEAD
 <!-- end of datatable -->
 
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
+=======
+
+            </div>
+        </div>
+    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <div class="clearfix"></div>
 
         <?php include 'includes/footer.php';?>
 
 
+<<<<<<< HEAD
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
+=======
+</div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>

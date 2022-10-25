@@ -34,7 +34,11 @@ if (isset($_POST['compute'])){
 
 
 <!doctype html>
+<<<<<<< HEAD
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+=======
+ <html class="no-js" lang=""> 
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,8 +60,11 @@ if (isset($_POST['compute'])){
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+<<<<<<< HEAD
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 </head>
 <body>
     <!-- Left Panel -->
@@ -77,8 +84,13 @@ if (isset($_POST['compute'])){
                     <div class="col-lg-12">
                         <div class="card">
                           
+<<<<<<< HEAD
                         </div> <!-- .card -->
                     </div><!--/.col-->
+=======
+                        </div> 
+                    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                
                     <div class="col-md-12">
                         <div class="card">
@@ -132,11 +144,18 @@ if (isset($_POST['compute'])){
         </div>
     </div>
                     
+<<<<<<< HEAD
 <!-- end of datatable -->
 
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
+=======
+
+            </div>
+        </div>
+    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <div class="clearfix"></div>
 
@@ -144,7 +163,11 @@ if (isset($_POST['compute'])){
 
     <?php include 'includes/footer.php';?>
 
+<<<<<<< HEAD
 </div><!-- /#right-panel -->
+=======
+</div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 <!-- Right Panel -->
 <!-- Scripts -->

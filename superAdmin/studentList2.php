@@ -8,7 +8,12 @@
   ?>
 
 <!doctype html>
+<<<<<<< HEAD
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+=======
+
+<html class="no-js" lang="">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,7 +35,10 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+<<<<<<< HEAD
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <script>
 function showValues(str) {
     if (str == "") {
@@ -38,10 +46,15 @@ function showValues(str) {
         return;
     } else { 
         if (window.XMLHttpRequest) {
+<<<<<<< HEAD
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
         } else {
             // code for IE6, IE5
+=======
+            xmlhttp = new XMLHttpRequest();
+        } else {
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function() {
@@ -59,12 +72,15 @@ function showValues(str) {
     <!-- Left Panel -->
     <?php $page="result"; include 'includes/leftMenu.php';?>
 
+<<<<<<< HEAD
    <!-- /#left-panel -->
 
     <!-- Left Panel -->
 
     <!-- Right Panel -->
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
@@ -106,7 +122,10 @@ function showValues(str) {
                                 <strong class="card-title"><h3 align="center">Select Student to Compute Result (CGPA)</h3></strong>
                             </div>
                             <div class="card-body">
+<<<<<<< HEAD
                                 <!-- Credit Card -->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                 <div id="pay-invoice">
                                     <div class="card-body">
                                        <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
@@ -175,14 +194,23 @@ function showValues(str) {
                                                 </div>
                                              </div>
                                                 <div>
+<<<<<<< HEAD
                                                 <button type="submit" name="submit" class="btn btn-success">View Student</button>
+=======
+                                                <button type="submit" name="submit" class="btn btn-success">View Pupil</button>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
                         </div> <!-- .card -->
                     </div><!--/.col-->
+=======
+                        </div> 
+                    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                
 
                 <br><br>
@@ -190,12 +218,17 @@ function showValues(str) {
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
+<<<<<<< HEAD
                                 <strong class="card-title"><h3 align="center">All Student</h3></strong><!-- Log on to codeastro.com for more projects! -->
+=======
+                                <strong class="card-title"><h3 align="center">All Pupils</h3></strong>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
                                      <thead>
                                         <tr>
+<<<<<<< HEAD
 										<!-- Log on to codeastro.com for more projects! -->
                                             <th>#</th>
                                             <th>FullName</th>
@@ -204,6 +237,15 @@ function showValues(str) {
                                             <th>Faculty</th>
                                             <th>Department</th>
                                             <th>Session</th>
+=======
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>ID $</th>
+                                            <th>Class lvl</th>
+                                            <th>Classroom</th>
+                                            <th>Section</th>
+                                            <th>S.Y</th>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             <th>Date Added</th>
                                             <th>View</th>
                                         </tr>
@@ -240,7 +282,10 @@ function showValues(str) {
                     <td><?php  echo $row['departmentName'];?></td>
                      <td><?php  echo $row['sessionName'];?></td>
                     <td><?php  echo $row['dateCreated'];?></td>
+<<<<<<< HEAD
 					<!-- Log on to codeastro.com for more projects! -->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                     <td><a href="finalResult.php?matricNo=<?php echo $row['matricNo'];?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
                     </tr>
                     <?php 
@@ -253,18 +298,28 @@ function showValues(str) {
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
 <!-- end of datatable -->
 
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
+=======
+            </div>
+        </div>
+    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <div class="clearfix"></div>
 
         <?php include 'includes/footer.php';?>
 
 
+<<<<<<< HEAD
 </div><!-- /#right-panel -->
+=======
+</div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 <!-- Right Panel -->
 

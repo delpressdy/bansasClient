@@ -53,7 +53,11 @@ if (isset($_POST['compute'])){
         $que=mysqli_query($con,"select * from tblcgparesult where matricNo ='$matricNo'");
         $ret=mysqli_fetch_array($que);
 
+<<<<<<< HEAD
         if($ret > 0){ //update the record if record exists
+=======
+        if($ret > 0){ //update the record if nag record exists
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
             $que=mysqli_query($con,"update tblcgparesult set cgpa='$cgpa', classOfDiploma='$classOfDiploma' where matricNo='$matricNo'");
 
@@ -85,6 +89,7 @@ if (isset($_POST['compute'])){
                 }
             }
     
+<<<<<<< HEAD
 
         // echo $cgpa.'<br>';
         // echo $classOfDiploma.'<br>';
@@ -96,6 +101,9 @@ if (isset($_POST['compute'])){
        
    
 }//end of POST
+=======
+}
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 
 ?>
@@ -103,7 +111,11 @@ if (isset($_POST['compute'])){
 
 
 <!doctype html>
+<<<<<<< HEAD
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+=======
+ <html class="no-js" lang="">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -125,8 +137,11 @@ if (isset($_POST['compute'])){
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+<<<<<<< HEAD
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 </head>
 <body>
     <!-- Left Panel -->
@@ -144,8 +159,13 @@ if (isset($_POST['compute'])){
                     <div class="col-lg-12">
                         <div class="card">
                           
+<<<<<<< HEAD
                         </div> <!-- .card -->
                     </div><!--/.col-->
+=======
+                        </div>
+                    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                
                     <div class="col-md-12">
                         <div class="card">
@@ -159,6 +179,7 @@ if (isset($_POST['compute'])){
                                        <thead>
                                         <tr>
                                             <th>#</th>
+<<<<<<< HEAD
                                             <th>FullName</th>
                                             <th>Matric No</th>
                                             <th>Level</th>
@@ -167,6 +188,14 @@ if (isset($_POST['compute'])){
                                             <th>Department</th>
                                             <th>Total Course Unit</th>
                                             <th>Total Score Grade Point</th>
+=======
+                                            <th>Name</th>
+                                            <th>ID No</th>
+                                            <th>Class lvl</th>
+                                            <th>Grading</th>
+                                            <th>S.Y</th>
+                                            <th>Section</th>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             <th>GPA</th>
                                             <th>Class Of Diploma</th>
                                             <th>Date</th>
@@ -198,8 +227,11 @@ if (isset($_POST['compute'])){
                 <td><?php  echo $row['semesterName'];?></td>
                 <td><?php  echo $row['sessionName'];?></td> 
                 <td><?php  echo $row['departmentName'];?></td>
+<<<<<<< HEAD
                 <td><?php  echo $row['totalCourseUnit'];?></td>
                 <td><?php  echo $row['totalScoreGradePoint'];?></td>
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                 <td><?php  echo $row['gpa'];?></td>
                 <td><?php  echo $row['classOfDiploma'];?></td>
                 <td><?php  echo $row['dateAdded'];?></td>
@@ -213,24 +245,39 @@ if (isset($_POST['compute'])){
                                                             
                 </tbody>
             </table>
+<<<<<<< HEAD
             <button type="submit" name="compute" class="btn btn-success">Compute CGPA</button>
+=======
+            <button type="submit" name="compute" class="btn btn-success">Compute</button>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
             </form>
         </div>
     </div>
 </div>
                     
+<<<<<<< HEAD
                 <!-- end of datatable -->
 
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
+=======
+
+            </div>
+        </div>
+    </div><
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <div class="clearfix"></div>
 
         <?php include 'includes/footer.php';?>
 
 
+<<<<<<< HEAD
 </div><!-- /#right-panel -->
+=======
+</div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 <!-- Right Panel -->
 

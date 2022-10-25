@@ -27,7 +27,11 @@ $facultyId=$_POST['facultyId'];
     if($ret > 0){
 
       $alertStyle ="alert alert-danger";
+<<<<<<< HEAD
       $statusMsg="Student with the Matric Number already exist!";
+=======
+      $statusMsg="Pupil with the ID Number already exist!";
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     }
     else{
@@ -37,7 +41,11 @@ $facultyId=$_POST['facultyId'];
     if ($query) {
 
       $alertStyle ="alert alert-success";
+<<<<<<< HEAD
       $statusMsg="Student Added Successfully!";
+=======
+      $statusMsg="Pupil Added Successfully!";
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
   }
   else
     {
@@ -49,7 +57,11 @@ $facultyId=$_POST['facultyId'];
   ?>
 
 <!doctype html>
+<<<<<<< HEAD
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+=======
+<html class="no-js" lang=""> 
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -70,9 +82,12 @@ $facultyId=$_POST['facultyId'];
     <link rel="stylesheet" href="../assets/css/style2.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+<<<<<<< HEAD
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <script>
 function showValues(str) {
     if (str == "") {
@@ -80,10 +95,15 @@ function showValues(str) {
         return;
     } else { 
         if (window.XMLHttpRequest) {
+<<<<<<< HEAD
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
         } else {
             // code for IE6, IE5
+=======
+            xmlhttp = new XMLHttpRequest();
+        } else {
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function() {
@@ -100,6 +120,7 @@ function showValues(str) {
 <body>
     <!-- Left Panel -->
     <?php $page="student"; include 'includes/leftMenu.php';?>
+<<<<<<< HEAD
 
    <!-- /#left-panel -->
 
@@ -107,13 +128,18 @@ function showValues(str) {
 
     <!-- Right Panel -->
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
             <?php include 'includes/header.php';?>
+<<<<<<< HEAD
         <!-- /header -->
         <!-- Header-->
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
         <div class="breadcrumbs">
             <div class="breadcrumbs-inner">
                 <div class="row m-0">
@@ -128,10 +154,16 @@ function showValues(str) {
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
+<<<<<<< HEAD
 								<!-- Log on to codeastro.com for more projects! -->
                                     <li><a href="#">Dashboard</a></li>
                                     <li><a href="#">Student</a></li>
                                     <li class="active">Add Student</li>
+=======
+                                    <li><a href="#">Dashboard</a></li>
+                                    <li><a href="#">Pupil</a></li>
+                                    <li class="active">Add Pupil</li>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                 </ol>
                             </div>
                         </div>
@@ -146,10 +178,16 @@ function showValues(str) {
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
+<<<<<<< HEAD
                                 <strong class="card-title"><h2 align="center">Add New Student</h2></strong>
                             </div>
                             <div class="card-body">
                                 <!-- Credit Card -->
+=======
+                                <strong class="card-title"><h2 align="center">Add New Pupil</h2></strong>
+                            </div>
+                            <div class="card-body">
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                 <div id="pay-invoice">
                                     <div class="card-body">
                                        <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
@@ -157,13 +195,19 @@ function showValues(str) {
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
+<<<<<<< HEAD
 													<!-- Log on to codeastro.com for more projects! -->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                         <label for="cc-exp" class="control-label mb-1">Firstname <i class="text-danger">*</i></label>
                                                         <input id="" name="firstname" type="text" class="form-control cc-exp" value="" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Firstname">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
+<<<<<<< HEAD
 												<!-- Log on to codeastro.com for more projects! -->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                     <label for="x_card_code" class="control-label mb-1">Lastname <i class="text-danger">*</i></label>
                                                         <input id="" name="lastname" type="text" class="form-control cc-cvc" value="" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Lastname">
                                                         </div>
@@ -173,19 +217,30 @@ function showValues(str) {
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
+<<<<<<< HEAD
 													<!-- Log on to codeastro.com for more projects! -->
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                         <label for="cc-exp" class="control-label mb-1">Nickname <i>(optional)</i></label>
                                                         <input id="" name="othername" type="text" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Nickname">
                                                     </div>
                                                 </div>
                                             <div class="col-6">
                                                 <div class="form-group">
+<<<<<<< HEAD
                                                     <label for="x_card_code" class="control-label mb-1">Grade Level</label>
+=======
+                                                    <label for="x_card_code" class="control-label mb-1">Class Level</label>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                     <?php 
                                                 $query=mysqli_query($con,"select * from tbllevel");                        
                                                 $count = mysqli_num_rows($query);
                                                 if($count > 0){                       
+<<<<<<< HEAD
                                                     echo ' <select required name="levelId" class="custom-select form-control">';
+=======
+                                                    echo '<select required name="levelId" class="custom-select form-control">';
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                     echo'<option value="">--Select Level--</option>';
                                                     while ($row = mysqli_fetch_array($query)) {
                                                     echo'<option value="'.$row['Id'].'" >'.$row['levelName'].'</option>';
@@ -200,19 +255,31 @@ function showValues(str) {
                                         <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
+<<<<<<< HEAD
                                                         <label for="cc-exp" class="control-label mb-1">ID #</label>
+=======
+                                                        <label for="cc-exp" class="control-label mb-1">ID # <small><i class="text-success">This will be the username</i></small></label>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                         <input id="" name="matricNo" type="text" class="form-control cc-exp" value="" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="ID Number">
                                                     </div>
                                                 </div>
                                             <div class="col-6">
                                                 <div class="form-group">
+<<<<<<< HEAD
                                                      <label for="x_card_code" class="control-label mb-1">Grading #</label>
+=======
+                                                     <label for="x_card_code" class="control-label mb-1">School Year</label>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                     <?php 
                                                     $query=mysqli_query($con,"select * from tblsession where isActive = 1");                        
                                                     $count = mysqli_num_rows($query);
                                                     if($count > 0){                       
                                                         echo ' <select required name="sessionId" class="custom-select form-control">';
+<<<<<<< HEAD
                                                         echo'<option value="">--Select Session--</option>';
+=======
+                                                        echo'<option value="">--Select S.Y--</option>';
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                         while ($row = mysqli_fetch_array($query)) {
                                                         echo'<option value="'.$row['Id'].'" >'.$row['sessionName'].'</option>';
                                                             }
@@ -225,13 +292,21 @@ function showValues(str) {
                                          <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
+<<<<<<< HEAD
                                                     <label for="x_card_code" class="control-label mb-1">Faculty</label>
+=======
+                                                    <label for="x_card_code" class="control-label mb-1">Classroom</label>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                     <?php 
                                                     $query=mysqli_query($con,"select * from tblfaculty ORDER BY facultyName ASC");                        
                                                     $count = mysqli_num_rows($query);
                                                     if($count > 0){                       
                                                         echo ' <select required name="facultyId" onchange="showValues(this.value)" class="custom-select form-control">';
+<<<<<<< HEAD
                                                         echo'<option value="">--Select Faculty--</option>';
+=======
+                                                        echo'<option value="">--Select Room--</option>';
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                                         while ($row = mysqli_fetch_array($query)) {
                                                         echo'<option value="'.$row['Id'].'" >'.$row['facultyName'].'</option>';
                                                             }
@@ -249,29 +324,44 @@ function showValues(str) {
                                                  
                                                 </div>
                                              </div>
+<<<<<<< HEAD
 											 <!-- Log on to codeastro.com for more projects! -->
                                              <p><small><i>By default student's password is set to "<b class="text-danger">test</b>"</i></small></p>
                                                 <button type="submit" name="submit" class="btn btn-success">Add New Student</button>
+=======
+                                             <p><small><i>By default pupil's password is set to "<b class="text-danger">test</b>"</i></small></p>
+                                                <button type="submit" name="submit" class="btn btn-success">Add New Pupil</button>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
                         </div> <!-- .card -->
                     </div><!--/.col-->
                
+=======
+                        </div>
+                    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
                 <br><br>
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
+<<<<<<< HEAD
                                 <strong class="card-title"><h2 align="center">All Student</h2></strong>
+=======
+                                <strong class="card-title"><h2 align="center">Pupil's List</h2></strong>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>#</th>
+<<<<<<< HEAD
 											<!-- Log on to codeastro.com for more projects! -->
                                             <th>FullName</th>
                                             <th>MatricNo</th>
@@ -279,6 +369,14 @@ function showValues(str) {
                                             <th>Faculty</th>
                                             <th>Department</th>
                                             <th>Session</th>
+=======
+                                            <th>Name</th>
+                                            <th>ID #</th>
+                                            <th>Class</th>
+                                            <th>Classroom</th>
+                                            <th>Section</th>
+                                            <th>S.Y</th>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                             <th>Date</th>
                                             <th>Actions</th>
                                         </tr>
@@ -295,7 +393,11 @@ function showValues(str) {
                     INNER JOIN tbldepartment ON tbldepartment.Id = tblstudent.departmentId");
                     $cnt=1;
                     while ($row=mysqli_fetch_array($ret)) {
+<<<<<<< HEAD
                                         ?>
+=======
+                    ?>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                     <tr>
                     <td><?php echo $cnt;?></td>
                     <td><?php  echo $row['firstName'].' '.$row['lastName'].' '.$row['otherName'];?></td>
@@ -305,9 +407,14 @@ function showValues(str) {
                     <td><?php  echo $row['departmentName'];?></td>
                      <td><?php  echo $row['sessionName'];?></td>
                     <td><?php  echo $row['dateCreated'];?></td>
+<<<<<<< HEAD
 					<!-- Log on to codeastro.com for more projects! -->
                     <td><a href="editStudent.php?editStudentId=<?php echo $row['matricNo'];?>" title="Edit Details"><i class="fa fa-edit fa-1x"></i></a>
                    <a onclick="return confirm('Are you sure you want to delete?')" href="deleteStudent.php?delid=<?php echo $row['matricNo'];?>" title="Delete Student Details"><i class="fa fa-trash fa-1x"></i></a></td>
+=======
+                    <td><a href="editStudent.php?editStudentId=<?php echo $row['matricNo'];?>" title="Edit Details"><i class="fa fa-edit fa-1x"></i></a>
+                   <a onclick="return confirm('Are you sure you want to delete?')" href="deleteStudent.php?delid=<?php echo $row['matricNo'];?>" title="Delete Pupil Details"><i class="fa fa-trash fa-1x"></i></a></td>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                     </tr>
                     <?php 
                     $cnt=$cnt+1;
@@ -318,20 +425,31 @@ function showValues(str) {
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
 <!-- end of datatable -->
 
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
+=======
+
+            </div>
+        </div>>
+    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <div class="clearfix"></div>
 
         <?php include 'includes/footer.php';?>
 
 
+<<<<<<< HEAD
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
+=======
+</div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>

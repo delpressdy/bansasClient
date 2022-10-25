@@ -1,4 +1,5 @@
 -- phpMyAdmin SQL Dump
+<<<<<<< HEAD
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
@@ -8,6 +9,19 @@
 -- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+=======
+-- version 4.8.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Oct 17, 2022 at 09:42 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 5.6.40
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 SET time_zone = "+00:00";
 
 
@@ -46,9 +60,13 @@ CREATE TABLE `tbladmin` (
 --
 
 INSERT INTO `tbladmin` (`Id`, `firstName`, `lastName`, `otherName`, `emailAddress`, `phoneNo`, `password`, `staffId`, `adminTypeId`, `isAssigned`, `isPasswordChanged`, `dateCreated`) VALUES
+<<<<<<< HEAD
 (1, 'Liam', 'Moore', 'Admin', 'admin@mail.com', '7777777777', 'f2d0ff370380124029c2b807a924156c', 'AD123', 1, 1, 0, ''),
 (2, 'asd', 'asd', 'asd', 'asd@mail.com', '8885554447', 'f2d0ff370380124029c2b807a924156c', '1121', 1, 1, 0, '2022-06-13'),
 (3, 'Test', 'Admin', 'ta', 'test@mail.com', '4587458888', 'f2d0ff370380124029c2b807a924156c', 'TEST10', 1, 1, 0, '2022-06-13');
+=======
+(1, 'Roniel', 'Bansas', 'Admin', 'admin@mail.com', '09704463789', '5f0038e170564c7ad98d949c741a4da2', 'press', 1, 1, 0, '');
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 -- --------------------------------------------------------
 
@@ -83,6 +101,7 @@ CREATE TABLE `tblassignedadmin` (
   `departmentId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Dumping data for table `tblassignedadmin`
 --
@@ -90,6 +109,8 @@ CREATE TABLE `tblassignedadmin` (
 INSERT INTO `tblassignedadmin` (`id`, `dateAssigned`, `staffId`, `facultyId`, `departmentId`) VALUES
 (1, '2022-06-13', 0, 1, 1);
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 -- --------------------------------------------------------
 
 --
@@ -104,6 +125,7 @@ CREATE TABLE `tblcgparesult` (
   `dateAdded` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Dumping data for table `tblcgparesult`
 --
@@ -114,6 +136,8 @@ INSERT INTO `tblcgparesult` (`Id`, `matricNo`, `cgpa`, `classOfDiploma`, `dateAd
 (3, '14750', '3.35', 'Upper Credit', '2022-06-15'),
 (4, 'SGS123', '3.49', 'Upper Credit', '2022-06-16');
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 -- --------------------------------------------------------
 
 --
@@ -132,6 +156,7 @@ CREATE TABLE `tblcourse` (
   `dateAdded` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Dumping data for table `tblcourse`
 --
@@ -155,6 +180,8 @@ INSERT INTO `tblcourse` (`Id`, `courseTitle`, `courseCode`, `courseUnit`, `facul
 (16, 'Physics Laboratory', 'PL08', 3, '4', '5', '1', '2', '2022-06-16'),
 (17, 'Physics II', 'P225', 5, '4', '5', '1', '2', '2022-06-16');
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 -- --------------------------------------------------------
 
 --
@@ -168,6 +195,7 @@ CREATE TABLE `tbldepartment` (
   `dateCreated` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+<<<<<<< HEAD
 --
 -- Dumping data for table `tbldepartment`
 --
@@ -179,6 +207,8 @@ INSERT INTO `tbldepartment` (`Id`, `departmentName`, `facultyId`, `dateCreated`)
 (4, 'Industrial Engineering', 4, '2022-06-15'),
 (5, 'Electrical Engineering', 4, '2022-06-15');
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 -- --------------------------------------------------------
 
 --
@@ -196,10 +226,19 @@ CREATE TABLE `tblfaculty` (
 --
 
 INSERT INTO `tblfaculty` (`Id`, `facultyName`, `dateCreated`) VALUES
+<<<<<<< HEAD
 (1, 'Faculty 1', '2022-06-13'),
 (2, 'Faculty 2', '2022-06-15'),
 (3, 'Faculty 3', '2022-06-15'),
 (4, 'Faculty 4', '2022-06-15');
+=======
+(1, 'Grade 1', '2022-06-13'),
+(2, 'Grade 2', '2022-06-15'),
+(3, 'Grade 3', '2022-06-15'),
+(5, 'Grade 4', '2022-10-16'),
+(6, 'Grade 5', '2022-10-16'),
+(7, 'Grade 6', '2022-10-16');
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 -- --------------------------------------------------------
 
@@ -216,10 +255,15 @@ CREATE TABLE `tblfinalresult` (
   `totalCourseUnit` varchar(10) NOT NULL,
   `totalScoreGradePoint` varchar(10) NOT NULL,
   `gpa` varchar(255) NOT NULL,
+<<<<<<< HEAD
+=======
+  `avg` int(255) NOT NULL,
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
   `classOfDiploma` varchar(50) NOT NULL,
   `dateAdded` varchar(25) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
 --
 -- Dumping data for table `tblfinalresult`
 --
@@ -234,6 +278,8 @@ INSERT INTO `tblfinalresult` (`Id`, `matricNo`, `levelId`, `semesterId`, `sessio
 (7, 'SGS123', '1', '1', '1', '22', '81', '3.68', 'Distinction', '2022-06-16'),
 (8, 'SGS123', '1', '2', '1', '19', '62.25', '3.28', 'Upper Credit', '2022-06-16');
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 -- --------------------------------------------------------
 
 --
@@ -250,8 +296,14 @@ CREATE TABLE `tbllevel` (
 --
 
 INSERT INTO `tbllevel` (`Id`, `levelName`) VALUES
+<<<<<<< HEAD
 (1, 'Level One'),
 (2, 'Level Two');
+=======
+(1, 'Class A'),
+(2, 'Class B'),
+(3, 'Class C');
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 -- --------------------------------------------------------
 
@@ -261,6 +313,7 @@ INSERT INTO `tbllevel` (`Id`, `levelName`) VALUES
 
 CREATE TABLE `tblresult` (
   `Id` int(10) NOT NULL,
+<<<<<<< HEAD
   `matricNo` varchar(50) NOT NULL,
   `levelId` varchar(10) NOT NULL,
   `semesterId` varchar(10) NOT NULL,
@@ -299,6 +352,21 @@ INSERT INTO `tblresult` (`Id`, `matricNo`, `levelId`, `semesterId`, `sessionId`,
 (18, 'SGS123', '1', '2', '1', 'PL08', '3', '72', '3.5', 'A', '10.5', '2022-06-16'),
 (19, 'SGS123', '1', '2', '1', 'P225', '5', '74', '3.5', 'A', '17.5', '2022-06-16');
 
+=======
+  `matricNo` varchar(50) DEFAULT NULL,
+  `levelId` varchar(10) DEFAULT NULL,
+  `semesterId` varchar(10) DEFAULT NULL,
+  `sessionId` varchar(10) DEFAULT NULL,
+  `courseCode` varchar(50) DEFAULT NULL,
+  `courseUnit` varchar(50) DEFAULT NULL,
+  `score` varchar(50) DEFAULT NULL,
+  `scoreGradePoint` varchar(50) DEFAULT NULL,
+  `scoreLetterGrade` varchar(10) DEFAULT NULL,
+  `totalScoreGradePoint` varchar(50) DEFAULT NULL,
+  `dateAdded` varchar(50) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 -- --------------------------------------------------------
 
 --
@@ -315,8 +383,15 @@ CREATE TABLE `tblsemester` (
 --
 
 INSERT INTO `tblsemester` (`Id`, `semesterName`) VALUES
+<<<<<<< HEAD
 (1, 'First Sem'),
 (2, 'Second Sem');
+=======
+(1, '1st Grading'),
+(2, '2nd Grading'),
+(3, '3rd Grading'),
+(4, '4th Grading');
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 -- --------------------------------------------------------
 
@@ -357,6 +432,7 @@ CREATE TABLE `tblstaff` (
   `dateCreated` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+<<<<<<< HEAD
 --
 -- Dumping data for table `tblstaff`
 --
@@ -367,6 +443,8 @@ INSERT INTO `tblstaff` (`Id`, `firstName`, `lastName`, `otherName`, `emailAddres
 (14, 'Samuel', 'Samuel', 'John', 'SamuelJohn@yahoo.com', '09087654321', '12345', 'STF0032', 1, 0, '2020-09-14'),
 (15, 'asd', 'asd', 'asd', 'asd@asd.ccc', '5555666654', '12345', '444', 0, 0, '2022-06-15');
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 -- --------------------------------------------------------
 
 --
@@ -392,6 +470,7 @@ CREATE TABLE `tblstudent` (
 --
 
 INSERT INTO `tblstudent` (`Id`, `firstName`, `lastName`, `otherName`, `matricNo`, `password`, `levelId`, `facultyId`, `departmentId`, `sessionId`, `dateCreated`) VALUES
+<<<<<<< HEAD
 (17, 'Craig', 'Rodriguez', 'cr', 'SGS100', 'codeastro', 1, 1, 1, 1, '2022-06-13'),
 (18, 'Edith', 'Beck', 'el', '10101', 'codeastro', 1, 1, 1, 1, '2022-06-15'),
 (19, 'Chasity', 'Wilson', 'cw', '14750', 'codeastro', 1, 3, 3, 1, '2022-06-15'),
@@ -405,6 +484,10 @@ INSERT INTO `tblstudent` (`Id`, `firstName`, `lastName`, `otherName`, `matricNo`
 (27, 'Timothy', 'Herera', 'Th', 'SGS131', 'codeastro', 1, 2, 2, 1, '2022-06-16'),
 (28, 'Nicholas', 'Ducc', 'Nd', 'SGS132', 'codeastro', 1, 3, 3, 1, '2022-06-16'),
 (29, 'Joan', 'Havens', 'Jh', 'SGS133', 'codeastro', 1, 2, 2, 1, '2022-06-16');
+=======
+(34, 'Delpressdy', 'Maglinte', '', 'press', 'test', 1, 2, 7, 1, '2022-10-16'),
+(35, 'Roniel ', 'Bansas', '', 'bansas', 'test', 1, 2, 7, 1, '2022-10-17');
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 --
 -- Indexes for dumped tables
@@ -503,71 +586,137 @@ ALTER TABLE `tblstudent`
 --
 ALTER TABLE `tbladmin`
   MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 --
 -- AUTO_INCREMENT for table `tbladmintype`
 --
 ALTER TABLE `tbladmintype`
   MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 --
 -- AUTO_INCREMENT for table `tblassignedadmin`
 --
 ALTER TABLE `tblassignedadmin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 --
 -- AUTO_INCREMENT for table `tblcgparesult`
 --
 ALTER TABLE `tblcgparesult`
+<<<<<<< HEAD
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+=======
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 --
 -- AUTO_INCREMENT for table `tblcourse`
 --
 ALTER TABLE `tblcourse`
+<<<<<<< HEAD
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+=======
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 --
 -- AUTO_INCREMENT for table `tbldepartment`
 --
 ALTER TABLE `tbldepartment`
+<<<<<<< HEAD
   MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+=======
+  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 --
 -- AUTO_INCREMENT for table `tblfaculty`
 --
 ALTER TABLE `tblfaculty`
+<<<<<<< HEAD
   MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+=======
+  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 --
 -- AUTO_INCREMENT for table `tblfinalresult`
 --
 ALTER TABLE `tblfinalresult`
+<<<<<<< HEAD
   MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+=======
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 --
 -- AUTO_INCREMENT for table `tbllevel`
 --
 ALTER TABLE `tbllevel`
+<<<<<<< HEAD
   MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+=======
+  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 --
 -- AUTO_INCREMENT for table `tblresult`
 --
 ALTER TABLE `tblresult`
+<<<<<<< HEAD
   MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+=======
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 --
 -- AUTO_INCREMENT for table `tblsemester`
 --
 ALTER TABLE `tblsemester`
+<<<<<<< HEAD
   MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+=======
+  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 --
 -- AUTO_INCREMENT for table `tblsession`
 --
 ALTER TABLE `tblsession`
   MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 --
 -- AUTO_INCREMENT for table `tblstaff`
 --
 ALTER TABLE `tblstaff`
   MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 --
 -- AUTO_INCREMENT for table `tblstudent`
 --
 ALTER TABLE `tblstudent`
+<<<<<<< HEAD
   MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+=======
+  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+COMMIT;
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

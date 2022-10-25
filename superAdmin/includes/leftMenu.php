@@ -13,6 +13,7 @@ $staffFullName = $row['firstName'].' '.$row['lastName'];
                     <li class="<?php if($page=='dashboard'){ echo 'active'; }?>">
                         <a href="index.php"><i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
+<<<<<<< HEAD
                   
                         <!-- <li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
@@ -38,11 +39,22 @@ $staffFullName = $row['firstName'].' '.$row['lastName'];
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-plus"></i> <a href="createFaculty.php">Add New Faculty</a></li>
                             <li><i class="fa fa-eye"></i> <a href="viewFaculty.php">View Faculty</a></li>
+=======
+                   
+                   <li class="menu-title">Rooms & Section</li>
+                    <li class="menu-item-has-children dropdown <?php if($page=='faculty'){ echo 'active'; }?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Classroom</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-plus"></i> <a href="createFaculty.php">Add New </a></li>
+                            <li><i class="fa fa-eye"></i> <a href="viewFaculty.php">View </a></li>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                         </ul>
                     </li>
                     
                     <li class="menu-item-has-children dropdown <?php if($page=='department'){ echo 'active'; }?>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+<<<<<<< HEAD
                             aria-expanded="false"> <i class="menu-icon fa fa-bars"></i>Departments</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-plus"></i> <a href="createDepartment.php">Add New Dept.</a></li>
@@ -68,6 +80,31 @@ $staffFullName = $row['firstName'].' '.$row['lastName'];
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-plus"></i> <a href="createCourses.php">Add New Course</a></li>
                             <li><i class="fa fa-eye"></i> <a href="viewCourses.php">View Courses</a></li>
+=======
+                            aria-expanded="false"> <i class="menu-icon fa fa-bars"></i>Sections</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-plus"></i> <a href="createDepartment.php">Add New</a></li>
+                            <li><i class="fa fa-eye"></i> <a href="viewDepartment.php">View</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-title">Pupils Section</li>
+                    <li class="menu-item-has-children dropdown <?php if($page=='student'){ echo 'active'; }?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Pupils</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-plus"></i> <a href="createStudent.php">Add New </a></li>
+                            <li><i class="fa fa-eye"></i> <a href="viewStudent.php">View Pupils</a></li>
+                        </ul>
+                    </li>
+
+                     <li class="menu-item-has-children dropdown <?php if($page=='courses'){ echo 'active'; }?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Subject</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-plus"></i> <a href="createCourses.php">Add New </a></li>
+                            <li><i class="fa fa-eye"></i> <a href="viewCourses.php">View </a></li>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                         </ul>
                     </li>
                     <li class="menu-title">Results and Grading</li>
@@ -75,6 +112,7 @@ $staffFullName = $row['firstName'].' '.$row['lastName'];
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"> <i class="menu-icon fa fa-file"></i>Result</a>
                         <ul class="sub-menu children dropdown-menu">
+<<<<<<< HEAD
                             <li><i class="fa fa-plus"></i> <a href="studentList.php">Compute GPA</a></li>
                             <li><i class="fa fa-plus"></i> <a href="studentList2.php">Compute CGPA</a></li>
                             <li><i class="fa fa-plus"></i> <a href="studentList3.php">View/Print Result</a></li>                     
@@ -98,5 +136,15 @@ $staffFullName = $row['firstName'].' '.$row['lastName'];
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
+=======
+                            <li><i class="fa fa-plus"></i> <a href="studentList.php">Compute Grade</a></li>
+                            <li><i class="fa fa-plus"></i> <a href="studentList3.php">Search Result</a></li>                     
+                            <li><i class="fa fa-plus"></i> <a href="gradingCriteria.php">Grading Criteria</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
         </nav>
     </aside>

@@ -22,7 +22,11 @@ if (isset($_POST['compute'])){
 
 
 <!doctype html>
+<<<<<<< HEAD
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+=======
+<html class="no-js" lang=""> 
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,8 +48,11 @@ if (isset($_POST['compute'])){
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+<<<<<<< HEAD
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
+=======
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 </head>
 <body>
     <!-- Left Panel -->
@@ -65,8 +72,13 @@ if (isset($_POST['compute'])){
                     <div class="col-lg-12">
                         <div class="card">
                           
+<<<<<<< HEAD
                         </div> <!-- .card -->
                     </div><!--/.col-->
+=======
+                        </div> 
+                    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                
                     <div class="col-md-12">
                         <div class="card">
@@ -77,13 +89,19 @@ if (isset($_POST['compute'])){
                                 <table class="table table-hover table-striped table-bordered">
                                        <thead>
                                         <tr>
+<<<<<<< HEAD
                                             <th>Class Of Diploma</th>
                                             <th>GPA</th>
+=======
+                                            <th>Results</th>
+                                            <th>Average</th>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                                         </tr>
                                     </thead>
                                     <tbody>
                            
                 <tr >
+<<<<<<< HEAD
                 <td>Distinction</td>
                 <td>3.50 and Above</td>
                 </tr>
@@ -105,28 +123,64 @@ if (isset($_POST['compute'])){
                 </tr>
                 </tbody>
             </table>
+=======
+                <td bgcolor="#32ff7e">Excellent</td>
+                <td bgcolor="#32ff7e">90% +</td>
+                </tr>
+                 <tr >
+                <td bgcolor="#7bed9f">Very nice</td>
+                <td bgcolor="#7bed9f">85% +</td>
+                </tr>
+                 <tr >
+                <td bgcolor="#97fdae">Nice</td>
+                <td bgcolor="#97fdae">80% +</td>
+                </tr>
+                 <tr >
+                <td bgcolor="#fffa65">Good</td>
+                <td bgcolor="#fffa65">75% +</td>
+                </tr>
+                 <tr>
+                <td bgcolor="#ff4757">Fail</td>
+                <td bgcolor="#ff4757">Below 74</td>
+                </tr>
+                </tbody>
+            </table>
+
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 <!-------------------------- FROM THE FINAL RESULT TABLE --------------------------->
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
+<<<<<<< HEAD
                     <th>Score</th>
                     <th>Grade Point Equivalent</th>
+=======
+                    <th>Grade</th>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                     <th>Letter Grade</th>
                 </tr>
             </thead>
             <tbody>
                 <tr >
                 <td>75 - 100</td>
+<<<<<<< HEAD
                 <td>4.00</td>
                 <td>AA</td>
                 </tr>
                 <tr >
                 <td>70 - 74</td>
                 <td>3.50</td>
+=======
+                <td>A+</td>
+                </tr>
+                <tr >
+                <td>70 - 74</td>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                 <td>A</td>
                 </tr>
                 <tr >
                 <td>65 - 69</td>
+<<<<<<< HEAD
                 <td>3.25</td>
                 <td>AB</td>
                 </tr>
@@ -161,6 +215,14 @@ if (isset($_POST['compute'])){
                 <td>F</td>
                 </tr>
                                                                                     
+=======
+                <td>B</td>
+                </tr>
+                <tr >
+                <td>60 - 64</td>
+                <td>Fail</td>
+                </tr>                                                                 
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
                     </tbody>
                 </table>
                 <a href="printGradingCriteria.php" class="btn btn-info"><i class="fa fa-print"></i> Print</a>
@@ -168,18 +230,29 @@ if (isset($_POST['compute'])){
         </div>
     </div>
                     
+<<<<<<< HEAD
 <!-- end of datatable -->
 
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
+=======
+
+            </div>
+        </div>
+    </div>
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
     <div class="clearfix"></div>
 
         <?php include 'includes/footer.php';?>
 
 
+<<<<<<< HEAD
 </div><!-- /#right-panel -->
+=======
+</div><
+>>>>>>> 1bb09366e33d936fac926359eee432755bfd56e2
 
 <!-- Right Panel -->
 
