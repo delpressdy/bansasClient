@@ -12,14 +12,19 @@ if(isset($_POST['submit'])){
 
   $firstname=$_POST['firstname'];
   $lastname=$_POST['lastname'];
-  $othername=$_POST['othername'];
+  $roleType=$_POST['othername'];
   $emailAddress=$_POST['emailAddress'];
-
+  $pass=md5('staff');
   $phoneNo=$_POST['phoneNo'];
   $staffId=$_POST['staffId'];
   $roleId=2;
   $dateCreated = date("Y-m-d");
 
+  if ($roleType == 1){
+    $rType = "Admin";
+  }else{
+    $rType = "Staff";
+  }
         $departmentId=$_POST['departmentId'];
         $facultyId=$_POST['facultyId'];
         $dateAssigned = date("Y-m-d");
@@ -37,16 +42,9 @@ if(isset($_POST['submit'])){
       $statusMsg="Administrator with the StaffID already exist!";
 
     }
-
-    else if($rets > 0){
-
-    $alertStyle ="alert alert-danger";
-    $statusMsg="An Administrator has been Assigned to this Department!";
-
-    }
     else{
 
-    $query=mysqli_query($con,"insert into tbladmin(firstName,lastName,otherName,emailAddress,phoneNo,password,staffId,adminTypeId,isPasswordChanged,isAssigned,dateCreated) value('$firstname','$lastname','$othername','$emailAddress','$phoneNo','12345','$staffId','2','0','0','$dateCreated')");
+    $query=mysqli_query($con,"insert into tbladmin(firstName,lastName,otherName,emailAddress,phoneNo,password,staffId,adminTypeId,isPasswordChanged,isAssigned,dateCreated) value('$firstname','$lastname','$rType','$emailAddress','$phoneNo','$pass','$staffId','$roleType','0','0','$dateCreated')");
 
     if($query) {
 
@@ -204,7 +202,7 @@ function showRole(str) {
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title"><h2 align="center">Add New Administrator</h2></strong>
+                                <strong class="card-title"><h2 align="left" class="text-success">ADD USER</h2></strong>
                             </div>
                             <div class="card-body">
                                 <!-- Credit Card -->
@@ -214,58 +212,68 @@ function showRole(str) {
                                         <form method="Post" action="">
                                             <div class="row">
                                                 <div class="col-6">
+
                                                     <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Firstname</label>
+                                                        <label for="x_card_code" class="control-label mb-1">User ID <small><i class="text-danger">Auto generated</i></small></label>
+                                                        <input id="" name="staffId" type="text" class="form-control cc-cvc" value="<?php $rand=rand(10000,99999); echo $rand; ?>" readonly>
+                                                    </div>
+                                                  
+
+                                                    <div class="form-group">
+                                                        <label for="cc-exp" class="control-label mb-1">First name<i class="text-danger">*</i></label>
                                                         <input id="" name="firstname" type="tel" class="form-control cc-exp" value="" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Firstname">
                                                     </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="x_card_code" class="control-label mb-1">Lastname</label>
+
+
+                                                    <label for="x_card_code" class="control-label mb-1">Last name<i class="text-danger">*</i></label>
                                                         <input id="" name="lastname" type="tel" class="form-control cc-cvc" value="" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Lastname">
-                                                        </div>
+
+                                                    <br>
+                                                    <div class="form-group">
+                                                        <label for="cc-exp" class="control-label mb-1">Phone Number<i class="text-danger">*</i></label>
+                                                        <input id="" name="phoneNo" type="text" class="form-control cc-exp" value="" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Phone Number" required>
                                                     </div>
-                                                    <div>
+
+                                                    <div class="form-group">
+                                                        <label for="x_card_code" class="control-label mb-1">Email Address<i class="text-danger">*</i></label>
+                                                        <input id="" name="emailAddress" type="email" class="form-control cc-cvc" value="" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Email Address">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        <div>
 
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Othername</label>
-                                                        <input id="" name="othername" type="text" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Othername">
+                                                        <label for="cc-exp" class="control-label mb-1">User Type<i class="text-danger">*</i></label>
+
+                                                        <?php 
+                                                            $query=mysqli_query($con,"select * from tbladmintype");                        
+                                                            $count = mysqli_num_rows($query);
+                                                            if($count > 0){                       
+                                                                echo ' <select required name="othername" onchange="showValues(this.value)" class="custom-select form-control">';
+                                                                echo'<option value="">-- Choose Type --</option>';
+                                                                while ($row = mysqli_fetch_array($query)) {
+                                                                echo'<option value="'.$row['Id'].'" >'.$row['adminTypeName'].'</option>';
+                                                                    }
+                                                                        echo '</select>';
+                                                            }
+                                                        ?>       
+                                                       
                                                     </div>
                                                 </div>
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="x_card_code" class="control-label mb-1">Email Address</label>
-                                                    <input id="" name="emailAddress" type="email" class="form-control cc-cvc" value="" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Email Address">
-                                                </div>
-                                            </div>
                                         </div>
 
-                                        <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Phone Number</label>
-                                                        <input id="" name="phoneNo" type="text" class="form-control cc-exp" value="" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Phone Number">
-                                                    </div>
-                                                </div>
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="x_card_code" class="control-label mb-1">Staff ID</label>
-                                                    <input id="" name="staffId" type="text" class="form-control cc-cvc" value="" data-val="true" Required data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="StaffID">
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                       
                                          <div class="row">
                                                <div class="col-6">
                                                 <div class="form-group">
-                                                    <label for="x_card_code" class="control-label mb-1">Faculty</label>
                                                 <?php 
                                                 $query=mysqli_query($con,"select * from tblfaculty ORDER BY facultyName ASC");                        
                                                 $count = mysqli_num_rows($query);
                                                 if($count > 0){                       
-                                                    echo ' <select required name="facultyId" onchange="showValues(this.value)" class="custom-select form-control">';
-                                                    echo'<option value="">--Select Faculty--</option>';
+                                                    echo ' <select hidden required name="facultyId" onchange="showValues(this.value)" class="custom-select form-control">';
                                                     while ($row = mysqli_fetch_array($query)) {
                                                     echo'<option value="'.$row['Id'].'" >'.$row['facultyName'].'</option>';
                                                         }
@@ -276,14 +284,14 @@ function showRole(str) {
                                                 </div>
                                             <div class="col-6">
                                                 <div class="form-group">
-                                             <?php
-                                            echo"<div id='txtHint'></div>";
-                                             ?>                                        
+                                                     <?php
+                                                    echo"<div id='txtHint'></div>";
+                                                     ?>                                        
                                                      </div>
                                                 </div>
                                             </div>
 
-                                                <button type="submit" name="submit" class="btn btn-success">Add Admin</button>
+                                                <button type="submit" name="submit" class="btn btn-success">Submit Details</button>
                                             </div>
                                         </form>
                                     </div>
@@ -293,25 +301,25 @@ function showRole(str) {
                     </div><!--/.col-->
                
 
-                <br><br>
+                 <br><br>
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title"><h2 align="center">All Administrator</h2></strong>
+                                <strong class="card-title"><h2 align="center">List of all user</h2></strong>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Staff ID</th>
+                                            <th>User ID</th>
                                             <th>Firstname</th>
                                             <th>Lastname</th>
-                                            <th>Othername</th>
+                                            <th>Type</th>
                                             <th>EmailAddress</th>
-                                            <th>PhoneNo</th>
-                                            <th>Faculty</th>
-                                            <th>Department</th>
+                                            <th>Contact</th>
+                                            <th>Password</th>
+                                            <th>Remarks</th>
                                             <th>Date Added</th>
                                             <th>Delete</th>
                                         </tr>
@@ -320,7 +328,7 @@ function showRole(str) {
                                       
                             <?php
         $ret=mysqli_query($con,"SELECT tblassignedadmin.dateAssigned,tblassignedadmin.staffId, tbladmin.staffId,tbladmin.firstName, tbladmin.lastName, tbladmin.otherName,
-        tblfaculty.facultyName,tbldepartment.departmentName, tbladmin.staffId, tbladmin.firstName, tbladmin.lastName, tbladmin.otherName,tbladmin.emailAddress, tbladmin.phoneNo, tbladmin.dateCreated
+        tbladmin.password,tbldepartment.departmentName, tbladmin.staffId, tbladmin.firstName, tbladmin.lastName, tbladmin.otherName,tbladmin.emailAddress, tbladmin.phoneNo, tbladmin.dateCreated
         from tblassignedadmin 
         INNER JOIN tbladmin ON tbladmin.staffId = tblassignedadmin.staffId
         INNER JOIN tblfaculty ON tblfaculty.Id = tblassignedadmin.facultyId
@@ -330,14 +338,14 @@ function showRole(str) {
                             ?>
                 <tr>
                 <td><?php echo $cnt;?></td>
-                <td><?php  echo $row['staffId'];?></td>
+                <td style="color: white; background-color: limegreen; border-radius: 12px;"><?php  echo $row['staffId'];?></td>
                 <td><?php  echo $row['firstName'];?></td>
                 <td><?php  echo $row['lastName'];?></td>
                 <td><?php  echo $row['otherName'];?></td>
                 <td><?php  echo $row['emailAddress'];?></td>
                 <td><?php  echo $row['phoneNo'];?></td>
-                <td><?php  echo $row['facultyName'];?></td>
-                <td><?php  echo $row['departmentName'];?></td>
+                <td style="color: white; background-color: red; border-radius: 12px;"><?php  echo $row['password'];?></td>
+                <td><?php  echo "Active"?></td>
                 <td><?php  echo $row['dateCreated'];?></td>
                 <!-- <td><a href="editAdmin.php?editid=<?php echo $row['staffId'];?>" title="View Admin"><i class="fa fa-edit fa-1x"></i></a></td> -->
                 <td><a onclick="return confirm('Are you sure you want to delete?')" href="deleteAdmin.php?delid=<?php echo $row['staffId'];?>" title="Delete Admin"><i class="fa fa-trash fa-1x"></i></a></td>

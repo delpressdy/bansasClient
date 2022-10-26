@@ -87,21 +87,21 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title"><h2 align="center">All Administrator</h2></strong>
+                                <strong class="card-title"><h2 align="center">List of all users</h2></strong>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Staff ID</th>
+                                            <th>User ID</th>
                                             <th>Firstname</th>
                                             <th>Lastname</th>
-                                            <th>Othername</th>
+                                            <th>Type</th>
                                             <th>EmailAddress</th>
-                                            <th>PhoneNo</th>
-                                            <th>Faculty</th>
-                                            <th>Department</th>
+                                            <th>Contact</th>
+                                            <th>Password</th>
+                                            <th>Remarks</th>
                                             <th>Date Added</th>
                                             <th>Delete</th>
                                         </tr>
@@ -110,7 +110,7 @@
                                       
                             <?php
         $ret=mysqli_query($con,"SELECT tblassignedadmin.dateAssigned,tblassignedadmin.staffId, tbladmin.staffId,tbladmin.firstName, tbladmin.lastName, tbladmin.otherName,
-        tblfaculty.facultyName,tbldepartment.departmentName, tbladmin.staffId, tbladmin.firstName, tbladmin.lastName, tbladmin.otherName,tbladmin.emailAddress, tbladmin.phoneNo, tbladmin.dateCreated
+        tbladmin.password,tbldepartment.departmentName, tbladmin.staffId, tbladmin.firstName, tbladmin.lastName, tbladmin.otherName,tbladmin.emailAddress, tbladmin.phoneNo, tbladmin.dateCreated
         from tblassignedadmin 
         INNER JOIN tbladmin ON tbladmin.staffId = tblassignedadmin.staffId
         INNER JOIN tblfaculty ON tblfaculty.Id = tblassignedadmin.facultyId
@@ -120,14 +120,14 @@
                             ?>
                 <tr>
                 <td><?php echo $cnt;?></td>
-                <td><?php  echo $row['staffId'];?></td>
+                <td style="color: white; background-color: limegreen; border-radius: 12px"><?php  echo $row['staffId'];?></td>
                 <td><?php  echo $row['firstName'];?></td>
                 <td><?php  echo $row['lastName'];?></td>
                 <td><?php  echo $row['otherName'];?></td>
                 <td><?php  echo $row['emailAddress'];?></td>
                 <td><?php  echo $row['phoneNo'];?></td>
-                <td><?php  echo $row['facultyName'];?></td>
-                <td><?php  echo $row['departmentName'];?></td>
+                <td style="color: white; background-color: red; border-radius: 12px;"><?php  echo $row['password'];?></td>
+                <td><?php  echo "Active"?></td>
                 <td><?php  echo $row['dateCreated'];?></td>
                 <!-- <td><a href="editAdmin.php?editid=<?php echo $row['staffId'];?>" title="View Admin"><i class="fa fa-edit fa-1x"></i></a></td> -->
                 <td><a onclick="return confirm('Are you sure you want to delete?')" href="deleteAdmin.php?delid=<?php echo $row['staffId'];?>" title="Delete Admin"><i class="fa fa-trash fa-1x"></i></a></td>
