@@ -57,8 +57,6 @@
             <ul>
               <li><a href="adminLogin.php">Administrator</a></li>
               <li><a href="studentLogin.php">Student</a></li>
-              <li><a href="staffLogin.php">Staff</a></li>
-
 			  <!-- Log on to codeastro.com for more projects! -->
              
             </ul>
