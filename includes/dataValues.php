@@ -47,7 +47,7 @@ $countAllAttendance=mysqli_num_rows($allAtt);
 // //-------------------------------------------
 
 
-$staffQuery=mysqli_query($con,"select * from tblstaff"); //staff
+$staffQuery=mysqli_query($con,"select * from tbladmin where adminTypeId = 2"); //staff
 $countAllStaff = mysqli_num_rows($staffQuery);
 
 $departmentQuery=mysqli_query($con,"select * from tbldepartment"); //department
