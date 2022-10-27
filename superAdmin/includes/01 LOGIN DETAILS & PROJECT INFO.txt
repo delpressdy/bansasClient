@@ -9,8 +9,8 @@
 
 **Admin Login Details** 
 
-Username: AD123
-Password: codeastro.com
+Username: Liam Moore
+Password: admin
 
 
 

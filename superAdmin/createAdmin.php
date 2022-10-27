@@ -39,7 +39,7 @@ if(isset($_POST['submit'])){
     if($res > 0){
 
       $alertStyle ="alert alert-danger";
-      $statusMsg="Administrator with the StaffID already exist!";
+      $statusMsg="User ID already exist!";
 
     }
     else{
@@ -56,7 +56,7 @@ if(isset($_POST['submit'])){
             if($querys == True){
 
                 $alertStyle ="alert alert-success";
-                $statusMsg="Administrator Created and Assigned Successfully!";
+                $statusMsg="Added Successfully!";
             }
             else
             {

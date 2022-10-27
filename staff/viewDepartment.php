@@ -3,28 +3,6 @@
 
     include('../includes/dbconnection.php');
     include('../includes/session.php');
-    error_reporting(0);
-
-if(isset($_POST['submit'])){
-    
-    $cpassword=md5($_POST['currentpassword']);
-    $newpassword=md5($_POST['newpassword']);
-
-    $query=mysqli_query($con,"select * from tbladmin where staffId='$staffId' and password='$cpassword'");
-    $row=mysqli_fetch_array($query);
-    if($row > 0){
-    $ret=mysqli_query($con,"update tbladmin set password='$newpassword' where staffId='$staffId'");
-
-      $alertStyle ="alert alert-success";
-      $statusMsg="Password changed successfully!";
-
-    } else {
-
-      $alertStyle ="alert alert-danger";
-      $statusMsg="Your current password is wrong!";
-    }
-}
-
 
   ?>
 
@@ -56,7 +34,7 @@ if(isset($_POST['submit'])){
 </head>
 <body>
     <!-- Left Panel -->
-    <?php $page="profile"; include 'includes/leftMenu.php';?>
+    <?php $page="department"; include 'includes/leftMenu.php';?>
 
    <!-- /#left-panel -->
 
@@ -86,8 +64,8 @@ if(isset($_POST['submit'])){
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
                                     <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Profile</a></li>
-                                    <li class="active">Change Password</li>
+                                    <li><a href="#">Sections</a></li>
+                                    <li class="active">View</li>
                                 </ol>
                             </div>
                         </div>
@@ -101,59 +79,54 @@ if(isset($_POST['submit'])){
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">Change Password</strong>
-                            </div>
-                            <div class="card-body">
-                                <!-- Credit Card -->
-                                <div id="pay-invoice">
-                                    <div class="card-body">
-                                       <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
-                                        <form method="Post" action="">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Current Password</label>
-                                                        <input id="" name="currentpassword" type="password" class="form-control cc-exp" value="" Required placeholder="Current Password">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <div>
-
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">New Password</label>
-                                                        <input id="" name="newpassword" type="password" class="form-control cc-exp" value="" data-val="true" placeholder="New Password">
-                                                    </div>
-                                                </div>
-                                             </div>
-
-                                        <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                    </div>
-                                                </div>
-                                             </div>
-
-                                        <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                </div>
-                                                </div>
-                                        </div>
-
-                                                <button type="submit" name="submit" class="btn btn-success">Change Password</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                          
+                           
                         </div> <!-- .card -->
                     </div><!--/.col-->
                
-
-                
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                               <strong id="tots" align="center" style="color: red; font-weight: 500px; font-size: 30px; margin-left: 175px;">**** TOTAL CLASSROOMS AND SECTIONS ****</strong>
+                            </div>
+                            <div class="card-body">
+                                <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
+                                   <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Classroom</th>
+                                            <th>Date Created</th>
+                                            <th>Actions</th>
+                                                                               
+                                            </tr>
+                                    </thead>
+                                    <tbody>
+                                      
+                            <?php
+        $ret=mysqli_query($con,"SELECT tbldepartment.Id, tbldepartment.departmentName,tbldepartment.dateCreated, tblfaculty.facultyName
+        from tbldepartment 
+        INNER JOIN tblfaculty ON tblfaculty.Id = tbldepartment.facultyId");
+        $cnt=1;
+        while ($row=mysqli_fetch_array($ret)) {
+                            ?>
+                <tr>
+                <td><?php echo $cnt;?></td>
+                <td><?php  echo $row['departmentName'];?></td>
+                <td><?php  echo $row['facultyName'];?></td>
+                <td><?php  echo $row['dateCreated'];?></td>
+                <td><a href="editDepartment.php?editid=<?php echo $row['Id'];?>" title="Edit Department"><i class="fa fa-edit fa-1x"></i></a>
+                <a onclick="return confirm('Are you sure you want to delete?')" href="deleteDepartment.php?delid=<?php echo $row['Id'];?>" title="Delete Department"><i class="fa fa-trash fa-1x"></i></a></td>
+                </tr>
+                <?php 
+                $cnt=$cnt+1;
+                }?>
+                                                                                
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 <!-- end of datatable -->
 
             </div>
@@ -191,7 +164,15 @@ if(isset($_POST['submit'])){
     <script type="text/javascript">
         $(document).ready(function() {
           $('#bootstrap-data-table-export').DataTable();
-      } );
+
+          function blink() {
+                $("#tots").fadeOut(500);
+                $("#tots").fadeIn(500);
+            };
+        
+            setInterval (blink, 1000);
+
+      });
 
       // Menu Trigger
       $('#menuToggle').on('click', function(event) {
@@ -206,8 +187,8 @@ if(isset($_POST['submit'])){
             } else {
                 $('body').toggleClass('open');
                 $('#left-panel').removeClass('open-menu');  
-            } 
-                
+            }
+
             }); 
 
       

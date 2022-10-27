@@ -8,7 +8,7 @@
         $countt = mysqli_num_rows($queryss);
 
         if($countt > 0){                       
-        echo '<select  required name="departmentId" class="custom-select form-control">';
+        echo '<select hidden required name="departmentId" class="custom-select form-control">';
         while ($row = mysqli_fetch_array($queryss)) {
         echo'<option value="'.$row['Id'].'" >'.$row['departmentName'].'</option>';
         }

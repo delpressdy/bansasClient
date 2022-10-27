@@ -82,7 +82,7 @@ $staffFullName = $row['firstName'].' '.$row['lastName'];
                             aria-expanded="false"> <i class="menu-icon fa fa-user-circle"></i>Profile</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-user"></i> <a href="updateProfile.php">Update Profile</a></li>
-                            </li>
+                            <li><i class="menu-icon fa fa-user"></i> <a href="changePassword.php">Change Pass</a></li>
                         </ul>
                          <li>
                         <a href="logout.php"> <i class="menu-icon fa fa-power-off"></i>Logout </a>
