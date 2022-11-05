@@ -1,51 +1,48 @@
 <?php
 
-    session_start();
-    error_reporting(0);
-    include('includes/dbconnection.php');
+session_start();
+error_reporting(0);
+include('includes/dbconnection.php');
 
-    if(isset($_POST['login']))
-    {
-        $staffId=$_POST['staffId'];
-        // $password=md5($_POST['password']);
-        $password=$_POST['password'];
-        $password = md5($password);
-        $query = mysqli_query($con,"select * from tbladmin where  staffId='$staffId' && password='$password'");
-        $count = mysqli_num_rows($query);
-        $row = mysqli_fetch_array($query);
+if (isset($_POST['login'])) {
+    $staffId = $_POST['staffId'];
+    // $password=md5($_POST['password']);
+    $password = $_POST['password'];
+    // $password = md5($password);
+    $query = mysqli_query($con, "select * from tbladmin where  staffId='$staffId' && password='$password'");
+    $count = mysqli_num_rows($query);
+    $row = mysqli_fetch_array($query);
 
-        if($count > 0)
+    if ($count > 0) {
+        $_SESSION['staffId'] = $row['staffId'];
+        $_SESSION['emailAddress'] = $row['emailAddress'];
+        $_SESSION['firstName'] = $row['firstName'];
+        $_SESSION['lastName'] = $row['lastName'];
+        $_SESSION['adminTypeId'] = $row['adminTypeId'];
+
+        if ($_SESSION['adminTypeId'] == 1) // SuperAdministrator
         {
-            $_SESSION['staffId']=$row['staffId'];
-            $_SESSION['emailAddress']=$row['emailAddress'];
-            $_SESSION['firstName']=$row['firstName'];
-            $_SESSION['lastName']=$row['lastName'];
-            $_SESSION['adminTypeId']=$row['adminTypeId'];
-
-            if($_SESSION['adminTypeId'] == 1) // SuperAdministrator
-            {
-                echo "<script type = \"text/javascript\">
+            echo "<script type = \"text/javascript\">
                 window.location = (\"superAdmin/index.php\")
-                </script>";  
-            }
-
-            else if($_SESSION['adminTypeId'] == 2) // Administrator
-            {
-                echo "<script type = \"text/javascript\">
-                window.location = (\"admin/index.php\")
-                </script>";  
-            }
-        }
-        else
+                </script>";
+        } else if ($_SESSION['adminTypeId'] == 2) // Administrator
         {
-            $errorMsg = "<div class='alert alert-danger' role='alert'>Invalid Username/Password!</div>";
+            echo "<script type = \"text/javascript\">
+                window.location = (\"admin/index.php\")
+                </script>";
         }
+    } else {
+        $errorMsg = "<div class='alert alert-danger' role='alert'>Invalid Username/Password!</div>";
     }
-  ?>
+}
+?>
 
 
 <!doctype html>
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -69,6 +66,7 @@
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
+
 <body class="bg-light">
 
     <div class="sufee-login d-flex align-content-center flex-wrap">
@@ -81,8 +79,11 @@
                 </div>
                 <div class="login-form">
                     <form method="Post" Action="">
-                            <?php echo $errorMsg; ?>
-                               <strong><h2 align="center">Administrator Login</h2></strong><hr>
+                        <?php echo $errorMsg; ?>
+                        <strong>
+                            <h2 align="center">Administrator Login</h2>
+                        </strong>
+                        <hr>
                         <div class="form-group">
                             <label>Staff ID</label>
                             <input type="text" name="staffId" Required class="form-control" placeholder="Staff ID">
@@ -92,7 +93,7 @@
                             <input type="password" name="password" Required class="form-control" placeholder="Password">
                         </div><!-- Log on to codeastro.com for more projects! -->
                         <div class="checkbox">
-                           <label class="pull-left">
+                            <label class="pull-left">
                                 <a href="index.php">Go Back</a>
                             </label>
                             <label class="pull-right">
@@ -100,11 +101,11 @@
                             </label>
                         </div>
                         <br>
-						<!-- Log on to codeastro.com for more projects! -->
+                        <!-- Log on to codeastro.com for more projects! -->
                         <button type="submit" name="login" class="btn btn-success btn-flat m-b-30 m-t-30">Log in</button>
-						
-						
-						
+
+
+
                         <!-- <div class="social-login-content">
                             <div class="social-button">
                                 <button type="button" class="btn social facebook btn-flat btn-addon mb-3"><i class="ti-facebook"></i>Sign in with facebook</button>
@@ -127,4 +128,5 @@
     <script src="assets/js/main.js"></script>
 
 </body>
+
 </html>

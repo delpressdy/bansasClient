@@ -64,7 +64,7 @@ error_reporting(0);
                         <h3><strong class="text-success">Hi, Please Login</strong></h3>
                         <hr>
                         <div class="form-group">
-                            <label>Username</label>
+                            <label>Staff_ID</label>
                             <input type="text" name="uname" Required class="form-control" placeholder="ID Number">
                         </div>
                         <div class="form-group">

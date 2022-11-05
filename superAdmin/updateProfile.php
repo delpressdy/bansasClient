@@ -1,48 +1,50 @@
-
 <?php
 
-    include('../includes/dbconnection.php');
-    include('../includes/session.php');
-    error_reporting(0);
+include('../includes/dbconnection.php');
+include('../includes/session.php');
+error_reporting(0);
 
 
-    $querys = mysqli_query($con,"select * from tbladmin where staffId='$staffId'");
-    $rrow = mysqli_fetch_array($querys);
-    
+$querys = mysqli_query($con, "select * from tbladmin where staffId='$staffId'");
+$rrow = mysqli_fetch_array($querys);
 
-if(isset($_POST['submit'])){
 
-     $alertStyle ="";
-     $statusMsg=""; 
+if (isset($_POST['submit'])) {
 
-  $firstname=$_POST['firstname'];
-  $lastname=$_POST['lastname'];
-  $othername=$_POST['othername'];
-  $emailAddress=$_POST['emailAddress'];
-  $phoneNo=$_POST['phoneNo'];
+    $alertStyle = "";
+    $statusMsg = "";
 
-  $ret=mysqli_query($con,"update tbladmin set firstName='$firstname', lastName='$lastname', otherName='$othername', 
-  emailAddress='$emailAddress', phoneNo='$phoneNo' where staffId='$staffId'");
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $othername = $_POST['othername'];
+    $emailAddress = $_POST['emailAddress'];
+    $phoneNo = $_POST['phoneNo'];
+    $password = $_POST['password'];
+    $password = md5($password);
 
-    if($ret == TRUE){
+    $ret = mysqli_query($con, "update tbladmin set firstName='$firstname', lastName='$lastname', otherName='$othername', 
+  emailAddress='$emailAddress', phoneNo='$phoneNo', password = '$password' where staffId='$staffId'");
 
-        $alertStyle ="alert alert-success";
-        $statusMsg="Profile Updated Successfully!";
-    }
-    else
-    {
-      $alertStyle ="alert alert-danger";
-      $statusMsg="An error Occurred!";
+    if ($ret == TRUE) {
+
+        $alertStyle = "alert alert-success";
+        $statusMsg = "Profile Updated Successfully!";
+    } else {
+        $alertStyle = "alert alert-danger";
+        $statusMsg = "An error Occurred!";
     }
 }
-  ?>
+?>
 
 <!doctype html>
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <?php include 'includes/title.php';?>
+    <?php include 'includes/title.php'; ?>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -63,11 +65,13 @@ if(isset($_POST['submit'])){
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+
 <body>
     <!-- Left Panel -->
-    <?php $page="profile"; include 'includes/leftMenu.php';?>
+    <?php $page = "profile";
+    include 'includes/leftMenu.php'; ?>
 
-   <!-- /#left-panel -->
+    <!-- /#left-panel -->
 
     <!-- Left Panel -->
 
@@ -76,7 +80,7 @@ if(isset($_POST['submit'])){
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-            <?php include 'includes/header.php';?>
+        <?php include 'includes/header.php'; ?>
         <!-- /header -->
         <!-- Header-->
 
@@ -117,46 +121,53 @@ if(isset($_POST['submit'])){
                                 <!-- Credit Card -->
                                 <div id="pay-invoice">
                                     <div class="card-body">
-                                       <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
+                                        <div class="<?php echo $alertStyle; ?>" role="alert"><?php echo $statusMsg; ?></div>
                                         <form method="Post" action="">
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="cc-exp" class="control-label mb-1">Firstname</label>
-                                                        <input id="" name="firstname" type="tel" class="form-control cc-exp" value="<?php echo $rrow['firstName'];?>" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Firstname">
+                                                        <input id="" name="firstname" type="tel" class="form-control cc-exp" value="<?php echo $rrow['firstName']; ?>" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Firstname">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <label for="x_card_code" class="control-label mb-1">Lastname</label>
-                                                        <input id="" name="lastname" type="tel" class="form-control cc-cvc" value="<?php echo $rrow['lastName'];?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Lastname">
-                                                        </div>
-                                                    </div>
-                                                    <div>
-
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Othername</label>
-                                                        <input id="" name="othername" type="text" class="form-control cc-exp" value="<?php echo $rrow['otherName'];?>" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Othername">
-                                                    </div>
-                                                </div>
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="x_card_code" class="control-label mb-1">Email Address</label>
-                                                    <input id="" name="emailAddress" type="email" class="form-control cc-cvc" value="<?php echo $rrow['emailAddress'];?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Email Address">
+                                                    <input id="" name="lastname" type="tel" class="form-control cc-cvc" value="<?php echo $rrow['lastName']; ?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Lastname">
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div>
 
-                                        <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Phone Number</label>
-                                                        <input id="" name="phoneNo" type="text" class="form-control cc-exp" value="<?php echo $rrow['phoneNo'];?>" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Phone Number">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="cc-exp" class="control-label mb-1">Othername</label>
+                                                            <input id="" name="othername" type="text" class="form-control cc-exp" value="<?php echo $rrow['otherName']; ?>" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Othername">
+                                                        </div>
                                                     </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="x_card_code" class="control-label mb-1">Email Address</label>
+                                                            <input id="" name="emailAddress" type="email" class="form-control cc-cvc" value="<?php echo $rrow['emailAddress']; ?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Email Address">
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-                                              
-                                        </div>
+
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="password" class="control-label mb-1">Password</label>
+                                                            <input id="password" name="password" type="password" class="form-control cc-cvc" value="<?php echo $rrow['password']; ?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Email Address">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="cc-exp" class="control-label mb-1">Phone Number</label>
+                                                            <input id="" name="phoneNo" type="text" class="form-control cc-exp" value="<?php echo $rrow['phoneNo']; ?>" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Phone Number">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
 
                                                 <button type="submit" name="submit" class="btn btn-success">Update Profile</button>
                                             </div>
@@ -165,31 +176,32 @@ if(isset($_POST['submit'])){
                                 </div>
                             </div>
                         </div> <!-- .card -->
-                    </div><!--/.col-->
-               
+                    </div>
+                    <!--/.col-->
 
 
-            </div>
-        </div><!-- .animated -->
-    </div><!-- .content -->
 
-    <div class="clearfix"></div>
+                </div>
+            </div><!-- .animated -->
+        </div><!-- .content -->
 
-        <?php include 'includes/footer.php';?>
+        <div class="clearfix"></div>
+
+        <?php include 'includes/footer.php'; ?>
 
 
-</div><!-- /#right-panel -->
+    </div><!-- /#right-panel -->
 
-<!-- Right Panel -->
+    <!-- Right Panel -->
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../assets/js/main.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="../assets/js/main.js"></script>
 
-<script src="../assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="../assets/js/lib/data-table/datatables.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
     <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
@@ -203,28 +215,27 @@ if(isset($_POST['submit'])){
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
+            $('#bootstrap-data-table-export').DataTable();
+        });
 
-      // Menu Trigger
-      $('#menuToggle').on('click', function(event) {
-            var windowWidth = $(window).width();   		 
-            if (windowWidth<1010) { 
-                $('body').removeClass('open'); 
-                if (windowWidth<760){ 
-                $('#left-panel').slideToggle(); 
+        // Menu Trigger
+        $('#menuToggle').on('click', function(event) {
+            var windowWidth = $(window).width();
+            if (windowWidth < 1010) {
+                $('body').removeClass('open');
+                if (windowWidth < 760) {
+                    $('#left-panel').slideToggle();
                 } else {
-                $('#left-panel').toggleClass('open-menu');  
-                } 
+                    $('#left-panel').toggleClass('open-menu');
+                }
             } else {
                 $('body').toggleClass('open');
-                $('#left-panel').removeClass('open-menu');  
-            } 
-                
-            }); 
+                $('#left-panel').removeClass('open-menu');
+            }
 
-      
-  </script>
+        });
+    </script>
 
 </body>
+
 </html>
