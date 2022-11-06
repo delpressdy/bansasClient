@@ -4,7 +4,6 @@ session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
 
-<<<<<<< HEAD
 if (isset($_POST['login'])) {
     $staffId = $_POST['staffId'];
     // $password=md5($_POST['password']);
@@ -13,16 +12,6 @@ if (isset($_POST['login'])) {
     $query = mysqli_query($con, "select * from tbladmin where  staffId='$staffId' && password='$password'");
     $count = mysqli_num_rows($query);
     $row = mysqli_fetch_array($query);
-=======
-    if(isset($_POST['login']))
-    {
-        $staffId=$_POST['uname'];
-        $password=$_POST['password'];
-        $password = md5($password);
-        $query = mysqli_query($con,"select * from tbladmin where  staffId='$staffId' && password='$password'");
-        $count = mysqli_num_rows($query);
-        $row = mysqli_fetch_array($query);
->>>>>>> bef7c1218c665a683b2c3a439f19ea6632badc80
 
     if ($count > 0) {
         $_SESSION['staffId'] = $row['staffId'];
@@ -35,22 +24,8 @@ if (isset($_POST['login'])) {
         {
             echo "<script type = \"text/javascript\">
                 window.location = (\"superAdmin/index.php\")
-<<<<<<< HEAD
                 </script>";
         } else if ($_SESSION['adminTypeId'] == 2) // Administrator
-=======
-                </script>";  
-            }
-
-            else if($_SESSION['adminTypeId'] == 2) // Staff
-            {
-                echo "<script type = \"text/javascript\">
-                window.location = (\"staff/index.php\")
-                </script>";  
-            }
-        }
-        else
->>>>>>> bef7c1218c665a683b2c3a439f19ea6632badc80
         {
             echo "<script type = \"text/javascript\">
                 window.location = (\"admin/index.php\")
@@ -65,14 +40,10 @@ if (isset($_POST['login'])) {
 
 
 <!doctype html>
-<<<<<<< HEAD
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang="">
 <!--<![endif]-->
 
-=======
-<html class="no-js" lang="">
->>>>>>> bef7c1218c665a683b2c3a439f19ea6632badc80
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -103,69 +74,62 @@ if (isset($_POST['login'])) {
                 </div>
                 <div class="login-form">
                     <form method="Post" Action="">
-<<<<<<< HEAD
                         <?php echo $errorMsg; ?>
                         <strong>
                             <h2 align="center">Administrator Login</h2>
                         </strong>
-=======
-                            <?php echo $errorMsg; ?>
-                        <h3><strong class="text-success">Hi, Please Login</strong></h3>
->>>>>>> bef7c1218c665a683b2c3a439f19ea6632badc80
                         <hr>
                         <div class="form-group">
                             <label>User</label>
 
-
-                                <?php 
-                                        $query=mysqli_query($con,"select * from tbladmin ORDER BY firstName ASC");                        
-                                        $count = mysqli_num_rows($query);
-                                        if($count > 0){                       
-                                            echo ' <select required name="uname" class="custom-select form-control">';
-                                            echo'<option value="">Choose User</option>';
-                                            while ($row = mysqli_fetch_array($query)) {
+                            <input class="form-control" type="text" placeholder="staff_ID" name="staffId" required />
+                            <!-- <?php
+                                    $query = mysqli_query($con, "select * from tbladmin ");
+                                    $count = mysqli_num_rows($query);
+                                    if ($count > 0) {
+                                        echo ' <select required name="uname" class="custom-select form-control">';
+                                        echo '<option value="">Choose User</option>';
+                                        while ($row = mysqli_fetch_array($query)) {
 
                                             $type = $row['otherName'];
 
-                                            echo'<option value="'.$row['staffId'].'" >'.'['.$type .'] ' .$row['firstName'].' '.$row['lastName'].'</option>';
-
-                                            }
-                                            echo '</select>';
-                                            }
-                                            ?>    
-
+                                            echo '<option value="' . $row['staffId'] . '" >' . $row['staffId'] . '</option>';
+                                        }
+                                        echo '</select>';
+                                    }
+                                    ?> -->
 
 
 
 
-                                <!-- <?php 
-                                    $query=mysqli_query($con,"select * from tbladmin ORDER BY firstName ASC");                        
+
+                            <!-- <?php
+                                    $query = mysqli_query($con, "select * from tbladmin ORDER BY firstName ASC");
                                     $count = mysqli_num_rows($query);
-                                        if($count > 0){                       
-                                            echo '<select required name="othername" onchange="showValues(this.value)" class="custom-select form-control">';
-                                            echo'<option value="">-- Choose User --</option>';
+                                    if ($count > 0) {
+                                        echo '<select required name="othername" onchange="showValues(this.value)" class="custom-select form-control">';
+                                        echo '<option value="">-- Choose User --</option>';
                                         while ($row = mysqli_fetch_array($query)) {
 
-                                            echo'<option value="'.$row['staffId'].'">';
+                                            echo '<option value="' . $row['staffId'] . '">';
 
                                             $id = $row['staffId'];
                                             $name = $row['firstName'];
                                             $type = $row['otherName'];
 
-                                            echo '['.$type.'] '.$name .' '.$row['lastName'];
+                                            echo '[' . $type . '] ' . $name . ' ' . $row['lastName'];
 
                                             echo '</option>';
-                                            }
-                                            echo '</select>';
-                                            }
-                                ?>  -->
+                                        }
+                                        echo '</select>';
+                                    }
+                                    ?>  -->
                         </div>
                         <div class="form-group">
                             <label>Password</label>
                             <input type="password" name="password" Required class="form-control" placeholder="Password">
                         </div>
                         <div class="checkbox">
-<<<<<<< HEAD
                             <label class="pull-left">
                                 <a href="index.php">Go Back</a>
                             </label>
@@ -188,18 +152,6 @@ if (isset($_POST['login'])) {
                         <!-- <div class="register-link m-t-15 text-center">
                             <p>Don't have account ? <a href="#"> Sign Up Here</a></p>
                         </div> -->
-=======
-                           <label class="pull-left">
-                                <small><a class="text-success" href="index.php">Go to main page</a></small>
-                            </label>
-                        </div>
-                        <br><!-- Log on to codeastro.com for more projects! -->
-                        <button type="submit" name="login" class="btn btn-info btn-flat m-b-30 m-t-30">Log in</button>
-                        
-                        <div class="register-link m-t-15 text-center"><br>
-                            <p>Sign Up <a class="text-success" href="staff/signup.php"><b>here!<b></a></p>
-                        </div>
->>>>>>> bef7c1218c665a683b2c3a439f19ea6632badc80
                     </form>
                 </div>
             </div>

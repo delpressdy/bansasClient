@@ -23,7 +23,7 @@ error_reporting(0);
         }
         else
         {
-            $errorMsg = "<h3 class='alert alert-danger text-danger' role='alert'>Invalid, YAWA TARUNGAG TYPE!</h3>";
+            $errorMsg = "<h3 class='alert alert-danger text-danger' role='alert'>Please type valid Staff_ID and Password</h3>";
         }
     }
   ?>
