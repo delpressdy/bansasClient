@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Student Grading PHP</title>
+  <title>Grade Recording System of Salug Daku Elementary </title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -34,6 +34,14 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <style>
+    .bg {
+      background-image: url("./img/bg.jpg");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
 </head>
 
 <body>
@@ -42,7 +50,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
       <a class="navbar-brand" href="index.php"><img src="assets/img/student-grade.png" alt="Logo" style="width:30px;height:30px;"></a>
-      <h1 class="logo mr-auto"><a href="index.php">Student Grading System</a></h1>
+      <h1 class="logo mr-auto"><a href="index.php"> Salug Daku Elementary</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -70,14 +78,16 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex justify-content-center align-items-center" style="background-image: url('assets/img/phb.jpg');">
-    <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
-      <h1>Student Grading System<br></h1>
-      <!-- <h2>Learning Today, Leading Tomorrow.</h2> -->
-      <a href="#" class="btn-get-started">Read More</a>
-    </div>
-  </section><!-- End Hero -->
+  <div class="bg">
+    <section id="hero" class="d-flex justify-content-center align-items-center " style="background-image: url('assets/img/phb.jpg');background-position:top;background-repeat:no-repeat;background-size:cover;">
 
+      <div class="container position-relative " data-aos="zoom-in" data-aos-delay="100">
+        <h1>Grade Recording System of Salug Daku Elementary<br></h1>
+
+      </div>
+
+    </section><!-- End Hero -->
+  </div>
   <main id="main">
 
 
@@ -139,7 +149,7 @@
 
       <div class="mr-md-auto text-center text-md-left">
         <div class="copyright">
-          &copy; <strong><span>Student Grading System</span></strong> - <?php echo date('Y'); ?> - Developed By Sodiq Ahmed
+          &copy; <strong><span>Grade Recording System of Salug Daku Elementary</span></strong> - <?php echo date('Y'); ?> - Developed By Sodiq Ahmed
         </div>
         <div class="credits">
           <!-- All the links in the footer should remain intact. -->
