@@ -1,17 +1,19 @@
-
 <?php
 
-    include('../includes/dbconnection.php');
-    include('../includes/session.php');
+include('../includes/dbconnection.php');
+include('../includes/session.php');
 
-  ?>
+?>
 
 <!doctype html>
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <?php include 'includes/title.php';?>
+    <?php include 'includes/title.php'; ?>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -32,11 +34,13 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+
 <body>
     <!-- Left Panel -->
-    <?php $page="courses"; include 'includes/leftMenu.php';?>
+    <?php $page = "courses";
+    include 'includes/leftMenu.php'; ?>
 
-   <!-- /#left-panel -->
+    <!-- /#left-panel -->
 
     <!-- Left Panel -->
 
@@ -45,7 +49,7 @@
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-            <?php include 'includes/header.php';?>
+        <?php include 'includes/header.php'; ?>
         <!-- /header -->
         <!-- Header-->
 
@@ -79,15 +83,18 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                          
-                           
+
+
                         </div> <!-- .card -->
-                    </div><!--/.col-->
-               
+                    </div>
+                    <!--/.col-->
+
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title"><h2 align="center">All Courses</h2></strong>
+                                <strong class="card-title">
+                                    <h2 align="center">All Subjects</h2>
+                                </strong>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
@@ -97,18 +104,18 @@
                                             <th>Title</th>
                                             <th>Code</th>
                                             <th>Unit</th>
-                                            <th>Level</th>
-                                            <th>Faculty</th>
-                                            <th>Department</th>
-                                             <th>Semester</th>
+                                            <th>Grade Level</th>
+                                            <th>Room</th>
+                                            <th>Section</th>
+                                            <th>Grading</th>
                                             <th>Date Added</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                      
-                            <?php
-                $ret=mysqli_query($con,"SELECT tblcourse.courseCode,tblcourse.courseTitle,tblcourse.dateAdded,
+
+                                        <?php
+                                        $ret = mysqli_query($con, "SELECT tblcourse.courseCode,tblcourse.courseTitle,tblcourse.dateAdded,
                 tblcourse.courseUnit,tbllevel.levelName,tblfaculty.facultyName,tbldepartment.departmentName,tblsemester.semesterName
                 from tblcourse 
                 INNER JOIN tbllevel ON tbllevel.Id = tblcourse.levelId
@@ -116,54 +123,55 @@
                 INNER JOIN tblfaculty ON tblfaculty.Id = tblcourse.facultyId
                 INNER JOIN tbldepartment ON tbldepartment.Id = tblcourse.departmentId");
 
-                $cnt=1;
-                while ($row=mysqli_fetch_array($ret)) {
-                            ?>
-                <tr>
-                <td><?php echo $cnt;?></td>
-                <td><?php  echo $row['courseTitle'];?></td>
-                <td><?php  echo $row['courseCode'];?></td>
-                <td><?php  echo $row['courseUnit'];?></td>
-                <td><?php  echo $row['levelName'];?></td>
-                <td><?php  echo $row['facultyName'];?></td>
-                <td><?php  echo $row['departmentName'];?></td>
-                <td><?php  echo $row['semesterName'];?></td>
-                <td><?php  echo $row['dateAdded'];?></td>
-                <td><a href="editCourses.php?editCourseId=<?php echo $row['courseCode'];?>" title="Edit Details"><i class="fa fa-edit fa-1x"></i></a>
-                <a onclick="return confirm('Are you sure you want to delete?')" href="deleteCourse.php?delid=<?php echo $row['courseCode'];?>" title="Delete Course"><i class="fa fa-trash fa-1x"></i></a></td>
-                </tr>
-                <?php 
-                $cnt=$cnt+1;
-                }?>
-                                                                                
+                                        $cnt = 1;
+                                        while ($row = mysqli_fetch_array($ret)) {
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $cnt; ?></td>
+                                                <td><?php echo $row['courseTitle']; ?></td>
+                                                <td><?php echo $row['courseCode']; ?></td>
+                                                <td><?php echo $row['courseUnit']; ?></td>
+                                                <td><?php echo $row['levelName']; ?></td>
+                                                <td><?php echo $row['facultyName']; ?></td>
+                                                <td><?php echo $row['departmentName']; ?></td>
+                                                <td><?php echo $row['semesterName']; ?></td>
+                                                <td><?php echo $row['dateAdded']; ?></td>
+                                                <td><a href="editCourses.php?editCourseId=<?php echo $row['courseCode']; ?>" title="Edit Details"><i class="fa fa-edit fa-1x"></i></a>
+                                                    <a onclick="return confirm('Are you sure you want to delete?')" href="deleteCourse.php?delid=<?php echo $row['courseCode']; ?>" title="Delete Course"><i class="fa fa-trash fa-1x"></i></a>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                            $cnt = $cnt + 1;
+                                        } ?>
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-<!-- end of datatable -->
+                    <!-- end of datatable -->
 
-            </div>
-        </div><!-- .animated -->
-    </div><!-- .content -->
+                </div>
+            </div><!-- .animated -->
+        </div><!-- .content -->
 
-    <div class="clearfix"></div>
+        <div class="clearfix"></div>
 
-        <?php include 'includes/footer.php';?>
+        <?php include 'includes/footer.php'; ?>
 
 
-</div><!-- /#right-panel -->
+    </div><!-- /#right-panel -->
 
-<!-- Right Panel -->
+    <!-- Right Panel -->
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../assets/js/main.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="../assets/js/main.js"></script>
 
-<script src="../assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="../assets/js/lib/data-table/datatables.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
     <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
@@ -177,29 +185,27 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
+            $('#bootstrap-data-table-export').DataTable();
+        });
 
-      // Menu Trigger
-      $('#menuToggle').on('click', function(event) {
-            var windowWidth = $(window).width();   		 
-            if (windowWidth<1010) { 
-                $('body').removeClass('open'); 
-                if (windowWidth<760){ 
-                $('#left-panel').slideToggle(); 
+        // Menu Trigger
+        $('#menuToggle').on('click', function(event) {
+            var windowWidth = $(window).width();
+            if (windowWidth < 1010) {
+                $('body').removeClass('open');
+                if (windowWidth < 760) {
+                    $('#left-panel').slideToggle();
                 } else {
-                $('#left-panel').toggleClass('open-menu');  
-                } 
+                    $('#left-panel').toggleClass('open-menu');
+                }
             } else {
                 $('body').toggleClass('open');
-                $('#left-panel').removeClass('open-menu');  
-            } 
-                
-            }); 
+                $('#left-panel').removeClass('open-menu');
+            }
 
-
-      
-  </script>
+        });
+    </script>
 
 </body>
+
 </html>
