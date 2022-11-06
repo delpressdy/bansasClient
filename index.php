@@ -56,16 +56,19 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
+          
 
 
           <li class="drop-down"><a href="">Login <i class='bx bxs-down-arrow'></i></a>
             <ul>
-              <li><a href="adminLogin.php">Administrator</a></li>
+              <li><a href="adminLogin.php">Admin/Staff</a></li>
               <li><a href="studentLogin.php">Student</a></li>
               <li><a href="staffLogin.php">Staff</a></li>
 
               <!-- Log on to codeastro.com for more projects! -->
 
+			  <!-- Log on to codeastro.com for more projects! -->
+             
             </ul>
           </li>
 

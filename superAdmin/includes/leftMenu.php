@@ -14,14 +14,14 @@ $staffFullName = $row['firstName'].' '.$row['lastName'];
                         <a href="index.php"><i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
                   
-                        <!-- <li class="menu-item-has-children dropdown">
+                        <li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Admin</a>
+                                aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Staff</a>
                             <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-plus"></i><a href="createAdmin.php">Add Administrator</a></li>
-                                <li><i class="fa fa-eye"></i><a href="viewAdmin.php">View Administrator</a></li>
+                                <li><i class="fa fa-plus"></i><a href="createAdmin.php">Add Staff</a></li>
+                                <li><i class="fa fa-eye"></i><a href="viewAdmin.php">View List</a></li>
                             </ul>
-                        </li> -->
+                        </li>
                  
                    
                    <li class="menu-title">Classrooms Tab ↓↓↓</li>
@@ -82,7 +82,7 @@ $staffFullName = $row['firstName'].' '.$row['lastName'];
                             aria-expanded="false"> <i class="menu-icon fa fa-user-circle"></i>Profile</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-user"></i> <a href="updateProfile.php">Update Profile</a></li>
-                            </li>
+                            <li><i class="menu-icon fa fa-user"></i> <a href="changePassword.php">Change Pass</a></li>
                         </ul>
                          <li>
                         <a href="logout.php"> <i class="menu-icon fa fa-power-off"></i>Logout </a>

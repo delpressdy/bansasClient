@@ -101,7 +101,7 @@
 
 
                     <div class="col-sm-6 col-lg-3">
-                        <div class="card text-white bg-flat-color-1">
+                        <a href="viewAdmin.php"><div class="card text-white bg-flat-color-1">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
                                     <h3 class="mb-0 fw-r">
@@ -111,14 +111,15 @@
                                     <p class="text-light mt-1 m-0">Total Staff</p>
                                 </div>
                                 <div class="card-right float-right text-right">
-                                    <i class="icon fade-5 icon-lg pe-7s-notebook"></i>
+                                    <i class="icon white-5 icon-lg pe-7s-users"></i>
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
 
                     <div class="col-sm-6 col-lg-3">
-                        <div class="card text-white bg-danger">
+                        <a href="viewStudent.php"><div class="card text-white bg-danger">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
                                     <h3 class="mb-0 fw-r">
@@ -128,14 +129,15 @@
                                     <p class="text-light mt-1 m-0">Total Pupils</p>
                                 </div>
                                 <div class="card-right float-right text-right">
-                                    <i class="icon fade-5 icon-lg pe-7s-users"></i>
+                                    <i class="icon white-5 icon-lg pe-7s-users"></i>
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
 
                     <div class="col-sm-6 col-lg-3">
-                        <div class="card text-white bg-flat-color-3">
+                        <a href="viewDepartment.php"><div class="card text-white bg-flat-color-3">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
                                     <h3 class="mb-0 fw-r">
@@ -145,10 +147,11 @@
                                     <p class="text-light mt-1 m-0">Total Sections</p>
                                 </div>
                                 <div class="card-right float-right text-right">
-                                    <i class="icon fade-5 icon-lg pe-7s-network"></i>
+                                    <i class="icon white-5 icon-lg pe-7s-network"></i>
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
 
                 </div>
@@ -162,6 +165,9 @@
                                 $sum = $row['sessname'];
                                 echo $sum;
                                 ?></small>
+
+                                <br><br> 
+                                <?php $day = date('l'); $time = date('h:i:s a'); echo $day . ', ' . $time; ?>
                             </div>
                     </div>
                 </div>

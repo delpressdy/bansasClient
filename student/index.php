@@ -139,14 +139,11 @@
                                         <span class="count"><?php echo $countAllStudResult;?></span>
                                     </h3>
                                     <p class="text-light mt-1 m-0">Result</p>
-                                </div><!-- /.card-left -->
-
+                                </div>
                                 <div class="card-right float-right text-right">
                                     <i class="icon fade-5 icon-lg pe-7s-copy-file"></i>
-                                </div><!-- /.card-right -->
-
+                                </div>
                             </div>
-
                         </div>
                     </div>
 

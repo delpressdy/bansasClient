@@ -1,7 +1,7 @@
 
 <?php
-$staffId = $_SESSION['staffId'];
-$query = mysqli_query($con,"select * from tblstaff where staffId='$staffId'");
+$adminTypeID = $_SESSION['adminTypeId'];
+$query = mysqli_query($con,"select * from tbladmin where adminTypeId='$adminTypeID'");
 $row = mysqli_fetch_array($query);
 $staffFullName = $row['firstName'].' '.$row['lastName'];
 ?>
