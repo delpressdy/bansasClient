@@ -10,29 +10,27 @@ if (isset($_POST['submit'])) {
     $statusMsg = "";
 
     $courseTitle = $_POST['courseTitle'];
-    $courseCode = $_POST['courseCode'];
     $levelId = $_POST['levelId'];
     $semesterId = $_POST['semesterId'];
-    $courseUnit = $_POST['courseUnit'];
     $departmentId = $_POST['departmentId'];
     $facultyId = $_POST['facultyId'];
     $dateAdded = date("Y-m-d");
 
     //Checks the Course Code
-    $query = mysqli_query($con, "select * from tblcourse where courseCode ='$courseCode'");
+    $query = mysqli_query($con, "select * from tblcourse where courseTitle ='$courseTitle'");
     $ret = mysqli_fetch_array($query);
 
     if ($ret > 0) { //Check the coure Title
         $alertStyle = "alert alert-danger";
-        $statusMsg = "This Course already exist!";
+        $statusMsg = "This Subject already exist!";
     } else {
 
-        $query = mysqli_query($con, "insert into tblcourse(courseTitle,courseCode,courseUnit,facultyId,departmentId,levelId,semesterId,dateAdded) value('$courseTitle','$courseCode','$courseUnit','$facultyId','$departmentId','$levelId','$semesterId','$dateAdded')");
+        $query = mysqli_query($con, "insert into tblcourse(courseTitle,facultyId,departmentId,levelId,semesterId,dateAdded) value('$courseTitle','$facultyId','$departmentId','$levelId','$semesterId','$dateAdded')");
 
         if ($query) {
 
             $alertStyle = "alert alert-success";
-            $statusMsg = "Course Created and Assigned Successfully!";
+            $statusMsg = "Created Successfully!";
         } else {
             $alertStyle = "alert alert-danger";
             $statusMsg = "An error Occurred!";
@@ -161,8 +159,8 @@ if (isset($_POST['submit'])) {
                                 <ol class="breadcrumb text-right">
                                     <!-- Log on to codeastro.com for more projects! -->
                                     <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Courses</a></li>
-                                    <li class="active">Add Courses</li>
+                                    <li><a href="#">Subject</a></li>
+                                    <li class="active">Add</li>
                                 </ol>
                             </div>
                         </div>
@@ -191,18 +189,14 @@ if (isset($_POST['submit'])) {
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <!-- Log on to codeastro.com for more projects! -->
-                                                        <label for="cc-exp" class="control-label mb-1">Subject Title</label>
+                                                        <label for="cc-exp" class="control-label mb-1">Subject Name</label>
                                                         <input id="" name="courseTitle" type="text" class="form-control cc-exp" value="" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Course Title">
                                                     </div>
                                                 </div>
 
-                                            </div>
-                                            <div>
-                                                <div class="row">
-
-                                                    <div class="col-6">
+                                                <div class="col-6">
                                                         <div class="form-group">
-                                                            <label for="x_card_code" class="control-label mb-1">Level</label>
+                                                            <label for="x_card_code" class="control-label mb-1">Grade Lvl</label>
                                                             <?php
                                                             $query = mysqli_query($con, "select * from tbllevel");
                                                             $count = mysqli_num_rows($query);
@@ -217,17 +211,19 @@ if (isset($_POST['submit'])) {
                                                             ?>
                                                         </div>
                                                     </div>
-                                                </div>
+
+                                            </div>
+                                            <div>
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <div class="form-group">
-                                                            <label for="cc-exp" class="control-label mb-1">Semester</label>
+                                                            <label for="cc-exp" class="control-label mb-1">Grading</label>
                                                             <?php
                                                             $query = mysqli_query($con, "select * from tblsemester");
                                                             $count = mysqli_num_rows($query);
                                                             if ($count > 0) {
                                                                 echo ' <select required name="semesterId" class="custom-select form-control">';
-                                                                echo '<option value="">--Select Semester--</option>';
+                                                                echo '<option value="">--Select--</option>';
                                                                 while ($row = mysqli_fetch_array($query)) {
                                                                     echo '<option value="' . $row['Id'] . '" >' . $row['semesterName'] . '</option>';
                                                                 }
@@ -235,16 +231,16 @@ if (isset($_POST['submit'])) {
                                                             }
                                                             ?>
                                                         </div>
-                                                    </div><!-- Log on to codeastro.com for more projects! -->
+                                                    </div>
                                                     <div class="col-6">
                                                         <div class="form-group">
-                                                            <label for="x_card_code" class="control-label mb-1">Faculty</label>
+                                                            <label for="x_card_code" class="control-label mb-1">Classroom</label>
                                                             <?php
                                                             $query = mysqli_query($con, "select * from tblfaculty ORDER BY facultyName ASC");
                                                             $count = mysqli_num_rows($query);
                                                             if ($count > 0) {
                                                                 echo ' <select required name="facultyId" onchange="showValues(this.value)" class="custom-select form-control">';
-                                                                echo '<option value="">--Select Faculty--</option>';
+                                                                echo '<option value="">--Select Room--</option>';
                                                                 while ($row = mysqli_fetch_array($query)) {
                                                                     echo '<option value="' . $row['Id'] . '" >' . $row['facultyName'] . '</option>';
                                                                 }
@@ -266,7 +262,7 @@ if (isset($_POST['submit'])) {
                                                     </div>
 
                                                 </div>
-                                                <button type="submit" name="submit" class="btn btn-success">Add Course</button>
+                                                <button type="submit" name="submit" class="btn btn-success">Add Subject</button>
                                             </div>
                                         </form>
                                     </div>
@@ -296,7 +292,6 @@ if (isset($_POST['submit'])) {
                                             <th>Level</th>
                                             <th>Room</th>
                                             <th>Department</th>
-                                            <th>Session</th>
                                             <th>Date Added</th>
                                             <th>Actions</th>
                                         </tr>
@@ -318,12 +313,10 @@ if (isset($_POST['submit'])) {
                                             <tr>
                                                 <td><?php echo $cnt; ?></td>
                                                 <td><?php echo $row['courseTitle']; ?></td>
-                                                <td><?php echo $row['courseCode']; ?></td>
-                                                <td><?php echo $row['courseUnit']; ?></td>
+                                                <td><?php echo $row['levelName']; ?></td>
                                                 <td><?php echo $row['levelName']; ?></td>
                                                 <td><?php echo $row['facultyName']; ?></td>
                                                 <td><?php echo $row['departmentName']; ?></td>
-                                                <td><?php echo $row['semesterName']; ?></td>
                                                 <td><?php echo $row['dateAdded']; ?></td>
                                                 <td><a href="editCourses.php?editCourseId=<?php echo $row['courseCode']; ?>" title="Edit Details"><i class="fa fa-edit fa-1x"></i></a>
                                                     <a onclick="return confirm('Are you sure you want to delete?')" href="deleteCourse.php?delid=<?php echo $row['courseCode']; ?>" title="Delete Course"><i class="fa fa-trash fa-1x"></i></a>
