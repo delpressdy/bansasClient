@@ -62,7 +62,7 @@
           <li class="drop-down"><a href="">Login <i class='bx bxs-down-arrow'></i></a>
             <ul>
               <li><a href="adminLogin.php">Admin</a></li>
-              <li><a href="studentLogin.php">Student</a></li>
+              <li><a href="studentLogin.php">Pupils</a></li>
               <li><a href="staffLogin.php">Staff</a></li>
 
               <!-- Log on to codeastro.com for more projects! -->
@@ -106,10 +106,10 @@
       <div class="mr-md-auto text-center text-md-left">
         <div class="copyright">
           &copy; <strong><span>Grade Recording System of Salug Daku Elementary</span></strong> - <?php echo date('Y'); ?>
-        <div class="credits">
+          <div class="credits">
+          </div>
         </div>
       </div>
-    </div>
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
