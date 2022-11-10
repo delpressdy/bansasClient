@@ -12,7 +12,7 @@ $levelId = $row['levelId'];
     <nav class="navbar navbar-expand-sm navbar-default">
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="menu-title">Student:&nbsp;<?php echo $fullName; ?></li>
+                <li class="menu-title">Pupil :&nbsp;<?php echo $fullName; ?></li>
                 <li class="<?php if ($page == 'dashboard') {
                                 echo 'active';
                             } ?>">
