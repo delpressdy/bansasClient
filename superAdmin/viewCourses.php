@@ -68,8 +68,8 @@ include('../includes/session.php');
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
                                     <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Courses</a></li>
-                                    <li class="active">View Courses</li>
+                                    <li><a href="#">Subject</a></li>
+                                    <li class="active">View</li>
                                 </ol>
                             </div>
                         </div>
@@ -101,9 +101,7 @@ include('../includes/session.php');
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Title</th>
-                                            <th>Code</th>
-                                            <th>Unit</th>
+                                            <th>Name</th>
                                             <th>Grade Level</th>
                                             <th>Room</th>
                                             <th>Section</th>
@@ -129,8 +127,6 @@ include('../includes/session.php');
                                             <tr>
                                                 <td><?php echo $cnt; ?></td>
                                                 <td><?php echo $row['courseTitle']; ?></td>
-                                                <td><?php echo $row['courseCode']; ?></td>
-                                                <td><?php echo $row['courseUnit']; ?></td>
                                                 <td><?php echo $row['levelName']; ?></td>
                                                 <td><?php echo $row['facultyName']; ?></td>
                                                 <td><?php echo $row['departmentName']; ?></td>

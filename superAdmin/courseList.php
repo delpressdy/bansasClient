@@ -84,8 +84,8 @@ if (isset($_POST['compute'])){
                     $totalScoreGradePoint += $scoreGradePoint; //adds up all the score grade points
 
                     //computes the gpa by dividing the total course unit by the total score grade point
-                    $gpa = round(($totalScoreGradePoint / $totalCourseUnit), 2);
-                    $classOfDiploma = getClassOfDiploma($gpa); //gets the class of diploma (Distinction, Upper, Lower etc)
+                    // $gpa = round(($totalScoreGradePoint / $totalCourseUnit), 2);
+                    // $classOfDiploma = getClassOfDiploma($gpa); //gets the class of diploma (Distinction, Upper, Lower etc)
                 }
                 else
                 {
@@ -212,7 +212,29 @@ function myFunction() {
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title"><h4 align="center">Compute <?php echo  $rowStd['firstName'].' '.$rowStd['lastName']?>'s&nbsp;<?php echo $rowLevel['levelName'];?>&nbsp;[<?php echo $rowSemester['semesterName'];?>] - Semester Result</h></strong>
+                                <strong class="card-title"><h4 align="center">
+                                    <?php 
+                                    $lvl=$rowLevel['levelName'];
+                                            echo '<strong style="color:red">'.$lvl.': </strong>';
+                                    ?>
+                                    &nbsp;
+
+                                    <?php echo  $rowStd['firstName'].' '.$rowStd['lastName']?>'s
+                                    <?php 
+                                        $grading=$rowSemester['semesterName'];
+                                        
+                                            if ($grading == "1st Grading"){
+                                                echo '<strong style="color:#9ef01a;">['.$grading.']</strong>';
+                                            }else if ($grading == "2nd Grading"){
+                                                echo '<strong style="color:#70e000;">['.$grading.']</strong>';
+                                            }else if ($grading == "3rd Grading"){
+                                                echo '<strong style="color:#38b000;">['.$grading.']</strong>';
+                                            }else{
+                                                echo '<strong style="color:#008000;">['.$grading.']</strong>';
+                                            }
+
+                                    ?> - Results</h>
+                                </strong>
                             </div>
                             <form method="post">
                             <div class="card-body">

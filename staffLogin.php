@@ -79,9 +79,9 @@ error_reporting(0);
                         <br><!-- Log on to codeastro.com for more projects! -->
                         <button type="submit" name="login" class="btn btn-info btn-flat m-b-30 m-t-30">Log in</button>
                         
-                        <div class="register-link m-t-15 text-center"><br>
+                        <!-- <div class="register-link m-t-15 text-center"><br>
                             <p>Sign Up <a class="text-success" href="staff/signup.php"><b>here!<b></a></p>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
             </div>

@@ -8,9 +8,8 @@
         $countt = mysqli_num_rows($queryss);
 
         if($countt > 0){                       
-        echo '<label for="select" class=" form-control-label">Sections</label>
+        echo '<label for="select" class=" form-control-label">Section</label>
         <select required name="departmentId" onchange="showLecturer(this.value)" class="custom-select form-control">';
-        echo'<option value="">--Select Sections--</option>';
         while ($row = mysqli_fetch_array($queryss)) {
         echo'<option value="'.$row['Id'].'" >'.$row['departmentName'].'</option>';
         }

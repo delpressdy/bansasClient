@@ -101,12 +101,12 @@ include('../includes/session.php');
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>FullName</th>
-                                            <th>MatricNo</th>
-                                            <th>Level</th>
-                                            <th>Room</th>
-                                            <th>Department</th>
-                                            <th>Session</th>
+                                            <th>Full Name</th>
+                                            <th>ID #</th>
+                                            <th>Grade lvl</th>
+                                            <th>Classroom</th>
+                                            <th>Section</th>
+                                            <th>S.Y</th>
                                             <th>Date Added</th>
                                             <th>Actions</th>
                                         </tr>
@@ -126,15 +126,38 @@ include('../includes/session.php');
                                         ?>
                                             <tr>
                                                 <td><?php echo $cnt; ?></td>
-                                                <td><?php echo $row['firstName'] . ' ' . $row['lastName'] . ' ' . $row['otherName']; ?></td>
+                                                <td><?php echo $row['firstName'] . ' ' . $row['lastName'] . '<strong style="color:red;"> [' . $row['otherName'].']</strong>'; ?></td>
                                                 <td><?php echo $row['matricNo']; ?></td>
-                                                <td><?php echo $row['levelName']; ?></td>
+                                                <td>
+
+                                                    <?php 
+                                                    $lvl=$row['levelName']; 
+
+                                                        if ($lvl == "Grade 1"){
+                                                            echo '<i style="background:#99d98c; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">'. $lvl . '</i>';
+                                                        }else if ($lvl == "Grade 2"){
+                                                            echo '<i style="background:#76c893; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">'. $lvl . '</i>';
+                                                        }else if ($lvl == "Grade 3"){
+                                                            echo '<i style="background:#52b69a; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">'. $lvl . '</i>';
+                                                        }else{
+                                                            echo '<i style="background:#34a0a4; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">'. $lvl . '</i>';
+                                                        }
+                                                    ?>
+                                                        
+                                                </td>
                                                 <td><?php echo $row['facultyName']; ?></td>
                                                 <td><?php echo $row['departmentName']; ?></td>
                                                 <td><?php echo $row['sessionName']; ?></td>
                                                 <td><?php echo $row['dateCreated']; ?></td>
-                                                <td><a href="editStudent.php?editStudentId=<?php echo $row['matricNo']; ?>" title="Edit Details"><i class="fa fa-edit fa-1x"></i></a>
-                                                    <a onclick="return confirm('Are you sure you want to delete?')" href="deleteStudent.php?delid=<?php echo $row['matricNo']; ?>" title="Delete Student Details"><i class="fa fa-trash fa-1x"></i></a>
+
+                                                <td>
+                                                    <!-- <a href="editStudent.php?editStudentId=<?php echo $row['matricNo']; ?>" title="Edit Details">
+                                                        <i class="fa fa-edit fa-1x"></i>
+                                                    </a> -->
+
+                                                    <a onclick="return confirm('Are you sure you want to delete?')" href="deleteStudent.php?delid=<?php echo $row['matricNo']; ?>" title="Delete Student Details">
+                                                        <i class="fa fa-trash fa-1x"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         <?php
