@@ -222,7 +222,7 @@ function myFunction() {
                                     <?php echo  $rowStd['firstName'].' '.$rowStd['lastName']?>'s
                                     <?php 
                                         $grading=$rowSemester['semesterName'];
-                                        
+
                                             if ($grading == "1st Grading"){
                                                 echo '<strong style="color:#9ef01a;">['.$grading.']</strong>';
                                             }else if ($grading == "2nd Grading"){
@@ -245,8 +245,6 @@ function myFunction() {
                                         <tr>
                                             <th>#</th>
                                             <th>Course</th>
-                                            <th>Code</th>
-                                            <th>Unit</th>
                                             <th>Score</th>
                                         </tr>
                                     </thead>
@@ -269,9 +267,7 @@ function myFunction() {
                 <tr>
                 <td><?php echo $cnt;?></td>
                 <td><?php  echo $row['courseTitle'];?></td>
-                <td><?php  echo $row['courseCode'];?></td>
-                <td><?php  echo $row['courseUnit'];?></td>
-                <td><input  name="score[]" id="score" type="text" class="form-control" maxlength="3" onkeypress="return isNumber(event)" ></td>
+                <td><input  name="score[]" id="score" type="text" class="form-control" max="100" onkeypress="return isNumber(event)" autofocus required></td>
                 <input id="" value="<?php echo $row['courseCode'];?>" name="courseCode[]"  type="hidden" class="form-control" >
                 <input id="" value="<?php echo $row['courseUnit'];?>" name="courseUnit[]"  type="hidden" class="form-control" >
                 <input id="" name="" value="<?php echo $row['Id'];?>" type="hidden" class="form-control" >

@@ -288,7 +288,6 @@ if (isset($_POST['submit'])) {
                                             <!-- Log on to codeastro.com for more projects! -->
                                             <th>#</th>
                                             <th>FullName</th>
-                                            <th>MatricNo</th>
                                             <th>Level</th>
                                             <th>Room</th>
                                             <th>Department</th>
@@ -313,7 +312,6 @@ if (isset($_POST['submit'])) {
                                             <tr>
                                                 <td><?php echo $cnt; ?></td>
                                                 <td><?php echo $row['courseTitle']; ?></td>
-                                                <td><?php echo $row['levelName']; ?></td>
                                                 <td><?php echo $row['levelName']; ?></td>
                                                 <td><?php echo $row['facultyName']; ?></td>
                                                 <td><?php echo $row['departmentName']; ?></td>

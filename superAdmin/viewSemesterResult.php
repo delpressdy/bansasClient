@@ -97,106 +97,87 @@ if (isset($_POST['compute'])){
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title"><h4 align="center"><?php echo  $rowStd['firstName'].' '.$rowStd['lastName']?>&nbsp;<?php echo $rowLevel['levelName'];?>&nbsp;<?php echo $rowSemester['semesterName'];?> Semester Result</h></strong>
+                                <strong class="card-title"><h4 align="center"><?php echo  $rowStd['firstName'].' '.$rowStd['lastName']?>&nbsp;<?php echo '<strong style="color:red;">['.$rowSemester['semesterName'].']</strong>';?> Result</h></strong>
                             </div>
                             <div class="card-body">
                              <div class="<?php if(isset($alertStyle)){echo $alertStyle;}?>" role="alert"><?php if(isset($statusMsg)){echo $statusMsg;}?></div>
+
                                 <table class="table table-hover table-striped table-bordered">
                                        <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Course</th>
-                                            <th>Code</th>
-                                            <th>Unit</th>
-                                            <th>Score</th>
-                                            <th>Grade</th>
-                                            <th>Grade Point</th>
-                                            <th>Total GradePoint</th>
+                                            <th>Subjects</th>
+                                            <th>Grades</th>
+                                            <th>Result</th>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                            <?php
+                                        </thead>
+                                        <tbody>
+                                            <?php  
+                                             $sql = "SELECT * FROM tblcourse WHERE semesterId=$semesterId";
+                                             $result = $con->query($sql);
 
-                $ret=mysqli_query($con,"SELECT tblresult.matricNo,tblresult.levelId,tblresult.courseCode,tblresult.courseUnit,tblresult.score,tblresult.scoreGradePoint,
-                tblresult.scoreLetterGrade,tblresult.totalScoreGradePoint,tblresult.dateAdded,tblcourse.courseTitle,
-                tbllevel.levelName,tblsemester.semesterName,tblsession.sessionName
-                from tblresult
-                INNER JOIN tbllevel ON tbllevel.Id = tblresult.levelId
-                INNER JOIN tblcourse ON tblcourse.courseCode = tblresult.courseCode
-                INNER JOIN tblsemester ON tblsemester.Id = tblresult.semesterId
-                INNER JOIN tblsession ON tblsession.Id = tblresult.sessionId
-                where tblresult.levelId ='$levelId' and tblresult.sessionId ='$sessionId' 
-                and tblresult.semesterId ='$semesterId' and tblresult.matricNo ='$matricNo'");
-                $cnt=1;  $totalCourseUnit = 0;  $totalScoreGradePoint = 0;
-                while ($row=mysqli_fetch_array($ret)) {
-                    if($row['scoreLetterGrade'] == "F"){$color = 'red';}else{$color = '';}
-                ?>
-                <tr >
-                <td bgcolor="<?php echo $color;?>"><?php  echo $cnt;?></td>
-                <td bgcolor="<?php echo $color;?>"><?php  echo $row['courseTitle'];?></td>
-                <td bgcolor="<?php echo $color;?>"><?php  echo $row['courseCode'];?></td>
-                <td bgcolor="<?php echo $color;?>"><?php  echo $row['courseUnit'];?></td>
-                <td bgcolor="<?php echo $color;?>"><?php  echo $row['score'];?></td>
-                <td bgcolor="<?php echo $color;?>"><?php  echo $row['scoreLetterGrade'];?></td>
-                <td bgcolor="<?php echo $color;?>"><?php  echo $row['scoreGradePoint'];?></td>
-                <td bgcolor="<?php echo $color;?>"><?php  echo $row['totalScoreGradePoint'];?></td>
-                </tr>
-                <?php 
-                    $cnt=$cnt+1;
-                    $courseUnit = $row['courseUnit'];
-                    $scoreGradePoint = $row['totalScoreGradePoint'];
-                    $totalCourseUnit += $courseUnit;
-                    $totalScoreGradePoint += $scoreGradePoint;
-                }?>
-                <tr>
-                <td bgcolor=""> </td>
-                <td bgcolor=""> </td>
-                <td bgcolor=""> </td>
-                <td bgcolor="#F9D342"><?php echo $totalCourseUnit;?></td>
-                <td bgcolor=""> </td>
-                <td bgcolor=""> </td>
-                <td bgcolor=""> </td>
-                <td bgcolor="#F9D342"><?php echo $totalScoreGradePoint;?></td>
-                </tr>                                                          
-                </tbody>
-            </table>
-<!-------------------------- FROM THE FINAL RESULT TABLE --------------------------->
-            <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th>Total Course Unit</th>
-                    <th>Total Grade Point</th>
-                    <th>GPA</th>
-                    <th>Class of Diploma</th>
-                </tr>
-            </thead>
-            <tbody>
-        <?php
 
-        $ret=mysqli_query($con,"SELECT tblfinalresult.matricNo,tblfinalresult.levelId,tblfinalresult.totalCourseUnit,tblfinalresult.totalScoreGradePoint,tblfinalresult.gpa,
-        tblfinalresult.classOfDiploma,tblfinalresult.dateAdded,
-        tbllevel.levelName,tblsemester.semesterName,tblsession.sessionName
-        from tblfinalresult
-        INNER JOIN tbllevel ON tbllevel.Id = tblfinalresult.levelId
-        INNER JOIN tblsemester ON tblsemester.Id = tblfinalresult.semesterId
-        INNER JOIN tblsession ON tblsession.Id = tblfinalresult.sessionId
-        where tblfinalresult.levelId ='$levelId' and tblfinalresult.sessionId ='$sessionId' 
-        and tblfinalresult.semesterId ='$semesterId' and tblfinalresult.matricNo ='$matricNo'");
-        $cnt=1;
-        while ($row=mysqli_fetch_array($ret)) {
-        ?>
-        <tr>
-        <td bgcolor="#F9D342"><?php  echo $row['totalCourseUnit'];?></td>
-        <td bgcolor="#F9D342"><?php  echo $row['totalScoreGradePoint'];?></td>
-        <td bgcolor="#F9D342"><?php  echo $row['gpa'];?></td>
-        <td bgcolor="#F9D342"><?php  echo $row['classOfDiploma'];?></td>
-        </tr>
-        <?php 
-        $cnt=$cnt+1;
-        }?>
-                                                                                    
-                    </tbody>
+                                             $sql2 = "SELECT * FROM tblresult WHERE semesterId=$semesterId";
+                                             $result2 = $con->query($sql2);
+                                             
+
+                                            $num = 1;
+                                                if ($result->num_rows > 0 && $result2->num_rows > 0) {
+                                                // E show and data each row
+
+                                                // 1st conditions para sa subject 2nd is score
+                                                while(($row = $result->fetch_assoc()) && ($row2 = $result2->fetch_assoc())) {
+
+                                                        echo '<tr><td>'.$num++;
+                                                        echo '<td>'.$row['courseTitle'].'</td></td>';
+                                                        echo '<td>'.$row2['score'].'</td></td>';
+                                                        echo '<td>'.$row2['scoreLetterGrade'].'</td></td>';
+                                                    }
+                                                } else {
+                                                        echo "No results";
+                                                }
+                                                        
+                                            
+                                                            
+                                             ?>
+                                                                                        
+                                        </tbody>
+                                        <tfoot>
+                                            <th colspan="4" class="text-sm-center">Generated on: <?php echo date('d M, Y') ?></th>
+                                        </tfoot>
+                                        </table>
                 </table>
+
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Average</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php
+                            $sql3 = "SELECT SUM(score) FROM tblresult WHERE semesterId=$semesterId";
+                            $result3 = $con->query($sql3);
+
+                            while($row3 = $result3->fetch_assoc()){
+                                
+                                $sum = $row3['SUM(score)'] / 6;
+
+                                echo '<td>'.$sum.'</td>';
+
+                            }
+
+                            if ($sum > 74){
+                            echo '<td style="background:#70e000; color:white; font-family:cursive;">'.'Passed'.'</td.>';
+                            }
+                        ?>
+                                                      
+                    </tbody>
+
+                </table>
+
                 <a href="studentList3.php" class="btn btn-primary">Go Back</a>
                 <a href="printSemesterResult.php?semesterId=<?php echo $semesterId;?>&matricNo=<?php echo $matricNo;?>&levelId=<?php echo $levelId;?>&sessionId=<?php echo $sessionId;?>" class="btn btn-info"><i class="fa fa-print"></i> Print Result</a>
             </div>
@@ -211,7 +192,7 @@ if (isset($_POST['compute'])){
 
     <div class="clearfix"></div>
 
-        <?php include 'includes/footer.php';?>
+        <?php $con->close(); include 'includes/footer.php';?>
 
 
 </div><!-- /#right-panel -->
