@@ -1,17 +1,19 @@
-
 <?php
 
-    include('../includes/dbconnection.php');
-    include('../includes/session.php');
+include('../includes/dbconnection.php');
+include('../includes/session.php');
 
-  ?>
+?>
 
 <!doctype html>
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <?php include 'includes/title.php';?>
+    <?php include 'includes/title.php'; ?>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -32,11 +34,12 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+
 <body>
     <!-- Left Panel -->
-    <?php include 'includes/leftMenu.php';?>
+    <?php include 'includes/leftMenu.php'; ?>
 
-   <!-- /#left-panel -->
+    <!-- /#left-panel -->
 
     <!-- Left Panel -->
 
@@ -45,7 +48,7 @@
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-            <?php include 'includes/header.php';?>
+        <?php include 'includes/header.php'; ?>
         <!-- /header -->
         <!-- Header-->
 
@@ -79,15 +82,18 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                          
-                           
+
+
                         </div> <!-- .card -->
-                    </div><!--/.col-->
-               
+                    </div>
+                    <!--/.col-->
+
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title"><h2 align="center">List of all users</h2></strong>
+                                <strong class="card-title">
+                                    <h2 align="center">List of all Staff</h2>
+                                </strong>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
@@ -107,63 +113,63 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                      
-                            <?php
-        $ret=mysqli_query($con,"SELECT tblassignedadmin.dateAssigned,tblassignedadmin.staffId, tbladmin.staffId,tbladmin.firstName, tbladmin.lastName, tbladmin.otherName,
+
+                                        <?php
+                                        $ret = mysqli_query($con, "SELECT tblassignedadmin.dateAssigned,tblassignedadmin.staffId, tbladmin.staffId,tbladmin.firstName, tbladmin.lastName, tbladmin.otherName,
         tbladmin.password,tbldepartment.departmentName, tbladmin.staffId, tbladmin.firstName, tbladmin.lastName, tbladmin.otherName,tbladmin.emailAddress, tbladmin.phoneNo, tbladmin.dateCreated
         from tblassignedadmin 
         INNER JOIN tbladmin ON tbladmin.staffId = tblassignedadmin.staffId
         INNER JOIN tblfaculty ON tblfaculty.Id = tblassignedadmin.facultyId
         INNER JOIN tbldepartment ON tbldepartment.Id = tblassignedadmin.departmentId");
-        $cnt=1;
-        while ($row=mysqli_fetch_array($ret)) {
-                            ?>
-                <tr>
-                <td><?php echo $cnt;?></td>
-                <td style="color: white; background-color: limegreen; border-radius: 12px"><?php  echo $row['staffId'];?></td>
-                <td><?php  echo $row['firstName'];?></td>
-                <td><?php  echo $row['lastName'];?></td>
-                <td><?php  echo $row['otherName'];?></td>
-                <td><?php  echo $row['emailAddress'];?></td>
-                <td><?php  echo $row['phoneNo'];?></td>
-                <td style="color: white; background-color: red; border-radius: 12px;"><?php  echo $row['password'];?></td>
-                <td><?php  echo "Active"?></td>
-                <td><?php  echo $row['dateCreated'];?></td>
-                <!-- <td><a href="editAdmin.php?editid=<?php echo $row['staffId'];?>" title="View Admin"><i class="fa fa-edit fa-1x"></i></a></td> -->
-                <td><a onclick="return confirm('Are you sure you want to delete?')" href="deleteAdmin.php?delid=<?php echo $row['staffId'];?>" title="Delete Admin"><i class="fa fa-trash fa-1x"></i></a></td>
-                </tr>
-                <?php 
-                $cnt=$cnt+1;
-                }?>
-                                                                                
+                                        $cnt = 1;
+                                        while ($row = mysqli_fetch_array($ret)) {
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $cnt; ?></td>
+                                                <td style="color: white; background-color: limegreen; border-radius: 12px"><?php echo $row['staffId']; ?></td>
+                                                <td><?php echo $row['firstName']; ?></td>
+                                                <td><?php echo $row['lastName']; ?></td>
+                                                <td><?php echo $row['otherName']; ?></td>
+                                                <td><?php echo $row['emailAddress']; ?></td>
+                                                <td><?php echo $row['phoneNo']; ?></td>
+                                                <td style="color: white; background-color: red; border-radius: 12px;"><?php echo $row['password']; ?></td>
+                                                <td><?php echo "Active" ?></td>
+                                                <td><?php echo $row['dateCreated']; ?></td>
+                                                <!-- <td><a href="editAdmin.php?editid=<?php echo $row['staffId']; ?>" title="View Admin"><i class="fa fa-edit fa-1x"></i></a></td> -->
+                                                <td><a onclick="return confirm('Are you sure you want to delete?')" href="deleteAdmin.php?delid=<?php echo $row['staffId']; ?>" title="Delete Admin"><i class="fa fa-trash fa-1x"></i></a></td>
+                                            </tr>
+                                        <?php
+                                            $cnt = $cnt + 1;
+                                        } ?>
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-<!-- end of datatable -->
+                    <!-- end of datatable -->
 
-            </div>
-        </div><!-- .animated -->
-    </div><!-- .content -->
+                </div>
+            </div><!-- .animated -->
+        </div><!-- .content -->
 
-    <div class="clearfix"></div>
+        <div class="clearfix"></div>
 
-        <?php include 'includes/footer.php';?>
+        <?php include 'includes/footer.php'; ?>
 
 
-</div><!-- /#right-panel -->
+    </div><!-- /#right-panel -->
 
-<!-- Right Panel -->
+    <!-- Right Panel -->
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../assets/js/main.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="../assets/js/main.js"></script>
 
-<script src="../assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="../assets/js/lib/data-table/datatables.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
     <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
@@ -177,11 +183,10 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
-
-      
-  </script>
+            $('#bootstrap-data-table-export').DataTable();
+        });
+    </script>
 
 </body>
+
 </html>

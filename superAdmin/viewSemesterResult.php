@@ -1,46 +1,40 @@
-
 <?php
 
-    include('../includes/dbconnection.php');
-    include('../includes/session.php');
-    include('../includes/functions.php');
+include('../includes/dbconnection.php');
+include('../includes/session.php');
+include('../includes/functions.php');
 
-    if(isset($_GET['matricNo']) && isset($_GET['levelId'])  && isset($_GET['sessionId']) && isset($_GET['semesterId'])){
+if (isset($_GET['matricNo']) && isset($_GET['levelId'])  && isset($_GET['sessionId']) && isset($_GET['semesterId'])) {
 
-        $matricNo = $_GET['matricNo'];
-        $levelId = $_GET['levelId'];
-        $sessionId = $_GET['sessionId'];
-        $semesterId = $_GET['semesterId'];
+    $matricNo = $_GET['matricNo'];
+    $levelId = $_GET['levelId'];
+    $sessionId = $_GET['sessionId'];
+    $semesterId = $_GET['semesterId'];
 
 
-        $stdQuery=mysqli_query($con,"select * from tblstudent where matricNo = '$matricNo'");                        
-        $rowStd = mysqli_fetch_array($stdQuery);
+    $stdQuery = mysqli_query($con, "select * from tblstudent where matricNo = '$matricNo'");
+    $rowStd = mysqli_fetch_array($stdQuery);
 
-        $semesterQuery=mysqli_query($con,"select * from tblsemester where Id = '$semesterId'");                        
-        $rowSemester = mysqli_fetch_array($semesterQuery);
+    $semesterQuery = mysqli_query($con, "select * from tblsemester where Id = '$semesterId'");
+    $rowSemester = mysqli_fetch_array($semesterQuery);
 
-        $sessionQuery=mysqli_query($con,"select * from tblsession where Id = '$sessionId'");                        
-        $rowSession = mysqli_fetch_array($sessionQuery);
+    $sessionQuery = mysqli_query($con, "select * from tblsession where Id = '$sessionId'");
+    $rowSession = mysqli_fetch_array($sessionQuery);
 
-        $levelQuery=mysqli_query($con,"select * from tbllevel where Id = '$levelId'");                        
-        $rowLevel = mysqli_fetch_array($levelQuery);
-
-    
-    }
-    else{
-        echo "<script type = \"text/javascript\">
+    $levelQuery = mysqli_query($con, "select * from tbllevel where Id = '$levelId'");
+    $rowLevel = mysqli_fetch_array($levelQuery);
+} else {
+    echo "<script type = \"text/javascript\">
         window.location = (\"studentList.php\");
         </script>";
-    }
+}
 
 
 
 //------------------------------------ COMPUTE RESULT -----------------------------------------------
 
-if (isset($_POST['compute'])){
-
-
-}//end of POST
+if (isset($_POST['compute'])) {
+} //end of POST
 
 
 ?>
@@ -48,11 +42,14 @@ if (isset($_POST['compute'])){
 
 
 <!doctype html>
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <?php include 'includes/title.php';?>
+    <?php include 'includes/title.php'; ?>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -73,140 +70,151 @@ if (isset($_POST['compute'])){
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+
 <body>
     <!-- Left Panel -->
-     
-         <?php include 'includes/leftMenu.php';?>
+
+    <?php include 'includes/leftMenu.php'; ?>
 
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-                    <?php include 'includes/header.php';?>
+        <?php include 'includes/header.php'; ?>
         <!-- Header-->
 
-       
+
         <div class="content">
             <div class="animated fadeIn">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                          
+
                         </div> <!-- .card -->
-                    </div><!--/.col-->
-               
+                    </div>
+                    <!--/.col-->
+
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title"><h4 align="center"><?php echo  $rowStd['firstName'].' '.$rowStd['lastName']?>&nbsp;<?php echo '<strong style="color:red;">['.$rowSemester['semesterName'].']</strong>';?> Result</h></strong>
+                                <strong class="card-title">
+                                    <h4 align="center"><?php echo  $rowStd['firstName'] . ' ' . $rowStd['lastName'] ?>&nbsp;<?php echo '<strong style="color:red;">[' . $rowSemester['semesterName'] . ']</strong>'; ?> Result</h>
+                                </strong>
                             </div>
                             <div class="card-body">
-                             <div class="<?php if(isset($alertStyle)){echo $alertStyle;}?>" role="alert"><?php if(isset($statusMsg)){echo $statusMsg;}?></div>
+                                <div class="<?php if (isset($alertStyle)) {
+                                                echo $alertStyle;
+                                            } ?>" role="alert"><?php if (isset($statusMsg)) {
+                                                                    echo $statusMsg;
+                                                                } ?></div>
 
                                 <table class="table table-hover table-striped table-bordered">
-                                       <thead>
+                                    <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>Subjects</th>
                                             <th>Grades</th>
                                             <th>Result</th>
                                         </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php  
-                                             $sql = "SELECT * FROM tblcourse WHERE semesterId=$semesterId";
-                                             $result = $con->query($sql);
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $sql = "SELECT * FROM tblcourse WHERE semesterId=$semesterId";
+                                        $result = $con->query($sql);
 
 
-                                             $sql2 = "SELECT * FROM tblresult WHERE semesterId=$semesterId";
-                                             $result2 = $con->query($sql2);
-                                             
-
-                                            $num = 1;
-                                                if ($result->num_rows > 0 && $result2->num_rows > 0) {
-                                                // E show and data each row
-
-                                                // 1st conditions para sa subject 2nd is score
-                                                while(($row = $result->fetch_assoc()) && ($row2 = $result2->fetch_assoc())) {
-
-                                                        echo '<tr><td>'.$num++;
-                                                        echo '<td>'.$row['courseTitle'].'</td></td>';
-                                                        echo '<td>'.$row2['score'].'</td></td>';
-                                                        echo '<td>'.$row2['scoreLetterGrade'].'</td></td>';
-                                                    }
-                                                } else {
-                                                        echo "No results";
-                                                }
-                                                        
-                                            
-                                                            
-                                             ?>
-                                                                                        
-                                        </tbody>
-                                        <tfoot>
-                                            <th colspan="4" class="text-sm-center">Generated on: <?php echo date('d M, Y') ?></th>
-                                        </tfoot>
-                                        </table>
-                </table>
-
-                <table class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Average</th>
-                            <th>Remarks</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <?php
-                            $sql3 = "SELECT SUM(score) FROM tblresult WHERE semesterId=$semesterId";
-                            $result3 = $con->query($sql3);
-
-                            while($row3 = $result3->fetch_assoc()){
-                                
-                                $sum = $row3['SUM(score)'] / 6;
-
-                                echo '<td>'.$sum.'</td>';
-
-                            }
-
-                            if ($sum > 74){
-                            echo '<td style="background:#70e000; color:white; font-family:cursive;">'.'Passed'.'</td.>';
-                            }
-                        ?>
-                                                      
-                    </tbody>
-
-                </table>
-
-                <a href="studentList3.php" class="btn btn-primary">Go Back</a>
-                <a href="printSemesterResult.php?semesterId=<?php echo $semesterId;?>&matricNo=<?php echo $matricNo;?>&levelId=<?php echo $levelId;?>&sessionId=<?php echo $sessionId;?>" class="btn btn-info"><i class="fa fa-print"></i> Print Result</a>
-            </div>
-        </div>
-    </div>
-                    
-<!-- end of datatable -->
-
-            </div>
-        </div><!-- .animated -->
-    </div><!-- .content -->
-
-    <div class="clearfix"></div>
-
-        <?php $con->close(); include 'includes/footer.php';?>
+                                        $sql2 = "SELECT * FROM tblresult WHERE semesterId=$semesterId";
+                                        $result2 = $con->query($sql2);
 
 
-</div><!-- /#right-panel -->
+                                        $num = 1;
+                                        if ($result->num_rows > 0 && $result2->num_rows > 0) {
+                                            // E show and data each row
 
-<!-- Right Panel -->
+                                            // 1st conditions para sa subject 2nd is score
+                                            while (($row = $result->fetch_assoc()) && ($row2 = $result2->fetch_assoc())) {
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../assets/js/main.js"></script>
+                                                echo '<tr><td>' . $num++;
+                                                echo '<td>' . $row['courseTitle'] . '</td></td>';
+                                                echo '<td>' . $row2['score'] . '</td></td>';
+                                                echo '<td>' . $row2['scoreLetterGrade'] . '</td></td>';
+                                            }
+                                        } else {
+                                            echo "No results";
+                                        }
 
-<script src="../assets/js/lib/data-table/datatables.min.js"></script>
+
+
+                                        ?>
+
+                                    </tbody>
+                                    <tfoot>
+                                        <th colspan="4" class="text-sm-center">Generated on: <?php echo date('d M, Y') ?></th>
+                                    </tfoot>
+                                </table>
+                                </table>
+
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Average</th>
+                                            <th>Remarks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <?php
+                                        $sql3 = "SELECT SUM(score) ,count(score) FROM tblresult WHERE semesterId=$semesterId";
+                                        $result3 = $con->query($sql3);
+
+                                        while ($row3 = $result3->fetch_assoc()) {
+                                            if (!$row3['SUM(score)'] == "") {
+                                                $sum = $row3['SUM(score)'] /  $row3['count(score)'];
+                                            }
+                                            $sum = 0;
+                                            echo '<td>' . $sum . '</td>';
+                                        }
+
+                                        if ($sum > 74) {
+                                            echo '<td style="background:#70e000; color:white; font-family:cursive;">' . 'Passed' . '</td.>';
+                                        } else {
+                                            echo '<td style="background:white; color:red; font-family:cursive;">' . 'Failed' . '</td.>';
+                                        }
+                                        ?>
+
+                                    </tbody>
+
+                                </table>
+
+                                <a href="studentList3.php" class="btn btn-primary">Go Back</a>
+                                <a href="printSemesterResult.php?semesterId=<?php echo $semesterId; ?>&matricNo=<?php echo $matricNo; ?>&levelId=<?php echo $levelId; ?>&sessionId=<?php echo $sessionId; ?>" class="btn btn-info"><i class="fa fa-print"></i> Print Result</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- end of datatable -->
+
+                </div>
+            </div><!-- .animated -->
+        </div><!-- .content -->
+
+        <div class="clearfix"></div>
+
+        <?php $con->close();
+        include 'includes/footer.php'; ?>
+
+
+    </div><!-- /#right-panel -->
+
+    <!-- Right Panel -->
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+
+    <script src="../assets/js/lib/data-table/datatables.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
     <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
@@ -220,28 +228,27 @@ if (isset($_POST['compute'])){
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
+            $('#bootstrap-data-table-export').DataTable();
+        });
 
-      // Menu Trigger
-      $('#menuToggle').on('click', function(event) {
-            var windowWidth = $(window).width();   		 
-            if (windowWidth<1010) { 
-                $('body').removeClass('open'); 
-                if (windowWidth<760){ 
-                $('#left-panel').slideToggle(); 
+        // Menu Trigger
+        $('#menuToggle').on('click', function(event) {
+            var windowWidth = $(window).width();
+            if (windowWidth < 1010) {
+                $('body').removeClass('open');
+                if (windowWidth < 760) {
+                    $('#left-panel').slideToggle();
                 } else {
-                $('#left-panel').toggleClass('open-menu');  
-                } 
+                    $('#left-panel').toggleClass('open-menu');
+                }
             } else {
                 $('body').toggleClass('open');
-                $('#left-panel').removeClass('open-menu');  
-            } 
-                
-            }); 
+                $('#left-panel').removeClass('open-menu');
+            }
 
-      
-  </script>
+        });
+    </script>
 
 </body>
+
 </html>
