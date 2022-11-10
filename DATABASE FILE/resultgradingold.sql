@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2022 at 09:03 AM
+-- Generation Time: Nov 09, 2022 at 03:40 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 5.6.40
 
@@ -114,7 +114,7 @@ CREATE TABLE `tblcgparesult` (
 CREATE TABLE `tblcourse` (
   `Id` int(11) NOT NULL,
   `courseTitle` varchar(255) NOT NULL,
-  `courseCode` varchar(255) DEFAULT 'N/A',
+  `courseCode` varchar(255) NOT NULL,
   `courseUnit` int(10) NOT NULL,
   `facultyId` varchar(255) NOT NULL,
   `departmentId` varchar(255) NOT NULL,
@@ -128,10 +128,6 @@ CREATE TABLE `tblcourse` (
 --
 
 INSERT INTO `tblcourse` (`Id`, `courseTitle`, `courseCode`, `courseUnit`, `facultyId`, `departmentId`, `levelId`, `semesterId`, `dateAdded`) VALUES
-(24, 'Makabayan', '', 0, '5', '6', '1', '1', '2022-11-10'),
-(23, 'Science', '', 0, '5', '6', '1', '1', '2022-11-10'),
-(22, 'Math', '', 0, '5', '6', '1', '1', '2022-11-10'),
-(21, 'Araling Panlipunan', '', 0, '5', '6', '1', '1', '2022-11-10'),
 (20, 'English', '', 3, '5', '6', '1', '1', '2022-11-09'),
 (19, 'Filipino', '', 3, '5', '6', '1', '1', '2022-11-09');
 
@@ -208,7 +204,7 @@ CREATE TABLE `tblfinalresult` (
 --
 
 INSERT INTO `tblfinalresult` (`Id`, `matricNo`, `levelId`, `semesterId`, `sessionId`, `totalCourseUnit`, `totalScoreGradePoint`, `gpa`, `classOfDiploma`, `dateAdded`) VALUES
-(13, '441622818', '1', '1', '1', '6', '24', '', '', '2022-11-10');
+(11, '441622818', '1', '1', '1', '6', '24', '', '', '2022-11-09');
 
 -- --------------------------------------------------------
 
@@ -259,12 +255,8 @@ CREATE TABLE `tblresult` (
 --
 
 INSERT INTO `tblresult` (`Id`, `matricNo`, `levelId`, `semesterId`, `sessionId`, `courseCode`, `courseUnit`, `score`, `scoreGradePoint`, `scoreLetterGrade`, `totalScoreGradePoint`, `dateAdded`) VALUES
-(37, '441622818', '1', '1', '1', '', '3', '96', '4', 'AA', '12', '2022-11-10'),
-(36, '441622818', '1', '1', '1', '', '3', '95', '4', 'AA', '12', '2022-11-10'),
-(35, '441622818', '1', '1', '1', '', '0', '94', '4', 'AA', '0', '2022-11-10'),
-(34, '441622818', '1', '1', '1', '', '0', '93', '4', 'AA', '0', '2022-11-10'),
-(33, '441622818', '1', '1', '1', '', '0', '92', '4', 'AA', '0', '2022-11-10'),
-(32, '441622818', '1', '1', '1', '', '0', '91', '4', 'AA', '0', '2022-11-10');
+(29, '441622818', '1', '1', '1', '', '3', '95', '4', 'AA', '12', '2022-11-09'),
+(28, '441622818', '1', '1', '1', '', '3', '95', '4', 'AA', '12', '2022-11-09');
 
 -- --------------------------------------------------------
 
@@ -351,6 +343,19 @@ CREATE TABLE `tblstudent` (
 --
 
 INSERT INTO `tblstudent` (`Id`, `firstName`, `lastName`, `otherName`, `matricNo`, `password`, `levelId`, `facultyId`, `departmentId`, `sessionId`, `dateCreated`) VALUES
+(17, 'Craig', 'Rodriguez', 'cr', 'SGS100', 'codeastro', 1, 1, 1, 1, '2022-06-13'),
+(18, 'Edith', 'Beck', 'el', '10101', 'codeastro', 1, 1, 1, 1, '2022-06-15'),
+(19, 'Chasity', 'Wilson', 'cw', '14750', 'codeastro', 1, 3, 3, 1, '2022-06-15'),
+(20, 'Noel', 'Jacobs', 'nj', 'SGS123', 'codeastro', 1, 4, 5, 1, '2022-06-16'),
+(21, 'Janet', 'Reyes', 'jjr', 'SGS124', 'codeastro', 1, 4, 5, 1, '2022-06-16'),
+(22, 'Travis', 'Parton', 'ttp', 'SGS125', 'codeastro', 1, 4, 5, 1, '2022-06-16'),
+(23, 'Colin', 'Farell', 'cff', 'SGS126', 'codeastro', 1, 4, 5, 1, '2022-06-16'),
+(24, 'Peter', 'Falcone', 'pfr', 'SGS127', 'codeastro', 1, 4, 5, 1, '2022-06-16'),
+(25, 'Zayn', 'Roberts', 'Zr', 'SGS128', 'codeastro', 1, 4, 5, 1, '2022-06-16'),
+(26, 'Norman', 'Parbon', 'Nr', 'SGS129', 'codeastro', 1, 4, 4, 1, '2022-06-16'),
+(27, 'Timothy', 'Herera', 'Th', 'SGS131', 'codeastro', 1, 2, 2, 1, '2022-06-16'),
+(28, 'Nicholas', 'Ducc', 'Nd', 'SGS132', 'codeastro', 1, 3, 3, 1, '2022-06-16'),
+(29, 'Joan', 'Havens', 'Jh', 'SGS133', 'codeastro', 1, 2, 2, 1, '2022-06-16'),
 (30, 'Pressdy', 'Maglinte', 'press', '441622818', 'test', 1, 5, 6, 1, '2022-11-09'),
 (32, 'Roniel', 'Bansas', 'neil', '191818722', 'test', 2, 6, 7, 1, '2022-11-09'),
 (33, 'Amanda', 'Beauty', 'Beauty', '6548945', 'test', 3, 7, 8, 1, '2022-11-09'),
@@ -478,7 +483,7 @@ ALTER TABLE `tblcgparesult`
 -- AUTO_INCREMENT for table `tblcourse`
 --
 ALTER TABLE `tblcourse`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tbldepartment`
@@ -496,7 +501,7 @@ ALTER TABLE `tblfaculty`
 -- AUTO_INCREMENT for table `tblfinalresult`
 --
 ALTER TABLE `tblfinalresult`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbllevel`
@@ -508,7 +513,7 @@ ALTER TABLE `tbllevel`
 -- AUTO_INCREMENT for table `tblresult`
 --
 ALTER TABLE `tblresult`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tblsemester`

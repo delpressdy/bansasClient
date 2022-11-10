@@ -88,7 +88,7 @@ function showValues(str) {
                                 <ol class="breadcrumb text-right">
                                     <li><a href="#">Dashboard</a></li>
                                     <li><a href="#">Result</a></li>
-                                    <li class="active">Student List</li>
+                                    <li class="active">Pupil's List</li>
                                 </ol>
                             </div>
                         </div>
@@ -103,7 +103,7 @@ function showValues(str) {
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title"><h3 align="center">Select Student to View Result</h3></strong>
+                                <strong class="card-title"><h3 align="center">Select Pupil to View Result</h3></strong>
                             </div>
                             <div class="card-body">
                                 <!-- Credit Card -->
@@ -115,13 +115,13 @@ function showValues(str) {
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                      <label for="x_card_code" class="control-label mb-1">Level</label>
+                                                      <label for="x_card_code" class="control-label mb-1">Grade lvl</label>
                                                     <?php 
                                                 $query=mysqli_query($con,"select * from tbllevel");                        
                                                 $count = mysqli_num_rows($query);
                                                 if($count > 0){                       
                                                     echo ' <select required name="levelId" class="custom-select form-control">';
-                                                    echo'<option value="">--Select Level--</option>';
+                                                    echo'<option value="">--Select--</option>';
                                                     while ($row = mysqli_fetch_array($query)) {
                                                     echo'<option value="'.$row['Id'].'" >'.$row['levelName'].'</option>';
                                                         }
@@ -132,13 +132,12 @@ function showValues(str) {
                                                 </div>
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                     <label for="x_card_code" class="control-label mb-1">Session</label>
+                                                     <label for="x_card_code" class="control-label mb-1">S.Y</label>
                                                     <?php 
                                                     $query=mysqli_query($con,"select * from tblsession where isActive = 1");                        
                                                     $count = mysqli_num_rows($query);
                                                     if($count > 0){                       
                                                         echo ' <select required name="sessionId" class="custom-select form-control">';
-                                                        echo'<option value="">--Select Session--</option>';
                                                         while ($row = mysqli_fetch_array($query)) {
                                                         echo'<option value="'.$row['Id'].'" >'.$row['sessionName'].'</option>';
                                                             }
@@ -151,13 +150,13 @@ function showValues(str) {
                                          <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                    <label for="x_card_code" class="control-label mb-1">Faculty</label>
+                                                    <label for="x_card_code" class="control-label mb-1">Classroom</label>
                                                     <?php 
                                                     $query=mysqli_query($con,"select * from tblfaculty ORDER BY facultyName ASC");                        
                                                     $count = mysqli_num_rows($query);
                                                     if($count > 0){                       
                                                         echo ' <select required name="facultyId" onchange="showValues(this.value)" class="custom-select form-control">';
-                                                        echo'<option value="">--Select Faculty--</option>';
+                                                        echo'<option value="">--Select--</option>';
                                                         while ($row = mysqli_fetch_array($query)) {
                                                         echo'<option value="'.$row['Id'].'" >'.$row['facultyName'].'</option>';
                                                             }
@@ -196,16 +195,15 @@ function showValues(str) {
                                 <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                      <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>FullName</th>
-                                            <th>MatricNo</th>
-                                            <th>Level</th>
-                                            <th>Faculty</th>
-                                            <th>Department</th>
-                                            <th>Session</th>
-                                            <th>Date Added</th>
-                                            <th>First semester</th>
-                                            <th>Second Semester</th>
+                                            <th>Full Name</th>
+                                            <th>ID #</th>
+                                            <th>Grade lvl</th>
+                                            <th>Section</th>
+                                            <th>S.Y</th>
+                                            <th>1st Grading</th>
+                                            <th>2nd Grading</th>
+                                            <th>3rd Grading</th>
+                                            <th>4th Grading</th>
                                             <th>Final Result</th>
                                         </tr>
                                     </thead>
@@ -233,17 +231,22 @@ function showValues(str) {
                     while ($row=mysqli_fetch_array($ret)) {
                                         ?>
                     <tr>
-                    <td><?php echo $cnt;?></td>
-                    <td><?php  echo $row['firstName'].' '.$row['lastName'].' '.$row['otherName'];?></td>
+                    <td><?php  echo $row['firstName'].' '.$row['lastName'];?></td>
                     <td><?php  echo $row['matricNo'];?></td>
                     <td><?php  echo $row['levelName'];?></td>
-                    <td><?php  echo $row['facultyName'];?></td>
                     <td><?php  echo $row['departmentName'];?></td>
                      <td><?php  echo $row['sessionName'];?></td>
-                    <td><?php  echo $row['dateCreated'];?></td>
+
                     <td><a href="viewSemesterResult.php?semesterId=1&matricNo=<?php echo $row['matricNo'];?>&levelId=<?php echo $row['levelId'];?>&sessionId=<?php echo $row['sessionId'];?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
                     <td><a href="viewSemesterResult.php?semesterId=2&matricNo=<?php echo $row['matricNo'];?>&levelId=<?php echo $row['levelId'];?>&sessionId=<?php echo $row['sessionId'];?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
+                    <td><a href="viewSemesterResult.php?semesterId=3&matricNo=<?php echo $row['matricNo'];?>&levelId=<?php echo $row['levelId'];?>&sessionId=<?php echo $row['sessionId'];?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
+                    <td><a href="viewSemesterResult.php?semesterId=4&matricNo=<?php echo $row['matricNo'];?>&levelId=<?php echo $row['levelId'];?>&sessionId=<?php echo $row['sessionId'];?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
                     <td><a href="viewFinalResult.php?matricNo=<?php echo $row['matricNo'];?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
                     </tr>
                     <?php 
                     $cnt=$cnt+1;

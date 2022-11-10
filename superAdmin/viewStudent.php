@@ -134,13 +134,17 @@ include('../includes/session.php');
                                                     $lvl = $row['levelName'];
 
                                                     if ($lvl == "Grade 1") {
-                                                        echo '<i style="background:#99d98c; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">' . $lvl . '</i>';
+                                                        echo '<i style="background:#99d98c; border-radius:15px; color: black; padding: 2px 5px 2px 5px; font-family:cursive;">' . $lvl . '</i>';
                                                     } else if ($lvl == "Grade 2") {
-                                                        echo '<i style="background:#76c893; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">' . $lvl . '</i>';
+                                                        echo '<i style="background:#76c893; border-radius:15px; color: black; padding: 2px 4px 2px 4px; font-family:cursive;">' . $lvl . '</i>';
                                                     } else if ($lvl == "Grade 3") {
-                                                        echo '<i style="background:#52b69a; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">' . $lvl . '</i>';
+                                                        echo '<i style="background:#52b69a; border-radius:15px; color: black; padding: 2px 4px 2px 4px; font-family:cursive;">' . $lvl . '</i>';
+                                                    } else if ($lvl == "Grade 4") {
+                                                        echo '<i style="background:#34a0a4; border-radius:15px; color: black; padding: 2px 4px 2px 4px; font-family:cursive;">' . $lvl . '</i>';
+                                                    } else if ($lvl == "Grade 5") {
+                                                        echo '<i style="background:#168aad; border-radius:15px; color: black; padding: 2px 4px 2px 4px; font-family:cursive;">' . $lvl . '</i>';
                                                     } else {
-                                                        echo '<i style="background:#34a0a4; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">' . $lvl . '</i>';
+                                                        echo '<i style="background:#1a759f; border-radius:15px; color: black; padding: 2px 4px 2px 4px; font-family:cursive;">' . $lvl . '</i>';
                                                     }
                                                     ?>
 
