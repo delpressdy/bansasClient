@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2022 at 06:01 PM
+-- Generation Time: Nov 10, 2022 at 09:03 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 5.6.40
 
@@ -133,24 +133,7 @@ INSERT INTO `tblcourse` (`Id`, `courseTitle`, `courseCode`, `courseUnit`, `facul
 (22, 'Math', '', 0, '5', '6', '1', '1', '2022-11-10'),
 (21, 'Araling Panlipunan', '', 0, '5', '6', '1', '1', '2022-11-10'),
 (20, 'English', '', 3, '5', '6', '1', '1', '2022-11-09'),
-(19, 'Filipino', '', 3, '5', '6', '1', '1', '2022-11-09'),
-(25, 'Mapeh', 'N/A', 0, '5', '6', '1', '2', '2022-11-10'),
-(26, 'Science', 'N/A', 0, '5', '6', '1', '2', '2022-11-10'),
-(27, 'Filipino', 'N/A', 0, '5', '6', '1', '2', '2022-11-10'),
-(28, 'English', 'N/A', 0, '5', '6', '1', '2', '2022-11-10'),
-(29, 'Math', 'N/A', 0, '5', '6', '1', '2', '2022-11-10'),
-(30, 'Makabayan', 'N/A', 0, '5', '6', '1', '2', '2022-11-10'),
-(31, 'Filipino', 'N/A', 0, '5', '6', '1', '3', '2022-11-10'),
-(32, 'English', 'N/A', 0, '5', '6', '1', '3', '2022-11-10'),
-(33, 'Math', 'N/A', 0, '5', '6', '1', '3', '2022-11-10'),
-(34, 'Science', 'N/A', 0, '5', '6', '1', '3', '2022-11-10'),
-(35, 'Makabayan', 'N/A', 0, '5', '6', '1', '3', '2022-11-10'),
-(36, 'Filipino', 'N/A', 0, '5', '6', '1', '4', '2022-11-10'),
-(37, 'English', 'N/A', 0, '5', '6', '1', '4', '2022-11-10'),
-(38, 'Arpan', 'N/A', 0, '5', '6', '1', '4', '2022-11-10'),
-(39, 'Math', 'N/A', 0, '5', '6', '1', '4', '2022-11-10'),
-(40, 'Science', 'N/A', 0, '5', '6', '1', '4', '2022-11-10'),
-(41, 'Makabayan', 'N/A', 0, '5', '6', '1', '4', '2022-11-10');
+(19, 'Filipino', '', 3, '5', '6', '1', '1', '2022-11-09');
 
 -- --------------------------------------------------------
 
@@ -225,9 +208,6 @@ CREATE TABLE `tblfinalresult` (
 --
 
 INSERT INTO `tblfinalresult` (`Id`, `matricNo`, `levelId`, `semesterId`, `sessionId`, `totalCourseUnit`, `totalScoreGradePoint`, `gpa`, `classOfDiploma`, `dateAdded`) VALUES
-(17, '441622818', '1', '4', '1', '0', '0', '', '', '2022-11-10'),
-(16, '441622818', '1', '3', '1', '0', '0', '', '', '2022-11-10'),
-(15, '441622818', '1', '2', '1', '0', '0', '', '', '2022-11-10'),
 (13, '441622818', '1', '1', '1', '6', '24', '', '', '2022-11-10');
 
 -- --------------------------------------------------------
@@ -267,7 +247,7 @@ CREATE TABLE `tblresult` (
   `sessionId` varchar(10) NOT NULL,
   `courseCode` varchar(50) NOT NULL,
   `courseUnit` varchar(50) NOT NULL,
-  `score` varchar(50) NOT NULL DEFAULT 'No Grade',
+  `score` varchar(50) NOT NULL,
   `scoreGradePoint` varchar(50) NOT NULL,
   `scoreLetterGrade` varchar(10) NOT NULL,
   `totalScoreGradePoint` varchar(50) NOT NULL,
@@ -279,28 +259,12 @@ CREATE TABLE `tblresult` (
 --
 
 INSERT INTO `tblresult` (`Id`, `matricNo`, `levelId`, `semesterId`, `sessionId`, `courseCode`, `courseUnit`, `score`, `scoreGradePoint`, `scoreLetterGrade`, `totalScoreGradePoint`, `dateAdded`) VALUES
-(56, '441622818', '1', '4', '1', 'N/A', '0', '73', '3.5', 'A', '0', '2022-11-10'),
-(55, '441622818', '1', '4', '1', 'N/A', '0', '74', '3.5', 'A', '0', '2022-11-10'),
-(54, '441622818', '1', '4', '1', 'N/A', '0', '74', '3.5', 'A', '0', '2022-11-10'),
-(53, '441622818', '1', '4', '1', 'N/A', '0', '75', '4', 'AA', '0', '2022-11-10'),
-(52, '441622818', '1', '3', '1', 'N/A', '0', '76', '4', 'AA', '0', '2022-11-10'),
-(51, '441622818', '1', '3', '1', 'N/A', '0', '73', '3.5', 'A', '0', '2022-11-10'),
-(50, '441622818', '1', '3', '1', 'N/A', '0', '74', '3.5', 'A', '0', '2022-11-10'),
-(49, '441622818', '1', '3', '1', 'N/A', '0', '73', '3.5', 'A', '0', '2022-11-10'),
-(48, '441622818', '1', '3', '1', 'N/A', '0', '75', '4', 'AA', '0', '2022-11-10'),
-(47, '441622818', '1', '2', '1', 'N/A', '0', '85', '4', 'AA', '0', '2022-11-10'),
-(46, '441622818', '1', '2', '1', 'N/A', '0', '81', '4', 'AA', '0', '2022-11-10'),
-(45, '441622818', '1', '2', '1', 'N/A', '0', '79', '4', 'AA', '0', '2022-11-10'),
-(44, '441622818', '1', '2', '1', 'N/A', '0', '78', '4', 'AA', '0', '2022-11-10'),
-(43, '441622818', '1', '2', '1', 'N/A', '0', '75', '4', 'AA', '0', '2022-11-10'),
 (37, '441622818', '1', '1', '1', '', '3', '96', '4', 'AA', '12', '2022-11-10'),
 (36, '441622818', '1', '1', '1', '', '3', '95', '4', 'AA', '12', '2022-11-10'),
 (35, '441622818', '1', '1', '1', '', '0', '94', '4', 'AA', '0', '2022-11-10'),
 (34, '441622818', '1', '1', '1', '', '0', '93', '4', 'AA', '0', '2022-11-10'),
 (33, '441622818', '1', '1', '1', '', '0', '92', '4', 'AA', '0', '2022-11-10'),
-(32, '441622818', '1', '1', '1', '', '0', '91', '4', 'AA', '0', '2022-11-10'),
-(57, '441622818', '1', '4', '1', 'N/A', '0', '75', '4', 'AA', '0', '2022-11-10'),
-(58, '441622818', '1', '4', '1', 'N/A', '0', '76', '4', 'AA', '0', '2022-11-10');
+(32, '441622818', '1', '1', '1', '', '0', '91', '4', 'AA', '0', '2022-11-10');
 
 -- --------------------------------------------------------
 
@@ -514,7 +478,7 @@ ALTER TABLE `tblcgparesult`
 -- AUTO_INCREMENT for table `tblcourse`
 --
 ALTER TABLE `tblcourse`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tbldepartment`
@@ -532,7 +496,7 @@ ALTER TABLE `tblfaculty`
 -- AUTO_INCREMENT for table `tblfinalresult`
 --
 ALTER TABLE `tblfinalresult`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbllevel`
@@ -544,7 +508,7 @@ ALTER TABLE `tbllevel`
 -- AUTO_INCREMENT for table `tblresult`
 --
 ALTER TABLE `tblresult`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `tblsemester`
