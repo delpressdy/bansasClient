@@ -1,54 +1,53 @@
 <?php
 error_reporting(0);
-    session_start();
-    include('includes/dbconnection.php');
+session_start();
+include('includes/dbconnection.php');
 
-    if(isset($_POST['login']))
-    {
-        $matricNo=$_POST['matricNo'];
-        // $password=md5($_POST['password']);
-        $password=$_POST['password'];
-        $query = mysqli_query($con,"select * from tblstudent where matricNo='$matricNo' && password='$password'");
-        $count = mysqli_num_rows($query);
-        $row = mysqli_fetch_array($query);
+if (isset($_POST['login'])) {
+    $matricNo = $_POST['matricNo'];
+    // $password=md5($_POST['password']);
+    $password = $_POST['password'];
+    $query = mysqli_query($con, "select * from tblstudent where matricNo='$matricNo' && password='$password'");
+    $count = mysqli_num_rows($query);
+    $row = mysqli_fetch_array($query);
 
-        if($count > 0)
-        {
-            $_SESSION['matricNo']=$row['matricNo'];
-            $_SESSION['firstName']=$row['firstName'];
-            $_SESSION['lastName']=$row['lastName'];
+    if ($count > 0) {
+        $_SESSION['matricNo'] = $row['matricNo'];
+        $_SESSION['firstName'] = $row['firstName'];
+        $_SESSION['lastName'] = $row['lastName'];
 
-            echo "<script type = \"text/javascript\">
+        echo "<script type = \"text/javascript\">
                 window.location = (\"student/index.php\")
-               </script>";  
+               </script>";
 
-            // if($row['roleId'] == 2){ //if user is Hod
-                
-            //     echo "<script type = \"text/javascript\">
-            //     window.location = (\"hod/index.php\")
-            //     </script>";  
-            // }
-            // else if($row['roleId'] == 3){ //if user is Dean
-                
-            //     echo "<script type = \"text/javascript\">
-            //     window.location = (\"dean/index.php\")
-            //     </script>";  
-            // }
-        }
-        else
-        {
-            $errorMsg = "<div class='alert alert-danger' role='alert'>Invalid Username/Password!</div>";
-        }
+        // if($row['roleId'] == 2){ //if user is Hod
+
+        //     echo "<script type = \"text/javascript\">
+        //     window.location = (\"hod/index.php\")
+        //     </script>";  
+        // }
+        // else if($row['roleId'] == 3){ //if user is Dean
+
+        //     echo "<script type = \"text/javascript\">
+        //     window.location = (\"dean/index.php\")
+        //     </script>";  
+        // }
+    } else {
+        $errorMsg = "<div class='alert alert-danger' role='alert'>Invalid Username/Password!</div>";
     }
-  ?>
+}
+?>
 
 
 <!doctype html>
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Student Grading PHP</title>
+    <title>Pupil Login Page</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -67,6 +66,7 @@ error_reporting(0);
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
+
 <body class="bg-light">
 
     <div class="sufee-login d-flex align-content-center flex-wrap">
@@ -79,8 +79,11 @@ error_reporting(0);
                 </div>
                 <div class="login-form">
                     <form method="Post" Action="">
-                            <?php echo $errorMsg; ?>
-                        <strong><h2 align="center">Student Login</h2></strong><hr>
+                        <?php echo $errorMsg; ?>
+                        <strong>
+                            <h2 align="center">Pupil Login</h2>
+                        </strong>
+                        <hr>
                         <div class="form-group">
                             <label>Matric Number</label>
                             <input type="text" name="matricNo" Required class="form-control" placeholder="Matric Number">
@@ -90,7 +93,7 @@ error_reporting(0);
                             <input type="password" name="password" Required class="form-control" placeholder="Password">
                         </div>
                         <div class="checkbox">
-                           <label class="pull-left">
+                            <label class="pull-left">
                                 <a href="index.php">Go Back</a>
                             </label>
                             <label class="pull-right">
@@ -121,4 +124,5 @@ error_reporting(0);
     <script src="assets/js/main.js"></script>
 
 </body>
+
 </html>

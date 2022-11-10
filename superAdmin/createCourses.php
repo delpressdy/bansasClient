@@ -221,7 +221,7 @@ if (isset($_POST['submit'])) {
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <div class="form-group">
-                                                            <label for="cc-exp" class="control-label mb-1">Semester</label>
+                                                            <label for="cc-exp" class="control-label mb-1">Grading</label>
                                                             <?php
                                                             $query = mysqli_query($con, "select * from tblsemester");
                                                             $count = mysqli_num_rows($query);
@@ -238,7 +238,7 @@ if (isset($_POST['submit'])) {
                                                     </div><!-- Log on to codeastro.com for more projects! -->
                                                     <div class="col-6">
                                                         <div class="form-group">
-                                                            <label for="x_card_code" class="control-label mb-1">Faculty</label>
+                                                            <label for="x_card_code" class="control-label mb-1">Room</label>
                                                             <?php
                                                             $query = mysqli_query($con, "select * from tblfaculty ORDER BY facultyName ASC");
                                                             $count = mysqli_num_rows($query);

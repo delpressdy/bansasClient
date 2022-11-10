@@ -1,49 +1,73 @@
-
 <?php
 
-    include('../includes/dbconnection.php');
-    include('../includes/session.php');
-    error_reporting(0);
+include('../includes/dbconnection.php');
+include('../includes/session.php');
+error_reporting(0);
+
+if (!isset($matricNo)) {
+    header("Location: index.php");
+}
+
+$querys = mysqli_query($con, "select * from tblstudent where matricNo='$matricNo'");
+$rows = mysqli_fetch_array($querys);
 
 
-    $querys = mysqli_query($con,"select * from tblstudent where matricNo='$matricNo'");
-    $rrow = mysqli_fetch_array($querys);
-    
+if (isset($_POST['submit'])) {
 
-if(isset($_POST['submit'])){
+    $alertStyle = "";
+    $statusMsg = "";
 
-     $alertStyle ="";
-     $statusMsg="";
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $othername = $_POST['othername'];
+    $password = $_POST['password'];
+    $pupilID = $_POST['pupilID'];
 
-  $firstname=$_POST['firstname'];
-  $lastname=$_POST['lastname'];
-  $othername=$_POST['othername'];
-  $emailAddress=$_POST['emailAddress'];
 
-  $phoneNo=$_POST['phoneNo'];
 
-  $ret=mysqli_query($con,"update tblstaff set firstName='$firstname', lastName='$lastname', otherName='$othername', 
-  emailAddress='$emailAddress', phoneNo='$phoneNo' where staffId='$staffId'");
+    // $ret = mysqli_query($con, "UPDATE tblstudent SET firstName = ' $firstname ', password= '$password ', matricNo= '$pupilID' ,otherName = '$othername', lastName='$lastname',  WHERE matricNo= '$pupilID'");
 
-    if($ret == TRUE){
+    // if ($ret == TRUE) {
 
-        $alertStyle ="alert alert-success";
-        $statusMsg="Profile Updated Successfully!";
-    }
-    else
-    {
-      $alertStyle ="alert alert-danger";
-      $statusMsg="An error Occurred!";
+    //     $alertStyle = "alert alert-success";
+    //     $statusMsg = "Profile Updated Successfully!";
+    // } else {
+    //     $alertStyle = "alert alert-danger";
+    //     $statusMsg = "An error Occurred!";
+    // }
+
+
+    $sql = "UPDATE tblstudent SET firstName = '$firstname', lastName = '$lastname', otherName = '$othername', PASSWORD = '$password' , matricNo = '$pupilID' WHERE matricNo = '$matricNo'";
+
+    if ($con->query($sql) === TRUE) {
+        $statusMsg = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+Profile Updated Successfully!
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+</div>';
+        $_SESSION['matricNo'] = $pupilID;
+    } else {
+
+        $statusMsg = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        An error Occurred!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>';
     }
 }
-  ?>
+?>
 
 <!doctype html>
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <?php include 'includes/title.php';?>
+    <?php include 'includes/title.php'; ?>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,11 +88,13 @@ if(isset($_POST['submit'])){
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+
 <body>
     <!-- Left Panel -->
-    <?php $page="profile"; include 'includes/leftMenu.php';?>
+    <?php $page = "profile";
+    include 'includes/leftMenu.php'; ?>
 
-   <!-- /#left-panel -->
+    <!-- /#left-panel -->
 
     <!-- Left Panel -->
 
@@ -77,7 +103,7 @@ if(isset($_POST['submit'])){
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-            <?php include 'includes/header.php';?>
+        <?php include 'includes/header.php'; ?>
         <!-- /header -->
         <!-- Header-->
 
@@ -118,79 +144,122 @@ if(isset($_POST['submit'])){
                                 <!-- Credit Card -->
                                 <div id="pay-invoice">
                                     <div class="card-body">
-                                       <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
-                                        <form method="Post" action="">
+
+
+                                        <div class="col-md-4">
+                                            <?php
+
+                                            echo $statusMsg;
+
+
+
+                                            ?>
+                                            <form method="POST" action="updateProfile.php" enctype="multipart/form-data">
+                                                <div class="form-group">
+                                                    <label for="pupilID" class="control-label">Pupil ID</label>
+                                                    <input type="text" id="pupilID" name="pupilID" class="form-control" value="<?= $rows['matricNo'] ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="firstname" class="control-label">First Name</label>
+                                                    <input type="text" id="firstname" name="firstname" class="form-control" value="<?= $rows['firstName'] ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="lastname" class="control-label">Last Name</label>
+                                                    <input type="text" id="lastname" name="lastname" class="form-control" value="<?= $rows['lastName'] ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="firstname" class="control-label">Other Name</label>
+                                                    <input type="othername" id="othername" name="othername" class="form-control" value="<?= $rows['otherName'] ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="firstname" class="control-label">Password</label>
+                                                    <input type="password" id="password" name="password" class="form-control" value="<?= $rows['password'] ?>">
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <input type="submit" name="submit" class="btn btn-success" value="submit">
+                                                </div>
+                                            </form>
+
+
+                                        </div>
+                                        <!-- <form method="Post" enctype="multipart/form-data">
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="cc-exp" class="control-label mb-1">Firstname</label>
-                                                        <input id="" name="firstname" type="tel" class="form-control cc-exp" value="<?php echo $rrow['firstName'];?>" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Firstname">
+                                                        <input id="" name="firstname" type="text" class="form-control cc-exp" value="<?= $rrow['firstName']; ?>" Required placeholder="Firstname">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <label for="x_card_code" class="control-label mb-1">Lastname</label>
-                                                        <input id="" name="lastname" type="tel" class="form-control cc-cvc" value="<?php echo $rrow['lastName'];?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Lastname">
-                                                        </div>
-                                                    </div>
-                                                    <div>
-
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Othername</label>
-                                                        <input id="" name="othername" type="text" class="form-control cc-exp" value="<?php echo $rrow['otherName'];?>" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Othername">
-                                                    </div>
-                                                </div>
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="x_card_code" class="control-label mb-1">Email Address</label>
-                                                    <input id="" name="emailAddress" type="email" class="form-control cc-cvc" value="<?php echo $rrow['emailAddress'];?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Email Address">
+                                                    <input id="" name="lastname" type="text" class="form-control cc-cvc" value="<?= $rrow['lastName']; ?>" Required placeholder="Lastname">
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div>
 
-                                        <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Phone Number</label>
-                                                        <input id="" name="phoneNo" type="text" class="form-control cc-exp" value="<?php echo $rrow['phoneNo'];?>" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Phone Number">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="cc-exp" class="control-label mb-1">Othername</label>
+                                                            <input id="" name="othername" type="text" class="form-control cc-exp" value="<?= $rrow['otherName']; ?>" placeholder="Othername">
+                                                        </div>
                                                     </div>
+
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="cc-exp" class="control-label mb-1">Pupil ID</label>
+                                                            <input id="" name="pupilID" type="text" class="form-control cc-exp" value="<?= $rrow['matricNo']; ?>" Required placeholder="Phone Number">
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-                                           
-                                        </div>
+
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="cc-exp" class="control-label mb-1">Othername</label>
+                                                            <input id="" name="othername" type="password" class="form-control cc-exp" value="<?= $rrow['password']; ?>" placeholder="Othername">
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
 
                                                 <button type="submit" name="submit" class="btn btn-success">Update Profile</button>
                                             </div>
-                                        </form>
+                                        </form> -->
                                     </div>
                                 </div>
                             </div>
                         </div> <!-- .card -->
-                    </div><!--/.col-->
-               
+                    </div>
+                    <!--/.col-->
 
 
-            </div>
-        </div><!-- .animated -->
-    </div><!-- .content -->
 
-    <div class="clearfix"></div>
+                </div>
+            </div><!-- .animated -->
+        </div><!-- .content -->
 
-        <?php include 'includes/footer.php';?>
+        <div class="clearfix"></div>
+
+        <?php include 'includes/footer.php'; ?>
 
 
-</div><!-- /#right-panel -->
+    </div><!-- /#right-panel -->
 
-<!-- Right Panel -->
+    <!-- Right Panel -->
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../assets/js/main.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="../assets/js/main.js"></script>
 
-<script src="../assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="../assets/js/lib/data-table/datatables.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
     <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
@@ -204,26 +273,27 @@ if(isset($_POST['submit'])){
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
+            $('#bootstrap-data-table-export').DataTable();
+        });
 
-      // Menu Trigger
-      $('#menuToggle').on('click', function(event) {
-            var windowWidth = $(window).width();   		 
-            if (windowWidth<1010) { 
-                $('body').removeClass('open'); 
-                if (windowWidth<760){ 
-                $('#left-panel').slideToggle(); 
+        // Menu Trigger
+        $('#menuToggle').on('click', function(event) {
+            var windowWidth = $(window).width();
+            if (windowWidth < 1010) {
+                $('body').removeClass('open');
+                if (windowWidth < 760) {
+                    $('#left-panel').slideToggle();
                 } else {
-                $('#left-panel').toggleClass('open-menu');  
-                } 
+                    $('#left-panel').toggleClass('open-menu');
+                }
             } else {
                 $('body').toggleClass('open');
-                $('#left-panel').removeClass('open-menu');  
-            } 
-                
-            }); 
-  </script>
+                $('#left-panel').removeClass('open-menu');
+            }
+
+        });
+    </script>
 
 </body>
+
 </html>
