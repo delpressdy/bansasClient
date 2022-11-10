@@ -2,8 +2,7 @@
             <div class="footer-inner bg-white">
                 <div class="row">
                     <div class="col-sm-6">
-                        &copy; <?php echo date('Y')?> Student Grading System - Developed By Sodiq Ahmed
-                    </div>
+                        &copy; <?php echo date('Y')?> Student Grading System
                     <div class="col-sm-6 text-right">
                         <!-- Designed by <a href="https://colorlib.com">Colorlib</a> -->
                     </div>

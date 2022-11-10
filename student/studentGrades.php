@@ -6,6 +6,15 @@ error_reporting(0);
 
 ?>
 
+<?php
+
+$query = mysqli_query($con, "SELECT * FROM tblstudent WHERE matricNo='$matricNo'");
+$row = mysqli_fetch_array($query);
+$user = $row['matricNo'];
+$levelId = $row['levelId'];
+
+?>
+
 <!doctype html>
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang="">
@@ -102,23 +111,45 @@ error_reporting(0);
 
             <!-- TABLE FOR GRADE 1 -->
             <div class="card w-100 my-4">
-                <table class="table">
+                <h3 
+                <?php
+                     $sql = "SELECT * FROM tblresult WHERE matricNo=$matricNo";
+                     $result = $con->query($sql);
+
+                                     if ($result->num_rows > 0){
+                                            echo 'hidden';
+                                        }else{
+                                            echo '';
+                                        }
+                                     
+                ?>
+                 align="center" style="color:red; padding:19px;">Sorry, there are no records to be shown.</h3>
+                <table 
+                    <?php 
+
+                        $query = mysqli_query($con, "SELECT * FROM tblresult WHERE matricNo=$matricNo");
+                        $row = mysqli_fetch_array($query);
+                        $check = $row['levelId'];
+
+                            if ($check != 1){
+                                echo 'hidden';
+                            }
+                    ?> 
+                class="table">
+
                     <thead>
-                        <h3 class="text-sm-center" style="color:red;">
-                            <?php  
-                                $sql = "SELECT * FROM tblcourse WHERE levelId=1 AND semesterId=1";
-                                $result = $con->query($sql);
+                            <h3 
+                                <?php 
 
-                                $sql2 = "SELECT * FROM tblresult WHERE levelId=1 AND semesterId=1";
-                                $result2 = $con->query($sql2);
+                                    $query = mysqli_query($con, "SELECT * FROM tblresult WHERE levelId=$levelId AND semesterId=1");
+                                    $row = mysqli_fetch_array($query);
+                                    $check = $row['levelId'];
 
-                                 if ($result->num_rows > 0 && $result2->num_rows > 0){
-                                    echo '<h3 class="text-sm-center" style="color:#00a6fb; font-weight:650; padding:12px 14px;">Grade 1 Records</h3>';
-                                 }else{
-                                    echo '<h3 class="text-sm-center" style="color:red; font-weight:650; padding:12px 14px;">No Grade 1 Records Found!</h3>';
-                                 }
-                            ?>
-                        </h3>
+                                        if ($check != 1){
+                                            echo 'hidden';
+                                        }
+                                ?>  
+                            class="text-sm-center" style="color:#00a6fb; font-weight:650; padding:12px 14px;">Grade 1 Records</h3>
                         <tr>
                             <th scope="col">Subject</th>
                             <th scope="col">1st Grading</th>
@@ -147,7 +178,7 @@ error_reporting(0);
 
                             <td>
                                 <?php
-                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=1 AND semesterId=1";
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=1 AND semesterId=1 AND matricNo=$matricNo";
                                     $result2 = $con->query($sql2);
 
                                      if ($result2->num_rows >0){
@@ -163,7 +194,7 @@ error_reporting(0);
 
                             <td>
                                 <?php
-                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=1 AND semesterId=2";
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=1 AND semesterId=2 AND matricNo=$matricNo";
                                     $result2 = $con->query($sql2);
 
                                      if ($result2->num_rows >0){
@@ -179,7 +210,7 @@ error_reporting(0);
 
                             <td>
                                 <?php
-                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=1 AND semesterId=3";
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=1 AND semesterId=3 AND matricNo=$matricNo";
                                     $result2 = $con->query($sql2);
 
                                      if ($result2->num_rows >0){
@@ -195,7 +226,7 @@ error_reporting(0);
 
                             <td>
                                 <?php
-                                    $sql4 = "SELECT * FROM tblresult WHERE levelId=1 AND semesterId=4";
+                                    $sql4 = "SELECT * FROM tblresult WHERE levelId=1 AND semesterId=4 AND matricNo=$matricNo";
                                     $result4 = $con->query($sql4);
 
                                      if ($result4->num_rows >0){
@@ -211,35 +242,35 @@ error_reporting(0);
                         </tr>
                     </tbody>
                     <tfoot>
-                        <tr>
+                        <tr style="background-color: #ade8f4;">
                             <th class="text-sm-center">AVERAGE:</th> 
 
                             <?php
 
                                 // query for 1st to 4th
-                                $sql = "SELECT sum(score) FROM tblresult WHERE levelId=1 AND semesterId=1";
+                                $sql = "SELECT sum(score) FROM tblresult WHERE levelId=1 AND semesterId=1 AND matricNo=$matricNo";
                                 $result = $con->query($sql);
 
-                                $sql2 = "SELECT sum(score) FROM tblresult WHERE levelId=1 AND semesterId=2";
+                                $sql2 = "SELECT sum(score) FROM tblresult WHERE levelId=1 AND semesterId=2 AND matricNo=$matricNo";
                                 $result2 = $con->query($sql2);
 
-                                $sql3 = "SELECT sum(score) FROM tblresult WHERE levelId=1 AND semesterId=3";
+                                $sql3 = "SELECT sum(score) FROM tblresult WHERE levelId=1 AND semesterId=3 AND matricNo=$matricNo";
                                 $result3 = $con->query($sql3);
 
-                                $sql4 = "SELECT sum(score) FROM tblresult WHERE levelId=1 AND semesterId=4";
+                                $sql4 = "SELECT sum(score) FROM tblresult WHERE levelId=1 AND semesterId=4 AND matricNo=$matricNo";
                                 $result4 = $con->query($sql4);
 
                                 // query for counting rows from 1st to 4th
-                                $forRows = "SELECT score FROM tblresult WHERE levelId=1 AND semesterId=1";
+                                $forRows = "SELECT score FROM tblresult WHERE levelId=1 AND semesterId=1 AND matricNo=$matricNo";
                                 $resforRows = $con->query($forRows);
 
-                                $forRows2 = "SELECT score FROM tblresult WHERE levelId=1 AND semesterId=2";
+                                $forRows2 = "SELECT score FROM tblresult WHERE levelId=1 AND semesterId=2 AND matricNo=$matricNo";
                                 $resforRows2 = $con->query($forRows2);
 
-                                $forRows3 = "SELECT score FROM tblresult WHERE levelId=1 AND semesterId=3";
+                                $forRows3 = "SELECT score FROM tblresult WHERE levelId=1 AND semesterId=3 AND matricNo=$matricNo";
                                 $resforRows3 = $con->query($forRows3);
 
-                                $forRows4 = "SELECT score FROM tblresult WHERE levelId=1 AND semesterId=4";
+                                $forRows4 = "SELECT score FROM tblresult WHERE levelId=1 AND semesterId=4 AND matricNo=$matricNo";
                                 $resforRows4 = $con->query($forRows4);
 
                                 // Rows variable for each Grading
@@ -295,23 +326,32 @@ error_reporting(0);
 
             <!-- TABLE FOR GRADE 2 -->
             <div class="card w-100 my-4">
-                <table class="table">
+                <table 
+                    <?php 
+
+                        $query = mysqli_query($con, "SELECT * FROM tblresult WHERE levelId=2");
+                        $row = mysqli_fetch_array($query);
+                        $check = $row['levelId'];
+
+                            if ($check != 2){
+                                echo 'hidden';
+                            }
+                    ?> 
+                class="table">
+
                     <thead>
-                        <h3 class="text-sm-center" style="color:red;">
-                            <?php  
-                                $sql = "SELECT * FROM tblcourse WHERE levelId=2 AND semesterId=1";
-                                $result = $con->query($sql);
+                            <h3 
+                                <?php 
 
-                                $sql2 = "SELECT * FROM tblresult WHERE levelId=2 AND semesterId=1";
-                                $result2 = $con->query($sql2);
+                                    $query = mysqli_query($con, "SELECT * FROM tblresult WHERE levelId=2");
+                                    $row = mysqli_fetch_array($query);
+                                    $check = $row['levelId'];
 
-                                 if ($result->num_rows > 0 && $result2->num_rows > 0){
-                                    echo '<h3 class="text-sm-center" style="color:#00a6fb; font-weight:650; padding:12px 14px;">Grade 2 Records</h3>';
-                                 }else{
-                                    echo '<h3 class="text-sm-center" style="color:red; font-weight:650; padding:12px 14px;">No Grade 2 Records Found!</h3>';
-                                 }
-                            ?>
-                        </h3>
+                                        if ($check != 2){
+                                            echo 'hidden';
+                                        }
+                                ?>  
+                            class="text-sm-center" style="color:#00a6fb; font-weight:650; padding:12px 14px;">Grade 2 Records</h3>
                         <tr>
                             <th scope="col">Subject</th>
                             <th scope="col">1st Grading</th>
@@ -340,7 +380,7 @@ error_reporting(0);
 
                             <td>
                                 <?php
-                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=2 AND semesterId=1";
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=2 AND semesterId=1 AND matricNo=$matricNo";
                                     $result2 = $con->query($sql2);
 
                                      if ($result2->num_rows >0){
@@ -356,7 +396,7 @@ error_reporting(0);
 
                             <td>
                                 <?php
-                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=2 AND semesterId=2";
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=2 AND semesterId=2 AND matricNo=$matricNo";
                                     $result2 = $con->query($sql2);
 
                                      if ($result2->num_rows >0){
@@ -372,7 +412,7 @@ error_reporting(0);
 
                             <td>
                                 <?php
-                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=2 AND semesterId=3";
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=2 AND semesterId=3 AND matricNo=$matricNo";
                                     $result2 = $con->query($sql2);
 
                                      if ($result2->num_rows >0){
@@ -388,7 +428,7 @@ error_reporting(0);
 
                             <td>
                                 <?php
-                                    $sql4 = "SELECT * FROM tblresult WHERE levelId=2 AND semesterId=4";
+                                    $sql4 = "SELECT * FROM tblresult WHERE levelId=2 AND semesterId=4 AND matricNo=$matricNo";
                                     $result4 = $con->query($sql4);
 
                                      if ($result4->num_rows >0){
@@ -404,35 +444,35 @@ error_reporting(0);
                         </tr>
                     </tbody>
                     <tfoot>
-                        <tr>
+                        <tr style="background-color: #ade8f4;">
                             <th class="text-sm-center">AVERAGE:</th> 
 
                             <?php
 
                                 // query for 1st to 4th
-                                $sql = "SELECT sum(score) FROM tblresult WHERE levelId=2 AND semesterId=1";
+                                $sql = "SELECT sum(score) FROM tblresult WHERE levelId=2 AND semesterId=1 AND matricNo=$matricNo";
                                 $result = $con->query($sql);
 
-                                $sql2 = "SELECT sum(score) FROM tblresult WHERE levelId=2 AND semesterId=2";
+                                $sql2 = "SELECT sum(score) FROM tblresult WHERE levelId=2 AND semesterId=2 AND matricNo=$matricNo";
                                 $result2 = $con->query($sql2);
 
-                                $sql3 = "SELECT sum(score) FROM tblresult WHERE levelId=2 AND semesterId=3";
+                                $sql3 = "SELECT sum(score) FROM tblresult WHERE levelId=2 AND semesterId=3 AND matricNo=$matricNo";
                                 $result3 = $con->query($sql3);
 
-                                $sql4 = "SELECT sum(score) FROM tblresult WHERE levelId=2 AND semesterId=4";
+                                $sql4 = "SELECT sum(score) FROM tblresult WHERE levelId=2 AND semesterId=4 AND matricNo=$matricNo";
                                 $result4 = $con->query($sql4);
 
                                 // query for counting rows from 1st to 4th
-                                $forRows = "SELECT score FROM tblresult WHERE levelId=2 AND semesterId=1";
+                                $forRows = "SELECT score FROM tblresult WHERE levelId=2 AND semesterId=1 AND matricNo=$matricNo";
                                 $resforRows = $con->query($forRows);
 
-                                $forRows2 = "SELECT score FROM tblresult WHERE levelId=2 AND semesterId=2";
+                                $forRows2 = "SELECT score FROM tblresult WHERE levelId=2 AND semesterId=2 AND matricNo=$matricNo";
                                 $resforRows2 = $con->query($forRows2);
 
-                                $forRows3 = "SELECT score FROM tblresult WHERE levelId=2 AND semesterId=3";
+                                $forRows3 = "SELECT score FROM tblresult WHERE levelId=2 AND semesterId=3 AND matricNo=$matricNo";
                                 $resforRows3 = $con->query($forRows3);
 
-                                $forRows4 = "SELECT score FROM tblresult WHERE levelId=2 AND semesterId=4";
+                                $forRows4 = "SELECT score FROM tblresult WHERE levelId=2 AND semesterId=4 AND matricNo=$matricNo";
                                 $resforRows4 = $con->query($forRows4);
 
                                 // Rows variable for each Grading
@@ -485,6 +525,815 @@ error_reporting(0);
                     </tfoot>
                 </table>
             </div><!-- END TABLE FOR GRADE 2 -->
+
+            <!-- TABLE FOR GRADE 3 -->
+            <div class="card w-100 my-4">
+                <table 
+                    <?php 
+
+                        $query = mysqli_query($con, "SELECT * FROM tblresult WHERE levelId=3");
+                        $row = mysqli_fetch_array($query);
+                        $check = $row['levelId'];
+
+                            if ($check != 3){
+                                echo 'hidden';
+                            }
+                    ?> 
+                class="table">
+
+                    <thead>
+                            <h3 
+                                <?php 
+
+                                    $query = mysqli_query($con, "SELECT * FROM tblresult WHERE levelId=3");
+                                    $row = mysqli_fetch_array($query);
+                                    $check = $row['levelId'];
+
+                                        if ($check != 3){
+                                            echo 'hidden';
+                                        }
+                                ?>  
+                            class="text-sm-center" style="color:#00a6fb; font-weight:650; padding:12px 14px;">Grade 3 Records</h3>
+                        <tr>
+                            <th scope="col">Subject</th>
+                            <th scope="col">1st Grading</th>
+                            <th scope="col">2nd Grading</th>
+                            <th scope="col">3rd Grading</th>
+                            <th scope="col">4th Grading</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <?php
+                                    $sql = "SELECT * FROM tblcourse WHERE levelId=4 AND semesterId=1";
+                                    $result = $con->query($sql);
+
+                                     if ($result->num_rows >0){
+                                        while($row=$result->fetch_assoc()){
+                                            echo $row['courseTitle'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=3 AND semesterId=1 AND matricNo=$matricNo";
+                                    $result2 = $con->query($sql2);
+
+                                     if ($result2->num_rows >0){
+                                        while($row2=$result2->fetch_assoc()){
+                                            echo $row2['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=3 AND semesterId=2 AND matricNo=$matricNo";
+                                    $result2 = $con->query($sql2);
+
+                                     if ($result2->num_rows >0){
+                                        while($row2=$result2->fetch_assoc()){
+                                            echo $row2['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=3 AND semesterId=3 AND matricNo=$matricNo";
+                                    $result2 = $con->query($sql2);
+
+                                     if ($result2->num_rows >0){
+                                        while($row2=$result2->fetch_assoc()){
+                                            echo $row2['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql4 = "SELECT * FROM tblresult WHERE levelId=3 AND semesterId=4 AND matricNo=$matricNo";
+                                    $result4 = $con->query($sql4);
+
+                                     if ($result4->num_rows >0){
+                                        while($row4=$result4->fetch_assoc()){
+                                            echo $row4['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr style="background-color: #ade8f4;">
+                            <th class="text-sm-center">AVERAGE:</th> 
+
+                            <?php
+
+                                // query for 1st to 4th
+                                $sql = "SELECT sum(score) FROM tblresult WHERE levelId=3 AND semesterId=1 AND matricNo=$matricNo";
+                                $result = $con->query($sql);
+
+                                $sql2 = "SELECT sum(score) FROM tblresult WHERE levelId=3 AND semesterId=2 AND matricNo=$matricNo";
+                                $result2 = $con->query($sql2);
+
+                                $sql3 = "SELECT sum(score) FROM tblresult WHERE levelId=3 AND semesterId=3 AND matricNo=$matricNo";
+                                $result3 = $con->query($sql3);
+
+                                $sql4 = "SELECT sum(score) FROM tblresult WHERE levelId=3 AND semesterId=4 AND matricNo=$matricNo";
+                                $result4 = $con->query($sql4);
+
+                                // query for counting rows from 1st to 4th
+                                $forRows = "SELECT score FROM tblresult WHERE levelId=3 AND semesterId=1 AND matricNo=$matricNo";
+                                $resforRows = $con->query($forRows);
+
+                                $forRows2 = "SELECT score FROM tblresult WHERE levelId=3 AND semesterId=2 AND matricNo=$matricNo";
+                                $resforRows2 = $con->query($forRows2);
+
+                                $forRows3 = "SELECT score FROM tblresult WHERE levelId=3 AND semesterId=3 AND matricNo=$matricNo";
+                                $resforRows3 = $con->query($forRows3);
+
+                                $forRows4 = "SELECT score FROM tblresult WHERE levelId=3 AND semesterId=4 AND matricNo=$matricNo";
+                                $resforRows4 = $con->query($forRows4);
+
+                                // Rows variable for each Grading
+                                $cntrows1 = mysqli_num_rows($resforRows);
+                                $cntrows2 = mysqli_num_rows($resforRows2);
+                                $cntrows3 = mysqli_num_rows($resforRows3);
+                                $cntrows4 = mysqli_num_rows($resforRows4);
+
+                                while($row = $result->fetch_assoc()){
+                                $avg = $row['sum(score)'] / $cntrows1;
+
+                                    if($avg >= 75){
+                                        echo '<th>'.round($avg,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg,2).' ✖️</th>';
+                                    }
+                                }
+
+                                while($row2 = $result2->fetch_assoc()){
+                                $avg2 = $row2['sum(score)'] / $cntrows2;
+                                    
+                                    if($avg2 >= 75){
+                                        echo '<th>'.round($avg2,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg2,2).' ✖️</th>';
+                                    }
+                                }
+
+                                while($row3 = $result3->fetch_assoc()){
+                                $avg3 = $row3['sum(score)'] / $cntrows3;
+
+                                    if($avg3 >= 75){
+                                        echo '<th>'.round($avg3,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg3,2).' ✖️</th>';
+                                    }
+                                }
+
+                                while($row4 = $result4->fetch_assoc()){
+                                $avg4 = $row4['sum(score)'] / $cntrows4;
+                                    
+                                    if($avg4 >= 75){
+                                        echo '<th>'.round($avg4,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg4,2).' ✖️</th>';
+                                    }
+                                }
+                            ?>                   
+                        </tr>
+                    </tfoot>
+                </table>
+            </div><!-- END TABLE FOR GRADE 3 -->
+
+
+            <!-- TABLE FOR GRADE 4 -->
+            <div class="card w-100 my-4">
+                <table 
+                    <?php 
+
+                        $query = mysqli_query($con, "SELECT * FROM tblresult WHERE levelId=4");
+                        $row = mysqli_fetch_array($query);
+                        $check = $row['levelId'];
+
+                            if ($check != 4){
+                                echo 'hidden';
+                            }
+                    ?> 
+                class="table">
+
+                    <thead>
+                            <h3 
+                                <?php 
+
+                                    $query = mysqli_query($con, "SELECT * FROM tblresult WHERE levelId=4");
+                                    $row = mysqli_fetch_array($query);
+                                    $check = $row['levelId'];
+
+                                        if ($check != 4){
+                                            echo 'hidden';
+                                        }
+                                ?>  
+                            class="text-sm-center" style="color:#00a6fb; font-weight:650; padding:12px 14px;">Grade 4 Records</h3>
+                        <tr>
+                            <th scope="col">Subject</th>
+                            <th scope="col">1st Grading</th>
+                            <th scope="col">2nd Grading</th>
+                            <th scope="col">3rd Grading</th>
+                            <th scope="col">4th Grading</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <?php
+                                    $sql = "SELECT * FROM tblcourse WHERE levelId=4 AND semesterId=1";
+                                    $result = $con->query($sql);
+
+                                     if ($result->num_rows >0){
+                                        while($row=$result->fetch_assoc()){
+                                            echo $row['courseTitle'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=4 AND semesterId=1 AND matricNo=$matricNo";
+                                    $result2 = $con->query($sql2);
+
+                                     if ($result2->num_rows >0){
+                                        while($row2=$result2->fetch_assoc()){
+                                            echo $row2['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=4 AND semesterId=2 AND matricNo=$matricNo";
+                                    $result2 = $con->query($sql2);
+
+                                     if ($result2->num_rows >0){
+                                        while($row2=$result2->fetch_assoc()){
+                                            echo $row2['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=4 AND semesterId=3 AND matricNo=$matricNo";
+                                    $result2 = $con->query($sql2);
+
+                                     if ($result2->num_rows >0){
+                                        while($row2=$result2->fetch_assoc()){
+                                            echo $row2['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql4 = "SELECT * FROM tblresult WHERE levelId=4 AND semesterId=4 AND matricNo=$matricNo";
+                                    $result4 = $con->query($sql4);
+
+                                     if ($result4->num_rows >0){
+                                        while($row4=$result4->fetch_assoc()){
+                                            echo $row4['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr style="background-color: #ade8f4;">
+                            <th class="text-sm-center">AVERAGE:</th> 
+
+                            <?php
+
+                                // query for 1st to 4th
+                                $sql = "SELECT sum(score) FROM tblresult WHERE levelId=4 AND semesterId=1 AND matricNo=$matricNo";
+                                $result = $con->query($sql);
+
+                                $sql2 = "SELECT sum(score) FROM tblresult WHERE levelId=4 AND semesterId=2 AND matricNo=$matricNo";
+                                $result2 = $con->query($sql2);
+
+                                $sql3 = "SELECT sum(score) FROM tblresult WHERE levelId=4 AND semesterId=3 AND matricNo=$matricNo";
+                                $result3 = $con->query($sql3);
+
+                                $sql4 = "SELECT sum(score) FROM tblresult WHERE levelId=4 AND semesterId=4 AND matricNo=$matricNo";
+                                $result4 = $con->query($sql4);
+
+                                // query for counting rows from 1st to 4th
+                                $forRows = "SELECT score FROM tblresult WHERE levelId=4 AND semesterId=1 AND matricNo=$matricNo";
+                                $resforRows = $con->query($forRows);
+
+                                $forRows2 = "SELECT score FROM tblresult WHERE levelId=4 AND semesterId=2 AND matricNo=$matricNo";
+                                $resforRows2 = $con->query($forRows2);
+
+                                $forRows3 = "SELECT score FROM tblresult WHERE levelId=4 AND semesterId=3 AND matricNo=$matricNo";
+                                $resforRows3 = $con->query($forRows3);
+
+                                $forRows4 = "SELECT score FROM tblresult WHERE levelId=4 AND semesterId=4 AND matricNo=$matricNo";
+                                $resforRows4 = $con->query($forRows4);
+
+                                // Rows variable for each Grading
+                                $cntrows1 = mysqli_num_rows($resforRows);
+                                $cntrows2 = mysqli_num_rows($resforRows2);
+                                $cntrows3 = mysqli_num_rows($resforRows3);
+                                $cntrows4 = mysqli_num_rows($resforRows4);
+
+                                while($row = $result->fetch_assoc()){
+                                $avg = $row['sum(score)'] / $cntrows1;
+
+                                    if($avg >= 75){
+                                        echo '<th>'.round($avg,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg,2).' ✖️</th>';
+                                    }
+                                }
+
+                                while($row2 = $result2->fetch_assoc()){
+                                $avg2 = $row2['sum(score)'] / $cntrows2;
+                                    
+                                    if($avg2 >= 75){
+                                        echo '<th>'.round($avg2,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg2,2).' ✖️</th>';
+                                    }
+                                }
+
+                                while($row3 = $result3->fetch_assoc()){
+                                $avg3 = $row3['sum(score)'] / $cntrows3;
+
+                                    if($avg3 >= 75){
+                                        echo '<th>'.round($avg3,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg3,2).' ✖️</th>';
+                                    }
+                                }
+
+                                while($row4 = $result4->fetch_assoc()){
+                                $avg4 = $row4['sum(score)'] / $cntrows4;
+                                    
+                                    if($avg4 >= 75){
+                                        echo '<th>'.round($avg4,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg4,2).' ✖️</th>';
+                                    }
+                                }
+                            ?>                   
+                        </tr>
+                    </tfoot>
+                </table>
+            </div><!-- END TABLE FOR GRADE 4 -->
+
+            <!-- TABLE FOR GRADE 5 -->
+            <div class="card w-100 my-4">
+                <table 
+                    <?php 
+
+                        $query = mysqli_query($con, "SELECT * FROM tblresult WHERE levelId=5");
+                        $row = mysqli_fetch_array($query);
+                        $check = $row['levelId'];
+
+                            if ($check != 5){
+                                echo 'hidden';
+                            }
+                    ?> 
+                class="table">
+
+                    <thead>
+                            <h3 
+                                <?php 
+
+                                    $query = mysqli_query($con, "SELECT * FROM tblresult WHERE levelId=5");
+                                    $row = mysqli_fetch_array($query);
+                                    $check = $row['levelId'];
+
+                                        if ($check != 5){
+                                            echo 'hidden';
+                                        }
+                                ?>  
+                            class="text-sm-center" style="color:#00a6fb; font-weight:650; padding:12px 14px;">Grade 5 Records</h3>
+                        <tr>
+                            <th scope="col">Subject</th>
+                            <th scope="col">1st Grading</th>
+                            <th scope="col">2nd Grading</th>
+                            <th scope="col">3rd Grading</th>
+                            <th scope="col">4th Grading</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <?php
+                                    $sql = "SELECT * FROM tblcourse WHERE levelId=5 AND semesterId=1";
+                                    $result = $con->query($sql);
+
+                                     if ($result->num_rows >0){
+                                        while($row=$result->fetch_assoc()){
+                                            echo $row['courseTitle'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=5 AND semesterId=1 AND matricNo=$matricNo";
+                                    $result2 = $con->query($sql2);
+
+                                     if ($result2->num_rows >0){
+                                        while($row2=$result2->fetch_assoc()){
+                                            echo $row2['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=5 AND semesterId=2 AND matricNo=$matricNo";
+                                    $result2 = $con->query($sql2);
+
+                                     if ($result2->num_rows >0){
+                                        while($row2=$result2->fetch_assoc()){
+                                            echo $row2['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=5 AND semesterId=3 AND matricNo=$matricNo";
+                                    $result2 = $con->query($sql2);
+
+                                     if ($result2->num_rows >0){
+                                        while($row2=$result2->fetch_assoc()){
+                                            echo $row2['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql4 = "SELECT * FROM tblresult WHERE levelId=5 AND semesterId=4 AND matricNo=$matricNo";
+                                    $result4 = $con->query($sql4);
+
+                                     if ($result4->num_rows >0){
+                                        while($row4=$result4->fetch_assoc()){
+                                            echo $row4['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr style="background-color: #ade8f4;">
+                            <th class="text-sm-center">AVERAGE:</th> 
+
+                            <?php
+
+                                // query for 1st to 4th
+                                $sql = "SELECT sum(score) FROM tblresult WHERE levelId=5 AND semesterId=1 AND matricNo=$matricNo";
+                                $result = $con->query($sql);
+
+                                $sql2 = "SELECT sum(score) FROM tblresult WHERE levelId=5 AND semesterId=2 AND matricNo=$matricNo";
+                                $result2 = $con->query($sql2);
+
+                                $sql3 = "SELECT sum(score) FROM tblresult WHERE levelId=5 AND semesterId=3 AND matricNo=$matricNo";
+                                $result3 = $con->query($sql3);
+
+                                $sql4 = "SELECT sum(score) FROM tblresult WHERE levelId=5 AND semesterId=4 AND matricNo=$matricNo";
+                                $result4 = $con->query($sql4);
+
+                                // query for counting rows from 1st to 4th
+                                $forRows = "SELECT score FROM tblresult WHERE levelId=5 AND semesterId=1 AND matricNo=$matricNo";
+                                $resforRows = $con->query($forRows);
+
+                                $forRows2 = "SELECT score FROM tblresult WHERE levelId=5 AND semesterId=2 AND matricNo=$matricNo";
+                                $resforRows2 = $con->query($forRows2);
+
+                                $forRows3 = "SELECT score FROM tblresult WHERE levelId=5 AND semesterId=3 AND matricNo=$matricNo";
+                                $resforRows3 = $con->query($forRows3);
+
+                                $forRows4 = "SELECT score FROM tblresult WHERE levelId=5 AND semesterId=4 AND matricNo=$matricNo";
+                                $resforRows4 = $con->query($forRows4);
+
+                                // Rows variable for each Grading
+                                $cntrows1 = mysqli_num_rows($resforRows);
+                                $cntrows2 = mysqli_num_rows($resforRows2);
+                                $cntrows3 = mysqli_num_rows($resforRows3);
+                                $cntrows4 = mysqli_num_rows($resforRows4);
+
+                                while($row = $result->fetch_assoc()){
+                                $avg = $row['sum(score)'] / $cntrows1;
+
+                                    if($avg >= 75){
+                                        echo '<th>'.round($avg,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg,2).' ✖️</th>';
+                                    }
+                                }
+
+                                while($row2 = $result2->fetch_assoc()){
+                                $avg2 = $row2['sum(score)'] / $cntrows2;
+                                    
+                                    if($avg2 >= 75){
+                                        echo '<th>'.round($avg2,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg2,2).' ✖️</th>';
+                                    }
+                                }
+
+                                while($row3 = $result3->fetch_assoc()){
+                                $avg3 = $row3['sum(score)'] / $cntrows3;
+
+                                    if($avg3 >= 75){
+                                        echo '<th>'.round($avg3,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg3,2).' ✖️</th>';
+                                    }
+                                }
+
+                                while($row4 = $result4->fetch_assoc()){
+                                $avg4 = $row4['sum(score)'] / $cntrows4;
+                                    
+                                    if($avg4 >= 75){
+                                        echo '<th>'.round($avg4,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg4,2).' ✖️</th>';
+                                    }
+                                }
+                            ?>                   
+                        </tr>
+                    </tfoot>
+                </table>
+            </div><!-- END TABLE FOR GRADE 5 -->
+
+            <!-- TABLE FOR GRADE 6 -->
+            <div class="card w-100 my-4">
+                <table 
+                    <?php 
+
+                        $query = mysqli_query($con, "SELECT * FROM tblresult WHERE levelId=6");
+                        $row = mysqli_fetch_array($query);
+                        $check = $row['levelId'];
+
+                            if ($check != 6){
+                                echo 'hidden';
+                            }
+                    ?> 
+                class="table">
+
+                    <thead>
+                            <h3 
+                                <?php 
+
+                                    $query = mysqli_query($con, "SELECT * FROM tblresult WHERE levelId=6");
+                                    $row = mysqli_fetch_array($query);
+                                    $check = $row['levelId'];
+
+                                        if ($check != 6){
+                                            echo 'hidden';
+                                        }
+                                ?>  
+                            class="text-sm-center" style="color:#00a6fb; font-weight:650; padding:12px 14px;">Grade 6 Records</h3>
+                        <tr>
+                            <th scope="col">Subject</th>
+                            <th scope="col">1st Grading</th>
+                            <th scope="col">2nd Grading</th>
+                            <th scope="col">3rd Grading</th>
+                            <th scope="col">4th Grading</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <?php
+                                    $sql = "SELECT * FROM tblcourse WHERE levelId=6 AND semesterId=1";
+                                    $result = $con->query($sql);
+
+                                     if ($result->num_rows >0){
+                                        while($row=$result->fetch_assoc()){
+                                            echo $row['courseTitle'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=6 AND semesterId=1 AND matricNo=$matricNo";
+                                    $result2 = $con->query($sql2);
+
+                                     if ($result2->num_rows >0){
+                                        while($row2=$result2->fetch_assoc()){
+                                            echo $row2['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=6 AND semesterId=2 AND matricNo=$matricNo";
+                                    $result2 = $con->query($sql2);
+
+                                     if ($result2->num_rows >0){
+                                        while($row2=$result2->fetch_assoc()){
+                                            echo $row2['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql2 = "SELECT * FROM tblresult WHERE levelId=6 AND semesterId=3 AND matricNo=$matricNo";
+                                    $result2 = $con->query($sql2);
+
+                                     if ($result2->num_rows >0){
+                                        while($row2=$result2->fetch_assoc()){
+                                            echo $row2['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php
+                                    $sql4 = "SELECT * FROM tblresult WHERE levelId=6 AND semesterId=4 AND matricNo=$matricNo";
+                                    $result4 = $con->query($sql4);
+
+                                     if ($result4->num_rows >0){
+                                        while($row4=$result4->fetch_assoc()){
+                                            echo $row4['score'];
+                                            echo '<br>';
+                                            echo '<hr>';
+                                        }
+                                     }
+
+                                ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr style="background-color: #ade8f4;">
+                            <th class="text-sm-center">AVERAGE:</th> 
+
+                            <?php
+
+                                // query for 1st to 4th
+                                $sql = "SELECT sum(score) FROM tblresult WHERE levelId=6 AND semesterId=1 AND matricNo=$matricNo";
+                                $result = $con->query($sql);
+
+                                $sql2 = "SELECT sum(score) FROM tblresult WHERE levelId=6 AND semesterId=2 AND matricNo=$matricNo";
+                                $result2 = $con->query($sql2);
+
+                                $sql3 = "SELECT sum(score) FROM tblresult WHERE levelId=6 AND semesterId=3 AND matricNo=$matricNo";
+                                $result3 = $con->query($sql3);
+
+                                $sql4 = "SELECT sum(score) FROM tblresult WHERE levelId=6 AND semesterId=4 AND matricNo=$matricNo";
+                                $result4 = $con->query($sql4);
+
+                                // query for counting rows from 1st to 4th
+                                $forRows = "SELECT score FROM tblresult WHERE levelId=6 AND semesterId=1 AND matricNo=$matricNo";
+                                $resforRows = $con->query($forRows);
+
+                                $forRows2 = "SELECT score FROM tblresult WHERE levelId=6 AND semesterId=2 AND matricNo=$matricNo";
+                                $resforRows2 = $con->query($forRows2);
+
+                                $forRows3 = "SELECT score FROM tblresult WHERE levelId=6 AND semesterId=3 AND matricNo=$matricNo";
+                                $resforRows3 = $con->query($forRows3);
+
+                                $forRows4 = "SELECT score FROM tblresult WHERE levelId=6 AND semesterId=4 AND matricNo=$matricNo";
+                                $resforRows4 = $con->query($forRows4);
+
+                                // Rows variable for each Grading
+                                $cntrows1 = mysqli_num_rows($resforRows);
+                                $cntrows2 = mysqli_num_rows($resforRows2);
+                                $cntrows3 = mysqli_num_rows($resforRows3);
+                                $cntrows4 = mysqli_num_rows($resforRows4);
+
+                                while($row = $result->fetch_assoc()){
+                                $avg = $row['sum(score)'] / $cntrows1;
+
+                                    if($avg >= 75){
+                                        echo '<th>'.round($avg,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg,2).' ✖️</th>';
+                                    }
+                                }
+
+                                while($row2 = $result2->fetch_assoc()){
+                                $avg2 = $row2['sum(score)'] / $cntrows2;
+                                    
+                                    if($avg2 >= 75){
+                                        echo '<th>'.round($avg2,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg2,2).' ✖️</th>';
+                                    }
+                                }
+
+                                while($row3 = $result3->fetch_assoc()){
+                                $avg3 = $row3['sum(score)'] / $cntrows3;
+
+                                    if($avg3 >= 75){
+                                        echo '<th>'.round($avg3,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg3,2).' ✖️</th>';
+                                    }
+                                }
+
+                                while($row4 = $result4->fetch_assoc()){
+                                $avg4 = $row4['sum(score)'] / $cntrows4;
+                                    
+                                    if($avg4 >= 75){
+                                        echo '<th>'.round($avg4,2).' ✔️</th>';
+                                    }else{
+                                        echo '<th>'.round($avg4,2).' ✖️</th>';
+                                    }
+                                }
+                            ?>                   
+                        </tr>
+                    </tfoot>
+                </table>
+            </div><!-- END TABLE FOR GRADE 6 -->
 
 
 </div>
