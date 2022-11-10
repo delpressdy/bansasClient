@@ -246,7 +246,7 @@ error_reporting(0);
                                         ?>
                                                 <tr>
                                                     <td><?php echo $cnt; ?></td>
-                                                    <td><?php echo $row['firstName'] . ' ' . $row['lastName'] . '<strong style="color:red;"> [' . $row['otherName'].']</strong>'; ?></td>
+                                                    <td><?php echo $row['firstName'] . ' ' . $row['lastName'] ?></td>
                                                     <td><?php echo $row['matricNo']; ?></td>
                                                     <td><?php echo $row['levelName']; ?></td>
                                                     <td><?php echo $row['facultyName']; ?></td>

@@ -68,8 +68,8 @@ include('../includes/session.php');
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
                                     <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Student</a></li>
-                                    <li class="active">View Student</li>
+                                    <li><a href="#">Pupils</a></li>
+                                    <li class="active">View Pupils</li>
                                 </ol>
                             </div>
                         </div>
@@ -93,7 +93,7 @@ include('../includes/session.php');
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">
-                                    <h2 align="center">All Student</h2>
+                                    <h2 align="center">All Pupils</h2>
                                 </strong>
                             </div>
                             <div class="card-body">
@@ -126,24 +126,24 @@ include('../includes/session.php');
                                         ?>
                                             <tr>
                                                 <td><?php echo $cnt; ?></td>
-                                                <td><?php echo $row['firstName'] . ' ' . $row['lastName'] . '<strong style="color:red;"> [' . $row['otherName'].']</strong>'; ?></td>
+                                                <td><?php echo $row['firstName'] . ' ' . $row['lastName']  ?></td>
                                                 <td><?php echo $row['matricNo']; ?></td>
                                                 <td>
 
-                                                    <?php 
-                                                    $lvl=$row['levelName']; 
+                                                    <?php
+                                                    $lvl = $row['levelName'];
 
-                                                        if ($lvl == "Grade 1"){
-                                                            echo '<i style="background:#99d98c; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">'. $lvl . '</i>';
-                                                        }else if ($lvl == "Grade 2"){
-                                                            echo '<i style="background:#76c893; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">'. $lvl . '</i>';
-                                                        }else if ($lvl == "Grade 3"){
-                                                            echo '<i style="background:#52b69a; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">'. $lvl . '</i>';
-                                                        }else{
-                                                            echo '<i style="background:#34a0a4; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">'. $lvl . '</i>';
-                                                        }
+                                                    if ($lvl == "Grade 1") {
+                                                        echo '<i style="background:#99d98c; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">' . $lvl . '</i>';
+                                                    } else if ($lvl == "Grade 2") {
+                                                        echo '<i style="background:#76c893; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">' . $lvl . '</i>';
+                                                    } else if ($lvl == "Grade 3") {
+                                                        echo '<i style="background:#52b69a; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">' . $lvl . '</i>';
+                                                    } else {
+                                                        echo '<i style="background:#34a0a4; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">' . $lvl . '</i>';
+                                                    }
                                                     ?>
-                                                        
+
                                                 </td>
                                                 <td><?php echo $row['facultyName']; ?></td>
                                                 <td><?php echo $row['departmentName']; ?></td>
