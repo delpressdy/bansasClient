@@ -108,7 +108,7 @@ if (isset($_POST['compute'])){
             if($ret > 0){
 
                 $alertStyle ="alert alert-danger";
-                $statusMsg="The result has been computed for this student for this semester, level and session!";
+                $statusMsg="Result has been computed for this student for this Grading!";
             }
             else{
 
@@ -267,7 +267,7 @@ function myFunction() {
                 <tr>
                 <td><?php echo $cnt;?></td>
                 <td><?php  echo $row['courseTitle'];?></td>
-                <td><input  name="score[]" id="score" type="text" class="form-control" max="100" onkeypress="return isNumber(event)" autofocus required></td>
+                <td><input  name="score[]" id="score" type="text" class="form-control" max="100" onkeypress="return isNumber(event)" autofocus></td>
                 <input id="" value="<?php echo $row['courseCode'];?>" name="courseCode[]"  type="hidden" class="form-control" >
                 <input id="" value="<?php echo $row['courseUnit'];?>" name="courseUnit[]"  type="hidden" class="form-control" >
                 <input id="" name="" value="<?php echo $row['Id'];?>" type="hidden" class="form-control" >
