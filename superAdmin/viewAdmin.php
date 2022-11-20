@@ -115,24 +115,22 @@ include('../includes/session.php');
                                     <tbody>
 
                                         <?php
-                                        $ret = mysqli_query($con, "SELECT tblassignedadmin.dateAssigned,tblassignedadmin.staffId, tbladmin.staffId,tbladmin.firstName, tbladmin.lastName, tbladmin.otherName,
-        tbladmin.password,tbldepartment.departmentName, tbladmin.staffId, tbladmin.firstName, tbladmin.lastName, tbladmin.otherName,tbladmin.emailAddress, tbladmin.phoneNo, tbladmin.dateCreated
-        from tblassignedadmin 
-        INNER JOIN tbladmin ON tbladmin.staffId = tblassignedadmin.staffId
-        INNER JOIN tblfaculty ON tblfaculty.Id = tblassignedadmin.facultyId
-        INNER JOIN tbldepartment ON tbldepartment.Id = tblassignedadmin.departmentId");
+                                        $ret = mysqli_query($con, "SELECT * from tbladmin where tbladmin.adminTypeId = 2");
                                         $cnt = 1;
+
+                                        // $ret = mysqli_query($con, "select * from tbladdmin where adminTypeId = 2");
                                         while ($row = mysqli_fetch_array($ret)) {
+                                            // print_r($row);
                                         ?>
                                             <tr>
                                                 <td><?php echo $cnt; ?></td>
-                                                <td style="color: white; background-color: limegreen; border-radius: 12px"><?php echo $row['staffId']; ?></td>
+                                                <td><?php echo $row['staffId']; ?></td>
                                                 <td><?php echo $row['firstName']; ?></td>
                                                 <td><?php echo $row['lastName']; ?></td>
                                                 <td><?php echo $row['otherName']; ?></td>
                                                 <td><?php echo $row['emailAddress']; ?></td>
                                                 <td><?php echo $row['phoneNo']; ?></td>
-                                                <td style="color: white; background-color: red; border-radius: 12px;"><?php echo $row['password']; ?></td>
+                                                <td><?php echo $row['password']; ?></td>
                                                 <td><?php echo "Active" ?></td>
                                                 <td><?php echo $row['dateCreated']; ?></td>
                                                 <!-- <td><a href="editAdmin.php?editid=<?php echo $row['staffId']; ?>" title="View Admin"><i class="fa fa-edit fa-1x"></i></a></td> -->

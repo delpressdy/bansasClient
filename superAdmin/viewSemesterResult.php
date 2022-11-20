@@ -169,8 +169,10 @@ if (isset($_POST['compute'])) {
                                         while ($row3 = $result3->fetch_assoc()) {
                                             if (!$row3['SUM(score)'] == "") {
                                                 $sum = $row3['SUM(score)'] /  $row3['count(score)'];
+                                            } else {
+                                                $sum = 0;
                                             }
-                                            $sum = 0;
+
                                             echo '<td>' . $sum . '</td>';
                                         }
 
