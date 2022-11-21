@@ -102,11 +102,11 @@ include('../includes/session.php');
                                         <tr>
                                             <th>Pupil ID</th>
                                             <th>Title</th>
-                                            <th>Code</th>
-                                            <th>Unit</th>
-                                            <th>Level</th>
-                                            <th>Faculty</th>
-                                            <th>Department</th>
+
+
+                                            <th>Grade</th>
+                                            <th>Room</th>
+                                            <th>Section</th>
                                             <th>Semester</th>
                                         </tr>
                                     </thead>
@@ -128,8 +128,7 @@ include('../includes/session.php');
                                             <tr>
                                                 <td><?php echo $cnt; ?></td>
                                                 <td><?php echo $row['courseTitle']; ?></td>
-                                                <td><?php echo $row['courseCode']; ?></td>
-                                                <td><?php echo $row['courseUnit']; ?></td>
+
                                                 <td><?php echo $row['levelName']; ?></td>
                                                 <td><?php echo $row['facultyName']; ?></td>
                                                 <td><?php echo $row['departmentName']; ?></td>
