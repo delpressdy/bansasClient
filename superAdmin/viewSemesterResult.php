@@ -107,7 +107,14 @@ if (isset($_POST['compute'])) {
                                                                     echo $statusMsg;
                                                                 } ?></div>
 
-                                <table class="table table-hover table-striped table-bordered">
+                                <table <?php
+                                        $sql = mysqli_query($con, "SELECT * FROM tblresult WHERE matricNo=$_GET[matricNo]");
+                                        if ($sql->num_rows > 0) {
+                                            echo "";
+                                        } else {
+                                            echo "hidden";
+                                        }
+                                        ?> class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -122,7 +129,7 @@ if (isset($_POST['compute'])) {
                                         $result = $con->query($sql);
 
 
-                                        $sql2 = "SELECT * FROM tblresult WHERE semesterId=$semesterId";
+                                        $sql2 = "SELECT * FROM tblresult WHERE semesterId=$semesterId AND matricNo=$_GET[matricNo]";
                                         $result2 = $con->query($sql2);
 
 
@@ -133,13 +140,13 @@ if (isset($_POST['compute'])) {
                                             // 1st conditions para sa subject 2nd is score
                                             while (($row = $result->fetch_assoc()) && ($row2 = $result2->fetch_assoc())) {
 
-                                                echo '<tr><td>' . $num++;
+                                                echo '<tr ><td>' . $num++;
                                                 echo '<td>' . $row['courseTitle'] . '</td></td>';
                                                 echo '<td>' . $row2['score'] . '</td></td>';
                                                 echo '<td>' . $row2['scoreLetterGrade'] . '</td></td>';
                                             }
                                         } else {
-                                            echo "No results";
+                                            echo "<h1 style='color:red; font-size:45px; font-weight:700;' align='center'><br>No results<br><br><br></h1>";
                                         }
 
 
@@ -153,7 +160,13 @@ if (isset($_POST['compute'])) {
                                 </table>
                                 </table>
 
-                                <table class="table table-striped table-bordered">
+                                <table <?php $sql = mysqli_query($con, "SELECT * FROM tblresult WHERE matricNo=$_GET[matricNo]");
+                                        if ($sql->num_rows > 0) {
+                                            echo "";
+                                        } else {
+                                            echo "hidden";
+                                        }
+                                        ?> class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Average</th>
@@ -163,7 +176,7 @@ if (isset($_POST['compute'])) {
                                     <tbody>
 
                                         <?php
-                                        $sql3 = "SELECT SUM(score) ,count(score) FROM tblresult WHERE semesterId=$semesterId";
+                                        $sql3 = "SELECT SUM(score) ,count(score) FROM tblresult WHERE semesterId=$semesterId AND matricNo=$_GET[matricNo]";
                                         $result3 = $con->query($sql3);
 
                                         while ($row3 = $result3->fetch_assoc()) {
@@ -173,7 +186,7 @@ if (isset($_POST['compute'])) {
                                                 $sum = 0;
                                             }
 
-                                            echo '<td>' . $sum . '</td>';
+                                            echo '<td>' . round($sum, 2) . '</td>';
                                         }
 
                                         if ($sum > 74) {

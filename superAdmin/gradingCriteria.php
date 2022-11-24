@@ -1,20 +1,17 @@
-
 <?php
 
-    include('../includes/dbconnection.php');
-    include('../includes/session.php');
-    include('../includes/functions.php');
+include('../includes/dbconnection.php');
+include('../includes/session.php');
+include('../includes/functions.php');
 
-    
+
 
 
 
 //------------------------------------ COMPUTE RESULT -----------------------------------------------
 
-if (isset($_POST['compute'])){
-
-
-}//end of POST
+if (isset($_POST['compute'])) {
+} //end of POST
 
 
 ?>
@@ -22,11 +19,12 @@ if (isset($_POST['compute'])){
 
 
 <!doctype html>
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<html class="no-js" lang="">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <?php include 'includes/title.php';?>
+    <?php include 'includes/title.php'; ?>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -44,188 +42,156 @@ if (isset($_POST['compute'])){
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-
 </head>
+
 <body>
     <!-- Left Panel -->
-     
-         <?php $page="result"; include 'includes/leftMenu.php';?>
+
+    <?php $page = "result";
+    include 'includes/leftMenu.php'; ?>
 
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-                    <?php include 'includes/header.php';?>
+        <?php include 'includes/header.php'; ?>
         <!-- Header-->
 
-       
+
         <div class="content">
             <div class="animated fadeIn">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                          
-                        </div> <!-- .card -->
-                    </div><!--/.col-->
-               
+
+                        </div>
+                    </div>
+
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title"><h3 align="center">GRADING CRITERIA</h3></strong>
+                                <strong class="card-title">
+                                    <h3 align="center">GRADING CRITERIA</h3>
+                                </strong>
                             </div>
                             <div class="card-body">
                                 <table class="table table-hover table-striped table-bordered">
-                                       <thead>
+                                    <thead>
                                         <tr>
-                                            <th>Class Of Diploma</th>
-                                            <th>GPA</th>
+                                            <th>Results</th>
+                                            <th>Average</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                           
-                <tr >
-                <td>Distinction</td>
-                <td>3.50 and Above</td>
-                </tr>
-                 <tr >
-                <td>Upper Credit</td>
-                <td>3.00 - 3.49</td>
-                </tr>
-                 <tr >
-                <td>Lower Credit</td>
-                <td>2.50 - 2.99</td>
-                </tr>
-                 <tr >
-                <td>Pass</td>
-                <td>2.00 - 2.49</td>
-                </tr>
-                 <tr >
-                <td>Fail</td>
-                <td>Below 2.00</td>
-                </tr>
-                </tbody>
-            </table>
-<!-------------------------- FROM THE FINAL RESULT TABLE --------------------------->
-            <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th>Score</th>
-                    <th>Grade Point Equivalent</th>
-                    <th>Letter Grade</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr >
-                <td>75 - 100</td>
-                <td>4.00</td>
-                <td>AA</td>
-                </tr>
-                <tr >
-                <td>70 - 74</td>
-                <td>3.50</td>
-                <td>A</td>
-                </tr>
-                <tr >
-                <td>65 - 69</td>
-                <td>3.25</td>
-                <td>AB</td>
-                </tr>
-                <tr >
-                <td>60 - 64</td>
-                <td>3.00</td>
-                <td>B</td>
-                </tr>
-                <tr >
-                <td>55 - 59</td>
-                <td>2.75</td>
-                <td>BC</td>
-                </tr>
-                <tr >
-                <td>50 - 54</td>
-                <td>2.50</td>
-                <td>C</td>
-                </tr>
-                <tr >
-                <td>45 - 49</td>
-                <td>2.25</td>
-                <td>CD</td>
-                </tr>
-                <tr >
-                <td>40 - 44</td>
-                <td>2.00</td>
-                <td>D</td>
-                </tr>
-                <tr >
-                <td>0 - 39</td>
-                <td>0.00</td>
-                <td>F</td>
-                </tr>
-                                                                                    
-                    </tbody>
-                </table>
-                <a href="printGradingCriteria.php" class="btn btn-info"><i class="fa fa-print"></i> Print</a>
+
+                                        <tr>
+                                            <td bgcolor="#32ff7e">Excellent</td>
+                                            <td bgcolor="#32ff7e">90% +</td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#7bed9f">Very nice</td>
+                                            <td bgcolor="#7bed9f">85% +</td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#97fdae">Nice</td>
+                                            <td bgcolor="#97fdae">80% +</td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#fffa65">Good</td>
+                                            <td bgcolor="#fffa65">75% +</td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#ff4757">Fail</td>
+                                            <td bgcolor="#ff4757">Below 74</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <!-------------------------- FROM THE FINAL RESULT TABLE --------------------------->
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Grade</th>
+                                            <th>Letter Grade</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>75 - 100</td>
+                                            <td>A+</td>
+                                        </tr>
+                                        <tr>
+                                            <td>70 - 74</td>
+                                            <td>A</td>
+                                        </tr>
+                                        <tr>
+                                            <td>65 - 69</td>
+                                            <td>B</td>
+                                        </tr>
+                                        <tr>
+                                            <td>60 - 64</td>
+                                            <td>Fail</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
         </div>
+
+        <div class="clearfix"></div>
+
+        <?php include 'includes/footer.php'; ?>
+
+
     </div>
-                    
-<!-- end of datatable -->
+    < <!-- Right Panel -->
 
-            </div>
-        </div><!-- .animated -->
-    </div><!-- .content -->
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+        <script src="../assets/js/main.js"></script>
 
-    <div class="clearfix"></div>
-
-        <?php include 'includes/footer.php';?>
-
-
-</div><!-- /#right-panel -->
-
-<!-- Right Panel -->
-
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../assets/js/main.js"></script>
-
-<script src="../assets/js/lib/data-table/datatables.min.js"></script>
-    <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
-    <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
-    <script src="../assets/js/lib/data-table/jszip.min.js"></script>
-    <script src="../assets/js/lib/data-table/vfs_fonts.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.html5.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.print.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.colVis.min.js"></script>
-    <script src="../assets/js/init/datatables-init.js"></script>
+        <script src="../assets/js/lib/data-table/datatables.min.js"></script>
+        <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+        <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+        <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+        <script src="../assets/js/lib/data-table/jszip.min.js"></script>
+        <script src="../assets/js/lib/data-table/vfs_fonts.js"></script>
+        <script src="../assets/js/lib/data-table/buttons.html5.min.js"></script>
+        <script src="../assets/js/lib/data-table/buttons.print.min.js"></script>
+        <script src="../assets/js/lib/data-table/buttons.colVis.min.js"></script>
+        <script src="../assets/js/init/datatables-init.js"></script>
 
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#bootstrap-data-table-export').DataTable();
+            });
 
-      // Menu Trigger
-      $('#menuToggle').on('click', function(event) {
-            var windowWidth = $(window).width();   		 
-            if (windowWidth<1010) { 
-                $('body').removeClass('open'); 
-                if (windowWidth<760){ 
-                $('#left-panel').slideToggle(); 
+            // Menu Trigger
+            $('#menuToggle').on('click', function(event) {
+                var windowWidth = $(window).width();
+                if (windowWidth < 1010) {
+                    $('body').removeClass('open');
+                    if (windowWidth < 760) {
+                        $('#left-panel').slideToggle();
+                    } else {
+                        $('#left-panel').toggleClass('open-menu');
+                    }
                 } else {
-                $('#left-panel').toggleClass('open-menu');  
-                } 
-            } else {
-                $('body').toggleClass('open');
-                $('#left-panel').removeClass('open-menu');  
-            } 
-                
-            }); 
+                    $('body').toggleClass('open');
+                    $('#left-panel').removeClass('open-menu');
+                }
 
-      
-  </script>
+            });
+        </script>
 
 </body>
+
 </html>
