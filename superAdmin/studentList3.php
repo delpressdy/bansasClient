@@ -116,212 +116,126 @@ error_reporting(0);
                                 <div id="pay-invoice">
                                     <div class="card-body">
                                         <div class="<?php echo $alertStyle; ?>" role="alert"><?php echo $statusMsg; ?></div>
-                                        <form method="Post" action="">
 
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="x_card_code" class="control-label mb-1">Grade lvl</label>
-                                                        <?php
-                                                        $query = mysqli_query($con, "select * from tbllevel");
-                                                        $count = mysqli_num_rows($query);
-                                                        if ($count > 0) {
-                                                            echo ' <select required name="levelId" class="custom-select form-control">';
-                                                            echo '<option value="">--Select--</option>';
-                                                            while ($row = mysqli_fetch_array($query)) {
-                                                                echo '<option value="' . $row['Id'] . '" >' . $row['levelName'] . '</option>';
-                                                            }
-                                                            echo '</select>';
-                                                        }
-                                                        ?>
-                                                    </div>
+
+
+                                        <br><br>
+
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <strong class="card-title">
+                                                        <h3 align="center">All Pupils</h3>
+                                                    </strong>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="x_card_code" class="control-label mb-1">S.Y</label>
-                                                        <?php
-                                                        $query = mysqli_query($con, "select * from tblsession where isActive = 1");
-                                                        $count = mysqli_num_rows($query);
-                                                        if ($count > 0) {
-                                                            echo ' <select required name="sessionId" class="custom-select form-control">';
-                                                            while ($row = mysqli_fetch_array($query)) {
-                                                                echo '<option value="' . $row['Id'] . '" >' . $row['sessionName'] . '</option>';
+                                                <div class="card-body">
+                                                    <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Full Name</th>
+                                                                <th>ID #</th>
+                                                                <th>Grade lvl</th>
+                                                                <th>Section</th>
+
+                                                                <th>1st Grading</th>
+                                                                <th>2nd Grading</th>
+                                                                <th>3rd Grading</th>
+                                                                <th>4th Grading</th>
+                                                                <th>Final Result</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            <?php
+
+
+                                                            $ret = mysqli_query($con, "SELECT tblstudent.`Id`, tblstudent.`firstName`, tblstudent.`dateCreated`, tbllevel.`levelId`,  tblstudent.`lastName`, tblstudent.`matricNo`, tbldepartment.`departmentName`, tbllevel.`levelName`,tblfaculty.`facultyId`,  tblfaculty.`facultyName`, tblstudent.`sessionId`  FROM tblstudent INNER JOIN tbllevel ON tblstudent.`levelId` = tbllevel.`levelId` INNER JOIN tblfaculty ON tblfaculty.`facultyId` = tblstudent.`facultyId` INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` INNER JOIN tblsession ON tblstudent.`sessionId` = tblsession.`sessionId`");
+                                                            $cnt = 1;
+                                                            while ($row = mysqli_fetch_array($ret)) {
+                                                            ?>
+                                                                <tr>
+                                                                    <td><?php echo $row['firstName'] . ' ' . $row['lastName']; ?></td>
+                                                                    <td><?php echo $row['matricNo']; ?></td>
+                                                                    <td><?php echo $row['levelName']; ?></td>
+                                                                    <td><?php echo $row['departmentName']; ?></td>
+
+                                                                    <td><a href="viewSemesterResult.php?semesterId=1&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
+                                                                    <td><a href="viewSemesterResult.php?semesterId=2&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
+                                                                    <td><a href="viewSemesterResult.php?semesterId=3&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
+                                                                    <td><a href="viewSemesterResult.php?semesterId=4&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
+                                                                    <td><a href="viewFinalResult.php?matricNo=<?php echo $row['matricNo']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
+                                                                </tr>
+                                                            <?php
+                                                                $cnt = $cnt + 1;
                                                             }
-                                                            echo '</select>';
-                                                        }
-                                                        ?>
-                                                    </div>
+                                                            ?>
+
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="x_card_code" class="control-label mb-1">Classroom</label>
-                                                        <?php
-                                                        $query = mysqli_query($con, "select * from tblfaculty ORDER BY facultyName ASC");
-                                                        $count = mysqli_num_rows($query);
-                                                        if ($count > 0) {
-                                                            echo ' <select required name="facultyId" onchange="showValues(this.value)" class="custom-select form-control">';
-                                                            echo '<option value="">--Select--</option>';
-                                                            while ($row = mysqli_fetch_array($query)) {
-                                                                echo '<option value="' . $row['Id'] . '" >' . $row['facultyName'] . '</option>';
-                                                            }
-                                                            echo '</select>';
-                                                        }
-                                                        ?>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <?php
-                                                        echo "<div id='txtHint'></div>";
-                                                        ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <button type="submit" name="submit" class="btn btn-success">View Student</button>
-                                            </div>
-                                        </form>
+                                        </div>
+                                        <!-- end of datatable -->
+
                                     </div>
-                                </div>
-                            </div>
-                        </div> <!-- .card -->
-                    </div>
-                    <!--/.col-->
+                                </div><!-- .animated -->
+                            </div><!-- .content -->
+
+                            <div class="clearfix"></div>
+
+                            <?php include 'includes/footer.php'; ?>
 
 
-                    <br><br>
+                        </div><!-- /#right-panel -->
 
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">
-                                    <h3 align="center">All Pupils</h3>
-                                </strong>
-                            </div>
-                            <div class="card-body">
-                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Full Name</th>
-                                            <th>ID #</th>
-                                            <th>Grade lvl</th>
-                                            <th>Section</th>
-                                            <th>S.Y</th>
-                                            <th>1st Grading</th>
-                                            <th>2nd Grading</th>
-                                            <th>3rd Grading</th>
-                                            <th>4th Grading</th>
-                                            <th>Final Result</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                        <!-- Right Panel -->
 
-                                        <?php
-                                        if (isset($_POST['submit'])) {
-                                            $levelId = $_POST['levelId'];
-                                            $sessionId = $_POST['sessionId'];
-                                            $departmentId = $_POST['departmentId'];
-                                            $facultyId = $_POST['facultyId'];
+                        <!-- Scripts -->
+                        <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+                        <script src="../assets/js/main.js"></script>
 
-                                            $ret = mysqli_query($con, "SELECT tblstudent.Id, tblstudent.firstName, tblstudent.lastName, tblstudent.otherName,tblstudent.matricNo,
-                    tblstudent.dateCreated, tbllevel.levelName,tblfaculty.facultyName,tbldepartment.departmentName,tblsession.sessionName,
-                    tblstudent.levelId,tblstudent.sessionId,tblstudent.facultyId,tblstudent.departmentId
-                    from tblstudent
-                    INNER JOIN tbllevel ON tbllevel.Id = tblstudent.levelId
-                    INNER JOIN tblsession ON tblsession.Id = tblstudent.sessionId
-                    INNER JOIN tblfaculty ON tblfaculty.Id = tblstudent.facultyId
-                    INNER JOIN tbldepartment ON tbldepartment.Id = tblstudent.departmentId
-                    where tblstudent.levelId ='$levelId' and tblstudent.sessionId ='$sessionId' 
-                    and tblstudent.departmentId ='$departmentId' and tblstudent.facultyId ='$facultyId'");
-                                            $cnt = 1;
-                                            while ($row = mysqli_fetch_array($ret)) {
-                                        ?>
-                                                <tr>
-                                                    <td><?php echo $row['firstName'] . ' ' . $row['lastName']; ?></td>
-                                                    <td><?php echo $row['matricNo']; ?></td>
-                                                    <td><?php echo $row['levelName']; ?></td>
-                                                    <td><?php echo $row['departmentName']; ?></td>
-                                                    <td><?php echo $row['sessionName']; ?></td>
-
-                                                    <td><a href="viewSemesterResult.php?semesterId=1&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
-
-                                                    <td><a href="viewSemesterResult.php?semesterId=2&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
-
-                                                    <td><a href="viewSemesterResult.php?semesterId=3&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
-
-                                                    <td><a href="viewSemesterResult.php?semesterId=4&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
-
-                                                    <td><a href="viewFinalResult.php?matricNo=<?php echo $row['matricNo']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
-
-                                                </tr>
-                                        <?php
-                                                $cnt = $cnt + 1;
-                                            }
-                                        } ?>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end of datatable -->
-
-                </div>
-            </div><!-- .animated -->
-        </div><!-- .content -->
-
-        <div class="clearfix"></div>
-
-        <?php include 'includes/footer.php'; ?>
+                        <script src="../assets/js/lib/data-table/datatables.min.js"></script>
+                        <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+                        <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+                        <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+                        <script src="../assets/js/lib/data-table/jszip.min.js"></script>
+                        <script src="../assets/js/lib/data-table/vfs_fonts.js"></script>
+                        <script src="../assets/js/lib/data-table/buttons.html5.min.js"></script>
+                        <script src="../assets/js/lib/data-table/buttons.print.min.js"></script>
+                        <script src="../assets/js/lib/data-table/buttons.colVis.min.js"></script>
+                        <script src="../assets/js/init/datatables-init.js"></script>
 
 
-    </div><!-- /#right-panel -->
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                $('#bootstrap-data-table-export').DataTable();
+                            });
 
-    <!-- Right Panel -->
+                            // Menu Trigger
+                            $('#menuToggle').on('click', function(event) {
+                                var windowWidth = $(window).width();
+                                if (windowWidth < 1010) {
+                                    $('body').removeClass('open');
+                                    if (windowWidth < 760) {
+                                        $('#left-panel').slideToggle();
+                                    } else {
+                                        $('#left-panel').toggleClass('open-menu');
+                                    }
+                                } else {
+                                    $('body').toggleClass('open');
+                                    $('#left-panel').removeClass('open-menu');
+                                }
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="../assets/js/main.js"></script>
-
-    <script src="../assets/js/lib/data-table/datatables.min.js"></script>
-    <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
-    <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
-    <script src="../assets/js/lib/data-table/jszip.min.js"></script>
-    <script src="../assets/js/lib/data-table/vfs_fonts.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.html5.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.print.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.colVis.min.js"></script>
-    <script src="../assets/js/init/datatables-init.js"></script>
-
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#bootstrap-data-table-export').DataTable();
-        });
-
-        // Menu Trigger
-        $('#menuToggle').on('click', function(event) {
-            var windowWidth = $(window).width();
-            if (windowWidth < 1010) {
-                $('body').removeClass('open');
-                if (windowWidth < 760) {
-                    $('#left-panel').slideToggle();
-                } else {
-                    $('#left-panel').toggleClass('open-menu');
-                }
-            } else {
-                $('body').toggleClass('open');
-                $('#left-panel').removeClass('open-menu');
-            }
-
-        });
-    </script>
+                            });
+                        </script>
 
 </body>
 

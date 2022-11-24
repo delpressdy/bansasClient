@@ -16,17 +16,8 @@ $levelId = $row['levelId'];
                 <li class="<?php if ($page == 'dashboard') {
                                 echo 'active';
                             } ?>">
-                    <a href="index.php"><i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                 </li>
 
-                <li class="menu-item-has-children dropdown <?php if ($page == 'courses') {
-                                                                echo 'active';
-                                                            } ?>">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Subjects</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-eye"></i><a href="studentSubjects.php">View Subjects</a></li>
-                    </ul>
-                </li>
 
                 <li class="menu-item-has-children dropdown <?php if ($page == 'result') {
                                                                 echo 'active';
@@ -34,7 +25,7 @@ $levelId = $row['levelId'];
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file"></i>Grades</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-eye"></i> <a href="studentGrades.php"> View Grades</a></li>
-                        <li><i class="fa fa-eye"></i> <a href="viewFinalResult.php"> Final Grades</a></li>
+                        <!-- <li><i class="fa fa-eye"></i> <a href="viewFinalResult.php"> Final Grades</a></li> -->
                         <li><i class="fa fa-eye"></i> <a href="gradingCriteria.php"> Grading Criteria</a></li>
                     </ul>
                 </li>

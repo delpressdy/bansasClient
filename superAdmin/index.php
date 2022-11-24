@@ -1,9 +1,8 @@
-
 <?php
 
-    include('../includes/dbconnection.php');
-    include('../includes/session.php');
-    include('../includes/dataValues.php');
+include('../includes/dbconnection.php');
+include('../includes/session.php');
+include('../includes/dataValues.php');
 
 ?>
 <!doctype html>
@@ -13,7 +12,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <?php include 'includes/title.php';?>
+    <?php include 'includes/title.php'; ?>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -23,8 +22,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="../assets/css/style2.css">
@@ -82,12 +80,13 @@
 
 <body>
     <!-- Left Panel -->
-    <?php $page="dashboard"; include 'includes/leftMenu.php';?>
+    <?php $page = "dashboard";
+    include 'includes/leftMenu.php'; ?>
     <!-- /#left-panel -->
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
         <!-- Header-->
-    <?php include 'includes/header.php';?>
+        <?php include 'includes/header.php'; ?>
 
         <!-- /#header -->
         <!-- Content -->
@@ -97,24 +96,26 @@
                 <!-- Widgets  -->
                 <div class="row">
 
-                  <div class="col-lg-12">
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                               <h3 align="center"><b><marquee direction="left">Hello, <strong class="text-danger"><?php echo $staffFullName;?></strong></marquee></b></h3>
+                                <h3 align="center"><b>
+                                        <marquee direction="left">Hello, <strong class="text-danger"><?php echo $staffFullName; ?></strong></marquee>
+                                    </b></h3>
                             </div>
-                            
+
                         </div>
                     </div><!-- /# column -->
 
 
-                  
-               <div class="col-sm-6 col-lg-3">
+
+                    <div class="col-sm-6 col-lg-3">
                         <div class="card text-white bg-flat-color-2">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
                                     <h3 class="mb-0 fw-r">
                                         <span class="currency float-left mr-1"></span>
-                                        <span class="count"><?php echo $countFaculty;?></span>
+                                        <span class="count"><?php echo $countFaculty; ?></span>
                                     </h3>
                                     <p class="text-light mt-1 m-0">Classrooms</p><!-- Log on to codeastro.com for more projects! -->
                                 </div><!-- /.card-left -->
@@ -128,13 +129,13 @@
                         </div>
                     </div>
 
-               <div class="col-sm-6 col-lg-3">
+                    <div class="col-sm-6 col-lg-3">
                         <div class="card text-white bg-flat-color-3">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
                                     <h3 class="mb-0 fw-r">
                                         <span class="currency float-left mr-1"></span>
-                                        <span class="count"><?php echo $countSection;?></span>
+                                        <span class="count"><?php echo $countSection; ?></span>
                                     </h3>
                                     <p class="text-light mt-1 m-0">Sections</p><!-- Log on to codeastro.com for more projects! -->
                                 </div><!-- /.card-left -->
@@ -148,13 +149,13 @@
                         </div>
                     </div>
 
-                <div class="col-sm-6 col-lg-3">
+                    <div class="col-sm-6 col-lg-3">
                         <div class="card text-white bg-flat-color-5">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
                                     <h3 class="mb-0 fw-r">
                                         <span class="currency float-left mr-1"></span>
-                                        <span class="count"><?php echo $countPupils;?></span>
+                                        <span class="count"><?php echo $countPupils; ?></span>
                                     </h3>
                                     <p class="text-light mt-1 m-0">Pupils</p><!-- Log on to codeastro.com for more projects! -->
                                 </div><!-- /.card-left -->
@@ -175,7 +176,7 @@
                                 <div class="card-left pt-1 float-left">
                                     <h3 class="mb-0 fw-r">
                                         <span class="currency float-left mr-1"></span>
-                                        <span class="count"><?php echo $countAllCourses;?></span>
+                                        <span class="count"><?php echo $countAllCourses; ?></span>
                                     </h3>
                                     <p class="text-light mt-1 m-0">Subjects</p><!-- Log on to codeastro.com for more projects! -->
                                 </div><!-- /.card-left -->
@@ -189,13 +190,13 @@
                         </div>
                     </div>
 
-             <div class="col-sm-6 col-lg-3">
+                    <div class="col-sm-6 col-lg-3">
                         <div class="card text-white bg-secondary">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
                                     <h3 class="mb-0 fw-r">
                                         <span class="currency float-left mr-1"></span>
-                                        <span class="count"><?php echo $countAllComputed;?></span>
+                                        <span class="count"><?php echo $countAllComputed; ?></span>
                                     </h3>
                                     <p class="text-light mt-1 m-0">Grade reports</p><!-- Log on to codeastro.com for more projects! -->
                                 </div><!-- /.card-left -->
@@ -209,13 +210,13 @@
                         </div>
                     </div>
 
-             <div class="col-sm-6 col-lg-3">
+                    <div class="col-sm-6 col-lg-3">
                         <div class="card text-white bg-info">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
                                     <h3 class="mb-0 fw-r">
                                         <span class="currency float-left mr-1"></span>
-                                        <span class="count"><?php echo $countAllLevel;?></span>
+                                        <span class="count"><?php echo $countAllLevel; ?></span>
                                     </h3>
                                     <p class="text-light mt-1 m-0">Grade Level</p><!-- Log on to codeastro.com for more projects! -->
                                 </div><!-- /.card-left -->
@@ -236,7 +237,7 @@
                                 <div class="card-left pt-1 float-left">
                                     <h3 class="mb-0 fw-r">
                                         <span class="currency float-left mr-1"></span>
-                                        <span class="count"><?php echo $countAlljp;?></span>
+                                        <span class="count"><?php echo $countAlljp; ?></span>
                                     </h3>
                                     <p class="text-light mt-1 m-0">Passed No.</p><!-- Log on to codeastro.com for more projects! -->
                                 </div><!-- /.card-left -->
@@ -256,7 +257,7 @@
                                 <div class="card-left pt-1 float-left">
                                     <h3 class="mb-0 fw-r">
                                         <span class="currency float-left mr-1"></span>
-                                        <span class="count"><?php echo $countAllf;?></span>
+                                        <span class="count"><?php echo $countAllf; ?></span>
                                     </h3>
                                     <p class="text-light mt-1 m-0">Failed No.</p><!-- Log on to codeastro.com for more projects! -->
                                 </div><!-- /.card-left -->
@@ -276,19 +277,19 @@
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <h4 align="center">School Year: <?php 
-                                $result = mysqli_query($con, 'SELECT (sessionName) AS sessname FROM tblsession WHERE isActive = 1'); 
-                                $row = mysqli_fetch_assoc($result); 
-                                $sum = $row['sessname'];
-                                echo $sum;
-                                ?>
+                        <h4 align="center">School Year: <?php
+                                                        $result = mysqli_query($con, 'SELECT (sessionName) AS sessname FROM tblsession WHERE isActive = 1');
+                                                        $row = mysqli_fetch_assoc($result);
+                                                        $sum = $row['sessname'];
+                                                        echo $sum;
+                                                        ?>
                         </h4>
                         <div class="card">
 
-                           
+
                         </div>
-                         </div>
-                          </div>
+                    </div>
+                </div>
                 <!--  /Traffic -->
                 <div class="clearfix"></div>
             </div>
@@ -297,7 +298,7 @@
         <!-- /.content -->
         <div class="clearfix"></div>
         <!-- Footer -->
-      <?php include 'includes/footer.php';?>
+        <?php include 'includes/footer.php'; ?>
         <!-- /.site-footer -->
     </div>
     <!-- /#right-panel -->
@@ -330,14 +331,31 @@
 
     <!--Local Stuff-->
     <script>
-        jQuery(document).ready(function ($) {
+        jQuery(document).ready(function($) {
             "use strict";
 
             // Pie chart flotPie1
-            var piedata = [
-                { label: "Desktop visits", data: [[1, 32]], color: '#5c6bc0' },
-                { label: "Tab visits", data: [[1, 33]], color: '#ef5350' },
-                { label: "Mobile visits", data: [[1, 35]], color: '#66bb6a' }
+            var piedata = [{
+                    label: "Desktop visits",
+                    data: [
+                        [1, 32]
+                    ],
+                    color: '#5c6bc0'
+                },
+                {
+                    label: "Tab visits",
+                    data: [
+                        [1, 33]
+                    ],
+                    color: '#ef5350'
+                },
+                {
+                    label: "Mobile visits",
+                    data: [
+                        [1, 35]
+                    ],
+                    color: '#66bb6a'
+                }
             ];
 
             $.plot('#flotPie1', piedata, {
@@ -363,9 +381,20 @@
             });
             // Pie chart flotPie1  End
             // cellPaiChart
-            var cellPaiChart = [
-                { label: "Direct Sell", data: [[1, 65]], color: '#5b83de' },
-                { label: "Channel Sell", data: [[1, 35]], color: '#00bfa5' }
+            var cellPaiChart = [{
+                    label: "Direct Sell",
+                    data: [
+                        [1, 65]
+                    ],
+                    color: '#5b83de'
+                },
+                {
+                    label: "Channel Sell",
+                    data: [
+                        [1, 35]
+                    ],
+                    color: '#00bfa5'
+                }
             ];
             $.plot('#cellPaiChart', cellPaiChart, {
                 series: {
@@ -378,7 +407,8 @@
                 },
                 legend: {
                     show: false
-                }, grid: {
+                },
+                grid: {
                     hoverable: true,
                     clickable: true
                 }
@@ -386,39 +416,48 @@
             });
             // cellPaiChart End
             // Line Chart  #flotLine5
-            var newCust = [[0, 3], [1, 5], [2, 4], [3, 7], [4, 9], [5, 3], [6, 6], [7, 4], [8, 10]];
+            var newCust = [
+                [0, 3],
+                [1, 5],
+                [2, 4],
+                [3, 7],
+                [4, 9],
+                [5, 3],
+                [6, 6],
+                [7, 4],
+                [8, 10]
+            ];
 
             var plot = $.plot($('#flotLine5'), [{
                 data: newCust,
                 label: 'New Data Flow',
                 color: '#fff'
-            }],
-                {
-                    series: {
-                        lines: {
-                            show: true,
-                            lineColor: '#fff',
-                            lineWidth: 2
-                        },
-                        points: {
-                            show: true,
-                            fill: true,
-                            fillColor: "#ffffff",
-                            symbol: "circle",
-                            radius: 3
-                        },
-                        shadowSize: 0
+            }], {
+                series: {
+                    lines: {
+                        show: true,
+                        lineColor: '#fff',
+                        lineWidth: 2
                     },
                     points: {
                         show: true,
+                        fill: true,
+                        fillColor: "#ffffff",
+                        symbol: "circle",
+                        radius: 3
                     },
-                    legend: {
-                        show: false
-                    },
-                    grid: {
-                        show: false
-                    }
-                });
+                    shadowSize: 0
+                },
+                points: {
+                    show: true,
+                },
+                legend: {
+                    show: false
+                },
+                grid: {
+                    show: false
+                }
+            });
             // Line Chart  #flotLine5 End
             // Traffic Chart using chartist
             if ($('#traffic-chart').length) {
@@ -440,7 +479,7 @@
                     }
                 });
 
-                chart.on('draw', function (data) {
+                chart.on('draw', function(data) {
                     if (data.type === 'line' || data.type === 'area') {
                         data.element.animate({
                             d: {
@@ -463,8 +502,7 @@
                     type: 'line',
                     data: {
                         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                        datasets: [
-                            {
+                        datasets: [{
                                 label: "Visit",
                                 borderColor: "rgba(4, 73, 203,.09)",
                                 borderWidth: "1",
@@ -506,7 +544,23 @@
             //Traffic chart chart-js  End
             // Bar Chart #flotBarChart
             $.plot("#flotBarChart", [{
-                data: [[0, 18], [2, 8], [4, 5], [6, 13], [8, 5], [10, 7], [12, 4], [14, 6], [16, 15], [18, 9], [20, 17], [22, 7], [24, 4], [26, 9], [28, 11]],
+                data: [
+                    [0, 18],
+                    [2, 8],
+                    [4, 5],
+                    [6, 13],
+                    [8, 5],
+                    [10, 7],
+                    [12, 4],
+                    [14, 6],
+                    [16, 15],
+                    [18, 9],
+                    [20, 17],
+                    [22, 7],
+                    [24, 4],
+                    [26, 9],
+                    [28, 11]
+                ],
                 bars: {
                     show: true,
                     lineWidth: 0,
@@ -521,29 +575,29 @@
         });
 
         // Menu Trigger
-$('#menuToggle').on('click', function(event) {
-  var windowWidth = $(window).width();   		 
-  if (windowWidth<1010) { 
-    $('body').removeClass('open'); 
-    if (windowWidth<760){ 
-      $('#left-panel').slideToggle(); 
-    } else {
-      $('#left-panel').toggleClass('open-menu');  
-    } 
-  } else {
-    $('body').toggleClass('open');
-    $('#left-panel').removeClass('open-menu');  
-  } 
-     
-}); 
+        $('#menuToggle').on('click', function(event) {
+            var windowWidth = $(window).width();
+            if (windowWidth < 1010) {
+                $('body').removeClass('open');
+                if (windowWidth < 760) {
+                    $('#left-panel').slideToggle();
+                } else {
+                    $('#left-panel').toggleClass('open-menu');
+                }
+            } else {
+                $('body').toggleClass('open');
+                $('#left-panel').removeClass('open-menu');
+            }
 
- 
-$(".menu-item-has-children.dropdown").each(function() {
-  $(this).on('click', function() {
-    var $temp_text = $(this).children('.dropdown-toggle').html();
-    $(this).children('.sub-menu').prepend('<li class="subtitle">' + $temp_text + '</li>'); 
-  });
-});
+        });
+
+
+        $(".menu-item-has-children.dropdown").each(function() {
+            $(this).on('click', function() {
+                var $temp_text = $(this).children('.dropdown-toggle').html();
+                $(this).children('.sub-menu').prepend('<li class="subtitle">' + $temp_text + '</li>');
+            });
+        });
     </script>
 </body>
 

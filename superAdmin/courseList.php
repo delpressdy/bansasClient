@@ -1,47 +1,43 @@
-
 <?php
 
-    include('../includes/dbconnection.php');
-    include('../includes/session.php');
-    include('../includes/functions.php');
+include('../includes/dbconnection.php');
+include('../includes/session.php');
+include('../includes/functions.php');
 
-    if(isset($_GET['matricNo']) && isset($_GET['levelId']) && isset($_GET['departmentId']) && isset($_GET['facultyId']) && isset($_GET['sessionId']) && isset($_GET['semesterId'])){
+if (isset($_GET['matricNo']) && isset($_GET['levelId']) && isset($_GET['departmentId']) && isset($_GET['facultyId']) && isset($_GET['sessionId']) && isset($_GET['semesterId'])) {
 
-        $matricNo = $_GET['matricNo'];
-        $levelId = $_GET['levelId'];
-        $departmentId = $_GET['departmentId'];
-        $facultyId = $_GET['facultyId'];
-        $sessionId = $_GET['sessionId'];
-        $semesterId = $_GET['semesterId'];
+    $matricNo = $_GET['matricNo'];
+    $levelId = $_GET['levelId'];
+    $departmentId = $_GET['departmentId'];
+    $facultyId = $_GET['facultyId'];
+    $sessionId = $_GET['sessionId'];
+    $semesterId = $_GET['semesterId'];
 
-        
-        $stdQuery=mysqli_query($con,"select * from tblstudent where matricNo = '$matricNo'");                        
-        $rowStd = mysqli_fetch_array($stdQuery);
 
-        $semesterQuery=mysqli_query($con,"select * from tblsemester where Id = '$semesterId'");                        
-        $rowSemester = mysqli_fetch_array($semesterQuery);
+    $stdQuery = mysqli_query($con, "select * from tblstudent where matricNo = '$matricNo'");
+    $rowStd = mysqli_fetch_array($stdQuery);
 
-        $sessionQuery=mysqli_query($con,"select * from tblsession where Id = '$sessionId'");                        
-        $rowSession = mysqli_fetch_array($sessionQuery);
+    $semesterQuery = mysqli_query($con, "select * from tblsemester where Id = '$semesterId'");
+    $rowSemester = mysqli_fetch_array($semesterQuery);
 
-        $levelQuery=mysqli_query($con,"select * from tbllevel where Id = '$levelId'");                        
-        $rowLevel = mysqli_fetch_array($levelQuery);
+    $sessionQuery = mysqli_query($con, "select * from tblsession where sessionId = '$sessionId'");
+    $rowSession = mysqli_fetch_array($sessionQuery);
 
-    
-    }
-    else{
-        echo "<script type = \"text/javascript\">
+    $levelQuery = mysqli_query($con, "select * from tbllevel where levelId = '$levelId'");
+    $rowLevel = mysqli_fetch_array($levelQuery);
+} else {
+    echo "<script type = \"text/javascript\">
         window.location = (\"studentList.php\");
         </script>";
-    }
+}
 
 
 
 //------------------------------------ COMPUTE RESULT -----------------------------------------------
 
-if (isset($_POST['compute'])){
+if (isset($_POST['compute'])) {
 
-    $score=$_POST['score'];
+    $score = $_POST['score'];
     $N = count($score);
 
     $courseCode = $_POST['courseCode'];
@@ -51,84 +47,75 @@ if (isset($_POST['compute'])){
     $letterGrade = "";
     $gradePoint = "";
     $scoreGradePoint = 0.00;
-   
+
 
     $totalCourseUnit = 0;
     $totalScoreGradePoint = 0;
     $gpa = "";
 
-    for($i = 0; $i < $N; $i++)
-    {
+    for ($i = 0; $i < $N; $i++) {
 
-      $score[$i]; //each scores entered
-      $courseCode[$i]; // each course codes 
-      $courseUnit[$i]; //each course units
-      $letterGrade =  getScoreLetterGrade($score[$i]); //get the score letter grade (AA, A, AB, B etc) for each courses
-      $gradePoint =  getScoreGradePoint($score[$i]); //get the score grade points (4.00, 3.75, 3.50 etc) for each courses
+        $score[$i]; //each scores entered
+        $courseCode[$i]; // each course codes 
+        $courseUnit[$i]; //each course units
+        $letterGrade =  getScoreLetterGrade($score[$i]); //get the score letter grade (AA, A, AB, B etc) for each courses
+        $gradePoint =  getScoreGradePoint($score[$i]); //get the score grade points (4.00, 3.75, 3.50 etc) for each courses
 
-      $scoreGradePoint = $courseUnit[$i] * $gradePoint; //multiply each course unit with their grade point ( 3 * 4 = 12)
-     
-    
-            //Checks if result has been computed (MatricNo, level, semester and session)
-            $que=mysqli_query($con,"select * from tblfinalresult where matricNo ='$matricNo' and levelId = '$levelId' and semesterId = '$semesterId' and sessionId = '$sessionId'");
-            $ret=mysqli_fetch_array($que); 
+        $scoreGradePoint = $courseUnit[$i] * $gradePoint; //multiply each course unit with their grade point ( 3 * 4 = 12)
 
-            if($ret == 0){  //if no record exists, insert a record
 
-                $query=mysqli_query($con,"insert into tblresult(matricNo,levelId,semesterId,sessionId,courseCode,courseUnit,score,scoreGradePoint,scoreLetterGrade,totalScoreGradePoint,dateAdded) 
+        //Checks if result has been computed (MatricNo, level, semester and session)
+        $que = mysqli_query($con, "select * from tblfinalresult where matricNo ='$matricNo' and levelId = '$levelId' and semesterId = '$semesterId' and sessionId = '$sessionId'");
+        $ret = mysqli_fetch_array($que);
+
+        if ($ret == 0) {  //if no record exists, insert a record
+
+            $query = mysqli_query($con, "insert into tblresult(matricNo,levelId,semesterId,sessionId,courseCode,courseUnit,score,scoreGradePoint,scoreLetterGrade,totalScoreGradePoint,dateAdded) 
                 value('$matricNo','$levelId','$semesterId','$sessionId','$courseCode[$i]','$courseUnit[$i]','$score[$i]','$gradePoint','$letterGrade','$scoreGradePoint','$dateAdded')");
 
-                if ($query) {
+            if ($query) {
 
-                    $totalCourseUnit += $courseUnit[$i]; //adds up all the course units
-                    $totalScoreGradePoint += $scoreGradePoint; //adds up all the score grade points
+                $totalCourseUnit += $courseUnit[$i]; //adds up all the course units
+                $totalScoreGradePoint += $scoreGradePoint; //adds up all the score grade points
 
-                    //computes the gpa by dividing the total course unit by the total score grade point
-                    // $gpa = round(($totalScoreGradePoint / $totalCourseUnit), 2);
-                    // $classOfDiploma = getClassOfDiploma($gpa); //gets the class of diploma (Distinction, Upper, Lower etc)
-                }
-                else
-                {
-                    $alertStyle ="alert alert-danger";
-                    $statusMsg="An error Occurred!";
-                }
-
-            }//end of check 
-
-       
-            //echo 'Score = '.$score[$i].' Letter Grade = '.$letterGrade.' Grade point = '.$gradePoint.' totalGradePoint = '.$scoreGradePoint.'<br>';
-
-    }//end of loop
-
-
-           //Checks if result has been computed (MatricNo, level, semester and session)
-            $que=mysqli_query($con,"select * from tblfinalresult where matricNo ='$matricNo' and levelId = '$levelId' and semesterId = '$semesterId' and sessionId = '$sessionId'");
-            $ret=mysqli_fetch_array($que);
-
-            if($ret > 0){
-
-                $alertStyle ="alert alert-danger";
-                $statusMsg="Result has been computed for this student for this Grading!";
+                //computes the gpa by dividing the total course unit by the total score grade point
+                // $gpa = round(($totalScoreGradePoint / $totalCourseUnit), 2);
+                // $classOfDiploma = getClassOfDiploma($gpa); //gets the class of diploma (Distinction, Upper, Lower etc)
+            } else {
+                $alertStyle = "alert alert-danger";
+                $statusMsg = "An error Occurred!";
             }
-            else{
+        } //end of check 
 
-                $querys = mysqli_query($con,"insert into tblfinalresult(matricNo,levelId,semesterId,sessionId,totalCourseUnit,totalScoreGradePoint,gpa,classOfDiploma,dateAdded) 
+
+        //echo 'Score = '.$score[$i].' Letter Grade = '.$letterGrade.' Grade point = '.$gradePoint.' totalGradePoint = '.$scoreGradePoint.'<br>';
+
+    } //end of loop
+
+
+    //Checks if result has been computed (MatricNo, level, semester and session)
+    $que = mysqli_query($con, "select * from tblfinalresult where matricNo ='$matricNo' and levelId = '$levelId' and semesterId = '$semesterId' and sessionId = '$sessionId'");
+    $ret = mysqli_fetch_array($que);
+
+    if ($ret > 0) {
+
+        $alertStyle = "alert alert-danger";
+        $statusMsg = "Result has been computed for this student for this Grading!";
+    } else {
+
+        $querys = mysqli_query($con, "insert into tblfinalresult(matricNo,levelId,semesterId,sessionId,totalCourseUnit,totalScoreGradePoint,gpa,classOfDiploma,dateAdded) 
                 value('$matricNo','$levelId','$semesterId','$sessionId','$totalCourseUnit','$totalScoreGradePoint','$gpa','$classOfDiploma','$dateAdded')");
 
-                if ($querys) {
+        if ($querys) {
 
-                    $alertStyle ="alert alert-success";
-                    $statusMsg="Result Computed Successfully!";
-                }
-                else
-                {
-                    $alertStyle ="alert alert-danger";
-                    $statusMsg="An error Occurred!";
-                }
-            }
-
-    
-}//end of POST
+            $alertStyle = "alert alert-success";
+            $statusMsg = "Result Computed Successfully!";
+        } else {
+            $alertStyle = "alert alert-danger";
+            $statusMsg = "An error Occurred!";
+        }
+    }
+} //end of POST
 
 
 ?>
@@ -136,11 +123,14 @@ if (isset($_POST['compute'])){
 
 
 <!doctype html>
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <?php include 'includes/title.php';?>
+    <?php include 'includes/title.php'; ?>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -159,44 +149,43 @@ if (isset($_POST['compute'])){
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-<script>
+    <script>
+        //Only allows Numbers
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
 
-//Only allows Numbers
-function isNumber(evt) {
-    evt = (evt) ? evt : window.event;
-    var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
-    }
-    return true;
-}
-
-//Check if the value entered is greater than 100 and not less than 0
-function myFunction() {
-  var x, text;
-  // Get the value of the input field with id="numb"
-  x = document.getElementById("score").value;
-  // If x is Not a Number or less than one or greater than 10
-  if (isNaN(x) || x < 1 || x > 100) {
-    // text = "Value cannot be greater than 100 or less than 0";
-    alert("Invalid");
-  } 
-  else{
-    text = "";
-  }
- document.getElementById("demo").innerHTML = text;
-}
-</script>
+        //Check if the value entered is greater than 100 and not less than 0
+        function myFunction() {
+            var x, text;
+            // Get the value of the input field with id="numb"
+            x = document.getElementById("score").value;
+            // If x is Not a Number or less than one or greater than 10
+            if (isNaN(x) || x < 1 || x > 100) {
+                // text = "Value cannot be greater than 100 or less than 0";
+                alert("Invalid");
+            } else {
+                text = "";
+            }
+            document.getElementById("demo").innerHTML = text;
+        }
+    </script>
 </head>
+
 <body>
     <!-- Left Panel -->
-     
-         <?php include 'includes/leftMenu.php';?>
+
+    <?php include 'includes/leftMenu.php'; ?>
 
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-                    <?php include 'includes/header.php';?>
+        <?php include 'includes/header.php'; ?>
         <!-- Header-->
 
 
@@ -205,86 +194,84 @@ function myFunction() {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                          
+
                         </div> <!-- .card -->
-                    </div><!--/.col-->
-               
+                    </div>
+                    <!--/.col-->
+
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title"><h4 align="center">
-                                    <?php 
-                                    $lvl=$rowLevel['levelName'];
-                                            echo '<strong style="color:red">'.$lvl.': </strong>';
-                                    ?>
-                                    &nbsp;
+                                <strong class="card-title">
+                                    <h4 align="center">
+                                        <?php
+                                        $lvl = $rowLevel['levelName'];
+                                        echo '<strong style="color:red">' . $lvl . ': </strong>';
+                                        ?>
+                                        &nbsp;
 
-                                    <?php echo  $rowStd['firstName'].' '.$rowStd['lastName']?>'s
-                                    <?php 
-                                        $grading=$rowSemester['semesterName'];
+                                        <?php echo  $rowStd['firstName'] . ' ' . $rowStd['lastName'] ?>'s
+                                        <?php
+                                        $grading = $rowSemester['semesterName'];
 
-                                            if ($grading == "1st Grading"){
-                                                echo '<strong style="color:#9ef01a;">['.$grading.']</strong>';
-                                            }else if ($grading == "2nd Grading"){
-                                                echo '<strong style="color:#70e000;">['.$grading.']</strong>';
-                                            }else if ($grading == "3rd Grading"){
-                                                echo '<strong style="color:#38b000;">['.$grading.']</strong>';
-                                            }else{
-                                                echo '<strong style="color:#008000;">['.$grading.']</strong>';
-                                            }
+                                        if ($grading == "1st Grading") {
+                                            echo '<strong style="color:#9ef01a;">[' . $grading . ']</strong>';
+                                        } else if ($grading == "2nd Grading") {
+                                            echo '<strong style="color:#70e000;">[' . $grading . ']</strong>';
+                                        } else if ($grading == "3rd Grading") {
+                                            echo '<strong style="color:#38b000;">[' . $grading . ']</strong>';
+                                        } else {
+                                            echo '<strong style="color:#008000;">[' . $grading . ']</strong>';
+                                        }
 
-                                    ?> - Results</h>
+                                        ?> - Results</h>
                                 </strong>
                             </div>
                             <form method="post">
-                            <div class="card-body">
-                                <p id="demo"></p>
-                             <div class="<?php if(isset($alertStyle)){echo $alertStyle;}?>" role="alert"><?php if(isset($statusMsg)){echo $statusMsg;}?></div>
-                                <table class="table table-hover table-striped table-bordered">
-                                       <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Course</th>
-                                            <th>Score</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                      
-                            <?php
-                $ret=mysqli_query($con,"SELECT tblcourse.courseCode,tblcourse.courseTitle,tblcourse.dateAdded,tblcourse.Id,
-                tblcourse.courseUnit,tbllevel.levelName,tblfaculty.facultyName,tbldepartment.departmentName,tblsemester.semesterName
-                from tblcourse 
-                INNER JOIN tbllevel ON tbllevel.Id = tblcourse.levelId
-                INNER JOIN tblsemester ON tblsemester.Id = tblcourse.semesterId
-                INNER JOIN tblfaculty ON tblfaculty.Id = tblcourse.facultyId
-                INNER JOIN tbldepartment ON tbldepartment.Id = tblcourse.departmentId
-                where tblcourse.levelId ='$levelId' and tblcourse.semesterId ='$semesterId' 
-                and tblcourse.departmentId ='$departmentId' and tblcourse.facultyId ='$facultyId'");
+                                <div class="card-body">
+                                    <p id="demo"></p>
+                                    <div class="<?php if (isset($alertStyle)) {
+                                                    echo $alertStyle;
+                                                } ?>" role="alert"><?php if (isset($statusMsg)) {
+                                                                        echo $statusMsg;
+                                                                    } ?></div>
+                                    <table class="table table-hover table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Course</th>
+                                                <th>Score</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                $cnt=1;
-                while ($row=mysqli_fetch_array($ret)) {
-                ?>
-                <tr>
-                <td><?php echo $cnt;?></td>
-                <td><?php  echo $row['courseTitle'];?></td>
-                <td><input  name="score[]" id="score" type="text" class="form-control" max="100" onkeypress="return isNumber(event)" autofocus></td>
-                <input id="" value="<?php echo $row['courseCode'];?>" name="courseCode[]"  type="hidden" class="form-control" >
-                <input id="" value="<?php echo $row['courseUnit'];?>" name="courseUnit[]"  type="hidden" class="form-control" >
-                <input id="" name="" value="<?php echo $row['Id'];?>" type="hidden" class="form-control" >
-                </tr>
-                <?php 
-                $cnt=$cnt+1;
-                }?>
-                                                                                
-                                    </tbody>
-                                </table>
-                            <button type="submit" onclick="myFunction()" name="compute" class="btn btn-success">Compute Result</button>
-                             </form>
-                            </div>
+                                            <?php
+                                            $ret = mysqli_query($con, "SELECT * FROM tblcourse WHERE levelId = $_GET[levelId]");
+
+                                            $cnt = 1;
+                                            while ($row = mysqli_fetch_array($ret)) {
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $cnt; ?></td>
+                                                    <td><?php echo $row['courseTitle']; ?></td>
+                                                    <td><input name="score[]" id="score" type="text" class="form-control" max="100" onkeypress="return isNumber(event)" autofocus></td>
+                                                    <input id="" value="<?php echo $row['courseCode']; ?>" name="courseCode[]" type="hidden" class="form-control">
+                                                    <input id="" value="<?php echo $row['courseUnit']; ?>" name="courseUnit[]" type="hidden" class="form-control">
+                                                    <input id="" name="" value="<?php echo $row['Id']; ?>" type="hidden" class="form-control">
+                                                </tr>
+                                            <?php
+                                                $cnt = $cnt + 1;
+                                            } ?>
+
+                                        </tbody>
+                                    </table>
+                                    <button type="submit" onclick="myFunction()" name="compute" class="btn btn-success">Compute Result</button>
+                            </form>
                         </div>
                     </div>
-                    
-<!-- end of datatable -->
+                </div>
+
+                <!-- end of datatable -->
 
             </div>
         </div><!-- .animated -->
@@ -292,21 +279,21 @@ function myFunction() {
 
     <div class="clearfix"></div>
 
-        <?php include 'includes/footer.php';?>
+    <?php include 'includes/footer.php'; ?>
 
 
-</div><!-- /#right-panel -->
+    </div><!-- /#right-panel -->
 
-<!-- Right Panel -->
+    <!-- Right Panel -->
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../assets/js/main.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="../assets/js/main.js"></script>
 
-<script src="../assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="../assets/js/lib/data-table/datatables.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
     <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
@@ -320,26 +307,27 @@ function myFunction() {
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
+            $('#bootstrap-data-table-export').DataTable();
+        });
 
-      // Menu Trigger
-      $('#menuToggle').on('click', function(event) {
-            var windowWidth = $(window).width();   		 
-            if (windowWidth<1010) { 
-                $('body').removeClass('open'); 
-                if (windowWidth<760){ 
-                $('#left-panel').slideToggle(); 
+        // Menu Trigger
+        $('#menuToggle').on('click', function(event) {
+            var windowWidth = $(window).width();
+            if (windowWidth < 1010) {
+                $('body').removeClass('open');
+                if (windowWidth < 760) {
+                    $('#left-panel').slideToggle();
                 } else {
-                $('#left-panel').toggleClass('open-menu');  
-                } 
+                    $('#left-panel').toggleClass('open-menu');
+                }
             } else {
                 $('body').toggleClass('open');
-                $('#left-panel').removeClass('open-menu');  
-            } 
-                
-            }); 
-  </script>
+                $('#left-panel').removeClass('open-menu');
+            }
+
+        });
+    </script>
 
 </body>
+
 </html>

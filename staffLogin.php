@@ -6,17 +6,19 @@ include('includes/dbconnection.php');
 if (isset($_POST['login'])) {
     $uname = $_POST['uname'];
     $password = md5($_POST['password']);
-    $query = mysqli_query($con, "select * from tbladmin where staffId='$uname' && password='$password'");
+    $query = mysqli_query($con, "select * from tblstaff where staffId='$uname' && password='$password'");
     $count = mysqli_num_rows($query);
     $row = mysqli_fetch_array($query);
 
     if ($count > 0) {
+        $_SESSION['adminTypeId'] = 2;
+        $_SESSION['facultyId'] = $row['facultyId'];
         $_SESSION['staffId'] = $row['staffId'];
         $_SESSION['firstName'] = $row['firstName'];
         $_SESSION['lastName'] = $row['lastName'];
 
         echo "<script type = \"text/javascript\">
-                window.location = (\"staff/index.php\")
+        window.location = (\"superAdmin/index.php\")
                </script>";
     } else {
         $errorMsg = "<h3 class='alert alert-danger text-danger' role='alert'>Please type valid Staff_ID and Password</h3>";

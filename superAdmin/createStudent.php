@@ -1,59 +1,57 @@
-
 <?php
 
-    include('../includes/dbconnection.php');
-    include('../includes/session.php');
-    error_reporting(0);
+include('../includes/dbconnection.php');
+include('../includes/session.php');
+error_reporting(0);
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
 
-     $alertStyle ="";
-      $statusMsg="";
+    $alertStyle = "";
+    $statusMsg = "";
 
-  $firstname=$_POST['firstname'];
-  $lastname=$_POST['lastname'];
-  $othername=$_POST['othername'];
-  $matricNo=$_POST['matricNo'];
-  $levelId=$_POST['levelId'];
-    $sessionId=$_POST['sessionId'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $othername = $_POST['othername'];
+    $matricNo = $_POST['matricNo'];
+    $levelId = $_POST['levelId'];
+    $sessionId = $_POST['sessionId'];
 
 
-$departmentId=$_POST['departmentId'];
-$facultyId=$_POST['facultyId'];
-  $dateCreated = date("Y-m-d");
+    $departmentId = $_POST['departmentId'];
+    $facultyId = $_POST['facultyId'];
+    $dateCreated = date("Y-m-d");
 
-    $query=mysqli_query($con,"select * from tblstudent where matricno ='$matricNo'");
-    $ret=mysqli_fetch_array($query);
-    if($ret > 0){
+    $query = mysqli_query($con, "select * from tblstudent where matricno ='$matricNo'");
+    $ret = mysqli_fetch_array($query);
+    if ($ret > 0) {
 
-      $alertStyle ="alert alert-danger";
-      $statusMsg="User ID is already exist!";
+        $alertStyle = "alert alert-danger";
+        $statusMsg = "User ID is already exist!";
+    } else {
 
+        $query = mysqli_query($con, "insert into tblstudent(firstName,lastName,otherName,matricNo,password,levelId,facultyId,departmentId,sessionId,dateCreated) value('$firstname','$lastname','$othername','$matricNo','test','$levelId','$facultyId','$departmentId','$sessionId','$dateCreated')");
+
+        if ($query) {
+
+            $alertStyle = "alert alert-success";
+            $statusMsg = "Pupil Added Successfully!";
+        } else {
+            $alertStyle = "alert alert-danger";
+            $statusMsg = "An error Occurred!";
+        }
     }
-    else{
-
-    $query=mysqli_query($con,"insert into tblstudent(firstName,lastName,otherName,matricNo,password,levelId,facultyId,departmentId,sessionId,dateCreated) value('$firstname','$lastname','$othername','$matricNo','test','$levelId','$facultyId','$departmentId','$sessionId','$dateCreated')");
-
-    if ($query) {
-
-      $alertStyle ="alert alert-success";
-      $statusMsg="Pupil Added Successfully!";
-  }
-  else
-    {
-      $alertStyle ="alert alert-danger";
-      $statusMsg="An error Occurred!";
-    }
-  }
 }
-  ?>
+?>
 
 <!doctype html>
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <?php include 'includes/title.php';?>
+    <?php include 'includes/title.php'; ?>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -73,35 +71,37 @@ $facultyId=$_POST['facultyId'];
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
-<script>
-function showValues(str) {
-    if (str == "") {
-        document.getElementById("txtHint").innerHTML = "";
-        return;
-    } else { 
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("txtHint").innerHTML = this.responseText;
+    <script>
+        function showValues(str) {
+            if (str == "") {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            } else {
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("txtHint").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "ajaxCall2.php?fid=" + str, true);
+                xmlhttp.send();
             }
-        };
-        xmlhttp.open("GET","ajaxCall2.php?fid="+str,true);
-        xmlhttp.send();
-    }
-}
-</script>
+        }
+    </script>
 </head>
+
 <body>
     <!-- Left Panel -->
-    <?php $page="student"; include 'includes/leftMenu.php';?>
+    <?php $page = "student";
+    include 'includes/leftMenu.php'; ?>
 
-   <!-- /#left-panel -->
+    <!-- /#left-panel -->
 
     <!-- Left Panel -->
 
@@ -110,7 +110,7 @@ function showValues(str) {
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-            <?php include 'includes/header.php';?>
+        <?php include 'includes/header.php'; ?>
         <!-- /header -->
         <!-- Header-->
 
@@ -128,7 +128,7 @@ function showValues(str) {
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-								<!-- Log on to codeastro.com for more projects! -->
+                                    <!-- Log on to codeastro.com for more projects! -->
                                     <li><a href="#">Dashboard</a></li>
                                     <li><a href="#">Pupils</a></li>
                                     <li class="active">Add </li>
@@ -146,118 +146,138 @@ function showValues(str) {
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title"><h2 align="center">Input Details</h2></strong>
+                                <strong class="card-title">
+                                    <h2 align="center">Input Details</h2>
+                                </strong>
                             </div>
                             <div class="card-body">
                                 <!-- Credit Card -->
                                 <div id="pay-invoice">
                                     <div class="card-body">
-                                       <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
+                                        <div class="<?php echo $alertStyle; ?>" role="alert"><?php echo $statusMsg; ?></div>
                                         <form method="Post" action="">
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-													<!-- Log on to codeastro.com for more projects! -->
+                                                        <!-- Log on to codeastro.com for more projects! -->
                                                         <label for="cc-exp" class="control-label mb-1">First name<i class="text-danger">*</i></label>
                                                         <input id="" name="firstname" type="text" class="form-control cc-exp" value="" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Firstname" autofocus>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
-												<!-- Log on to codeastro.com for more projects! -->
+                                                    <!-- Log on to codeastro.com for more projects! -->
                                                     <label for="x_card_code" class="control-label mb-1">Last name<i class="text-danger">*</i></label>
-                                                        <input id="" name="lastname" type="text" class="form-control cc-cvc" value="" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Lastname">
+                                                    <input id="" name="lastname" type="text" class="form-control cc-cvc" value="" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Lastname">
+                                                </div>
+                                            </div>
+                                            <div>
+
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <!-- Log on to codeastro.com for more projects! -->
+                                                            <label for="cc-exp" class="control-label mb-1">Nickname <small><i class="text-danger">Optional</i></small></label>
+                                                            <input id="" name="othername" type="text" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Nickname">
                                                         </div>
                                                     </div>
-                                                    <div>
 
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-													<!-- Log on to codeastro.com for more projects! -->
-                                                        <label for="cc-exp" class="control-label mb-1">Nickname <small><i class="text-danger">Optional</i></small></label>
-                                                        <input id="" name="othername" type="text" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Nickname">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="x_card_code" class="control-label mb-1">Grade Level<i class="text-danger">*</i></label>
+                                                            <?php
+                                                            $query = mysqli_query($con, "select * from tbllevel");
+                                                            $count = mysqli_num_rows($query);
+                                                            if ($count > 0) {
+                                                                echo ' <select required name="levelId" class="custom-select form-control">';
+                                                                echo '<option value="">--Select Level--</option>';
+                                                                while ($row = mysqli_fetch_array($query)) {
+                                                                    echo '<option value="' . $row['levelId'] . '" >' . $row['levelName'] . '</option>';
+                                                                }
+                                                                echo '</select>';
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="x_card_code" class="control-label mb-1">Teacher<i class="text-danger">*</i></label>
+                                                            <?php
+                                                            $query = mysqli_query($con, "select * from tbladmin where adminTypeId = 2");
+                                                            $count = mysqli_num_rows($query);
+                                                            if ($count > 0) {
+                                                                echo ' <select required name="teacher" class="custom-select form-control">';
+                                                                echo '<option value="">--Select teacher--</option>';
+                                                                while ($row = mysqli_fetch_array($query)) {
+                                                                    echo '<option value="' . $row['firstName'] . ' ' . $row['lastName'] . '" >' . $row['firstName'] . ' ' . $row['lastName'] . '</option>';
+                                                                }
+                                                                echo '</select>';
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                    </div> -->
+
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="cc-exp" class="control-label mb-1">ID No <small><i class="text-danger">This will be the user ID</i></small></label>
+                                                            <input id="" name="matricNo" type="text" class="form-control cc-exp" value="" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="ID Number" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <?php
+                                                            echo "<div id='txtHint'></div>";
+                                                            ?>
+                                                        </div>
                                                     </div>
                                                 </div>
 
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="x_card_code" class="control-label mb-1">Grade Level<i class="text-danger">*</i></label>
-                                                    <?php 
-                                                $query=mysqli_query($con,"select * from tbllevel");                        
-                                                $count = mysqli_num_rows($query);
-                                                if($count > 0){                       
-                                                    echo ' <select required name="levelId" class="custom-select form-control">';
-                                                    echo'<option value="">--Select Level--</option>';
-                                                    while ($row = mysqli_fetch_array($query)) {
-                                                    echo'<option value="'.$row['Id'].'" >'.$row['levelName'].'</option>';
-                                                        }
-                                                            echo '</select>';
-                                                        }
-                                                ?>   
-                                                </div>
-                                            </div>
+                                                <div class="row">
 
-                                            <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">ID No <small><i class="text-danger">This will be the user ID</i></small></label>
-                                                        <input id="" name="matricNo" type="text" class="form-control cc-exp" value="" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="ID Number" required>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="x_card_code" class="control-label mb-1">Classroom</label>
+                                                            <?php
+                                                            $query = mysqli_query($con, "select * from tblfaculty ORDER BY facultyName ASC");
+                                                            $count = mysqli_num_rows($query);
+                                                            if ($count > 0) {
+                                                                echo ' <select required name="facultyId" onchange="showValues(this.value)" class="custom-select form-control">';
+                                                                echo '<option value="">--Select Rooms--</option>';
+                                                                while ($row = mysqli_fetch_array($query)) {
+                                                                    echo '<option value="' . $row['facultyId'] . '" >' . $row['facultyName'] . '</option>';
+                                                                }
+                                                                echo '</select>';
+                                                            }
+                                                            ?>
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                   <?php
-                                                        echo"<div id='txtHint'></div>";
-                                                    ?>                                    
-                                                 </div>
-                                                </div>
-                                        </div>
-
-                                        <div class="row">
-                                                
-                                            <div class="col-6">
-                                                    <div class="form-group">
-                                                    <label for="x_card_code" class="control-label mb-1">Classroom</label>
-                                                    <?php 
-                                                    $query=mysqli_query($con,"select * from tblfaculty ORDER BY facultyName ASC");                        
-                                                    $count = mysqli_num_rows($query);
-                                                    if($count > 0){                       
-                                                        echo ' <select required name="facultyId" onchange="showValues(this.value)" class="custom-select form-control">';
-                                                        echo'<option value="">--Select Rooms--</option>';
-                                                        while ($row = mysqli_fetch_array($query)) {
-                                                        echo'<option value="'.$row['Id'].'" >'.$row['facultyName'].'</option>';
-                                                            }
+                                                    <!-- DIRI ANG INPUT SA SCHOOL YEAR PERO NAKA HIDE -->
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <?php
+                                                            $query = mysqli_query($con, "select * from tblsession where isActive = 1");
+                                                            $count = mysqli_num_rows($query);
+                                                            if ($count > 0) {
+                                                                echo ' <select hidden required name="sessionId" class="custom-select form-control">';
+                                                                while ($row = mysqli_fetch_array($query)) {
+                                                                    echo '<option value="' . $row['sessionId'] . '" >' . $row['sessionName'] . '</option>';
+                                                                }
                                                                 echo '</select>';
                                                             }
-                                                    ?>                                                     
-                                                 </div>
+                                                            ?>
+                                                        </div>
+                                                    </div>
+
+
+
                                                 </div>
+                                                <div class="row">
 
-                                        <!-- DIRI ANG INPUT SA SCHOOL YEAR PERO NAKA HIDE -->
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <?php 
-                                                    $query=mysqli_query($con,"select * from tblsession where isActive = 1");                        
-                                                    $count = mysqli_num_rows($query);
-                                                    if($count > 0){                       
-                                                        echo ' <select hidden required name="sessionId" class="custom-select form-control">';
-                                                        while ($row = mysqli_fetch_array($query)) {
-                                                        echo'<option value="'.$row['Id'].'" >'.$row['sessionName'].'</option>';
-                                                            }
-                                                                echo '</select>';
-                                                            }
-                                                ?>   
+
                                                 </div>
-                                            </div>
-
-                                            
-
-                                        </div>
-                                         <div class="row">
-                                                
-
-                                            </div>
-                                             <p><small><i>Default pupil's password is set to "<b class="text-danger">pupil</b>"</i></small></p>
+                                                <p><small><i>Default pupil's password is set to "<b class="text-danger">pupil</b>"</i></small></p>
                                                 <button type="submit" name="submit" class="btn btn-success">Add New Student</button>
                                             </div>
                                         </form>
@@ -265,112 +285,31 @@ function showValues(str) {
                                 </div>
                             </div>
                         </div> <!-- .card -->
-                    </div><!--/.col-->
-               
-
-                <br><br>
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title"><h2 align="center">List of all Pupils</h2></strong>
-                            </div>
-                            <div class="card-body">
-                                <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>User ID</th>
-                                            <th>Grade lvl</th>
-                                            <th>Classroom</th>
-                                            <th>Section</th>
-                                            <th>S.Y</th>
-                                            <th>Date</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                      
-                            <?php
-                    $ret=mysqli_query($con,"SELECT tblstudent.Id, tblstudent.firstName, tblstudent.lastName, tblstudent.otherName,tblstudent.matricNo,
-                    tblstudent.dateCreated, tbllevel.levelName,tblfaculty.facultyName,tbldepartment.departmentName,tblsession.sessionName
-                    from tblstudent
-                    INNER JOIN tbllevel ON tbllevel.Id = tblstudent.levelId
-                    INNER JOIN tblsession ON tblsession.Id = tblstudent.sessionId
-                    INNER JOIN tblfaculty ON tblfaculty.Id = tblstudent.facultyId
-                    INNER JOIN tbldepartment ON tbldepartment.Id = tblstudent.departmentId");
-                    $cnt=1;
-                    while ($row=mysqli_fetch_array($ret)) {
-                                        ?>
-                    <tr>
-                    <td><?php echo $cnt;?></td>
-                    <td>
-                        <?php 
-                        echo $row['firstName'] . ' ' . $row['lastName'] . '<strong style="color:red;"> [' . $row['otherName'].']</strong>'; 
-                        ?>
-                    </td>
-                    <td><?php  echo $row['matricNo'];?></td>
-                    <td>
-
-                          <?php 
-                                $lvl=$row['levelName']; 
-
-                                if ($lvl == "Grade 1"){
-                                    echo '<i style="background:#b5e48c; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">'. $lvl . '</i>';
-                                }else if ($lvl == "Grade 2"){
-                                    echo '<i style="background:#99d98c; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">'. $lvl . '</i>';
-                                }else if ($lvl == "Grade 3"){
-                                    echo '<i style="background:#76c893; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">'. $lvl . '</i>';
-                                }else if ($lvl == "Grade 4"){
-                                    echo '<i style="background:#52b69a; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">'. $lvl . '</i>';
-                                }else if ($lvl == "Grade 5"){
-                                    echo '<i style="background:#34a0a4; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">'. $lvl . '</i>';
-                                }else{
-                                     echo '<i style="background:#168aad; border-radius:15px; color: black; padding: 2px 15px 2px 15px; font-family:cursive;">'. $lvl . '</i>';
-                                }
-                                ?>
-                                                        
-                                                </td>
-                    <td><?php  echo $row['facultyName'];?></td>
-                    <td><?php  echo $row['departmentName'];?></td>
-                     <td><?php  echo $row['sessionName'];?></td>
-                    <td><?php  echo $row['dateCreated'];?></td>
-					<!-- Log on to codeastro.com for more projects! -->
-                    <td><a href="editStudent.php?editStudentId=<?php echo $row['matricNo'];?>" title="Edit Details"><i class="fa fa-edit fa-1x"></i></a>
-                   <a onclick="return confirm('Are you sure you want to delete?')" href="deleteStudent.php?delid=<?php echo $row['matricNo'];?>" title="Delete Student Details"><i class="fa fa-trash fa-1x"></i></a></td>
-                    </tr>
-                    <?php 
-                    $cnt=$cnt+1;
-                    }?>
-                                                                                            
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
+                    <!--/.col-->
+
+
                 </div>
-<!-- end of datatable -->
+            </div><!-- .animated -->
+        </div><!-- .content -->
 
-            </div>
-        </div><!-- .animated -->
-    </div><!-- .content -->
+        <div class="clearfix"></div>
 
-    <div class="clearfix"></div>
-
-        <?php include 'includes/footer.php';?>
+        <?php include 'includes/footer.php'; ?>
 
 
-</div><!-- /#right-panel -->
+    </div><!-- /#right-panel -->
 
-<!-- Right Panel -->
+    <!-- Right Panel -->
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../assets/js/main.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="../assets/js/main.js"></script>
 
-<script src="../assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="../assets/js/lib/data-table/datatables.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
     <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
@@ -384,28 +323,27 @@ function showValues(str) {
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
+            $('#bootstrap-data-table-export').DataTable();
+        });
 
-      // Menu Trigger
-      $('#menuToggle').on('click', function(event) {
-            var windowWidth = $(window).width();   		 
-            if (windowWidth<1010) { 
-                $('body').removeClass('open'); 
-                if (windowWidth<760){ 
-                $('#left-panel').slideToggle(); 
+        // Menu Trigger
+        $('#menuToggle').on('click', function(event) {
+            var windowWidth = $(window).width();
+            if (windowWidth < 1010) {
+                $('body').removeClass('open');
+                if (windowWidth < 760) {
+                    $('#left-panel').slideToggle();
                 } else {
-                $('#left-panel').toggleClass('open-menu');  
-                } 
+                    $('#left-panel').toggleClass('open-menu');
+                }
             } else {
                 $('body').toggleClass('open');
-                $('#left-panel').removeClass('open-menu');  
-            } 
-                
-            }); 
+                $('#left-panel').removeClass('open-menu');
+            }
 
-      
-  </script>
+        });
+    </script>
 
 </body>
+
 </html>

@@ -17,7 +17,7 @@ if (isset($_POST['login'])) {
         $_SESSION['lastName'] = $row['lastName'];
 
         echo "<script type = \"text/javascript\">
-                window.location = (\"student/index.php\")
+                window.location = (\"student/studentGrades.php\")
                </script>";
 
         // if($row['roleId'] == 2){ //if user is Hod

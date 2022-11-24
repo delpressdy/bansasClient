@@ -100,12 +100,9 @@ include('../includes/session.php');
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Pupil ID</th>
                                             <th>Title</th>
-
-
                                             <th>Grade</th>
-                                            <th>Room</th>
+                                            <!-- <th>Room</th> -->
                                             <th>Section</th>
                                             <th>Semester</th>
                                         </tr>
@@ -113,14 +110,7 @@ include('../includes/session.php');
                                     <tbody>
 
                                         <?php
-                                        $ret = mysqli_query($con, "SELECT tblcourse.courseCode,tblcourse.courseTitle,tblcourse.dateAdded,
-                tblcourse.courseUnit,tbllevel.levelName,tblfaculty.facultyName,tbldepartment.departmentName,tblsemester.semesterName
-                from tblcourse 
-                INNER JOIN tbllevel ON tbllevel.Id = tblcourse.levelId
-                INNER JOIN tblsemester ON tblsemester.Id = tblcourse.semesterId
-                INNER JOIN tblfaculty ON tblfaculty.Id = tblcourse.facultyId
-                INNER JOIN tbldepartment ON tbldepartment.Id = tblcourse.departmentId
-                where tblcourse.departmentId = '$departmentId' and tblcourse.levelId = '$levelId'");
+                                        $ret = mysqli_query($con, "SELECT * FROM tblcourse WHERE levelId = 1");
 
                                         $cnt = 1;
                                         while ($row = mysqli_fetch_array($ret)) {
@@ -129,9 +119,9 @@ include('../includes/session.php');
                                                 <td><?php echo $cnt; ?></td>
                                                 <td><?php echo $row['courseTitle']; ?></td>
 
-                                                <td><?php echo $row['levelName']; ?></td>
-                                                <td><?php echo $row['facultyName']; ?></td>
-                                                <td><?php echo $row['departmentName']; ?></td>
+                                                <td><?php echo $row['levelId']; ?></td>
+                                                <td><?php echo $row['facultyId']; ?></td>
+                                                <td><?php echo $row['departmentId']; ?></td>
                                                 <td><span class="badge badge-success"><?php echo $row['semesterName']; ?></span></td>
                                             </tr>
                                         <?php

@@ -26,7 +26,7 @@ if (isset($_POST['login'])) {
         } else if ($_SESSION['adminTypeId'] == 2) // Administrator
         {
             echo "<script type = \"text/javascript\">
-                window.location = (\"admin/index.php\")
+                window.location = (\"staff/index.php\")
                 </script>";
         }
     } else {

@@ -11,29 +11,20 @@ if (isset($_POST['submit'])) {
 
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
-    $roleType = $_POST['othername'];
     $emailAddress = $_POST['emailAddress'];
     $pass = md5('staff');
     $phoneNo = $_POST['phoneNo'];
     $staffId = $_POST['staffId'];
-    $roleId = 2;
     $dateCreated = date("Y-m-d");
-
-    if ($roleType == 1) {
-        $rType = "Admin";
-    } else {
-        $rType = "Staff";
-    }
     $departmentId = $_POST['departmentId'];
     $facultyId = $_POST['facultyId'];
-    $dateAssigned = date("Y-m-d");
 
-    $que = mysqli_query($con, "select * from tbladmin where staffId ='$staffId'");
+    $que = mysqli_query($con, "select * from tblstaff where staffId ='$staffId'");
     $res = mysqli_fetch_array($que);
 
 
-    $queryi = mysqli_query($con, "select * from tblassignedadmin where facultyId = '$facultyId' and departmentId = '$departmentId'");
-    $rets = mysqli_fetch_array($queryi);
+    // $queryi = mysqli_query($con, "select * from tblassignedadmin where facultyId = '$facultyId' and departmentId = '$departmentId'");
+    // $rets = mysqli_fetch_array($queryi);
 
     if ($res > 0) {
 
@@ -41,30 +32,15 @@ if (isset($_POST['submit'])) {
         $statusMsg = "User ID already exist!";
     } else {
 
-        $query = mysqli_query($con, "insert into tbladmin(firstName,lastName,otherName,emailAddress,phoneNo,password,staffId,adminTypeId,isPasswordChanged,isAssigned,dateCreated) value('$firstname','$lastname','$rType','$emailAddress','$phoneNo','$pass','$staffId','$roleType','0','0','$dateCreated')");
+        $query = mysqli_query($con, "insert into tblstaff(firstName,lastName,emailAddress,phoneNo,password,staffId,isAssigned,dateCreated) value('$firstname','$lastname','$emailAddress','$phoneNo','$pass','$staffId','$facultyId','$dateCreated')");
 
         if ($query) {
 
-            $queryss = mysqli_query($con, "insert into tblassignedadmin(staffId,departmentId,facultyId,dateAssigned) value('$staffId','$departmentId','$facultyId','$dateAssigned')");
-            if ($queryss) {
-
-                $querys = mysqli_query($con, "update tbladmin set isAssigned='1' where staffId='$staffId'");
-
-                if ($querys == True) {
-
-                    $alertStyle = "alert alert-success";
-                    $statusMsg = "Added Successfully!";
-                } else {
-                    $alertStyle = "alert alert-danger";
-                    $statusMsg = "An error Occurred!";
-                }
-            } else {
-                $alertStyle = "alert alert-danger";
-                $statusMsg = "An error Occurred!";
-            }
+            $alertStyle = "alert alert-success";
+            $statusMsg = "Added Successfully!";
         } else {
             $alertStyle = "alert alert-danger";
-            $statusMsg = "An error Occurred!";
+            $statusMsg = "Query Error!";
         }
     }
 }
@@ -237,49 +213,26 @@ if (isset($_POST['submit'])) {
                                                         <input id="" name="emailAddress" type="email" class="form-control cc-cvc" value="" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Email Address">
                                                     </div>
 
+                                                    <div class="form-group">
+                                                        <label for="cc-exp" class="control-label mb-1">Classroom<i class="text-danger">*</i></label>
+                                                        <?php
+                                                        $query = mysqli_query($con, "select * from tblfaculty ORDER BY facultyName ASC");
+                                                        $count = mysqli_num_rows($query);
+                                                        if ($count > 0) {
+                                                            echo ' <select required name="facultyId" onchange="showValues(this.value)" class="custom-select form-control">';
+                                                            while ($row = mysqli_fetch_array($query)) {
+                                                                echo '<option value="' . $row['facultyId'] . '" >' . $row['facultyName'] . '</option>';
+                                                            }
+                                                            echo '</select>';
+                                                        }
+                                                        ?>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div>
 
                                                 <div class="row">
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label for="cc-exp" class="control-label mb-1">User Type<i class="text-danger">*</i></label>
 
-                                                            <?php
-                                                            $query = mysqli_query($con, "select * from tbladmintype");
-                                                            $count = mysqli_num_rows($query);
-                                                            if ($count > 0) {
-                                                                echo ' <select required name="othername" onchange="showValues(this.value)" class="custom-select form-control">';
-                                                                echo '<option value="">-- Choose Type --</option>';
-                                                                while ($row = mysqli_fetch_array($query)) {
-                                                                    echo '<option value="' . $row['Id'] . '" >' . $row['adminTypeName'] . '</option>';
-                                                                }
-                                                                echo '</select>';
-                                                            }
-                                                            ?>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <?php
-                                                            $query = mysqli_query($con, "select * from tblfaculty ORDER BY facultyName ASC");
-                                                            $count = mysqli_num_rows($query);
-                                                            if ($count > 0) {
-                                                                echo ' <select hidden required name="facultyId" onchange="showValues(this.value)" class="custom-select form-control">';
-                                                                while ($row = mysqli_fetch_array($query)) {
-                                                                    echo '<option value="' . $row['Id'] . '" >' . $row['facultyName'] . '</option>';
-                                                                }
-                                                                echo '</select>';
-                                                            }
-                                                            ?>
-                                                        </div>
-                                                    </div>
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <?php

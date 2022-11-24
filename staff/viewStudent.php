@@ -52,13 +52,13 @@ include('../includes/session.php');
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong id="tots" align="center" style="color: red; font-weight: 500px; font-size: 30px; margin-left: 175px;">**** TOTAL PUPILS IN ALL CLASSROOMS ****</strong>
+                                <strong id="tots" align="center" style="color: green; font-weight: 500px; font-size: 30px; margin-left: 175px;">**** TOTAL PUPILS IN ALL CLASSROOMS ****</strong>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
                                     <thead>
-                                        <tr style="color: white; background-color: red;">
-                                            <th style="background-color: white; color: black;">#</th>
+                                        <tr style="color: darkblue; background-color: darlwhite;">
+                                            <th style="background-color: darkwhite; color: black;">#</th>
                                             <th>Name</th>
                                             <th>User ID</th>
                                             <th>Grade</th>
@@ -75,16 +75,16 @@ include('../includes/session.php');
                                         $ret = mysqli_query($con, "SELECT tblstudent.Id, tblstudent.firstName, tblstudent.lastName, tblstudent.otherName,tblstudent.matricNo,
                     tblstudent.dateCreated, tbllevel.levelName,tblfaculty.facultyName,tbldepartment.departmentName,tblsession.sessionName
                     from tblstudent
-                    INNER JOIN tbllevel ON tbllevel.Id = tblstudent.levelId
-                    INNER JOIN tblsession ON tblsession.Id = tblstudent.sessionId
-                    INNER JOIN tblfaculty ON tblfaculty.Id = tblstudent.facultyId
-                    INNER JOIN tbldepartment ON tbldepartment.Id = tblstudent.departmentId");
+                    INNER JOIN tbllevel ON tbllevel.levelId = tblstudent.levelId
+                    INNER JOIN tblsession ON tblsession.sessionId = tblstudent.sessionId
+                    INNER JOIN tblfaculty ON tblfaculty.facultyId = tblstudent.facultyId
+                    INNER JOIN tbldepartment ON tbldepartment.departmentId = tblstudent.departmentId");
                                         $cnt = 1;
                                         while ($row = mysqli_fetch_array($ret)) {
                                         ?>
                                             <tr>
                                                 <td><?php echo $cnt; ?></td>
-                                                <td style="color: white; background-color: limegreen; border-radius: 15px;"><?php echo $row['firstName'] . ' ' . $row['lastName'] . ' ' . $row['otherName']; ?></td>
+                                                <td><?php echo $row['firstName'] . ' ' . $row['lastName']; ?></td>
                                                 <td><?php echo $row['matricNo']; ?></td>
                                                 <td><?php echo $row['levelName']; ?></td>
                                                 <td><?php echo $row['facultyName']; ?></td>

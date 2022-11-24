@@ -116,10 +116,10 @@ include('../includes/session.php');
                                         $ret = mysqli_query($con, "SELECT tblcourse.courseCode,tblcourse.courseTitle,tblcourse.dateAdded,
                 tblcourse.courseUnit,tbllevel.levelName,tblfaculty.facultyName,tbldepartment.departmentName,tblsemester.semesterName
                 from tblcourse 
-                INNER JOIN tbllevel ON tbllevel.Id = tblcourse.levelId
+                INNER JOIN tbllevel ON tbllevel.levelId = tblcourse.levelId
                 INNER JOIN tblsemester ON tblsemester.Id = tblcourse.semesterId
-                INNER JOIN tblfaculty ON tblfaculty.Id = tblcourse.facultyId
-                INNER JOIN tbldepartment ON tbldepartment.Id = tblcourse.departmentId");
+                INNER JOIN tblfaculty ON tblfaculty.facultyId = tblcourse.facultyId
+                INNER JOIN tbldepartment ON tbldepartment.departmentId = tblcourse.departmentId");
 
                                         $cnt = 1;
                                         while ($row = mysqli_fetch_array($ret)) {

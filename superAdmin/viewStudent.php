@@ -102,11 +102,11 @@ include('../includes/session.php');
                                         <tr>
                                             <th>#</th>
                                             <th>Full Name</th>
-                                            <th>ID #</th>
+                                            <th>StudentID</th>
                                             <th>Grade lvl</th>
                                             <th>Classroom</th>
                                             <th>Section</th>
-                                            <th>S.Y</th>
+
                                             <th>Date Added</th>
                                             <th>Actions</th>
                                         </tr>
@@ -114,13 +114,24 @@ include('../includes/session.php');
                                     <tbody>
 
                                         <?php
-                                        $ret = mysqli_query($con, "SELECT tblstudent.Id, tblstudent.firstName, tblstudent.lastName, tblstudent.otherName,tblstudent.matricNo,
-                    tblstudent.dateCreated, tbllevel.levelName,tblfaculty.facultyName,tbldepartment.departmentName,tblsession.sessionName
-                    from tblstudent
-                    INNER JOIN tbllevel ON tbllevel.Id = tblstudent.levelId
-                    INNER JOIN tblsession ON tblsession.Id = tblstudent.sessionId
-                    INNER JOIN tblfaculty ON tblfaculty.Id = tblstudent.facultyId
-                    INNER JOIN tbldepartment ON tbldepartment.Id = tblstudent.departmentId");
+                                        if ($_SESSION['adminTypeId'] == 1) {
+                                            $ret = mysqli_query($con, "SELECT  tblstudent.`firstName`, tblstudent.`lastName`, tbllevel.`levelName`,
+                                            tblfaculty.`facultyName`, tbldepartment.`departmentName`, tblstudent.`matricNo`,tblstudent.`dateCreated`,
+                                            tblstaff.`facultyId`, tblfaculty.`facultyName` FROM tblstudent
+                                             INNER JOIN  tblfaculty ON tblfaculty.`facultyId` = tblstudent.`facultyId` 
+                                             INNER JOIN tblstaff ON tblstaff.`facultyId` = tblfaculty.`facultyId` 
+                                             INNER JOIN tbllevel ON tbllevel.`levelId` = tblstudent.`levelId` 
+                                             INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId`");
+                                        } else {
+                                            $ret = mysqli_query($con, "SELECT  tblstudent.`firstName`, tblstudent.`lastName`, tbllevel.`levelName`,
+                                             tblfaculty.`facultyName`, tbldepartment.`departmentName`, tblstudent.`matricNo`,tblstudent.`dateCreated`,
+                                             tblstaff.`facultyId`, tblfaculty.`facultyName` FROM tblstudent
+                                              INNER JOIN  tblfaculty ON tblfaculty.`facultyId` = tblstudent.`facultyId` 
+                                              INNER JOIN tblstaff ON tblstaff.`facultyId` = tblfaculty.`facultyId` 
+                                              INNER JOIN tbllevel ON tbllevel.`levelId` = tblstudent.`levelId` 
+                                              INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` where tblfaculty.facultyId = ' $_SESSION[facultyId]' ");
+                                        }
+
                                         $cnt = 1;
                                         while ($row = mysqli_fetch_array($ret)) {
                                         ?>
@@ -151,7 +162,7 @@ include('../includes/session.php');
                                                 </td>
                                                 <td><?php echo $row['facultyName']; ?></td>
                                                 <td><?php echo $row['departmentName']; ?></td>
-                                                <td><?php echo $row['sessionName']; ?></td>
+
                                                 <td><?php echo $row['dateCreated']; ?></td>
 
                                                 <td>

@@ -204,7 +204,7 @@ if (isset($_POST['submit'])) {
                                                             echo ' <select required name="levelId" class="custom-select form-control">';
                                                             echo '<option value="">--Select Level--</option>';
                                                             while ($row = mysqli_fetch_array($query)) {
-                                                                echo '<option value="' . $row['Id'] . '" >' . $row['levelName'] . '</option>';
+                                                                echo '<option value="' . $row['levelId'] . '" >' . $row['levelName'] . '</option>';
                                                             }
                                                             echo '</select>';
                                                         }
@@ -242,7 +242,7 @@ if (isset($_POST['submit'])) {
                                                                 echo ' <select required name="facultyId" onchange="showValues(this.value)" class="custom-select form-control">';
                                                                 echo '<option value="">--Select Room--</option>';
                                                                 while ($row = mysqli_fetch_array($query)) {
-                                                                    echo '<option value="' . $row['Id'] . '" >' . $row['facultyName'] . '</option>';
+                                                                    echo '<option value="' . $row['facultyId'] . '" >' . $row['facultyName'] . '</option>';
                                                                 }
                                                                 echo '</select>';
                                                             }
@@ -273,63 +273,6 @@ if (isset($_POST['submit'])) {
                     <!--/.col-->
 
 
-                    <br><br>
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">
-                                    <h2 align="center">All Courses</h2>
-                                </strong>
-                            </div>
-                            <div class="card-body">
-                                <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <!-- Log on to codeastro.com for more projects! -->
-                                            <th>#</th>
-                                            <th>FullName</th>
-                                            <th>Level</th>
-                                            <th>Room</th>
-                                            <th>Department</th>
-                                            <th>Date Added</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <?php
-                                        $ret = mysqli_query($con, "SELECT tblcourse.courseCode,tblcourse.courseTitle,tblcourse.dateAdded,
-       tblcourse.courseUnit,tbllevel.levelName,tblfaculty.facultyName,tbldepartment.departmentName,tblsemester.semesterName
-        from tblcourse 
-        INNER JOIN tbllevel ON tbllevel.Id = tblcourse.levelId
-        INNER JOIN tblsemester ON tblsemester.Id = tblcourse.semesterId
-        INNER JOIN tblfaculty ON tblfaculty.Id = tblcourse.facultyId
-        INNER JOIN tbldepartment ON tbldepartment.Id = tblcourse.departmentId");
-
-                                        $cnt = 1;
-                                        while ($row = mysqli_fetch_array($ret)) {
-                                        ?>
-                                            <tr>
-                                                <td><?php echo $cnt; ?></td>
-                                                <td><?php echo $row['courseTitle']; ?></td>
-                                                <td><?php echo $row['levelName']; ?></td>
-                                                <td><?php echo $row['facultyName']; ?></td>
-                                                <td><?php echo $row['departmentName']; ?></td>
-                                                <td><?php echo $row['dateAdded']; ?></td>
-                                                <td><a href="editCourses.php?editCourseId=<?php echo $row['courseCode']; ?>" title="Edit Details"><i class="fa fa-edit fa-1x"></i></a>
-                                                    <a onclick="return confirm('Are you sure you want to delete?')" href="deleteCourse.php?delid=<?php echo $row['courseCode']; ?>" title="Delete Course"><i class="fa fa-trash fa-1x"></i></a>
-                                                </td>
-                                            </tr>
-                                        <?php
-                                            $cnt = $cnt + 1;
-                                        } ?>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end of datatable -->
 
                 </div>
             </div><!-- .animated -->

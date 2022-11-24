@@ -18,10 +18,10 @@ if (isset($_GET['matricNo']) && isset($_GET['levelId'])  && isset($_GET['session
     $semesterQuery = mysqli_query($con, "select * from tblsemester where Id = '$semesterId'");
     $rowSemester = mysqli_fetch_array($semesterQuery);
 
-    $sessionQuery = mysqli_query($con, "select * from tblsession where Id = '$sessionId'");
+    $sessionQuery = mysqli_query($con, "select * from tblsession where sessionId = '$sessionId'");
     $rowSession = mysqli_fetch_array($sessionQuery);
 
-    $levelQuery = mysqli_query($con, "select * from tbllevel where Id = '$levelId'");
+    $levelQuery = mysqli_query($con, "select * from tbllevel where levelId = '$levelId'");
     $rowLevel = mysqli_fetch_array($levelQuery);
 } else {
     echo "<script type = \"text/javascript\">
@@ -201,7 +201,7 @@ if (isset($_POST['compute'])) {
                                 </table>
 
                                 <a href="studentList3.php" class="btn btn-primary">Go Back</a>
-                                <a href="printSemesterResult.php?semesterId=<?php echo $semesterId; ?>&matricNo=<?php echo $matricNo; ?>&levelId=<?php echo $levelId; ?>&sessionId=<?php echo $sessionId; ?>" class="btn btn-info"><i class="fa fa-print"></i> Print Result</a>
+                                <!-- <a href="printSemesterResult.php?semesterId=<?php echo $semesterId; ?>&matricNo=<?php echo $matricNo; ?>&levelId=<?php echo $levelId; ?>&sessionId=<?php echo $sessionId; ?>" class="btn btn-info"><i class="fa fa-print"></i> Print Result</a> -->
                             </div>
                         </div>
                     </div>

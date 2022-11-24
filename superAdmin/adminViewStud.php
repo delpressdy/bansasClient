@@ -37,7 +37,8 @@ include('../includes/session.php');
 
 <body>
     <!-- Left Panel -->
-    <?php include 'includes/leftMenu.php'; ?>
+    <?php $page = "student";
+    include 'includes/leftMenu.php'; ?>
 
     <!-- /#left-panel -->
 
@@ -67,8 +68,8 @@ include('../includes/session.php');
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
                                     <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Staff</a></li>
-                                    <li class="active">View Staff</li>
+                                    <li><a href="#">Pupils</a></li>
+                                    <li class="active">View Pupils</li>
                                 </ol>
                             </div>
                         </div>
@@ -92,7 +93,7 @@ include('../includes/session.php');
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">
-                                    <h2 align="center">List of all Staff</h2>
+                                    <h2 align="center">All Pupils</h2>
                                 </strong>
                             </div>
                             <div class="card-body">
@@ -100,41 +101,68 @@ include('../includes/session.php');
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>User ID</th>
-                                            <th>Firstname</th>
-                                            <th>Lastname</th>
-                                            <th>Room Number</th>
-                                            <th>EmailAddress</th>
-                                            <th>Contact</th>
-                                            <th>Password</th>
-                                            <th>Remarks</th>
+                                            <th>Full Name</th>
+                                            <th>ID #</th>
+                                            <th>Grade lvl</th>
+                                            <th>Classroom</th>
+                                            <th>Section</th>
+                                            <th>S.Y</th>
                                             <th>Date Added</th>
-                                            <th>Delete</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         <?php
-                                        $ret = mysqli_query($con, "SELECT tblstaff.`staffId`,tblstaff.`firstName`,tblstaff.`lastName`, tblfaculty.`facultyName` ,tblstaff.`emailAddress`,tblstaff.`phoneNo`,tblstaff.`password`,tblstaff.`dateCreated`FROM tblstaff INNER JOIN tblfaculty ON tblfaculty.`facultyId` = tblstaff.`facultyId`");
+                                        $ret = mysqli_query($con, "SELECT tblstudent.Id, tblstudent.firstName, tblstudent.lastName, tblstudent.otherName,tblstudent.matricNo,
+                    tblstudent.dateCreated, tbllevel.levelName,tblfaculty.facultyName,tbldepartment.departmentName,tblsession.sessionName
+                    from tblstudent
+                    INNER JOIN tbllevel ON tbllevel.levelId = tblstudent.levelId
+                    INNER JOIN tblsession ON tblsession.sessionId = tblstudent.sessionId
+                    INNER JOIN tblfaculty ON tblfaculty.facultyId = tblstudent.facultyId
+                    INNER JOIN tbldepartment ON tbldepartment.departmentId = tblstudent.departmentId");
                                         $cnt = 1;
-
-                                        // $ret = mysqli_query($con, "select * from tbladdmin where adminTypeId = 2");
                                         while ($row = mysqli_fetch_array($ret)) {
-                                            // print_r($row);
                                         ?>
                                             <tr>
                                                 <td><?php echo $cnt; ?></td>
-                                                <td><?php echo $row['staffId']; ?></td>
-                                                <td><?php echo $row['firstName']; ?></td>
-                                                <td><?php echo $row['lastName']; ?></td>
+                                                <td><?php echo $row['firstName'] . ' ' . $row['lastName']  ?></td>
+                                                <td><?php echo $row['matricNo']; ?></td>
+                                                <td>
+
+                                                    <?php
+                                                    $lvl = $row['levelName'];
+
+                                                    if ($lvl == "Grade 1") {
+                                                        echo '<i style="background:#99d98c; border-radius:15px; color: black; padding: 2px 5px 2px 5px; font-family:cursive; font-size: 16px;" class="text-white  ">' . $lvl . '</i>';
+                                                    } else if ($lvl == "Grade 2") {
+                                                        echo '<i style="background:#76c893; border-radius:15px; color: black; padding: 2px 4px 2px 4px; font-family:cursive; font-size: 16px;" class="text-white ">' . $lvl . '</i>';
+                                                    } else if ($lvl == "Grade 3") {
+                                                        echo '<i style="background:#52b69a; border-radius:15px; color: black; padding: 2px 4px 2px 4px; font-family:cursive; font-size: 16px;" class="text-white ">' . $lvl . '</i>';
+                                                    } else if ($lvl == "Grade 4") {
+                                                        echo '<i style="background:#34a0a4; border-radius:15px; color: black; padding: 2px 4px 2px 4px; font-family:cursive; font-size: 16px;" class="text-white ">' . $lvl . '</i>';
+                                                    } else if ($lvl == "Grade 5") {
+                                                        echo '<i style="background:#168aad; border-radius:15px; color: black; padding: 2px 4px 2px 4px; font-family:cursive; font-size: 16px;" class="text-white ">' . $lvl . '</i>';
+                                                    } else {
+                                                        echo '<i style="background:#1a759f; border-radius:15px; color: black; padding: 2px 4px 2px 4px; font-family:cursive; font-size: 16px;" class="text-white ">' . $lvl . '</i>';
+                                                    }
+                                                    ?>
+
+                                                </td>
                                                 <td><?php echo $row['facultyName']; ?></td>
-                                                <td><?php echo $row['emailAddress']; ?></td>
-                                                <td><?php echo $row['phoneNo']; ?></td>
-                                                <td><?php echo $row['password']; ?></td>
-                                                <td><?php echo "Active" ?></td>
+                                                <td><?php echo $row['departmentName']; ?></td>
+                                                <td><?php echo $row['sessionName']; ?></td>
                                                 <td><?php echo $row['dateCreated']; ?></td>
-                                                <!-- <td><a href="editAdmin.php?editid=<?php echo $row['staffId']; ?>" title="View Admin"><i class="fa fa-edit fa-1x"></i></a></td> -->
-                                                <td><a onclick="return confirm('Are you sure you want to delete?')" href="deleteAdmin.php?delid=<?php echo $row['staffId']; ?>" title="Delete Admin"><i class="fa fa-trash fa-1x"></i></a></td>
+
+                                                <td>
+                                                    <!-- <a href="editStudent.php?editStudentId=<?php echo $row['matricNo']; ?>" title="Edit Details">
+                                                        <i class="fa fa-edit fa-1x"></i>
+                                                    </a> -->
+
+                                                    <a onclick="return confirm('Are you sure you want to delete?')" href="deleteStudent.php?delid=<?php echo $row['matricNo']; ?>" title="Delete Student Details">
+                                                        <i class="fa fa-trash fa-1x"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         <?php
                                             $cnt = $cnt + 1;
@@ -161,11 +189,11 @@ include('../includes/session.php');
     <!-- Right Panel -->
 
     <!-- Scripts -->
+    <script src="../assets/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="../assets/js/main.js"></script>
 
     <script src="../assets/js/lib/data-table/datatables.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
@@ -182,6 +210,24 @@ include('../includes/session.php');
     <script type="text/javascript">
         $(document).ready(function() {
             $('#bootstrap-data-table-export').DataTable();
+
+        });
+
+        // Menu Trigger
+        $('#menuToggle').on('click', function(event) {
+            var windowWidth = $(window).width();
+            if (windowWidth < 1010) {
+                $('body').removeClass('open');
+                if (windowWidth < 760) {
+                    $('#left-panel').slideToggle();
+                } else {
+                    $('#left-panel').toggleClass('open-menu');
+                }
+            } else {
+                $('body').toggleClass('open');
+                $('#left-panel').removeClass('open-menu');
+            }
+
         });
     </script>
 
