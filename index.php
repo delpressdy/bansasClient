@@ -51,9 +51,6 @@
     <div class="container d-flex align-items-center">
       <a class="navbar-brand" href="index.php"><img src="img/profile.jpg" alt="Logo" style="width:70px;height:70px; border-radius: 26px;"></a>
       <h1 class="logo mr-auto"><a href="index.php"> Salug Daku Elementary</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
       <nav class="nav-menu d-none d-lg-block">
         <ul>
 
@@ -64,10 +61,6 @@
               <li><a href="adminLogin.php">Admin</a></li>
               <li><a href="studentLogin.php">Pupils</a></li>
               <li><a href="staffLogin.php">Staff</a></li>
-
-              <!-- Log on to codeastro.com for more projects! -->
-
-              <!-- Log on to codeastro.com for more projects! -->
 
             </ul>
           </li>

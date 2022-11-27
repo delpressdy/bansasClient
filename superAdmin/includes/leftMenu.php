@@ -10,6 +10,7 @@ if ($row['adminTypeId'] === 1) {
 } else {
 
     $staffFullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
+    $staffRoom = $_SESSION['facultyId'];
 }
 ?>
 <aside id="left-panel" class="left-panel">
@@ -96,7 +97,7 @@ if ($row['adminTypeId'] === 1) {
                                                             } ?>">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file"></i>Setup-Generate</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-plus"></i> <a href="studentList.php">Submit Grades</a></li>
+                        <li><i class="fa fa-plus"></i> <a href="<?php if ($_SESSION['adminTypeId'] == 2) {echo "staffStudentList.php";}else{echo "studentList.php";} ?>">Submit Grades</a></li>
                         <li><i class="fa fa-plus"></i> <a href="studentList3.php">Generate Results</a></li>
                         <li><i class="fa fa-plus"></i> <a href="gradingCriteria.php">View Grading Criteria</a></li>
 
