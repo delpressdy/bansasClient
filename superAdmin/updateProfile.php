@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
     $emailAddress = $_POST['emailAddress'];
     $phoneNo = $_POST['phoneNo'];
     $password = $_POST['password'];
-    $password = md5($password);
+ 
 
     $ret = mysqli_query($con, "update tbladmin set firstName='$firstname', lastName='$lastname', otherName='$othername', 
   emailAddress='$emailAddress', phoneNo='$phoneNo', password = '$password' where staffId='$staffId'");

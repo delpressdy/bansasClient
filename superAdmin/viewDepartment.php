@@ -93,7 +93,7 @@ include('../includes/session.php');
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">
-                                    <h2 align="center">List of Secions</h2>
+                                    <h2 align="center">List of Sections</h2>
                                 </strong>
                             </div>
                             <div class="card-body">
@@ -101,33 +101,31 @@ include('../includes/session.php');
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <!-- Log on to codeastro.com for more projects! -->
                                             <th>Name</th>
-                                            <th>Classroom</th>
-                                            <th>Date Created</th>
+                                            <th>Grade</th>
+                                            <th>Created</th>
                                             <th>Actions</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         <?php
-                                        $ret = mysqli_query($con, "SELECT tbldepartment.departmentId, tbldepartment.departmentName,tbldepartment.dateCreated, tblfaculty.facultyName
-        from tbldepartment 
-        INNER JOIN tblfaculty ON tblfaculty.facultyId = tbldepartment.facultyId");
-                                        $cnt = 1;
+                                        $ret = mysqli_query($con, "SELECT  tbldepartment.`dateCreated`, tbldepartment.`departmentName`, tbldepartment.`departmentId`,tbllevel.`levelName` FROM tbldepartment INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId`");
+
                                         while ($row = mysqli_fetch_array($ret)) {
                                         ?>
                                             <tr>
-                                                <td><?php echo $cnt; ?></td>
+                                                <td><?php echo $row['departmentId']; ?></td>
                                                 <td><?php echo $row['departmentName']; ?></td>
-                                                <td><?php echo $row['facultyName']; ?></td>
+                                                <td><?php echo $row['levelName']; ?></td>
                                                 <td><?php echo $row['dateCreated']; ?></td>
                                                 <td><a href="editDepartment.php?editid=<?php echo $row['departmentId']; ?>" title="Edit Department"><i class="fa fa-edit fa-1x"></i></a>
                                                     <a onclick="return confirm('Are you sure you want to delete?')" href="deleteDepartment.php?delid=<?php echo $row['departmentId']; ?>" title="Delete Department"><i class="fa fa-trash fa-1x"></i></a>
                                                 </td>
                                             </tr>
                                         <?php
-                                            $cnt = $cnt + 1;
+
                                         } ?>
 
                                     </tbody>

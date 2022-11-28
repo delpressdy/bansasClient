@@ -3,7 +3,7 @@
 include('../includes/session.php');
 
 $delid = $_GET['delid'];
-$fid = $_GET['fid'];
+
 
 
 $query = mysqli_query($con,"DELETE FROM tblstaff WHERE staffId='$delid'");

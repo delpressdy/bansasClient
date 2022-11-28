@@ -99,11 +99,11 @@ include('../includes/session.php');
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>User ID</th>
+
+                                            <th>Staff ID</th>
                                             <th>Firstname</th>
                                             <th>Lastname</th>
-                                            <th>Room Number</th>
+                                            <th>Grade</th>
                                             <th>EmailAddress</th>
                                             <th>Contact</th>
                                             <th>Password</th>
@@ -115,29 +115,30 @@ include('../includes/session.php');
                                     <tbody>
 
                                         <?php
-                                        $ret = mysqli_query($con, "SELECT tblstaff.`staffId`,tblstaff.`firstName`,tblstaff.`lastName`, tblfaculty.`facultyName` ,tblstaff.`emailAddress`,tblstaff.`phoneNo`,tblstaff.`password`,tblstaff.`dateCreated`FROM tblstaff INNER JOIN tblfaculty ON tblfaculty.`facultyId` = tblstaff.`facultyId`");
-                                        $cnt = 1;
+                                        $ret = mysqli_query($con, "SELECT tblstaff.`firstName`, tbllevel.`levelName`, tblstaff.`lastName`,tblstaff.`emailAddress`, tblstaff.`password`,tblstaff.`phoneNo`,tblstaff.`staffId`, tblstaff.`teacherId`,tblstaff.`dateCreated` ,tbldepartment.`departmentName` FROM tblstaff INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstaff.`departmentId` INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId`");
+
 
                                         // $ret = mysqli_query($con, "select * from tbladdmin where adminTypeId = 2");
                                         while ($row = mysqli_fetch_array($ret)) {
                                             // print_r($row);
                                         ?>
                                             <tr>
-                                                <td><?php echo $cnt; ?></td>
+
                                                 <td><?php echo $row['staffId']; ?></td>
                                                 <td><?php echo $row['firstName']; ?></td>
                                                 <td><?php echo $row['lastName']; ?></td>
-                                                <td><?php echo $row['facultyName']; ?></td>
+                                                <td><?php echo $row['levelName']; ?></td>
                                                 <td><?php echo $row['emailAddress']; ?></td>
                                                 <td><?php echo $row['phoneNo']; ?></td>
                                                 <td><?php echo $row['password']; ?></td>
                                                 <td><?php echo "Active" ?></td>
                                                 <td><?php echo $row['dateCreated']; ?></td>
-                                                <!-- <td><a href="editAdmin.php?editid=<?php echo $row['staffId']; ?>" title="View Admin"><i class="fa fa-edit fa-1x"></i></a></td> -->
-                                                <td><a onclick="return confirm('Are you sure you want to delete?')" href="deleteAdmin.php?delid=<?php echo $row['staffId']; ?>" title="Delete Admin"><i class="fa fa-trash fa-1x"></i></a></td>
+                                                <td><a href="editAdmin.php?editid=<?php echo $row['staffId']; ?>" title="View Admin"><i class="fa fa-edit fa-1x"></i></a>
+                                                    <a onclick="return confirm('Are you sure you want to delete?')" href="deleteStaff.php?delid=<?php echo $row['staffId']; ?>" title="Delete Admin"><i class="fa fa-trash fa-1x"></i></a>
+                                                </td>
                                             </tr>
                                         <?php
-                                            $cnt = $cnt + 1;
+
                                         } ?>
 
                                     </tbody>

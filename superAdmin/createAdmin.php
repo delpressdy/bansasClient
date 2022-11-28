@@ -17,8 +17,8 @@ if (isset($_POST['submit'])) {
     $staffId = $_POST['staffId'];
     $dateCreated = date("Y-m-d");
     $departmentId = $_POST['departmentId'];
-    $facultyId = $_POST['facultyId'];
-
+    // $facultyId = $_POST['facultyId'];
+    // $levelId = $_POST['levelId'];
     $que = mysqli_query($con, "select * from tblstaff where staffId ='$staffId'");
     $res = mysqli_fetch_array($que);
 
@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
         $statusMsg = "User ID already exist!";
     } else {
 
-        $query = mysqli_query($con, "insert into tblstaff(firstName,lastName,emailAddress,phoneNo,password,staffId,isAssigned,dateCreated) value('$firstname','$lastname','$emailAddress','$phoneNo','$pass','$staffId','$facultyId','$dateCreated')");
+        $query = mysqli_query($con, "insert into tblstaff(firstName,lastName,emailAddress,phoneNo,password,staffId,departmentId,dateCreated) value('$firstname','$lastname','$emailAddress','$phoneNo','$pass','$staffId','$departmentId','$dateCreated')");
 
         if ($query) {
 
@@ -212,21 +212,23 @@ if (isset($_POST['submit'])) {
                                                         <label for="x_card_code" class="control-label mb-1">Email Address<i class="text-danger">*</i></label>
                                                         <input id="" name="emailAddress" type="email" class="form-control cc-cvc" value="" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Email Address">
                                                     </div>
-
                                                     <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Classroom<i class="text-danger">*</i></label>
+                                                        <label for="cc-exp" class="control-label mb-1">Section<i class="text-danger">*</i></label>
                                                         <?php
-                                                        $query = mysqli_query($con, "select * from tblfaculty ORDER BY facultyName ASC");
+                                                        $query = mysqli_query($con, "select * from tbldepartment ORDER BY departmentName ASC");
                                                         $count = mysqli_num_rows($query);
                                                         if ($count > 0) {
-                                                            echo ' <select required name="facultyId" onchange="showValues(this.value)" class="custom-select form-control">';
+                                                            echo ' <select required name="departmentId" onchange="showValues(this.value)" class="custom-select form-control">';
                                                             while ($row = mysqli_fetch_array($query)) {
-                                                                echo '<option value="' . $row['facultyId'] . '" >' . $row['facultyName'] . '</option>';
+                                                                echo '<option value="' . $row['departmentId'] . '" >' . $row['departmentName'] . '</option>';
                                                             }
                                                             echo '</select>';
                                                         }
                                                         ?>
                                                     </div>
+
+
+
                                                 </div>
                                             </div>
                                             <div>

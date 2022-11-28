@@ -9,12 +9,12 @@ if (isset($_POST['submit'])) {
     $alertStyle = "";
     $statusMsg = "";
 
-    $facultyId = $_POST['facultyId'];
+
     $departmentName = $_POST['departmentName'];
     $dateCreated = date("Y-m-d");
+    $level = $_POST['level'];
 
-
-    $query = mysqli_query($con, "select * from tbldepartment where facultyId ='$facultyId' and departmentName = '$departmentName'");
+    $query = mysqli_query($con, "select * from tbldepartment where  departmentName = '$departmentName'");
     $ret = mysqli_fetch_array($query);
     if ($ret > 0) {
 
@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
         $statusMsg = "This Section is already exist for this Classroom!";
     } else {
 
-        $query = mysqli_query($con, "insert into tbldepartment(departmentName,facultyId,dateCreated) value('$departmentName','$facultyId','$dateCreated')");
+        $query = mysqli_query($con, "insert into tbldepartment(departmentName,dateCreated,levelId) value('$departmentName','$dateCreated','$level')");
 
         if ($query) {
 
@@ -127,28 +127,27 @@ if (isset($_POST['submit'])) {
                                         <div class="<?php echo $alertStyle; ?>" role="alert"><?php echo $statusMsg; ?></div>
                                         <form method="Post" action="">
                                             <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="x_card_code" class="control-label mb-1">Classroom</label>
+                                                <div class="col-6 mb-2">
+                                                    <label for="x_card_code" class="control-label mb-1">Grade Level</label>
+                                                    <select required name="level" class="custom-select form-control">
                                                         <?php
-                                                        $query = mysqli_query($con, "select * from tblfaculty ORDER BY facultyName ASC");
+                                                        $query = mysqli_query($con, "select * from tbllevel ORDER BY levelId ASC");
                                                         $count = mysqli_num_rows($query);
                                                         if ($count > 0) {
-                                                            echo ' <select required name="facultyId" class="custom-select form-control">';
-                                                            echo '<option value="">--Select Rooms--</option>';
-                                                            while ($row = mysqli_fetch_array($query)) {
-                                                                echo '<option value="' . $row['facultyId'] . '" >' . $row['facultyName'] . '</option>';
-                                                            }
-                                                            echo '</select>';
+
+                                                            while ($row = mysqli_fetch_array($query)) { ?>
+                                                                <option value=" <?= $row['levelId'] ?>"> <?= $row['levelName'] ?> </option>
+
+                                                        <?php  }
                                                         }
                                                         ?>
-
-                                                    </div>
+                                                    </select>
                                                 </div>
                                                 <div class="col-6">
                                                     <label for="x_card_code" class="control-label mb-1">Section Name</label>
                                                     <input id="" name="departmentName" type="tel" class="form-control cc-cvc" value="" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="e.g Charity, Lilac, Rose">
                                                 </div>
+
                                             </div>
                                             <div>
 
@@ -164,52 +163,7 @@ if (isset($_POST['submit'])) {
 
 
                     <br><br>
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">
-                                    <h2 align="center">List of all Sections</h2>
-                                </strong>
-                            </div>
-                            <div class="card-body">
-                                <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <!-- Log on to codeastro.com for more projects! -->
-                                            <th>Name</th>
-                                            <th>Classroom</th>
-                                            <th>Created</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
 
-                                        <?php
-                                        $ret = mysqli_query($con, "SELECT tbldepartment.departmentId, tbldepartment.departmentName,tbldepartment.dateCreated, tblfaculty.facultyName
-        from tbldepartment 
-        INNER JOIN tblfaculty ON tblfaculty.facultyId = tbldepartment.facultyId");
-                                        $cnt = 1;
-                                        while ($row = mysqli_fetch_array($ret)) {
-                                        ?>
-                                            <tr>
-                                                <td><?php echo $cnt; ?></td>
-                                                <td><?php echo $row['departmentName']; ?></td>
-                                                <td><?php echo $row['facultyName']; ?></td>
-                                                <td><?php echo $row['dateCreated']; ?></td>
-                                                <td><a href="editDepartment.php?editid=<?php echo $row['Id']; ?>" title="Edit Department"><i class="fa fa-edit fa-1x"></i></a>
-                                                    <a onclick="return confirm('Are you sure you want to delete?')" href="deleteDepartment.php?delid=<?php echo $row['departmentId']; ?>" title="Delete Department"><i class="fa fa-trash fa-1x"></i></a>
-                                                </td>
-                                            </tr>
-                                        <?php
-                                            $cnt = $cnt + 1;
-                                        } ?>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
                     <!-- end of datatable -->
 
                 </div>
