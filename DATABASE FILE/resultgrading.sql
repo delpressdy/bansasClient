@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2022 at 06:01 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 5.6.40
+-- Generation Time: Nov 27, 2022 at 08:21 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -21,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `resultgrading`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mysubjects`
+--
+
+CREATE TABLE `mysubjects` (
+  `mySubjectId` int(100) NOT NULL,
+  `courseID` int(100) DEFAULT NULL,
+  `Id` int(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -48,7 +59,9 @@ CREATE TABLE `tbladmin` (
 --
 
 INSERT INTO `tbladmin` (`Id`, `firstName`, `lastName`, `otherName`, `emailAddress`, `phoneNo`, `password`, `staffId`, `adminTypeId`, `isAssigned`, `isPasswordChanged`, `dateCreated`) VALUES
-(2, 'Liam', 'Moore', 'Admin', 'admin@mail.com', '7777777777', '123', 'Admin', 1, 1, 0, '');
+(2, 'Liam', 'Moore', 'Admin', 'admin@mail.com', '888888', 'test', 'Admin', 1, 1, 0, ''),
+(6, 'Chadwick', 'Booseman', 'Staff', 'xampp@gmail.com', '9451465196', '1253208465b1efa876f982d8a9e73eef', '91437', 2, 1, 0, '2022-11-21'),
+(7, 'Wakanda', 'Forever', 'Staff', 'roneilbansas5222@gmail.com', '09661337494', '1253208465b1efa876f982d8a9e73eef', '76158', 2, 1, 0, '2022-11-24');
 
 -- --------------------------------------------------------
 
@@ -82,14 +95,6 @@ CREATE TABLE `tblassignedadmin` (
   `facultyId` int(11) NOT NULL,
   `departmentId` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tblassignedadmin`
---
-
-INSERT INTO `tblassignedadmin` (`id`, `dateAssigned`, `staffId`, `facultyId`, `departmentId`) VALUES
-(1, '2022-10-27', 24966, 1, '2'),
-(2, '2022-10-27', 44118, 1, '2');
 
 -- --------------------------------------------------------
 
@@ -134,23 +139,7 @@ INSERT INTO `tblcourse` (`Id`, `courseTitle`, `courseCode`, `courseUnit`, `facul
 (21, 'Araling Panlipunan', '', 0, '5', '6', '1', '1', '2022-11-10'),
 (20, 'English', '', 3, '5', '6', '1', '1', '2022-11-09'),
 (19, 'Filipino', '', 3, '5', '6', '1', '1', '2022-11-09'),
-(25, 'Mapeh', 'N/A', 0, '5', '6', '1', '2', '2022-11-10'),
-(26, 'Science', 'N/A', 0, '5', '6', '1', '2', '2022-11-10'),
-(27, 'Filipino', 'N/A', 0, '5', '6', '1', '2', '2022-11-10'),
-(28, 'English', 'N/A', 0, '5', '6', '1', '2', '2022-11-10'),
-(29, 'Math', 'N/A', 0, '5', '6', '1', '2', '2022-11-10'),
-(30, 'Makabayan', 'N/A', 0, '5', '6', '1', '2', '2022-11-10'),
-(31, 'Filipino', 'N/A', 0, '5', '6', '1', '3', '2022-11-10'),
-(32, 'English', 'N/A', 0, '5', '6', '1', '3', '2022-11-10'),
-(33, 'Math', 'N/A', 0, '5', '6', '1', '3', '2022-11-10'),
-(34, 'Science', 'N/A', 0, '5', '6', '1', '3', '2022-11-10'),
-(35, 'Makabayan', 'N/A', 0, '5', '6', '1', '3', '2022-11-10'),
-(36, 'Filipino', 'N/A', 0, '5', '6', '1', '4', '2022-11-10'),
-(37, 'English', 'N/A', 0, '5', '6', '1', '4', '2022-11-10'),
-(38, 'Arpan', 'N/A', 0, '5', '6', '1', '4', '2022-11-10'),
-(39, 'Math', 'N/A', 0, '5', '6', '1', '4', '2022-11-10'),
-(40, 'Science', 'N/A', 0, '5', '6', '1', '4', '2022-11-10'),
-(41, 'Makabayan', 'N/A', 0, '5', '6', '1', '4', '2022-11-10');
+(45, 'arpan', 'N/A', 0, '6', '7', '2', '1', '2022-11-24');
 
 -- --------------------------------------------------------
 
@@ -159,7 +148,7 @@ INSERT INTO `tblcourse` (`Id`, `courseTitle`, `courseCode`, `courseUnit`, `facul
 --
 
 CREATE TABLE `tbldepartment` (
-  `Id` int(20) NOT NULL,
+  `departmentId` int(20) NOT NULL,
   `departmentName` varchar(255) NOT NULL,
   `facultyId` int(20) NOT NULL,
   `dateCreated` varchar(255) NOT NULL
@@ -169,7 +158,7 @@ CREATE TABLE `tbldepartment` (
 -- Dumping data for table `tbldepartment`
 --
 
-INSERT INTO `tbldepartment` (`Id`, `departmentName`, `facultyId`, `dateCreated`) VALUES
+INSERT INTO `tbldepartment` (`departmentId`, `departmentName`, `facultyId`, `dateCreated`) VALUES
 (6, 'Rose', 5, '2022-11-09'),
 (7, 'Lilac', 6, '2022-11-09'),
 (8, 'Sampaguita', 7, '2022-11-09'),
@@ -184,7 +173,7 @@ INSERT INTO `tbldepartment` (`Id`, `departmentName`, `facultyId`, `dateCreated`)
 --
 
 CREATE TABLE `tblfaculty` (
-  `Id` int(20) NOT NULL,
+  `facultyId` int(20) NOT NULL,
   `facultyName` varchar(255) NOT NULL,
   `dateCreated` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -193,7 +182,7 @@ CREATE TABLE `tblfaculty` (
 -- Dumping data for table `tblfaculty`
 --
 
-INSERT INTO `tblfaculty` (`Id`, `facultyName`, `dateCreated`) VALUES
+INSERT INTO `tblfaculty` (`facultyId`, `facultyName`, `dateCreated`) VALUES
 (5, 'Room 1', '2022-11-09'),
 (6, 'Room 2', '2022-11-09'),
 (7, 'Room 3', '2022-11-09'),
@@ -237,7 +226,7 @@ INSERT INTO `tblfinalresult` (`Id`, `matricNo`, `levelId`, `semesterId`, `sessio
 --
 
 CREATE TABLE `tbllevel` (
-  `Id` int(20) NOT NULL,
+  `levelId` int(20) NOT NULL,
   `levelName` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -245,7 +234,7 @@ CREATE TABLE `tbllevel` (
 -- Dumping data for table `tbllevel`
 --
 
-INSERT INTO `tbllevel` (`Id`, `levelName`) VALUES
+INSERT INTO `tbllevel` (`levelId`, `levelName`) VALUES
 (1, 'Grade 1'),
 (2, 'Grade 2'),
 (3, 'Grade 3'),
@@ -330,7 +319,7 @@ INSERT INTO `tblsemester` (`Id`, `semesterName`) VALUES
 --
 
 CREATE TABLE `tblsession` (
-  `Id` int(20) NOT NULL,
+  `sessionId` int(20) NOT NULL,
   `sessionName` varchar(30) NOT NULL,
   `isActive` int(5) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -339,7 +328,7 @@ CREATE TABLE `tblsession` (
 -- Dumping data for table `tblsession`
 --
 
-INSERT INTO `tblsession` (`Id`, `sessionName`, `isActive`) VALUES
+INSERT INTO `tblsession` (`sessionId`, `sessionName`, `isActive`) VALUES
 (1, '2022/2023', 1);
 
 -- --------------------------------------------------------
@@ -349,18 +338,24 @@ INSERT INTO `tblsession` (`Id`, `sessionName`, `isActive`) VALUES
 --
 
 CREATE TABLE `tblstaff` (
-  `Id` int(20) NOT NULL,
+  `teacherId` int(255) NOT NULL,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
-  `otherName` varchar(255) NOT NULL,
   `emailAddress` varchar(255) NOT NULL,
   `phoneNo` varchar(20) NOT NULL,
   `password` varchar(255) NOT NULL,
   `staffId` varchar(255) NOT NULL,
-  `isAssigned` int(10) NOT NULL,
-  `isPasswordChanged` int(10) NOT NULL,
+  `facultyId` int(10) NOT NULL,
   `dateCreated` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblstaff`
+--
+
+INSERT INTO `tblstaff` (`teacherId`, `firstName`, `lastName`, `emailAddress`, `phoneNo`, `password`, `staffId`, `facultyId`, `dateCreated`) VALUES
+(7, 'Elon', 'Musk', 'elon@mail.com', '9451465196', '1253208465b1efa876f982d8a9e73eef', '40282', 8, '2022-11-24'),
+(8, 'john', 'Musk', 'roneilbansas5222@gmail.com', '09661337494', '1253208465b1efa876f982d8a9e73eef', '44260', 6, '2022-11-24');
 
 -- --------------------------------------------------------
 
@@ -387,16 +382,20 @@ CREATE TABLE `tblstudent` (
 --
 
 INSERT INTO `tblstudent` (`Id`, `firstName`, `lastName`, `otherName`, `matricNo`, `password`, `levelId`, `facultyId`, `departmentId`, `sessionId`, `dateCreated`) VALUES
-(30, 'Pressdy', 'Maglinte', 'press', '441622818', 'test', 1, 5, 6, 1, '2022-11-09'),
-(32, 'Roniel', 'Bansas', 'neil', '191818722', 'test', 2, 6, 7, 1, '2022-11-09'),
-(33, 'Amanda', 'Beauty', 'Beauty', '6548945', 'test', 3, 7, 8, 1, '2022-11-09'),
-(34, 'Elon', 'Musk', 'Elon', '875465', 'test', 4, 8, 9, 1, '2022-11-09'),
-(35, 'Angelica', 'Panganiban', 'Gel', '453423', 'test', 5, 9, 10, 1, '2022-11-09'),
-(36, 'Drow', 'Ranger', 'Traxex', '34534123', 'test', 6, 10, 11, 1, '2022-11-09');
+(51, 'sadboy', 'sadgirl', 'sadsad', '21323', 'test', 1, 8, 9, 1, '2022-11-24'),
+(52, 'johnloy', 'joh', 'joloy', '213123', 'test', 1, 8, 9, 1, '2022-11-24'),
+(55, 'samples', 'Bansas', 'sdff', '2422223', 'test', 1, 6, 7, 1, '2022-11-24'),
+(56, 'asdf', 'asdf', 'asdfsdf', '41232332', 'test', 3, 6, 7, 1, '2022-11-24');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `mysubjects`
+--
+ALTER TABLE `mysubjects`
+  ADD PRIMARY KEY (`mySubjectId`);
 
 --
 -- Indexes for table `tbladmin`
@@ -432,13 +431,13 @@ ALTER TABLE `tblcourse`
 -- Indexes for table `tbldepartment`
 --
 ALTER TABLE `tbldepartment`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`departmentId`);
 
 --
 -- Indexes for table `tblfaculty`
 --
 ALTER TABLE `tblfaculty`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`facultyId`);
 
 --
 -- Indexes for table `tblfinalresult`
@@ -450,7 +449,7 @@ ALTER TABLE `tblfinalresult`
 -- Indexes for table `tbllevel`
 --
 ALTER TABLE `tbllevel`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`levelId`);
 
 --
 -- Indexes for table `tblresult`
@@ -468,29 +467,39 @@ ALTER TABLE `tblsemester`
 -- Indexes for table `tblsession`
 --
 ALTER TABLE `tblsession`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`sessionId`);
 
 --
 -- Indexes for table `tblstaff`
 --
 ALTER TABLE `tblstaff`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`teacherId`),
+  ADD KEY `FK_tblstaff` (`facultyId`);
 
 --
 -- Indexes for table `tblstudent`
 --
 ALTER TABLE `tblstudent`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `FK_tblstudent` (`facultyId`),
+  ADD KEY `FK_tblstudent_level` (`levelId`),
+  ADD KEY `FK_tblstudent_deparment` (`departmentId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `mysubjects`
+--
+ALTER TABLE `mysubjects`
+  MODIFY `mySubjectId` int(100) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tbladmin`
 --
 ALTER TABLE `tbladmin`
-  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbladmintype`
@@ -502,7 +511,7 @@ ALTER TABLE `tbladmintype`
 -- AUTO_INCREMENT for table `tblassignedadmin`
 --
 ALTER TABLE `tblassignedadmin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tblcgparesult`
@@ -514,37 +523,37 @@ ALTER TABLE `tblcgparesult`
 -- AUTO_INCREMENT for table `tblcourse`
 --
 ALTER TABLE `tblcourse`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `tbldepartment`
 --
 ALTER TABLE `tbldepartment`
-  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `departmentId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tblfaculty`
 --
 ALTER TABLE `tblfaculty`
-  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `facultyId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tblfinalresult`
 --
 ALTER TABLE `tblfinalresult`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbllevel`
 --
 ALTER TABLE `tbllevel`
-  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `levelId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tblresult`
 --
 ALTER TABLE `tblresult`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `tblsemester`
@@ -556,19 +565,37 @@ ALTER TABLE `tblsemester`
 -- AUTO_INCREMENT for table `tblsession`
 --
 ALTER TABLE `tblsession`
-  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `sessionId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tblstaff`
 --
 ALTER TABLE `tblstaff`
-  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `teacherId` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tblstudent`
 --
 ALTER TABLE `tblstudent`
-  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tblstaff`
+--
+ALTER TABLE `tblstaff`
+  ADD CONSTRAINT `FK_tblstaff` FOREIGN KEY (`facultyId`) REFERENCES `tblfaculty` (`facultyId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tblstudent`
+--
+ALTER TABLE `tblstudent`
+  ADD CONSTRAINT `FK_tblstudent` FOREIGN KEY (`facultyId`) REFERENCES `tblfaculty` (`facultyId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_tblstudent_deparment` FOREIGN KEY (`departmentId`) REFERENCES `tbldepartment` (`departmentId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_tblstudent_level` FOREIGN KEY (`levelId`) REFERENCES `tbllevel` (`levelId`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
