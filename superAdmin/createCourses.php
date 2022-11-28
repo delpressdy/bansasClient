@@ -194,7 +194,12 @@ if (isset($_POST['submit'])) {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-6">
+
+                                            </div>
+                                            <div>
+                                                <div class="row">
+
+                                                    <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="x_card_code" class="control-label mb-1">Grade Lvl</label>
                                                         <?php
@@ -212,18 +217,13 @@ if (isset($_POST['submit'])) {
                                                     </div>
                                                 </div>
 
-                                            </div>
-                                            <div>
-                                                <div class="row">
                                                     <div class="col-6">
                                                         <div class="form-group">
-                                                            <label for="cc-exp" class="control-label mb-1">Grading</label>
                                                             <?php
                                                             $query = mysqli_query($con, "select * from tblsemester");
                                                             $count = mysqli_num_rows($query);
                                                             if ($count > 0) {
-                                                                echo ' <select required name="semesterId" class="custom-select form-control">';
-                                                                echo '<option value="">--Select--</option>';
+                                                                echo ' <select hidden required name="semesterId" class="custom-select form-control">';
                                                                 while ($row = mysqli_fetch_array($query)) {
                                                                     echo '<option value="' . $row['Id'] . '" >' . $row['semesterName'] . '</option>';
                                                                 }

@@ -277,7 +277,7 @@ if (isset($_POST['submit'])) {
 
 
                                                 </div>
-                                                <p><small><i>Default pupil's password is set to "<b class="text-danger">pupil</b>"</i></small></p>
+                                                <p><small><i>Default pupil's password is set to "<b class="text-danger">test</b>"</i></small></p>
                                                 <button type="submit" name="submit" class="btn btn-success">Add New Student</button>
                                             </div>
                                         </form>
