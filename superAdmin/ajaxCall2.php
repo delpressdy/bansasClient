@@ -11,7 +11,7 @@ $countt2 = mysqli_num_rows($queryss2);
 
 if ($countt > 0) {
     echo '
-        <select hidden required name="departmentId" onchange="showLecturer(this.value)" class="custom-select form-control">';
+        <select required name="departmentId" onchange="showLecturer(this.value)" class="custom-select form-control">';
     while ($row = mysqli_fetch_array($queryss)) {
         echo '<option value="' . $row['departmentId'] . '" >' . $row['departmentName'] . '</option>';
     }

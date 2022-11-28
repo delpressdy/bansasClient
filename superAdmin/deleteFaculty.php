@@ -4,7 +4,7 @@ include('../includes/session.php');
 
 $delid = $_GET['delid'];
 
-$query = mysqli_query($con,"DELETE FROM tblfaculty WHERE Id='$delid'");
+$query = mysqli_query($con,"DELETE FROM tblfaculty WHERE facultyId='$delid'");
 
 
 if ($query === TRUE) {
@@ -27,9 +27,3 @@ else{
 
 
 }
-
-
-   
-
-?>
-
