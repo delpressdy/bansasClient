@@ -77,16 +77,7 @@ if ($row['adminTypeId'] === 1) {
 
 
 
-                <li class="menu-title">Pupils Tab ↓↓↓</li>
-                <li class="menu-item-has-children dropdown <?php if ($page == 'student') {
-                                                                echo 'active';
-                                                            } ?>">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Pupils</a>
-                    <ul class="sub-menu children dropdown-menu">
 
-                        <li><i class="fa fa-eye"></i> <a href="viewStudent.php">Show Pupils</a></li>
-                    </ul>
-                </li>
 
 
 
