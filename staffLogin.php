@@ -12,7 +12,7 @@ if (isset($_POST['login'])) {
 
     if ($count > 0) {
         $_SESSION['adminTypeId'] = 2;
-        $_SESSION['facultyId'] = $row['facultyId'];
+        $_SESSION['departmentId'] = $row['departmentId'];
         $_SESSION['staffId'] = $row['staffId'];
         $_SESSION['firstName'] = $row['firstName'];
         $_SESSION['lastName'] = $row['lastName'];

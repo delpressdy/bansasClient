@@ -104,7 +104,7 @@ include('../includes/session.php');
                                             <th>Full Name</th>
                                             <th>StudentID</th>
                                             <th>Grade lvl</th>
-                                            <th>Classroom</th>
+
                                             <th>Section</th>
 
                                             <th>Date Added</th>
@@ -115,21 +115,10 @@ include('../includes/session.php');
 
                                         <?php
                                         if ($_SESSION['adminTypeId'] == 1) {
-                                            $ret = mysqli_query($con, "SELECT  tblstudent.`firstName`, tblstudent.`lastName`, tbllevel.`levelName`,
-                                            tblfaculty.`facultyName`, tbldepartment.`departmentName`, tblstudent.`matricNo`,tblstudent.`dateCreated`,
-                                            tblstaff.`facultyId`, tblfaculty.`facultyName` FROM tblstudent
-                                             INNER JOIN  tblfaculty ON tblfaculty.`facultyId` = tblstudent.`facultyId` 
-                                             INNER JOIN tblstaff ON tblstaff.`facultyId` = tblfaculty.`facultyId` 
-                                             INNER JOIN tbllevel ON tbllevel.`levelId` = tblstudent.`levelId` 
-                                             INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId`");
+                                            $ret = mysqli_query($con, "SELECT * FROM tblstudent INNER JOIN tbldepartment ON  tbldepartment.`departmentId` = tblstudent.`departmentId` INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId`
+                                            ");
                                         } else {
-                                            $ret = mysqli_query($con, "SELECT  tblstudent.`firstName`, tblstudent.`lastName`, tbllevel.`levelName`,
-                                             tblfaculty.`facultyName`, tbldepartment.`departmentName`, tblstudent.`matricNo`,tblstudent.`dateCreated`,
-                                             tblstaff.`facultyId`, tblfaculty.`facultyName` FROM tblstudent
-                                              INNER JOIN  tblfaculty ON tblfaculty.`facultyId` = tblstudent.`facultyId` 
-                                              INNER JOIN tblstaff ON tblstaff.`facultyId` = tblfaculty.`facultyId` 
-                                              INNER JOIN tbllevel ON tbllevel.`levelId` = tblstudent.`levelId` 
-                                              INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` where tblfaculty.facultyId = ' $_SESSION[facultyId]' ");
+                                            $ret = mysqli_query($con, "SELECT * FROM tblstudent INNER JOIN tbldepartment ON  tbldepartment.`departmentId` = tblstudent.`departmentId` INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` where tbldepartment.departmentId = ' $_SESSION[departmentId]' ");
                                         }
 
                                         $cnt = 1;
@@ -160,7 +149,7 @@ include('../includes/session.php');
                                                     ?>
 
                                                 </td>
-                                                <td><?php echo $row['facultyName']; ?></td>
+                                                <!-- <td><?php echo $row['facultyName']; ?></td> -->
                                                 <td><?php echo $row['departmentName']; ?></td>
 
                                                 <td><?php echo $row['dateCreated']; ?></td>

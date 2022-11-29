@@ -10,11 +10,12 @@ if (isset($_POST['submit'])) {
     $statusMsg = "";
 
     $courseTitle = $_POST['courseTitle'];
-    $levelId = $_POST['levelId'];
-    $semesterId = $_POST['semesterId'];
-    $departmentId = $_POST['departmentId'];
-    $facultyId = $_POST['facultyId'];
+    $department = $_POST['department'];
     $dateAdded = date("Y-m-d");
+
+
+    echo "window.alert($courseTitle )";
+
 
     //Checks the Course Code
     $query = mysqli_query($con, "select * from tblcourse where courseTitle ='$courseTitle'");
@@ -25,7 +26,7 @@ if (isset($_POST['submit'])) {
         $statusMsg = "This Subject already exist!";
     } else {
 
-        $query = mysqli_query($con, "insert into tblcourse(courseTitle,facultyId,departmentId,levelId,semesterId,dateAdded) value('$courseTitle','$facultyId','$departmentId','$levelId','$semesterId','$dateAdded')");
+        $query = mysqli_query($con, "insert into tblcourse(subjectTitle,departmentId,dateAdded) value('$courseTitle','$department','$dateAdded')");
 
         if ($query) {
 
@@ -123,6 +124,53 @@ if (isset($_POST['submit'])) {
             }
         }
     </script>
+
+    <script>
+        function showValues2(str) {
+            if (str == "") {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            } else {
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("txtHint").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "ajaxCall.php?fid=" + str, true);
+                xmlhttp.send();
+            }
+        }
+
+        function showRole(str) {
+            if (str == "") {
+                document.getElementById("txtHintt").innerHTML = "";
+                return;
+            } else {
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("txtHintt").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "ajaxCallRole.php?id=" + str, true);
+                xmlhttp.send();
+            }
+        }
+    </script>
+
 </head>
 
 <body>
@@ -200,56 +248,29 @@ if (isset($_POST['submit'])) {
                                                 <div class="row">
 
                                                     <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="x_card_code" class="control-label mb-1">Grade Lvl</label>
-                                                        <?php
-                                                        $query = mysqli_query($con, "select * from tbllevel");
-                                                        $count = mysqli_num_rows($query);
-                                                        if ($count > 0) {
-                                                            echo ' <select required name="levelId" class="custom-select form-control">';
-                                                            echo '<option value="">--Select Level--</option>';
-                                                            while ($row = mysqli_fetch_array($query)) {
-                                                                echo '<option value="' . $row['levelId'] . '" >' . $row['levelName'] . '</option>';
-                                                            }
-                                                            echo '</select>';
-                                                        }
-                                                        ?>
-                                                    </div>
-                                                </div>
-
-                                                    <div class="col-6">
                                                         <div class="form-group">
+                                                            <label for="x_card_code" class="control-label mb-1">Section</label>
                                                             <?php
-                                                            $query = mysqli_query($con, "select * from tblsemester");
+                                                            $query = mysqli_query($con, "select * from tbldepartment");
                                                             $count = mysqli_num_rows($query);
                                                             if ($count > 0) {
-                                                                echo ' <select hidden required name="semesterId" class="custom-select form-control">';
+                                                                echo ' <select required name="department"  onchange="showValues2(this.value)" class="custom-select form-control">';
+                                                                echo '<option value="">--Select Level--</option>';
                                                                 while ($row = mysqli_fetch_array($query)) {
-                                                                    echo '<option value="' . $row['Id'] . '" >' . $row['semesterName'] . '</option>';
+                                                                    echo '<option value="' . $row['departmentId'] . '" >' . $row['departmentName'] . '</option>';
                                                                 }
                                                                 echo '</select>';
                                                             }
                                                             ?>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label for="x_card_code" class="control-label mb-1">Classroom</label>
-                                                            <?php
-                                                            $query = mysqli_query($con, "select * from tblfaculty ORDER BY facultyName ASC");
-                                                            $count = mysqli_num_rows($query);
-                                                            if ($count > 0) {
-                                                                echo ' <select required name="facultyId" onchange="showValues(this.value)" class="custom-select form-control">';
-                                                                echo '<option value="">--Select Room--</option>';
-                                                                while ($row = mysqli_fetch_array($query)) {
-                                                                    echo '<option value="' . $row['facultyId'] . '" >' . $row['facultyName'] . '</option>';
-                                                                }
-                                                                echo '</select>';
-                                                            }
-                                                            ?>
 
-                                                        </div>
+
                                                     </div>
+
+
+
+
+
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">

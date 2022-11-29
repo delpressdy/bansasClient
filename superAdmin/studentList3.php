@@ -132,8 +132,9 @@ error_reporting(0);
                                                     <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                                         <thead>
                                                             <tr>
-                                                                <th>Full Name</th>
+
                                                                 <th>ID #</th>
+                                                                <th>Full Name</th>
                                                                 <th>Grade lvl</th>
                                                                 <th>Section</th>
 
@@ -145,35 +146,51 @@ error_reporting(0);
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-
                                                             <?php
 
-
-                                                            $ret = mysqli_query($con, "SELECT tblstudent.`Id`, tblstudent.`firstName`, tblstudent.`dateCreated`, tbllevel.`levelId`,  tblstudent.`lastName`, tblstudent.`matricNo`, tbldepartment.`departmentName`, tbllevel.`levelName`,tblfaculty.`facultyId`,  tblfaculty.`facultyName`, tblstudent.`sessionId`  FROM tblstudent INNER JOIN tbllevel ON tblstudent.`levelId` = tbllevel.`levelId` INNER JOIN tblfaculty ON tblfaculty.`facultyId` = tblstudent.`facultyId` INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` INNER JOIN tblsession ON tblstudent.`sessionId` = tblsession.`sessionId`");
-                                                            $cnt = 1;
-                                                            while ($row = mysqli_fetch_array($ret)) {
+                                                            if ($_SESSION['adminTypeId'] == 2) {
+                                                                $sql = mysqli_query($con, "SELECT  tblcourse.`subjectId`, tblstudent.`StudentId` ,
+    tbldepartment.`departmentId` ,tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`contactNumber`,
+    tblstudent.`matricNo`,tblstudent.`otherName`,tblstudent.`schoolyear`, tbldepartment.`departmentName`,
+    tbllevel.`levelName` 
+    FROM tblstudent 
+    INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` 
+    INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` 
+    INNER JOIN tblcourse ON tblcourse.`departmentId` = tbldepartment.`departmentId` where tbldepartment.`departmentId` = ' $_SESSION[departmentId]'  group by tblstudent.`StudentId` ");
+                                                            } else {
+                                                                $sql = mysqli_query($con, "SELECT  tblcourse.`subjectId`, tblstudent.`StudentId` ,
+tbldepartment.`departmentId` ,tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`contactNumber`,
+tblstudent.`matricNo`,tblstudent.`otherName`,tblstudent.`schoolyear`, tbldepartment.`departmentName`,
+tbllevel.`levelName` 
+FROM tblstudent 
+INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` 
+INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` 
+INNER JOIN tblcourse ON tblcourse.`departmentId` = tbldepartment.`departmentId` group by tblstudent.`StudentId` ");
+                                                            }
+                                                            while ($row = mysqli_fetch_array($sql)) {
                                                             ?>
                                                                 <tr>
-                                                                    <td><?php echo $row['firstName'] . ' ' . $row['lastName']; ?></td>
                                                                     <td><?php echo $row['matricNo']; ?></td>
+                                                                    <td><?php echo $row['firstName'] . ' ' . $row['lastName'] ?></td>
+
                                                                     <td><?php echo $row['levelName']; ?></td>
                                                                     <td><?php echo $row['departmentName']; ?></td>
 
-                                                                    <td><a href="viewSemesterResult.php?semesterId=1&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+                                                                    <td><a href="viewGradeResult.php?semesterId=1&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
 
-                                                                    <td><a href="viewSemesterResult.php?semesterId=2&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+                                                                    <td><a href="viewGradeResult.php?semesterId=2&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
 
-                                                                    <td><a href="viewSemesterResult.php?semesterId=3&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+                                                                    <td><a href="viewGradeResult.php?semesterId=3&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
 
-                                                                    <td><a href="viewSemesterResult.php?semesterId=4&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+                                                                    <td><a href="viewGradeResult.php?semesterId=4&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
 
-                                                                    <td><a href="viewFinalResult.php?matricNo=<?php echo $row['matricNo']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+                                                                    <td><a href="viewGradeResult.php?matricNo=<?php echo $row['matricNo']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
 
                                                                 </tr>
                                                             <?php
-                                                                $cnt = $cnt + 1;
-                                                            }
-                                                            ?>
+
+                                                            } ?>
+
 
                                                         </tbody>
                                                     </table>

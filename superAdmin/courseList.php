@@ -4,26 +4,25 @@ include('../includes/dbconnection.php');
 include('../includes/session.php');
 include('../includes/functions.php');
 
-if (isset($_GET['matricNo']) && isset($_GET['levelId']) && isset($_GET['departmentId']) && isset($_GET['facultyId']) && isset($_GET['sessionId']) && isset($_GET['semesterId'])) {
+if (isset($_GET['matricNo']) && isset($_GET['departmentId']) && isset($_GET['semesterId'])) {
 
     $matricNo = $_GET['matricNo'];
-    $levelId = $_GET['levelId'];
+
     $departmentId = $_GET['departmentId'];
-    $facultyId = $_GET['facultyId'];
-    $sessionId = $_GET['sessionId'];
+
+
     $semesterId = $_GET['semesterId'];
 
 
     $stdQuery = mysqli_query($con, "select * from tblstudent where matricNo = '$matricNo'");
     $rowStd = mysqli_fetch_array($stdQuery);
 
-    $semesterQuery = mysqli_query($con, "select * from tblsemester where Id = '$semesterId'");
+    $semesterQuery = mysqli_query($con, "select * from tblsemester where grading_Id = '$semesterId'");
     $rowSemester = mysqli_fetch_array($semesterQuery);
 
-    $sessionQuery = mysqli_query($con, "select * from tblsession where sessionId = '$sessionId'");
-    $rowSession = mysqli_fetch_array($sessionQuery);
 
-    $levelQuery = mysqli_query($con, "select * from tbllevel where levelId = '$levelId'");
+
+    $levelQuery = mysqli_query($con, "SELECT * FROM tbldepartment INNER JOIN tbllevel ON tbllevel.levelId = tbldepartment.levelId WHERE tbldepartment.departmentId = '$departmentId'");
     $rowLevel = mysqli_fetch_array($levelQuery);
 } else {
     echo "<script type = \"text/javascript\">
@@ -32,90 +31,6 @@ if (isset($_GET['matricNo']) && isset($_GET['levelId']) && isset($_GET['departme
 }
 
 
-
-//------------------------------------ COMPUTE RESULT -----------------------------------------------
-
-if (isset($_POST['compute'])) {
-
-    $score = $_POST['score'];
-    $N = count($score);
-
-    $courseCode = $_POST['courseCode'];
-    $courseUnit = $_POST['courseUnit'];
-    $dateAdded = date("Y-m-d");
-
-    $letterGrade = "";
-    $gradePoint = "";
-    $scoreGradePoint = 0.00;
-
-
-    $totalCourseUnit = 0;
-    $totalScoreGradePoint = 0;
-    $gpa = "";
-
-    for ($i = 0; $i < $N; $i++) {
-
-        $score[$i]; //each scores entered
-        $courseCode[$i]; // each course codes 
-        $courseUnit[$i]; //each course units
-        $letterGrade =  getScoreLetterGrade($score[$i]); //get the score letter grade (AA, A, AB, B etc) for each courses
-        $gradePoint =  getScoreGradePoint($score[$i]); //get the score grade points (4.00, 3.75, 3.50 etc) for each courses
-
-        $scoreGradePoint = $courseUnit[$i] * $gradePoint; //multiply each course unit with their grade point ( 3 * 4 = 12)
-
-
-        //Checks if result has been computed (MatricNo, level, semester and session)
-        $que = mysqli_query($con, "select * from tblfinalresult where matricNo ='$matricNo' and levelId = '$levelId' and semesterId = '$semesterId' and sessionId = '$sessionId'");
-        $ret = mysqli_fetch_array($que);
-
-        if ($ret == 0) {  //if no record exists, insert a record
-
-            $query = mysqli_query($con, "insert into tblresult(matricNo,levelId,semesterId,sessionId,courseCode,courseUnit,score,scoreGradePoint,scoreLetterGrade,totalScoreGradePoint,dateAdded) 
-                value('$matricNo','$levelId','$semesterId','$sessionId','$courseCode[$i]','$courseUnit[$i]','$score[$i]','$gradePoint','$letterGrade','$scoreGradePoint','$dateAdded')");
-
-            if ($query) {
-
-                $totalCourseUnit += $courseUnit[$i]; //adds up all the course units
-                $totalScoreGradePoint += $scoreGradePoint; //adds up all the score grade points
-
-                //computes the gpa by dividing the total course unit by the total score grade point
-                // $gpa = round(($totalScoreGradePoint / $totalCourseUnit), 2);
-                // $classOfDiploma = getClassOfDiploma($gpa); //gets the class of diploma (Distinction, Upper, Lower etc)
-            } else {
-                $alertStyle = "alert alert-danger";
-                $statusMsg = "An error Occurred!";
-            }
-        } //end of check 
-
-
-        //echo 'Score = '.$score[$i].' Letter Grade = '.$letterGrade.' Grade point = '.$gradePoint.' totalGradePoint = '.$scoreGradePoint.'<br>';
-
-    } //end of loop
-
-
-    //Checks if result has been computed (MatricNo, level, semester and session)
-    $que = mysqli_query($con, "select * from tblfinalresult where matricNo ='$matricNo' and levelId = '$levelId' and semesterId = '$semesterId' and sessionId = '$sessionId'");
-    $ret = mysqli_fetch_array($que);
-
-    if ($ret > 0) {
-
-        $alertStyle = "alert alert-danger";
-        $statusMsg = "Result has been computed for this student for this Grading!";
-    } else {
-
-        $querys = mysqli_query($con, "insert into tblfinalresult(matricNo,levelId,semesterId,sessionId,totalCourseUnit,totalScoreGradePoint,gpa,classOfDiploma,dateAdded) 
-                value('$matricNo','$levelId','$semesterId','$sessionId','$totalCourseUnit','$totalScoreGradePoint','$gpa','$classOfDiploma','$dateAdded')");
-
-        if ($querys) {
-
-            $alertStyle = "alert alert-success";
-            $statusMsg = "Result Computed Successfully!";
-        } else {
-            $alertStyle = "alert alert-danger";
-            $statusMsg = "An error Occurred!";
-        }
-    }
-} //end of POST
 
 
 ?>
@@ -148,33 +63,6 @@ if (isset($_POST['compute'])) {
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-    <script>
-        //Only allows Numbers
-        function isNumber(evt) {
-            evt = (evt) ? evt : window.event;
-            var charCode = (evt.which) ? evt.which : evt.keyCode;
-            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-                return false;
-            }
-            return true;
-        }
-
-        //Check if the value entered is greater than 100 and not less than 0
-        function myFunction() {
-            var x, text;
-            // Get the value of the input field with id="numb"
-            x = document.getElementById("score").value;
-            // If x is Not a Number or less than one or greater than 10
-            if (isNaN(x) || x < 1 || x > 100) {
-                // text = "Value cannot be greater than 100 or less than 0";
-                alert("Invalid");
-            } else {
-                text = "";
-            }
-            document.getElementById("demo").innerHTML = text;
-        }
-    </script>
 </head>
 
 <body>
@@ -188,7 +76,32 @@ if (isset($_POST['compute'])) {
         <?php include 'includes/header.php'; ?>
         <!-- Header-->
 
+        <script>
+            //Only allows Numbers
+            function isNumber(evt) {
+                evt = (evt) ? evt : window.event;
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                    return false;
+                }
+                return true;
+            }
 
+            //Check if the value entered is greater than 100 and not less than 0
+            function myFunction() {
+                var x, text;
+                // Get the value of the input field with id="numb"
+                x = document.getElementById("score").value;
+                // If x is Not a Number or less than one or greater than 10
+                if (isNaN(x) || x < 1 || x > 100) {
+                    // text = "Value cannot be greater than 100 or less than 0";
+                    alert("Invalid");
+                } else {
+                    text = "";
+                }
+                document.getElementById("demo").innerHTML = text;
+            }
+        </script>
         <div class="content">
             <div class="animated fadeIn">
                 <div class="row">
@@ -198,88 +111,151 @@ if (isset($_POST['compute'])) {
                         </div> <!-- .card -->
                     </div>
                     <!--/.col-->
+                    <?php
 
+                    ?>
                     <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">
-                                    <h4 align="center">
-                                        <?php
-                                        $lvl = $rowLevel['levelName'];
-                                        echo '<strong style="color:red">' . $lvl . ': </strong>';
-                                        ?>
-                                        &nbsp;
-
-                                        <?php echo  $rowStd['firstName'] . ' ' . $rowStd['lastName'] ?>'s
-                                        <?php
-                                        $grading = $rowSemester['semesterName'];
-
-                                        if ($grading == "1st Grading") {
-                                            echo '<strong style="color:#9ef01a;">[' . $grading . ']</strong>';
-                                        } else if ($grading == "2nd Grading") {
-                                            echo '<strong style="color:#70e000;">[' . $grading . ']</strong>';
-                                        } else if ($grading == "3rd Grading") {
-                                            echo '<strong style="color:#38b000;">[' . $grading . ']</strong>';
-                                        } else {
-                                            echo '<strong style="color:#008000;">[' . $grading . ']</strong>';
-                                        }
-
-                                        ?> - Results</h>
-                                </strong>
+                        <div class="row">
+                            <div class="col-md-4">
                             </div>
-                            <form method="post">
-                                <div class="card-body">
-                                    <p id="demo"></p>
-                                    <div class="<?php if (isset($alertStyle)) {
-                                                    echo $alertStyle;
-                                                } ?>" role="alert"><?php if (isset($statusMsg)) {
-                                                                        echo $statusMsg;
-                                                                    } ?></div>
-                                    <table class="table table-hover table-striped table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Course</th>
-                                                <th>Score</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
 
-                                            <?php
-                                            $ret = mysqli_query($con, "SELECT * FROM tblcourse WHERE levelId = $_GET[levelId]");
+                            <div class="col-md-4 d-flex justify-content-center align-items-center">
 
-                                            $cnt = 1;
-                                            while ($row = mysqli_fetch_array($ret)) {
-                                            ?>
-                                                <tr>
-                                                    <td><?php echo $cnt; ?></td>
-                                                    <td><?php echo $row['courseTitle']; ?></td>
-                                                    <td><input name="score[]" id="score" type="text" class="form-control" max="100" onkeypress="return isNumber(event)" autofocus></td>
-                                                    <input id="" value="<?php echo $row['courseCode']; ?>" name="courseCode[]" type="hidden" class="form-control">
-                                                    <input id="" value="<?php echo $row['courseUnit']; ?>" name="courseUnit[]" type="hidden" class="form-control">
-                                                    <input id="" name="" value="<?php echo $row['Id']; ?>" type="hidden" class="form-control">
-                                                </tr>
-                                            <?php
-                                                $cnt = $cnt + 1;
-                                            } ?>
+                                <div class="card p-4">
+                                    <?php
 
-                                        </tbody>
-                                    </table>
-                                    <button type="submit" onclick="myFunction()" name="compute" class="btn btn-success">Compute Result</button>
-                            </form>
+                                    if (isset($_POST['submitGrade'])) {
+                                        $subject = $_POST['subject'];
+                                        $grade = $_POST['grade'];
+                                        $studentId =   $rowStd['StudentId'];
+                                        $date = date("Y-m-d");
+                                        $departmentId = $departmentId;
+                                        $grading = $semesterId;
+
+
+
+                                        $query = mysqli_query($con, "select * from tblresult where subjectId = '$subject' and StudentId = '$studentId' and gradingId = '$grading'");
+                                        if (mysqli_num_rows($query) > 0) { ?>
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                You already submitted grade to this subject.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <?php } else {
+                                            $insertGrade = "insert into tblresult(StudentId,subjectId,grade,dateAdded,departmentId,gradingId)
+                                        value('  $studentId','  $subject',' $grade','  $date','    $departmentId ','   $grading')";
+
+                                            if ($con->query($insertGrade) === TRUE) { ?>
+                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                    Grade Added
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            <?php } else {   ?>
+                                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                    Failed to add grades
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                    <?php  }
+                                        }
+                                    }
+                                    ?>
+
+
+
+                                    <h3 class="py-2 text-center"><?= $rowStd['firstName'] . ' ' . $rowStd['lastName'] ?> </h3>
+                                    <div class="card-header">
+
+                                        <strong class="card-title">
+
+
+                                            <h4 align="center">
+                                                <?php
+                                                $lvl = $rowLevel['levelName'];
+                                                echo '<strong style="color:red" class="text-success">' . $lvl . ': </strong>';
+                                                ?>
+                                                &nbsp;
+
+                                                <?php
+                                                $grading = $rowSemester['grading'];
+
+                                                if ($grading == "1st Grading") {
+                                                    echo '<strong style="color:#9ef01a;" class="text-info">[' . $grading . ']</strong>';
+                                                } else if ($grading == "2nd Grading") {
+                                                    echo '<strong style="color:#70e000;">[' . $grading . ']</strong>';
+                                                } else if ($grading == "3rd Grading") {
+                                                    echo '<strong style="color:#38b000;">[' . $grading . ']</strong>';
+                                                } else {
+                                                    echo '<strong style="color:#008000;">[' . $grading . ']</strong>';
+                                                }
+
+                                                ?> </h4>
+                                        </strong>
+                                    </div>
+                                    <form method="post" enctype="multipart/form-data">
+
+                                        <div class="form-group my-4">
+                                            <label for="subject" class="form-label">Subject</label>
+                                            <select class="form-control" aria-label="Default select example" required name="subject">
+                                                <option selected>--Select Subject--</option>
+
+
+                                                <?php
+                                                $ret = mysqli_query($con, "SELECT  tblcourse.`subjectId`,tblcourse.`subjectTitle`, tblstudent.`StudentId` ,
+                                            tbldepartment.`departmentId` ,tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`contactNumber`,
+                                            tblstudent.`matricNo`,tblstudent.`otherName`,tblstudent.`schoolyear`, tbldepartment.`departmentName`,
+                                            tbllevel.`levelName` 
+                                            FROM tblstudent 
+                                            INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` 
+                                            INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` 
+                                            INNER JOIN tblcourse ON tblcourse.`departmentId` = tbldepartment.`departmentId` where tblstudent.matricNo = '$matricNo'");
+
+
+                                                while ($row = mysqli_fetch_array($ret)) {
+                                                ?>
+                                                    <option value="<?= $row['subjectId'] ?>"><?= $row['subjectTitle'] ?></option>
+                                                <?php
+
+                                                } ?>
+
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label"></label>
+                                            <input type="text" class="form-control" name="grade" max="100" required placeholder="98">
+
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <input type="submit" name="submitGrade" value="Submit" class="btn btn-outline-success">
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4">
+
+                            </div>
                         </div>
+
                     </div>
                 </div>
 
                 <!-- end of datatable -->
 
             </div>
+            <?php include 'includes/footer.php'; ?>
         </div><!-- .animated -->
+
     </div><!-- .content -->
 
     <div class="clearfix"></div>
 
-    <?php include 'includes/footer.php'; ?>
+
 
 
     </div><!-- /#right-panel -->

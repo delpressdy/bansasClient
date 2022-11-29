@@ -1,39 +1,40 @@
-
 <?php
 
-    include('../includes/dbconnection.php');
-    include('../includes/session.php');
-    error_reporting(0);
+include('../includes/dbconnection.php');
+include('../includes/session.php');
+error_reporting(0);
 
-if(isset($_POST['submit'])){
-    
-    $cpassword=md5($_POST['currentpassword']);
-    $newpassword=md5($_POST['newpassword']);
+if (isset($_POST['submit'])) {
 
-    $query=mysqli_query($con,"select * from tbladmin where staffId='$staffId' and password='$cpassword'");
-    $row=mysqli_fetch_array($query);
-    if($row > 0){
-    $ret=mysqli_query($con,"update tbladmin set password='$newpassword' where staffId='$staffId'");
+    $cpassword = md5($_POST['currentpassword']);
+    $newpassword = md5($_POST['newpassword']);
 
-      $alertStyle ="alert alert-success";
-      $statusMsg="Password changed successfully!";
+    $query = mysqli_query($con, "select * from tblstaff where staffId='$staffId' and password='$cpassword'");
+    $row = mysqli_fetch_array($query);
+    if ($row > 0) {
+        $ret = mysqli_query($con, "update tblstaff set password='$newpassword' where staffId='$staffId'");
 
+        $alertStyle = "alert alert-success";
+        $statusMsg = "Password changed successfully!";
     } else {
 
-      $alertStyle ="alert alert-danger";
-      $statusMsg="Your current password is wrong!";
+        $alertStyle = "alert alert-danger";
+        $statusMsg = "Your current password is wrong!";
     }
 }
 
 
-  ?>
+?>
 
 <!doctype html>
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <?php include 'includes/title.php';?>
+    <?php include 'includes/title.php'; ?>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -54,11 +55,13 @@ if(isset($_POST['submit'])){
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+
 <body>
     <!-- Left Panel -->
-    <?php $page="profile"; include 'includes/leftMenu.php';?>
+    <?php $page = "profile";
+    include 'includes/leftMenu.php'; ?>
 
-   <!-- /#left-panel -->
+    <!-- /#left-panel -->
 
     <!-- Left Panel -->
 
@@ -67,7 +70,7 @@ if(isset($_POST['submit'])){
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-            <?php include 'includes/header.php';?>
+        <?php include 'includes/header.php'; ?>
         <!-- /header -->
         <!-- Header-->
 
@@ -108,7 +111,7 @@ if(isset($_POST['submit'])){
                                 <!-- Credit Card -->
                                 <div id="pay-invoice">
                                     <div class="card-body">
-                                       <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
+                                        <div class="<?php echo $alertStyle; ?>" role="alert"><?php echo $statusMsg; ?></div>
                                         <form method="Post" action="">
                                             <div class="row">
                                                 <div class="col-6">
@@ -118,30 +121,30 @@ if(isset($_POST['submit'])){
                                                     </div>
                                                 </div>
                                             </div>
-                                        <div>
+                                            <div>
 
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">New Password</label>
-                                                        <input id="" name="newpassword" type="password" class="form-control cc-exp" value="" data-val="true" placeholder="New Password">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="cc-exp" class="control-label mb-1">New Password</label>
+                                                            <input id="" name="newpassword" type="password" class="form-control cc-exp" value="" data-val="true" placeholder="New Password">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                             </div>
 
-                                        <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                             </div>
 
-                                        <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                </div>
-                                        </div>
 
                                                 <button type="submit" name="submit" class="btn btn-success">Change Password</button>
                                             </div>
@@ -150,33 +153,34 @@ if(isset($_POST['submit'])){
                                 </div>
                             </div>
                         </div> <!-- .card -->
-                    </div><!--/.col-->
-               
-
-                
-<!-- end of datatable -->
-
-            </div>
-        </div><!-- .animated -->
-    </div><!-- .content -->
-
-    <div class="clearfix"></div>
-
-        <?php include 'includes/footer.php';?>
+                    </div>
+                    <!--/.col-->
 
 
-</div><!-- /#right-panel -->
 
-<!-- Right Panel -->
+                    <!-- end of datatable -->
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="../assets/js/main.js"></script>
+                </div>
+            </div><!-- .animated -->
+        </div><!-- .content -->
 
-<script src="../assets/js/lib/data-table/datatables.min.js"></script>
+        <div class="clearfix"></div>
+
+        <?php include 'includes/footer.php'; ?>
+
+
+    </div><!-- /#right-panel -->
+
+    <!-- Right Panel -->
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+
+    <script src="../assets/js/lib/data-table/datatables.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
     <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
@@ -190,28 +194,27 @@ if(isset($_POST['submit'])){
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
+            $('#bootstrap-data-table-export').DataTable();
+        });
 
-      // Menu Trigger
-      $('#menuToggle').on('click', function(event) {
-            var windowWidth = $(window).width();   		 
-            if (windowWidth<1010) { 
-                $('body').removeClass('open'); 
-                if (windowWidth<760){ 
-                $('#left-panel').slideToggle(); 
+        // Menu Trigger
+        $('#menuToggle').on('click', function(event) {
+            var windowWidth = $(window).width();
+            if (windowWidth < 1010) {
+                $('body').removeClass('open');
+                if (windowWidth < 760) {
+                    $('#left-panel').slideToggle();
                 } else {
-                $('#left-panel').toggleClass('open-menu');  
-                } 
+                    $('#left-panel').toggleClass('open-menu');
+                }
             } else {
                 $('body').toggleClass('open');
-                $('#left-panel').removeClass('open-menu');  
-            } 
-                
-            }); 
+                $('#left-panel').removeClass('open-menu');
+            }
 
-      
-  </script>
+        });
+    </script>
 
 </body>
+
 </html>

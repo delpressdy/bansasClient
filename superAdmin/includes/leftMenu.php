@@ -10,7 +10,7 @@ if ($row['adminTypeId'] === 1) {
 } else {
 
     $staffFullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
-    $staffRoom = $_SESSION['facultyId'];
+    $staffRoom = $_SESSION['departmentId'];
 }
 ?>
 <aside id="left-panel" class="left-panel">
@@ -25,12 +25,57 @@ if ($row['adminTypeId'] === 1) {
                 </li>
 
                 <?php if ($_SESSION['adminTypeId'] == 2) { ?>
-                    <li class="menu-item-has-children dropdown">
-                        <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Staff</a>
+
+                    <li class="menu-title">Pupils Tab ↓↓↓</li>
+                    <li class="menu-item-has-children dropdown <?php if ($page == 'student') {
+                                                                    echo 'active';
+                                                                } ?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Pupils</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-plus"></i><a href="createAdmin.php">Add Staff</a></li>
-                            <li><i class="fa fa-eye"></i><a href="viewAdmin.php">View List</a></li>
-                        </ul> -->
+                            <!-- <li><i class="fa fa-plus"></i> <a href="createStudent.php">Add New Pupil</a></li> -->
+                            <li><i class="fa fa-eye"></i> <a href="viewStudent.php">Show Pupils</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li class="menu-item-has-children dropdown <?php if ($page == 'courses') {
+                                                                    echo 'active';
+                                                                } ?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Subjects</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-plus"></i> <a href="createCourses.php">Add New Subject</a></li>
+                            <li><i class="fa fa-eye"></i> <a href="viewCourses.php">Show Subjects</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-title">Grading Repors Tab ↓↓↓</li>
+                    <li class="menu-item-has-children dropdown <?php if ($page == 'result') {
+                                                                    echo 'active';
+                                                                } ?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file"></i>Setup-Generate</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-plus"></i> <a href="<?php if ($_SESSION['adminTypeId'] == 2) {
+                                                                        echo "studentList.php";
+                                                                    } else {
+                                                                        echo "studentList.php";
+                                                                    } ?>">Submit Grades</a></li>
+                            <li><i class="fa fa-plus"></i> <a href="studentList3.php">View Grades</a></li>
+
+
+                        </ul>
+                    </li>
+
+                    <li class="menu-title">Accounts Tab ↓↓↓</li>
+                    <li class="menu-item-has-children dropdown <?php if ($page == 'profile') {
+                                                                    echo 'active';
+                                                                } ?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user-circle"></i>Profile</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="menu-icon fa fa-user"></i> <a href="updateProfile.php">Update Profile</a></li>
+                            <li><i class="menu-icon fa fa-user"></i> <a href="changePassword.php">Change Pass</a></li>
+                        </ul>
+                    <li>
+                        <a href="logout.php"> <i class="menu-icon fa fa-power-off"></i>Logout </a>
+                    </li>
                     </li>
 
                 <?php } else { ?>
@@ -41,7 +86,7 @@ if ($row['adminTypeId'] === 1) {
                             <li><i class="fa fa-eye"></i><a href="viewAdmin.php">View List</a></li>
                         </ul>
                     </li>
-                    <li class="menu-title">Classrooms Tab ↓↓↓</li>
+                    <!-- <li class="menu-title">Classrooms Tab ↓↓↓</li>
                     <li class="menu-item-has-children dropdown <?php if ($page == 'faculty') {
                                                                     echo 'active';
                                                                 } ?>">
@@ -50,7 +95,7 @@ if ($row['adminTypeId'] === 1) {
                             <li><i class="fa fa-plus"></i> <a href="createFaculty.php">Add New Room</a></li>
                             <li><i class="fa fa-eye"></i> <a href="viewFaculty.php">View Rooms</a></li>
                         </ul>
-                    </li>
+                    </li> -->
 
                     <li class="menu-item-has-children dropdown <?php if ($page == 'department') {
                                                                     echo 'active';
@@ -72,6 +117,46 @@ if ($row['adminTypeId'] === 1) {
                             <li><i class="fa fa-eye"></i> <a href="viewStudent.php">Show Pupils</a></li>
                         </ul>
                     </li>
+                    <li class="menu-item-has-children dropdown <?php if ($page == 'courses') {
+                                                                    echo 'active';
+                                                                } ?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Subjects</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-plus"></i> <a href="createCourses.php">Add New Subject</a></li>
+                            <li><i class="fa fa-eye"></i> <a href="viewCourses.php">Show Subjects</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-title">Grading Repors Tab ↓↓↓</li>
+                    <li class="menu-item-has-children dropdown <?php if ($page == 'result') {
+                                                                    echo 'active';
+                                                                } ?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file"></i>Setup-Generate</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-plus"></i> <a href="<?php if ($_SESSION['adminTypeId'] == 2) {
+                                                                        echo "studentList.php";
+                                                                    } else {
+                                                                        echo "studentList.php";
+                                                                    } ?>">Submit Grades</a></li>
+                            <li><i class="fa fa-plus"></i> <a href="studentList3.php">View Grades</a></li>
+
+
+                        </ul>
+                    </li>
+
+                    <li class="menu-title">Accounts Tab ↓↓↓</li>
+                    <li class="menu-item-has-children dropdown <?php if ($page == 'profile') {
+                                                                    echo 'active';
+                                                                } ?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user-circle"></i>Profile</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="menu-icon fa fa-user"></i> <a href="updateProfile.php">Update Profile</a></li>
+                            <li><i class="menu-icon fa fa-user"></i> <a href="changePassword.php">Change Pass</a></li>
+                        </ul>
+                    <li>
+                        <a href="logout.php"> <i class="menu-icon fa fa-power-off"></i>Logout </a>
+                    </li>
+                    </li>
+
 
 
                 <?php   } ?>
@@ -79,44 +164,6 @@ if ($row['adminTypeId'] === 1) {
 
 
 
-
-
-
-                <li class="menu-item-has-children dropdown <?php if ($page == 'courses') {
-                                                                echo 'active';
-                                                            } ?>">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Subjects</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-plus"></i> <a href="createCourses.php">Add New Subject</a></li>
-                        <li><i class="fa fa-eye"></i> <a href="viewCourses.php">Show Subjects</a></li>
-                    </ul>
-                </li>
-                <li class="menu-title">Grading Repors Tab ↓↓↓</li>
-                <li class="menu-item-has-children dropdown <?php if ($page == 'result') {
-                                                                echo 'active';
-                                                            } ?>">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file"></i>Setup-Generate</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-plus"></i> <a href="<?php if ($_SESSION['adminTypeId'] == 2) {echo "staffStudentList.php";}else{echo "studentList.php";} ?>">Submit Grades</a></li>
-                        <li><i class="fa fa-plus"></i> <a href="studentList3.php">Generate Results</a></li>
-                        <li><i class="fa fa-plus"></i> <a href="gradingCriteria.php">View Grading Criteria</a></li>
-
-                    </ul>
-                </li>
-
-                <li class="menu-title">Accounts Tab ↓↓↓</li>
-                <li class="menu-item-has-children dropdown <?php if ($page == 'profile') {
-                                                                echo 'active';
-                                                            } ?>">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user-circle"></i>Profile</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-user"></i> <a href="updateProfile.php">Update Profile</a></li>
-                        <li><i class="menu-icon fa fa-user"></i> <a href="changePassword.php">Change Pass</a></li>
-                    </ul>
-                <li>
-                    <a href="logout.php"> <i class="menu-icon fa fa-power-off"></i>Logout </a>
-                </li>
-                </li>
             </ul>
         </div>
     </nav>

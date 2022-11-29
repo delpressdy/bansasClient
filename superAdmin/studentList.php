@@ -133,11 +133,11 @@ error_reporting(0);
                                                         <thead>
                                                             <tr>
                                                                 <!-- Log on to codeastro.com for more projects! -->
-                                                                <th>#</th>
-                                                                <th>Full Name</th>
                                                                 <th>ID #</th>
+                                                                <th>Full Name</th>
+
                                                                 <th>Grade lvl</th>
-                                                                <th>Classroom</th>
+                                                                <th>Section</th>
                                                                 <!-- <th>S.Y</th> -->
                                                                 <th>Date Added</th>
                                                                 <th>1st Grading</th>
@@ -149,35 +149,54 @@ error_reporting(0);
                                                         <tbody>
 
                                                             <?php
-                                                            $sql = mysqli_query($con, "SELECT tblstudent.`Id`, tblstudent.`firstName`, tblstudent.`dateCreated`, tbllevel.`levelId`,  tblstudent.`lastName`, tblstudent.`matricNo`, tbldepartment.`departmentId`, tbllevel.`levelName`,tblfaculty.`facultyId`,  tblfaculty.`facultyName`, tblstudent.`sessionId`  FROM tblstudent INNER JOIN tbllevel ON tblstudent.`levelId` = tbllevel.`levelId` INNER JOIN tblfaculty ON tblfaculty.`facultyId` = tblstudent.`facultyId` INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` INNER JOIN tblsession ON tblstudent.`sessionId` = tblsession.`sessionId`");
-                                                            $cnt = 1;
+
+                                                            if ($_SESSION['adminTypeId'] == 2) {
+                                                                $sql = mysqli_query($con, "SELECT  tblcourse.`subjectId`, tblstudent.`StudentId` ,
+                                                                tbldepartment.`departmentId` ,tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`contactNumber`,
+                                                                tblstudent.`matricNo`,tblstudent.`otherName`,tblstudent.`schoolyear`, tbldepartment.`departmentName`,
+                                                                tbllevel.`levelName` 
+                                                                FROM tblstudent 
+                                                                INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` 
+                                                                INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` 
+                                                                INNER JOIN tblcourse ON tblcourse.`departmentId` = tbldepartment.`departmentId` where tbldepartment.`departmentId` = ' $_SESSION[departmentId]'  group by tblstudent.`StudentId` ");
+                                                            } else {
+                                                                $sql = mysqli_query($con, "SELECT  tblcourse.`subjectId`, tblstudent.`StudentId` ,
+                                                            tbldepartment.`departmentId` ,tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`contactNumber`,
+                                                            tblstudent.`matricNo`,tblstudent.`otherName`,tblstudent.`schoolyear`, tbldepartment.`departmentName`,
+                                                            tbllevel.`levelName` 
+                                                            FROM tblstudent 
+                                                            INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` 
+                                                            INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` 
+                                                            INNER JOIN tblcourse ON tblcourse.`departmentId` = tbldepartment.`departmentId` group by tblstudent.`StudentId` ");
+                                                            }
                                                             while ($row = mysqli_fetch_array($sql)) {
                                                             ?>
                                                                 <tr>
-                                                                    <td><?php echo $cnt; ?></td>
-                                                                    <td><?php echo $row['firstName'] . ' ' . $row['lastName'] ?></td>
                                                                     <td><?php echo $row['matricNo']; ?></td>
+                                                                    <td><?php echo $row['firstName'] . ' ' . $row['lastName'] ?></td>
+
                                                                     <td><?php echo $row['levelName']; ?></td>
-                                                                    <td><?php echo $row['facultyName']; ?></td>
-                                                                    <!-- <td><?php echo $row['sessionName']; ?></td> -->
-                                                                    <td><?php echo $row['dateCreated']; ?></td>
+                                                                    <td><?php echo $row['departmentName']; ?></td>
+
+
+                                                                    <td><?php echo $row['schoolyear']; ?></td>
 
                                                                     <td>
-                                                                        <a href="courseList.php?semesterId=1&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&facultyId=<?php echo $row['facultyId']; ?>&departmentId=<?php echo $row['departmentId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="Edit Details"><i class="fa fa-eye fa-1x"></i> Submit Grades</a>
+                                                                        <a href="courseList.php?semesterId=1&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="Edit Details"><i class="fa fa-eye fa-1x"></i> Submit Grades</a>
                                                                     </td>
                                                                     <td>
-                                                                        <a href="courseList.php?semesterId=2&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&facultyId=<?php echo $row['facultyId']; ?>&departmentId=<?php echo $row['departmentId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="Edit Details"><i class="fa fa-eye fa-1x"></i> Submit Grades</a>
+                                                                        <a href="courseList.php?semesterId=2&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="Edit Details"><i class="fa fa-eye fa-1x"></i> Submit Grades</a>
                                                                     </td>
                                                                     <td>
-                                                                        <a href="courseList.php?semesterId=3&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&facultyId=<?php echo $row['facultyId']; ?>&departmentId=<?php echo $row['departmentId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="Edit Details"><i class="fa fa-eye fa-1x"></i> Submit Grades</a>
+                                                                        <a href="courseList.php?semesterId=3&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="Edit Details"><i class="fa fa-eye fa-1x"></i> Submit Grades</a>
                                                                     </td>
                                                                     <td>
-                                                                        <a href="courseList.php?semesterId=4&matricNo=<?php echo $row['matricNo']; ?>&levelId=<?php echo $row['levelId']; ?>&facultyId=<?php echo $row['facultyId']; ?>&departmentId=<?php echo $row['departmentId']; ?>&sessionId=<?php echo $row['sessionId']; ?>" title="Edit Details"><i class="fa fa-eye fa-1x"></i> Submit Grades</a>
+                                                                        <a href="courseList.php?semesterId=4&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="Edit Details"><i class="fa fa-eye fa-1x"></i> Submit Grades</a>
                                                                     </td>
 
                                                                 </tr>
                                                             <?php
-                                                                $cnt = $cnt + 1;
+
                                                             } ?>
 
                                                         </tbody>

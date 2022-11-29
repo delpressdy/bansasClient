@@ -100,12 +100,12 @@ include('../includes/session.php');
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th>Subject ID</th>
                                             <th>Name</th>
-                                            <th>Grade Level</th>
-                                            <th>Room</th>
                                             <th>Section</th>
-                                            <th>Grading</th>
+                                            <th>Section</th>
+                                            <th>Grade</th>
+
                                             <th>Date Added</th>
                                             <th>Actions</th>
                                         </tr>
@@ -113,31 +113,31 @@ include('../includes/session.php');
                                     <tbody>
 
                                         <?php
-                                        $ret = mysqli_query($con, "SELECT tblcourse.courseCode,tblcourse.courseTitle,tblcourse.dateAdded,
-                tblcourse.courseUnit,tbllevel.levelName,tblfaculty.facultyName,tbldepartment.departmentName,tblsemester.semesterName
-                from tblcourse 
-                INNER JOIN tbllevel ON tbllevel.levelId = tblcourse.levelId
-                INNER JOIN tblsemester ON tblsemester.Id = tblcourse.semesterId
-                INNER JOIN tblfaculty ON tblfaculty.facultyId = tblcourse.facultyId
-                INNER JOIN tbldepartment ON tbldepartment.departmentId = tblcourse.departmentId");
+                                        if ($_SESSION['adminTypeId'] == 2) {
+                                            $ret = mysqli_query($con, "SELECT  tbldepartment.`departmentId`, tblcourse.`subjectId`, tblcourse.`subjectTitle`,tbldepartment.`departmentName`,tblcourse.`dateAdded`, tbllevel.`levelName` FROM tblcourse INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblcourse.`departmentId` INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` INNER JOIN tblstaff ON tblstaff.`departmentId` = tbldepartment.`departmentId` where tbldepartment.`departmentId` = '$_SESSION[departmentId]'");
+                                        } else {
+                                            $ret = mysqli_query($con, "SELECT  tbldepartment.`departmentId`, tblcourse.`subjectId`, tblcourse.`subjectTitle`,tbldepartment.`departmentName`,tblcourse.`dateAdded`, tbllevel.`levelName` FROM tblcourse INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblcourse.`departmentId` INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` INNER JOIN tblstaff ON tblstaff.`departmentId` = tbldepartment.`departmentId`");
+                                        }
 
-                                        $cnt = 1;
+
+
                                         while ($row = mysqli_fetch_array($ret)) {
                                         ?>
                                             <tr>
-                                                <td><?php echo $cnt; ?></td>
-                                                <td><?php echo $row['courseTitle']; ?></td>
-                                                <td><?php echo $row['levelName']; ?></td>
-                                                <td><?php echo $row['facultyName']; ?></td>
+
+                                                <td><?php echo $row['subjectId']; ?></td>
+                                                <td><?php echo $row['subjectTitle']; ?></td>
                                                 <td><?php echo $row['departmentName']; ?></td>
-                                                <td><?php echo $row['semesterName']; ?></td>
+                                                <td><?php echo $row['departmentName']; ?></td>
+                                                <td><?php echo $row['levelName']; ?></td>
                                                 <td><?php echo $row['dateAdded']; ?></td>
-                                                <td><a href="editCourses.php?editCourseId=<?php echo $row['courseCode']; ?>" title="Edit Details"><i class="fa fa-edit fa-1x"></i></a>
-                                                    <a onclick="return confirm('Are you sure you want to delete?')" href="deleteCourse.php?delid=<?php echo $row['courseCode']; ?>" title="Delete Course"><i class="fa fa-trash fa-1x"></i></a>
+                                                <td>
+                                                    <a href="editCourses.php?editCourseId=<?php echo $row['subjectId']; ?>" title="Edit Details"><i class="fa fa-edit fa-1x"></i></a>
+                                                    <a onclick="return confirm('Are you sure you want to delete?')" href="deleteCourse.php?delid=<?php echo $row['subjectId']; ?>" title="Delete Course"><i class="fa fa-trash fa-1x"></i></a>
                                                 </td>
                                             </tr>
                                         <?php
-                                            $cnt = $cnt + 1;
+
                                         } ?>
 
                                     </tbody>
