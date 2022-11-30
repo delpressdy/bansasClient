@@ -109,25 +109,7 @@ include('../includes/dataValues.php');
 
 
 
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="card text-white bg-flat-color-2">
-                            <div class="card-body">
-                                <div class="card-left pt-1 float-left">
-                                    <h3 class="mb-0 fw-r">
-                                        <span class="currency float-left mr-1"></span>
-                                        <span class="count"><?php echo $countFaculty; ?></span>
-                                    </h3>
-                                    <p class="text-light mt-1 m-0">Classrooms</p><!-- Log on to codeastro.com for more projects! -->
-                                </div><!-- /.card-left -->
 
-                                <div class="card-right float-right text-right">
-                                    <i class="icon fade-5 icon-lg pe-7s-keypad"></i>
-                                </div><!-- /.card-right -->
-
-                            </div>
-
-                        </div>
-                    </div>
 
                     <div class="col-sm-6 col-lg-3">
                         <div class="card text-white bg-flat-color-3">
@@ -190,25 +172,6 @@ include('../includes/dataValues.php');
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="card text-white bg-secondary">
-                            <div class="card-body">
-                                <div class="card-left pt-1 float-left">
-                                    <h3 class="mb-0 fw-r">
-                                        <span class="currency float-left mr-1"></span>
-                                        <span class="count"><?php echo $countAllComputed; ?></span>
-                                    </h3>
-                                    <p class="text-light mt-1 m-0">Grade reports</p><!-- Log on to codeastro.com for more projects! -->
-                                </div><!-- /.card-left -->
-
-                                <div class="card-right float-right text-right">
-                                    <i class="icon fade-5 icon-lg pe-7s-news-paper"></i>
-                                </div><!-- /.card-right -->
-
-                            </div>
-
-                        </div>
-                    </div>
 
                     <div class="col-sm-6 col-lg-3">
                         <div class="card text-white bg-info">
@@ -216,9 +179,9 @@ include('../includes/dataValues.php');
                                 <div class="card-left pt-1 float-left">
                                     <h3 class="mb-0 fw-r">
                                         <span class="currency float-left mr-1"></span>
-                                        <span class="count"><?php echo $countAllLevel; ?></span>
+                                        <span class="count"><?php echo $staff; ?></span>
                                     </h3>
-                                    <p class="text-light mt-1 m-0">Grade Level</p><!-- Log on to codeastro.com for more projects! -->
+                                    <p class="text-light mt-1 m-0">Staff</p><!-- Log on to codeastro.com for more projects! -->
                                 </div><!-- /.card-left -->
 
                                 <div class="card-right float-right text-right">
@@ -231,45 +194,8 @@ include('../includes/dataValues.php');
                     </div>
 
 
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="card text-white bg-flat-color-2">
-                            <div class="card-body">
-                                <div class="card-left pt-1 float-left">
-                                    <h3 class="mb-0 fw-r">
-                                        <span class="currency float-left mr-1"></span>
-                                        <span class="count"><?php echo $countAlljp; ?></span>
-                                    </h3>
-                                    <p class="text-light mt-1 m-0">Passed No.</p><!-- Log on to codeastro.com for more projects! -->
-                                </div><!-- /.card-left -->
 
-                                <div class="card-right float-right text-right">
-                                    <i class="icon fade-5 icon-lg pe-7s-check"></i>
-                                </div><!-- /.card-right -->
 
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="card text-white bg-danger">
-                            <div class="card-body">
-                                <div class="card-left pt-1 float-left">
-                                    <h3 class="mb-0 fw-r">
-                                        <span class="currency float-left mr-1"></span>
-                                        <span class="count"><?php echo $countAllf; ?></span>
-                                    </h3>
-                                    <p class="text-light mt-1 m-0">Failed No.</p><!-- Log on to codeastro.com for more projects! -->
-                                </div><!-- /.card-left -->
-
-                                <div class="card-right float-right text-right">
-                                    <i class="icon fade-5 icon-lg fa fa-times"></i>
-                                </div><!-- /.card-right -->
-
-                            </div>
-
-                        </div>
-                    </div>
 
 
 

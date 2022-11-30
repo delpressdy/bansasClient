@@ -12,12 +12,13 @@ if (isset($_POST['login'])) {
     $row = mysqli_fetch_array($query);
 
     if ($count > 0) {
+        $_SESSION['StudentId'] = $row['StudentId'];
         $_SESSION['matricNo'] = $row['matricNo'];
         $_SESSION['firstName'] = $row['firstName'];
         $_SESSION['lastName'] = $row['lastName'];
-
+        $_SESSION['departmentId'] = $row['departmentId'];
         echo "<script type = \"text/javascript\">
-                window.location = (\"student/studentGrades.php\")
+                window.location = (\"student/index.php\")
                </script>";
 
         // if($row['roleId'] == 2){ //if user is Hod

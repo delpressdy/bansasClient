@@ -106,90 +106,6 @@ if (isset($_GET['matricNo']) && isset($_GET['departmentId']) && isset($_GET['sem
         <div class="content">
             <div class="animated fadeIn">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">
-                                    <h3 align="center">GRADING CRITERIA</h3>
-                                </strong>
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-hover table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Results</th>
-                                            <th>Average</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <tr>
-                                            <td bgcolor="#32ff7e">Excellent</td>
-                                            <td bgcolor="#32ff7e">90% +</td>
-                                        </tr>
-                                        <tr>
-                                            <td bgcolor="#7bed9f">Very nice</td>
-                                            <td bgcolor="#7bed9f">85% +</td>
-                                        </tr>
-                                        <tr>
-                                            <td bgcolor="#97fdae">Nice</td>
-                                            <td bgcolor="#97fdae">80% +</td>
-                                        </tr>
-                                        <tr>
-                                            <td bgcolor="#fffa65">Good</td>
-                                            <td bgcolor="#fffa65">75% +</td>
-                                        </tr>
-                                        <tr>
-                                            <td bgcolor="#ff4757">Fail</td>
-                                            <td bgcolor="#ff4757">Below 74</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                <!-------------------------- FROM THE FINAL RESULT TABLE --------------------------->
-                                <table class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Grade</th>
-                                            <th>Letter Grade</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>75 - 100</td>
-                                            <td>A+</td>
-                                        </tr>
-                                        <tr>
-                                            <td>70 - 74</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>65 - 69</td>
-                                            <td>B</td>
-                                        </tr>
-                                        <tr>
-                                            <td>60 - 64</td>
-                                            <td>Fail</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-        <div class="content">
-            <div class="animated fadeIn">
-                <div class="row">
 
                     <!--/.col-->
                     <?php
@@ -199,7 +115,7 @@ if (isset($_GET['matricNo']) && isset($_GET['departmentId']) && isset($_GET['sem
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">
-                                    <h2 align="center">All Pupils</h2>
+                                    <!-- <h2 align="center">My Grades</h2> -->
                                 </strong>
                             </div>
                             <div class="card-body">
@@ -212,20 +128,16 @@ if (isset($_GET['matricNo']) && isset($_GET['departmentId']) && isset($_GET['sem
                                             <th>Grades</th>
 
                                             <th>Date Added</th>
-                                            <th>Actions</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         <?php
-                                        if ($_SESSION['adminTypeId'] == 1) {
-                                            $ret = mysqli_query($con, "SELECT tblresult.`resultId`, tblresult.`grade` ,tblcourse.`subjectTitle`, tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`schoolyear`, tblsemester.`grading`, tbllevel.`levelName` FROM tblresult INNER JOIN tblcourse ON tblcourse.`subjectId` = tblresult.`subjectId`
-                                            INNER JOIN tblstudent ON tblstudent.`StudentId` = tblresult.`StudentId` INNER JOIN tblsemester ON tblsemester.`grading_Id`= tblresult.`gradingId` INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblresult.`departmentId` INNER JOIN tbllevel ON  tbllevel.`levelId` = tbldepartment.`levelId` WHERE tblsemester.`grading_Id` = '$_GET[semesterId]' and  tblstudent.`matricNo` = '$_GET[matricNo]' 
-                                            ");
-                                        } else {
-                                            $ret = mysqli_query($con, "SELECT tblresult.`resultId`, tblresult.`grade` ,tblcourse.`subjectTitle`, tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`schoolyear`, tblsemester.`grading`, tbllevel.`levelName` FROM tblresult INNER JOIN tblcourse ON tblcourse.`subjectId` = tblresult.`subjectId`
-                                            INNER JOIN tblstudent ON tblstudent.`StudentId` = tblresult.`StudentId` INNER JOIN tblsemester ON tblsemester.`grading_Id`= tblresult.`gradingId` INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblresult.`departmentId` INNER JOIN tbllevel ON  tbllevel.`levelId` = tbldepartment.`levelId` WHERE tblstudent.`matricNo` = '$_GET[matricNo]' and tblsemester.`grading_Id` = '$_GET[semesterId]'");
-                                        }
+
+                                        $ret = mysqli_query($con, "SELECT tblresult.`resultId`, tblresult.`grade` ,tblcourse.`subjectTitle`, tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`schoolyear`, tblsemester.`grading`, tbllevel.`levelName` FROM tblresult INNER JOIN tblcourse ON tblcourse.`subjectId` = tblresult.`subjectId`
+                                            INNER JOIN tblstudent ON tblstudent.`StudentId` = tblresult.`StudentId` INNER JOIN tblsemester ON tblsemester.`grading_Id`= tblresult.`gradingId` INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblresult.`departmentId` INNER JOIN tbllevel ON  tbllevel.`levelId` = tbldepartment.`levelId` WHERE tblstudent.`matricNo` = '$_GET[matricNo]' and tblsemester.`grading_Id` = '$_GET[semesterId]' and tblcourse.`subjectId` = '$_GET[subjectId]' ");
+
 
                                         $cnt = 1;
                                         while ($row = mysqli_fetch_array($ret)) {
@@ -234,8 +146,8 @@ if (isset($_GET['matricNo']) && isset($_GET['departmentId']) && isset($_GET['sem
 
                                                 <td><?= $row['resultId'] ?></td>
                                                 <td><?= $row['subjectTitle']; ?></td>
-
                                                 <td><?= $row['grade']; ?></td>
+
 
 
                                                 <td><?= $row['schoolyear']; ?></td>
@@ -246,9 +158,7 @@ if (isset($_GET['matricNo']) && isset($_GET['departmentId']) && isset($_GET['sem
                                                         <i class="fa fa-edit fa-1x"></i>
                                                     </a> -->
 
-                                                    <a onclick="return confirm('Are you sure you want to delete?')" href="deleteStudent.php?delid=<?php echo $row['matricNo']; ?>" title="Delete Student Details">
-                                                        <i class="fa fa-trash fa-1x"></i>
-                                                    </a>
+
                                                 </td>
                                             </tr>
                                         <?php

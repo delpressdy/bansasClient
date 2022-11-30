@@ -206,51 +206,53 @@ $row = mysqli_fetch_array($query)
 
                     ?>
                     <div class="col-md-12">
+
+
+                    </div>
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">
-                                    <h2 align="center">My Grades</h2>
+                                    <h3 align="center">Your Subjects</h3>
                                 </strong>
                             </div>
                             <div class="card-body">
-                                <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
+                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Subject</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Grades</th>
-                                            <th>Grading</th>
-                                            <th>Grade Level</th>
-                                            <th>Date Added</th>
+
+                                            <th>ID #</th>
+                                            <th>Full Name</th>
+                                            <th>Grade lvl</th>
+                                            <th>Section</th>
+
+                                            <th>1st Grading</th>
+                                            <th>2nd Grading</th>
+                                            <th>3rd Grading</th>
+                                            <th>4th Grading</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <?php
 
-                                        $ret = mysqli_query($con, " SELECT tblresult.`resultId`, tblresult.`grade` ,tblcourse.`subjectTitle`, tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`schoolyear`, tblsemester.`grading`, tbllevel.`levelName` FROM tblresult INNER JOIN tblcourse ON tblcourse.`subjectId` = tblresult.`subjectId`
-                                        INNER JOIN tblstudent ON tblstudent.`StudentId` = tblresult.`StudentId` 
-                                        INNER JOIN tblsemester ON tblsemester.`grading_Id`= tblresult.`gradingId` 
-                                        INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblresult.`departmentId` 
-                                        INNER JOIN tbllevel ON  tbllevel.`levelId` = tbldepartment.`levelId` WHERE tblstudent.`matricNo` = '$_SESSION[matricNo]'");
 
+                                        $sql = mysqli_query($con, "SELECT  tblcourse.`subjectId`, tblstudent.`StudentId` ,
+    tbldepartment.`departmentId` ,tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`contactNumber`,
+    tblstudent.`matricNo`,tblstudent.`otherName`,tblstudent.`schoolyear`, tbldepartment.`departmentName`,tblcourse.`subjectTitle`,
+    tbllevel.`levelName` ,tblresult.grade
+    FROM tblstudent 
+        inner join tblresult on tblresult.StudentId = tblstudent.StudentId
+    INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` 
+    INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` 
+    INNER JOIN tblcourse ON tblcourse.`departmentId` = tbldepartment.`departmentId` where tbldepartment.`departmentId` = ' $_SESSION[departmentId]' and tblstudent.StudentId =     ' $_SESSION[studentId] ' and tbldepartment.departmentId =    '$_SESSION[departmentId] ' group by tblcourse.subjectId");
 
-                                        $cnt = 1;
-                                        while ($row = mysqli_fetch_array($ret)) {
+                                        while ($row = mysqli_fetch_array($sql)) {
                                         ?>
                                             <tr>
+                                                <td><?php echo $row['subjectId']; ?></td>
+                                                <td><?php echo $row['subjectTitle'] ?> </td>
 
-                                                <td><?= $row['resultId'] ?></td>
-                                                <td><?= $row['subjectTitle']; ?></td>
-                                                <td><?= $row['firstName']; ?></td>
-                                                <td><?= $row['lastName']; ?></td>
-                                                <td><?= $row['grade']; ?></td>
-
-
-                                                <td><?= $row['grading']; ?></td>
                                                 <td>
 
                                                     <?php
@@ -272,75 +274,22 @@ $row = mysqli_fetch_array($query)
                                                     ?>
 
                                                 </td>
+                                                <td><?php echo $row['departmentName']; ?></td>
 
-                                                <td><?= $row['schoolyear']; ?></td>
+                                                <td><a href="viewGradeResult.php?subjectId=<?php echo $row['subjectId']; ?>&semesterId=1&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
+                                                <td><a href="viewGradeResult.php?subjectId=<?php echo $row['subjectId']; ?>&semesterId=2&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
+                                                <td><a href="viewGradeResult.php?subjectId=<?php echo $row['subjectId']; ?>&semesterId=3&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
+                                                <td><a href="viewGradeResult.php?subjectId=<?php echo $row['subjectId']; ?>&semesterId=4&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
 
 
-                                                <td>
-                                                    <!-- <a href="editStudent.php?editStudentId=<?php echo $row['matricNo']; ?>" title="Edit Details">
-                                                        <i class="fa fa-edit fa-1x"></i>
-                                                    </a> -->
-
-
-                                                </td>
                                             </tr>
                                         <?php
 
                                         } ?>
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">
-                                    <h2 align="center">Final Grades</h2>
-                                </strong>
-                            </div>
-                            <div class="card-body">
-                                <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-
-                                            <th>Subject</th>
-                                            <th>Final Grade</th>
-                                            <th>Remarks</th>
-
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <?php
-
-                                        $rets = mysqli_query($con, " SELECT tblresult.`resultId`, tblresult.`grade` ,tblcourse.`subjectTitle`, tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`schoolyear`, tblsemester.`grading`, tbllevel.`levelName` FROM tblresult INNER JOIN tblcourse ON tblcourse.`subjectId` = tblresult.`subjectId`
-                                        INNER JOIN tblstudent ON tblstudent.`StudentId` = tblresult.`StudentId` 
-                                        INNER JOIN tblsemester ON tblsemester.`grading_Id`= tblresult.`gradingId` 
-                                        INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblresult.`departmentId` 
-                                        INNER JOIN tbllevel ON  tbllevel.`levelId` = tbldepartment.`levelId` WHERE tblstudent.`matricNo` = '$_SESSION[matricNo]'");
-                                        $average = 0.0;
-
-
-                                        while ($rows = mysqli_fetch_array($rets)) { ?>
-
-
-                                            <tr>
-                                                <th><?= $rows['subjectTitle'] ?></th>
-                                                <td><?= $rows['grade'] ?></td>
-
-                                                <td>Passed</td>
-                                            </tr>
-
-                                        <?php  }
-
-
-
-                                        // echo $average / 4;
-                                        ?>
 
                                     </tbody>
                                 </table>

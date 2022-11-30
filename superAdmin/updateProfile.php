@@ -84,37 +84,74 @@ error_reporting(0);
             <div class="animated fadeIn">
                 <div class="row">
                     <?php
+                    if ($_SESSION['adminTypeId'] == 1) {
+                        $querys = mysqli_query($con, "select * from tbladmin where staffId='$staffId'");
+                        $rrow = mysqli_fetch_array($querys);
 
-                    $querys = mysqli_query($con, "select * from tblstaff where staffId='$staffId'");
-                    $rrow = mysqli_fetch_array($querys);
 
-                    if (isset($_POST['submit'])) {
+                        if (isset($_POST['submit'])) {
 
-                        $alertStyle = "";
-                        $statusMsg = "";
+                            $alertStyle = "";
+                            $statusMsg = "";
 
-                        $firstname = $_POST['firstname'];
-                        $lastname = $_POST['lastname'];
+                            $firstname = $_POST['firstname'];
+                            $lastname = $_POST['lastname'];
 
-                        $emailAddress = $_POST['emailAddress'];
-                        $phoneNo = $_POST['phoneNo'];
-                        $password = $_POST['password'];
-                        $department = $_POST['department'];
+                            $emailAddress = $_POST['emailAddress'];
+                            $phoneNo = $_POST['phoneNo'];
+                            $password = $_POST['password'];
 
-                        $ret = mysqli_query($con, "update tblstaff set firstName='$firstname', departmentId='$department',  lastName='$lastname',  
+
+                            $ret = mysqli_query($con, "update tblstaff set firstName='$firstname', lastName='$lastname',  
   emailAddress='$emailAddress', phoneNo='$phoneNo', password = '$password' where staffId='$staffId'");
 
-                        if ($ret == TRUE) {
-                            $_SESSION['departmentId'] =  $department;
-                            $alertStyle = "alert alert-success";
-                            $statusMsg = "Profile Updated Successfully!";
-                        } else {
-                            $alertStyle = "alert alert-danger";
-                            $statusMsg = "An error Occurred!";
+                            if ($ret == TRUE) {
+                                $_SESSION['departmentId'] =  $department;
+                                $alertStyle = "alert alert-success";
+                                $statusMsg = "Profile Updated Successfully!";
+                                header("Location: updateProfile.php");
+                            } else {
+                                $alertStyle = "alert alert-danger";
+                                $statusMsg = "An error Occurred!";
+                                header("Location: updateProfile.php");
+                            }
+                        }
+                    } else {
+                        $querys = mysqli_query($con, "select * from tblstaff where staffId='$staffId'");
+                        $rrow = mysqli_fetch_array($querys);
+
+
+                        if (isset($_POST['submit'])) {
+
+                            $alertStyle = "";
+                            $statusMsg = "";
+
+                            $firstname = $_POST['firstname'];
+                            $lastname = $_POST['lastname'];
+
+                            $emailAddress = $_POST['emailAddress'];
+                            $phoneNo = $_POST['phoneNo'];
+                            $password = $_POST['password'];
+                            $department = $_POST['department'];
+
+                            $ret = mysqli_query($con, "update tblstaff set firstName='$firstname', departmentId='$department',  lastName='$lastname',  
+  emailAddress='$emailAddress', phoneNo='$phoneNo', password = '$password' where staffId='$staffId'");
+
+                            if ($ret == TRUE) {
+                                $_SESSION['departmentId'] =  $department;
+                                $alertStyle = "alert alert-success";
+                                $statusMsg = "Profile Updated Successfully!";
+                                header("Location: updateProfile.php");
+                            } else {
+                                $alertStyle = "alert alert-danger";
+                                $statusMsg = "An error Occurred!";
+                                header("Location: updateProfile.php");
+                            }
                         }
                     }
+
                     ?>
-                    <div class="col-lg-12">
+                    <div class="col-lg-8">
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Update Profile Information</strong>
@@ -123,18 +160,24 @@ error_reporting(0);
                                 <!-- Credit Card -->
                                 <div id="pay-invoice">
                                     <div class="card-body">
-                                        <div class="<?php echo $alertStyle; ?>" role="alert"><?php echo $statusMsg; ?></div>
+
+                                        <div class="<?php echo $alertStyle; ?> alert-dismissible fade show" role="alert">
+                                            <?php echo $statusMsg; ?>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
                                         <form method="Post" action="">
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="cc-exp" class="control-label mb-1">Firstname</label>
-                                                        <input id="" name="firstname" type="tel" class="form-control cc-exp" value="<?php echo $rrow['firstName']; ?>" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Firstname">
+                                                        <input id="" name="firstname" type="text" class="form-control cc-exp" value="<?php echo $rrow['firstName']; ?>" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Firstname">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <label for="x_card_code" class="control-label mb-1">Lastname</label>
-                                                    <input id="" name="lastname" type="tel" class="form-control cc-cvc" value="<?php echo $rrow['lastName']; ?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Lastname">
+                                                    <input id="" name="lastname" type="text" class="form-control cc-cvc" value="<?php echo $rrow['lastName']; ?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Lastname">
                                                 </div>
                                             </div>
                                             <div>
@@ -147,7 +190,12 @@ error_reporting(0);
                                                             <input id="" name="emailAddress" type="email" class="form-control cc-cvc" value="<?php echo $rrow['emailAddress']; ?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Email Address">
                                                         </div>
                                                     </div>
-
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="cc-exp" class="control-label mb-1">Phone Number</label>
+                                                            <input id="" name="phoneNo" type="text" class="form-control cc-exp" value="<?php echo $rrow['phoneNo']; ?>" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Phone Number">
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="row">
@@ -157,24 +205,27 @@ error_reporting(0);
                                                             <input id="password" name="password" type="password" class="form-control cc-cvc" value="<?php echo $rrow['password']; ?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Email Address">
                                                         </div>
                                                     </div>
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label for="cc-exp" class="control-label mb-1">Phone Number</label>
-                                                            <input id="" name="phoneNo" type="text" class="form-control cc-exp" value="<?php echo $rrow['phoneNo']; ?>" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Phone Number">
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label for="password" class="control-label mb-1">Department ID</label>
-                                                            <input id="text" name="department" type="text" class="form-control cc-cvc" value="<?php echo $rrow['departmentId']; ?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Email Address">
-                                                        </div>
-                                                    </div>
 
 
                                                 </div>
+                                                <?php
+                                                if ($_SESSION['adminTypeId'] == 1) { ?>
+
+                                                <?php    } else { ?>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="password" class="control-label mb-1">Department ID</label>
+                                                                <input id="text" name="department" type="text" class="form-control cc-cvc" value="<?php echo $rrow['departmentId']; ?>" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Email Address">
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                <?php    }
+
+                                                ?>
+
 
                                                 <button type="submit" name="submit" class="btn btn-success">Update Profile</button>
                                             </div>

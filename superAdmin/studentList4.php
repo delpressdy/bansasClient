@@ -89,11 +89,10 @@ error_reporting(0);
                     <div class="col-sm-8">
                         <div class="page-header float-right">
                             <div class="page-title">
-                                <!-- Log on to codeastro.com for more projects! -->
                                 <ol class="breadcrumb text-right">
                                     <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Compute Result</a></li>
-                                    <li class="active">Compute Result</li>
+                                    <li><a href="#">Result</a></li>
+                                    <li class="active">Pupil's List</li>
                                 </ol>
                             </div>
                         </div>
@@ -108,9 +107,8 @@ error_reporting(0);
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <!-- Log on to codeastro.com for more projects! -->
                                 <strong class="card-title">
-                                    <h3 align="center">Select Student to Compute Result</h3>
+                                    <h3 align="center">Select Pupil to View Result</h3>
                                 </strong>
                             </div>
                             <div class="card-body">
@@ -119,90 +117,74 @@ error_reporting(0);
                                     <div class="card-body">
                                         <div class="<?php echo $alertStyle; ?>" role="alert"><?php echo $statusMsg; ?></div>
 
+
+
                                         <br><br>
 
                                         <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <strong class="card-title">
-                                                            <h3 align="center">All Student</h3>
-                                                        </strong>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <!-- Log on to codeastro.com for more projects! -->
-                                                                    <th>ID #</th>
-                                                                    <th>Full Name</th>
-
-                                                                    <th>Grade lvl</th>
-                                                                    <th>Section</th>
-                                                                    <!-- <th>S.Y</th> -->
-                                                                    <th>Date Added</th>
-                                                                    <th>1st Grading</th>
-                                                                    <th>2nd Grading</th>
-                                                                    <th>3rd Grading</th>
-                                                                    <th>4th Grading</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-
-                                                                <?php
-
-                                                                if ($_SESSION['adminTypeId'] == 2) {
-                                                                    $sql = mysqli_query($con, "SELECT  tblcourse.`subjectId`, tblstudent.`StudentId` ,
-                                                                    tbldepartment.`departmentId` ,tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`contactNumber`,
-                                                                    tblstudent.`matricNo`,tblstudent.`otherName`,tblstudent.`schoolyear`, tbldepartment.`departmentName`,
-                                                                    tbllevel.`levelName` 
-                                                                    FROM tblstudent 
-                                                                    INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` 
-                                                                    INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` 
-                                                                    INNER JOIN tblcourse ON tblcourse.`departmentId` = tbldepartment.`departmentId` where tbldepartment.`departmentId` = ' $_SESSION[departmentId]'  group by tblstudent.`StudentId` ");
-                                                                } else {
-                                                                    $sql = mysqli_query($con, "SELECT  tblcourse.`subjectId`, tblstudent.`StudentId` ,
-                                                                tbldepartment.`departmentId` ,tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`contactNumber`,
-                                                                tblstudent.`matricNo`,tblstudent.`otherName`,tblstudent.`schoolyear`, tbldepartment.`departmentName`,
-                                                                tbllevel.`levelName` 
-                                                                FROM tblstudent 
-                                                                INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` 
-                                                                INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` 
-                                                                INNER JOIN tblcourse ON tblcourse.`departmentId` = tbldepartment.`departmentId` group by tblstudent.`StudentId` ");
-                                                                }
-                                                                while ($row = mysqli_fetch_array($sql)) {
-                                                                ?>
-                                                                    <tr>
-                                                                        <td><?php echo $row['matricNo']; ?></td>
-                                                                        <td><?php echo $row['firstName'] . ' ' . $row['lastName'] ?></td>
-
-                                                                        <td><?php echo $row['levelName']; ?></td>
-                                                                        <td><?php echo $row['departmentName']; ?></td>
-
-
-                                                                        <td><?php echo $row['schoolyear']; ?></td>
-
-                                                                        <td>
-                                                                            <a href="courseList.php?semesterId=1&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="Edit Details"><i class="fa fa-eye fa-1x"></i> Submit Grades</a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <a href="courseList.php?semesterId=2&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="Edit Details"><i class="fa fa-eye fa-1x"></i> Submit Grades</a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <a href="courseList.php?semesterId=3&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="Edit Details"><i class="fa fa-eye fa-1x"></i> Submit Grades</a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <a href="courseList.php?semesterId=4&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="Edit Details"><i class="fa fa-eye fa-1x"></i> Submit Grades</a>
-                                                                        </td>
-
-                                                                    </tr>
-                                                                <?php
-
-                                                                } ?>
-
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <strong class="card-title">
+                                                        <h3 align="center">All Pupils</h3>
+                                                    </strong>
                                                 </div>
+                                                <div class="card-body">
+                                                    <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>ID #</th>
+                                                                <th>Full Name</th>
+                                                                <th>Grade lvl</th>
+                                                                <th>Section</th>
+
+
+                                                                <th>Final Result</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+
+                                                            if ($_SESSION['adminTypeId'] == 2) {
+                                                                $sql = mysqli_query($con, "SELECT  tblcourse.`subjectId`, tblstudent.`StudentId` ,
+    tbldepartment.`departmentId` ,tblstudent.`firstName`,tblstudent.`StudentId`,tblstudent.`lastName`,tblstudent.`contactNumber`,
+    tblstudent.`matricNo`,tblstudent.`otherName`,tblstudent.`schoolyear`, tbldepartment.`departmentName`,
+    tbllevel.`levelName` 
+    FROM tblstudent 
+    INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` 
+    INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` 
+    INNER JOIN tblcourse ON tblcourse.`departmentId` = tbldepartment.`departmentId` where tbldepartment.`departmentId` = ' $_SESSION[departmentId]'  group by tblstudent.`StudentId` ");
+                                                            } else {
+                                                                $sql = mysqli_query($con, "SELECT  tblcourse.`subjectId`, tblstudent.`StudentId` ,
+tbldepartment.`departmentId` ,tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`contactNumber`,
+tblstudent.`matricNo`,tblstudent.`otherName`,tblstudent.`schoolyear`, tbldepartment.`departmentName`,
+tbllevel.`levelName` 
+FROM tblstudent 
+INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` 
+INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` 
+INNER JOIN tblcourse ON tblcourse.`departmentId` = tbldepartment.`departmentId` group by tblstudent.`StudentId` ");
+                                                            }
+                                                            while ($row = mysqli_fetch_array($sql)) {
+                                                            ?>
+                                                                <tr>
+                                                                    <td><?php echo $row['StudentId']; ?></td>
+                                                                    <td><?php echo $row['firstName'] . ' ' . $row['lastName'] ?></td>
+
+                                                                    <td><?php echo $row['levelName']; ?></td>
+                                                                    <td><?php echo $row['departmentName']; ?></td>
+
+                                                                    <td><a href="finalStudentGrades.php?subjectId=<?= $row['subjectId'] ?>&departmentId=<?php echo $row['departmentId']; ?>&StudentId=<?php echo $row['StudentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
+                                                                </tr>
+                                                            <?php
+
+                                                            } ?>
+
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                         <!-- end of datatable -->
 

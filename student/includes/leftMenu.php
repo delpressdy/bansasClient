@@ -24,7 +24,8 @@ $departmentId = $row['departmentId'];
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file"></i>Grades</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-eye"></i> <a href="studentGrades.php"> View Grades</a></li>
-                        <li><i class="fa fa-eye"></i> <a href="viewFinalResult.php">Quiz Result</a></li>
+                        <li><i class="fa fa-eye"></i> <a href="finalStudentGrades.php?departmentId=<?php echo $row['departmentId']; ?>&StudentId=<?php echo $row['StudentId']; ?> "> View Final Grades</a></li>
+                        <li><i class="fa fa-eye"></i> <a href="quizResult.php">Quiz Result</a></li>
                         <li><i class="fa fa-eye"></i> <a href="gradingCriteria.php"> Grading Criteria</a></li>
                     </ul>
                 </li>
@@ -39,6 +40,7 @@ $departmentId = $row['departmentId'];
                         <li><i class="menu-icon fa fa-user-circle"></i><a href="updateProfile.php"> Update Profile</a></li>
                         <!-- <li><i class="menu-icon fa fa-sign-in"></i><a href="changePassword.php">Change Password</a></li> -->
                 </li>
+
             </ul>
             <li>
                 <a href="logout.php"> <i class="menu-icon fa fa-power-off"></i>Logout </a>

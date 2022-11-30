@@ -106,9 +106,9 @@ include('../includes/session.php');
                                             <th>Grade</th>
                                             <th>EmailAddress</th>
                                             <th>Contact</th>
-                                            <th>Password</th>
-                                            <th>Remarks</th>
-                                            <th>Date Added</th>
+                                          
+
+                                            <th>Section</th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
@@ -130,9 +130,9 @@ include('../includes/session.php');
                                                 <td><?php echo $row['levelName']; ?></td>
                                                 <td><?php echo $row['emailAddress']; ?></td>
                                                 <td><?php echo $row['phoneNo']; ?></td>
-                                                <td><?php echo $row['password']; ?></td>
-                                                <td><?php echo "Active" ?></td>
-                                                <td><?php echo $row['dateCreated']; ?></td>
+                                           
+
+                                                <td><?php echo $row['departmentName']; ?></td>
                                                 <td><a href="editAdmin.php?editid=<?php echo $row['staffId']; ?>" title="View Admin"><i class="fa fa-edit fa-1x"></i></a>
                                                     <a onclick="return confirm('Are you sure you want to delete?')" href="deleteStaff.php?delid=<?php echo $row['staffId']; ?>" title="Delete Admin"><i class="fa fa-trash fa-1x"></i></a>
                                                 </td>

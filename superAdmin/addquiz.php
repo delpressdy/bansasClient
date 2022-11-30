@@ -4,46 +4,6 @@ include('../includes/dbconnection.php');
 include('../includes/session.php');
 error_reporting(0);
 
-if (isset($_POST['submit'])) {
-
-    $alertStyle = "";
-    $statusMsg = "";
-
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $emailAddress = $_POST['emailAddress'];
-    $pass = md5('staff');
-    $phoneNo = $_POST['phoneNo'];
-    $staffId = $_POST['staffId'];
-    $dateCreated = date("Y-m-d");
-    $departmentId = $_POST['departmentId'];
-    // $facultyId = $_POST['facultyId'];
-    // $levelId = $_POST['levelId'];
-    $que = mysqli_query($con, "select * from tblstaff where staffId ='$staffId'");
-    $res = mysqli_fetch_array($que);
-
-
-    // $queryi = mysqli_query($con, "select * from tblassignedadmin where facultyId = '$facultyId' and departmentId = '$departmentId'");
-    // $rets = mysqli_fetch_array($queryi);
-
-    if ($res > 0) {
-
-        $alertStyle = "alert alert-danger";
-        $statusMsg = "User ID already exist!";
-    } else {
-
-        $query = mysqli_query($con, "insert into tblstaff(firstName,lastName,emailAddress,phoneNo,password,staffId,departmentId,dateCreated) value('$firstname','$lastname','$emailAddress','$phoneNo','$pass','$staffId','$departmentId','$dateCreated')");
-
-        if ($query) {
-
-            $alertStyle = "alert alert-success";
-            $statusMsg = "Added Successfully!";
-        } else {
-            $alertStyle = "alert alert-danger";
-            $statusMsg = "Query Error!";
-        }
-    }
-}
 ?>
 
 <!doctype html>
@@ -74,9 +34,8 @@ if (isset($_POST['submit'])) {
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
-
     <script>
-        function showValues(str) {
+        function showValues2(str) {
             if (str == "") {
                 document.getElementById("txtHint").innerHTML = "";
                 return;
@@ -120,14 +79,35 @@ if (isset($_POST['submit'])) {
             }
         }
     </script>
-
-
-
+    <script>
+        function showValues(str) {
+            if (str == "") {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            } else {
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("txtHint").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "ajaxCall2.php?fid=" + str, true);
+                xmlhttp.send();
+            }
+        }
+    </script>
 </head>
 
 <body>
     <!-- Left Panel -->
-    <?php include 'includes/leftMenu.php'; ?>
+    <?php $page = "student";
+    include 'includes/leftMenu.php'; ?>
 
     <!-- /#left-panel -->
 
@@ -156,9 +136,10 @@ if (isset($_POST['submit'])) {
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
+                                    <!-- Log on to codeastro.com for more projects! -->
                                     <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Administrator</a></li>
-                                    <li class="active">Add Administrator</li>
+                                    <li><a href="#">Pupils</a></li>
+                                    <li class="active">Add </li>
                                 </ol>
                             </div>
                         </div>
@@ -170,11 +151,45 @@ if (isset($_POST['submit'])) {
         <div class="content">
             <div class="animated fadeIn">
                 <div class="row">
+                    <?php
+
+                    if (isset($_POST['submit'])) {
+
+                        $alertStyle = "";
+                        $statusMsg = "";
+
+                        $title = $_POST['title'];
+                        $length = $_POST['length'];
+
+
+
+
+
+                        // $query = mysqli_query($con, "insert into tblstudent(firstName,lastName,otherName,matricNo,password,departmentId,schoolyear,contactNumber)
+                        //         value('$firstname','$lastname','$othername','$matricNo','$departmentId','$dateCreated','$contactNum','$password')");
+                        $insertStu = "insert into tblquiz(quizTitle,quizLength)
+                        value('$title','$length')";
+                        $insertRes = $con->query($insertStu);
+
+                        if ($insertRes) {
+
+                            $alertStyle = "alert alert-success";
+                            $statusMsg = "Quiz Added Successfully!";
+                        } else {
+                            $alertStyle = "alert alert-danger";
+                            $statusMsg = "An error Occurred!";
+                        }
+
+
+
+                        //catch exception
+
+                    } ?>
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">
-                                    <h2 align="left" class="text-success">ADD USER</h2>
+                                    <h2 align="center">Quiz Details</h2>
                                 </strong>
                             </div>
                             <div class="card-body">
@@ -184,88 +199,44 @@ if (isset($_POST['submit'])) {
                                         <div class="<?php echo $alertStyle; ?>" role="alert"><?php echo $statusMsg; ?></div>
                                         <form method="Post" action="">
                                             <div class="row">
-                                                <div class="col-6">
-
+                                                <div class="col-4">
                                                     <div class="form-group">
-                                                        <label for="x_card_code" class="control-label mb-1">User ID <small><i class="text-danger">Auto generated</i></small></label>
-                                                        <input id="" name="staffId" type="text" class="form-control cc-cvc" value="<?php $rand = rand(10000, 99999);
-                                                                                                                                    echo $rand; ?>" readonly>
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">First name<i class="text-danger">*</i></label>
-                                                        <input id="" name="firstname" type="tel" class="form-control cc-exp" value="" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Firstname">
-                                                    </div>
-
-
-                                                    <label for="x_card_code" class="control-label mb-1">Last name<i class="text-danger">*</i></label>
-                                                    <input id="" name="lastname" type="tel" class="form-control cc-cvc" value="" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Lastname">
-
-                                                    <br>
-                                                    <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Phone Number<i class="text-danger">*</i></label>
-                                                        <input id="" name="phoneNo" type="text" class="form-control cc-exp" value="" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Phone Number" required>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="x_card_code" class="control-label mb-1">Email Address<i class="text-danger">*</i></label>
-                                                        <input id="" name="emailAddress" type="email" class="form-control cc-cvc" value="" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="Email Address">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="cc-exp" class="control-label mb-1">Section<i class="text-danger">*</i></label>
-                                                        <?php
-                                                        $query = mysqli_query($con, "select * from tbldepartment ORDER BY departmentName ASC");
-                                                        $count = mysqli_num_rows($query);
-                                                        if ($count > 0) {
-                                                            echo ' <select required name="departmentId" onchange="showValues(this.value)" class="custom-select form-control">';
-                                                            while ($row = mysqli_fetch_array($query)) {
-                                                                echo '<option value="' . $row['departmentId'] . '" >' . $row['departmentName'] . '</option>';
-                                                            }
-                                                            echo '</select>';
-                                                        }
-                                                        ?>
-                                                    </div>
-
-
-
-                                                </div>
-                                            </div>
-                                            <div>
-
-                                                <div class="row">
-
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <?php
-                                                            echo "<div id='txtHint'></div>";
-                                                            ?>
-                                                        </div>
+                                                        <!-- Log on to codeastro.com for more projects! -->
+                                                        <label for="cc-exp" class="control-label mb-1">Quiz Title<i class="text-danger">*</i></label>
+                                                        <input id="" name="title" type="text" class="form-control cc-exp" value="" Required data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="quiz title..." autofocus>
                                                     </div>
                                                 </div>
-
-                                                <button type="submit" name="submit" class="btn btn-success">Submit Details</button>
+                                                <div class="col-4">
+                                                    <!-- Log on to codeastro.com for more projects! -->
+                                                    <label for="x_card_code" class="control-label mb-1">Quiz Length<i class="text-danger">*</i></label>
+                                                    <input id="" name="length" type="number" class="form-control cc-cvc" value="" Required data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" placeholder="quiz length...">
+                                                </div>
                                             </div>
-                                        </form>
+
+
+                                            <div class="row">
+
+
+                                            </div>
+
+                                            <button type="submit" name="submit" class="btn btn-success">Add New Quiz</button>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div> <!-- .card -->
-                    </div>
-                    <!--/.col-->
-
-
-                    <br><br>
-
-                    <!-- end of datatable -->
-
+                        </div>
+                    </div> <!-- .card -->
                 </div>
-            </div><!-- .animated -->
-        </div><!-- .content -->
+                <!--/.col-->
 
-        <div class="clearfix"></div>
 
-        <?php include 'includes/footer.php'; ?>
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
+
+    <div class="clearfix"></div>
+
+    <?php include 'includes/footer.php'; ?>
 
 
     </div><!-- /#right-panel -->
@@ -294,6 +265,23 @@ if (isset($_POST['submit'])) {
     <script type="text/javascript">
         $(document).ready(function() {
             $('#bootstrap-data-table-export').DataTable();
+        });
+
+        // Menu Trigger
+        $('#menuToggle').on('click', function(event) {
+            var windowWidth = $(window).width();
+            if (windowWidth < 1010) {
+                $('body').removeClass('open');
+                if (windowWidth < 760) {
+                    $('#left-panel').slideToggle();
+                } else {
+                    $('#left-panel').toggleClass('open-menu');
+                }
+            } else {
+                $('body').toggleClass('open');
+                $('#left-panel').removeClass('open-menu');
+            }
+
         });
     </script>
 

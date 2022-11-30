@@ -1,33 +1,33 @@
 
-<?php 
+<?php
 error_reporting(0);
 
-$query = mysqli_query($con,"select * from tblstudent where matricNo='$matricNo'");
+$query = mysqli_query($con, "select * from tblstudent where matricNo='$matricNo'");
 $row = mysqli_fetch_array($query);
 $departmentId = $row['departmentId'];
 $facultyId = $row['facultyId'];
 $levelId = $row['levelId'];
 
 
-$que=mysqli_query($con,"select * from tbldepartment where Id = '$departmentId'"); //department                     
-$row = mysqli_fetch_array($que);  
-$departmentName = $row['departmentName'];      
+$que = mysqli_query($con, "select * from tbldepartment where Id = '$departmentId'"); //department                     
+$row = mysqli_fetch_array($que);
+$departmentName = $row['departmentName'];
 
 
-$que=mysqli_query($con,"select * from tblfaculty where Id = '$facultyId'"); //faculty                      
-$row = mysqli_fetch_array($que);  
-$facultyName = $row['facultyName'];      
+$que = mysqli_query($con, "select * from tblfaculty where Id = '$facultyId'"); //faculty                      
+$row = mysqli_fetch_array($que);
+$facultyName = $row['facultyName'];
 
 
 
 //Log on to codeastro.com for more projects!
 ////////////  ADMINISTRATOR DASHBOARD //////////////
 
-$queryStudent=mysqli_query($con,"select * from tblstudent where facultyId = '$facultyId' and departmentId = '$departmentId'"); //assigned staff
+$queryStudent = mysqli_query($con, "select * from tblstudent where facultyId = '$facultyId' and departmentId = '$departmentId'"); //assigned staff
 $adminCountStudent = mysqli_num_rows($queryStudent);
 
-$queryCourses=mysqli_query($con,"select * from tblcourse where facultyId = '$facultyId' and departmentId = '$departmentId'"); //today's Attendance
-$adminCountCourses=mysqli_num_rows($queryCourses);
+$queryCourses = mysqli_query($con, "select * from tblcourse where facultyId = '$facultyId' and departmentId = '$departmentId'"); //today's Attendance
+$adminCountCourses = mysqli_num_rows($queryCourses);
 
 
 
@@ -35,76 +35,78 @@ $adminCountCourses=mysqli_num_rows($queryCourses);
 //-------------------------SUPER ADMINISTRATOR
 
 
-$admin=mysqli_query($con,"select * from tbladmin where adminTypeId = '2'");
-$countAdmin=mysqli_num_rows($admin);
+$admin = mysqli_query($con, "select * from tbladmin where adminTypeId = '2'");
+$countAdmin = mysqli_num_rows($admin);
 
-$todaysAtt=mysqli_query($con,"select * from tblattendance where date(DateTaken)=CURDATE();"); //today's Attendance
-$countTodaysAttendance=mysqli_num_rows($todaysAtt);
+$todaysAtt = mysqli_query($con, "select * from tblattendance where date(DateTaken)=CURDATE();"); //today's Attendance
+$countTodaysAttendance = mysqli_num_rows($todaysAtt);
 
-$allAtt=mysqli_query($con,"select * from tblattendance");
-$countAllAttendance=mysqli_num_rows($allAtt);
+$allAtt = mysqli_query($con, "select * from tblattendance");
+$countAllAttendance = mysqli_num_rows($allAtt);
 
 // //-------------------------------------------
 
+$staffQuery = mysqli_query($con, "select * from tblstaff "); //staff
+$staff = mysqli_num_rows($staffQuery);
 
-$staffQuery=mysqli_query($con,"select * from tbladmin where adminTypeId = 2"); //staff
+$staffQuery = mysqli_query($con, "select * from tbladmin where adminTypeId = 2"); //staff
 $countAllStaff = mysqli_num_rows($staffQuery);
 
-$departmentQuery=mysqli_query($con,"select * from tbldepartment"); //department
+$departmentQuery = mysqli_query($con, "select * from tbldepartment"); //department
 $countSection = mysqli_num_rows($departmentQuery);
 
-$facultyQuery=mysqli_query($con,"select * from tblfaculty"); //faculty
+$facultyQuery = mysqli_query($con, "select * from tblfaculty"); //faculty
 $countFaculty = mysqli_num_rows($facultyQuery);
 
-$studentQuery=mysqli_query($con,"select * from tblstudent"); //student
+$studentQuery = mysqli_query($con, "select * from tblstudent"); //student
 $countPupils = mysqli_num_rows($studentQuery);
 
-$courseQuery=mysqli_query($con,"select * from tblcourse"); //courses
+$courseQuery = mysqli_query($con, "select * from tblcourse"); //courses
 $countAllCourses = mysqli_num_rows($courseQuery);
 
-$courseSession=mysqli_query($con,"select * from tblsession"); //courses
+$courseSession = mysqli_query($con, "select * from tblsession"); //courses
 $countAllSession = mysqli_num_rows($courseSession);
 
-$resultComputed=mysqli_query($con,"select * from tblfinalresult"); //courses
+$resultComputed = mysqli_query($con, "select * from tblfinalresult"); //courses
 $countAllComputed = mysqli_num_rows($resultComputed);
 
-$levelQue=mysqli_query($con,"select * from tbllevel"); //courses
+$levelQue = mysqli_query($con, "select * from tbllevel"); //courses
 $countAllLevel = mysqli_num_rows($levelQue);
 
-$semesterQue=mysqli_query($con,"select * from tblsemester"); //courses
+$semesterQue = mysqli_query($con, "select * from tblsemester"); //courses
 $countAllSemester = mysqli_num_rows($semesterQue);
 
-$distinctno=mysqli_query($con,"SELECT * from tblfinalresult WHERE classOfDiploma = 'Distinction'"); //dist. no.
+$distinctno = mysqli_query($con, "SELECT * from tblfinalresult WHERE classOfDiploma = 'Distinction'"); //dist. no.
 $countAllDist = mysqli_num_rows($distinctno);
 
-$uppercred=mysqli_query($con,"SELECT * from tblfinalresult WHERE classOfDiploma = 'Upper Credit'"); //upper cred
+$uppercred = mysqli_query($con, "SELECT * from tblfinalresult WHERE classOfDiploma = 'Upper Credit'"); //upper cred
 $countAllUpc = mysqli_num_rows($uppercred);
 
-$lowercred=mysqli_query($con,"SELECT * from tblfinalresult WHERE classOfDiploma = 'Lower Credit'"); //lower cred
+$lowercred = mysqli_query($con, "SELECT * from tblfinalresult WHERE classOfDiploma = 'Lower Credit'"); //lower cred
 $countAlllc = mysqli_num_rows($lowercred);
 
-$justpass=mysqli_query($con,"SELECT * from tblfinalresult WHERE classOfDiploma = 'Pass'"); //just passed
+$justpass = mysqli_query($con, "SELECT * from tblfinalresult WHERE classOfDiploma = 'Pass'"); //just passed
 $countAlljp = mysqli_num_rows($justpass);
 
-$failed=mysqli_query($con,"SELECT * from tblfinalresult WHERE classOfDiploma = 'Fail'"); //failed numbers
+$failed = mysqli_query($con, "SELECT * from tblfinalresult WHERE classOfDiploma = 'Fail'"); //failed numbers
 $countAllf = mysqli_num_rows($failed);
 
 //Log on to codeastro.com for more projects!
 //-----------------------LECTURER----------------------
 
-$lecCourse=mysqli_query($con,"select * from tblcourse where departmentId = '$departmentId'"); //courses
+$lecCourse = mysqli_query($con, "select * from tblcourse where departmentId = '$departmentId'"); //courses
 $countLecCourse = mysqli_num_rows($lecCourse);
 
-$que=mysqli_query($con,"select * from tblassignedstaff where departmentId = '$departmentId'"); //assigned staff
+$que = mysqli_query($con, "select * from tblassignedstaff where departmentId = '$departmentId'"); //assigned staff
 $lecCountStaff = mysqli_num_rows($que);
 
 //Log on to codeastro.com for more projects!
 //-----------------------STUDENT----------------------
 
-$studCourse=mysqli_query($con,"select * from tblcourse where departmentId = '$departmentId'"); //courses
+$studCourse = mysqli_query($con, "select * from tblcourse where departmentId = '$departmentId'"); //courses
 $coutAllStudentCourses = mysqli_num_rows($studCourse);
 
-$queResult=mysqli_query($con,"select * from tblfinalresult where matricNo = '$matricNo'"); //assigned staff
+$queResult = mysqli_query($con, "select * from tblfinalresult where matricNo = '$matricNo'"); //assigned staff
 $countAllStudResult = mysqli_num_rows($queResult);
 //Log on to codeastro.com for more projects!
 ?>

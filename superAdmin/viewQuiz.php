@@ -37,7 +37,7 @@ include('../includes/session.php');
 
 <body>
     <!-- Left Panel -->
-    <?php $page = "courses";
+    <?php $page = "student";
     include 'includes/leftMenu.php'; ?>
 
     <!-- /#left-panel -->
@@ -68,8 +68,8 @@ include('../includes/session.php');
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
                                     <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Subject</a></li>
-                                    <li class="active">View</li>
+                                    <li><a href="#">Pupils</a></li>
+                                    <li class="active">View Pupils</li>
                                 </ol>
                             </div>
                         </div>
@@ -93,30 +93,31 @@ include('../includes/session.php');
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">
-                                    <h2 align="center">All Subjects</h2>
+                                    <h2 align="center">Quizzes</h2>
                                 </strong>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Subject ID</th>
-                                            <th>Name</th>
-                                            <th>Section</th>
-                                         
-                                            <th>Grade</th>
+                                            <th>#</th>
+                                            <th>Full Name</th>
+                                            <th>Score</th>
+                                            <th>Quiz Title</th>
 
-                                            <th>Date Added</th>
+
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         <?php
-                                        if ($_SESSION['adminTypeId'] == 2) {
-                                            $ret = mysqli_query($con, "SELECT  tbldepartment.`departmentId`, tblcourse.`subjectId`, tblcourse.`subjectTitle`,tbldepartment.`departmentName`,tblcourse.`dateAdded`, tbllevel.`levelName` FROM tblcourse INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblcourse.`departmentId` INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` INNER JOIN tblstaff ON tblstaff.`departmentId` = tbldepartment.`departmentId` where tbldepartment.`departmentId` = '$_SESSION[departmentId]'");
+                                        if ($_SESSION['adminTypeId'] == 1) {
+                                            $ret = mysqli_query($con, "
+            SELECT tblmyquiz.`myquizId`, tblstudent.`firstName`, tblstudent.`lastName`,tblmyquiz.`score`,tblquiz.`quizLength`,tblquiz.`quizTitle` ,tbldepartment.`departmentId`FROM tblmyquiz INNER JOIN tblstudent ON tblstudent.`StudentId` = tblmyquiz.`StudentId`INNER JOIN tblcourse ON tblcourse.`subjectId` = tblmyquiz.`subjectId` INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblmyquiz.`departmentId` INNER JOIN tblquiz ON tblquiz.`quiz_id` = tblmyquiz.`quiz_id` WHERE tbldepartment.`departmentId`");
                                         } else {
-                                            $ret = mysqli_query($con, "SELECT  tbldepartment.`departmentId`, tblcourse.`subjectId`, tblcourse.`subjectTitle`,tbldepartment.`departmentName`,tblcourse.`dateAdded`, tbllevel.`levelName` FROM tblcourse INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblcourse.`departmentId` INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` INNER JOIN tblstaff ON tblstaff.`departmentId` = tbldepartment.`departmentId`");
+                                            $ret = mysqli_query($con, "
+                                        SELECT tblmyquiz.`myquizId`, tblstudent.`firstName`, tblstudent.`lastName`,tblmyquiz.`score`,tblquiz.`quizLength`,tblquiz.`quizTitle` ,tbldepartment.`departmentId`FROM tblmyquiz INNER JOIN tblstudent ON tblstudent.`StudentId` = tblmyquiz.`StudentId`INNER JOIN tblcourse ON tblcourse.`subjectId` = tblmyquiz.`subjectId` INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblmyquiz.`departmentId` INNER JOIN tblquiz ON tblquiz.`quiz_id` = tblmyquiz.`quiz_id` WHERE tbldepartment.`departmentId` = '$_SESSION[departmentId]'");
                                         }
 
 
@@ -124,16 +125,19 @@ include('../includes/session.php');
                                         while ($row = mysqli_fetch_array($ret)) {
                                         ?>
                                             <tr>
+                                                <td><?php echo $row['myquizId']; ?></td>
+                                                <td><?php echo $row['firstName'] . ' ' . $row['lastName']  ?></td>
+                                                <td><?php echo $row['score'] . '/' . $row['quizLength']   ?></td>
 
-                                                <td><?php echo $row['subjectId']; ?></td>
-                                                <td><?php echo $row['subjectTitle']; ?></td>
-                                                <td><?php echo $row['departmentName']; ?></td>
-                                            
-                                                <td><?php echo $row['levelName']; ?></td>
-                                                <td><?php echo $row['dateAdded']; ?></td>
+                                                <td><?php echo $row['quizTitle']  ?></td>
                                                 <td>
-                                                    <a href="editCourses.php?editCourseId=<?php echo $row['subjectId']; ?>" title="Edit Details"><i class="fa fa-edit fa-1x"></i></a>
-                                                    <a onclick="return confirm('Are you sure you want to delete?')" href="deleteCourse.php?delid=<?php echo $row['subjectId']; ?>" title="Delete Course"><i class="fa fa-trash fa-1x"></i></a>
+                                                    <!-- <a href="editStudent.php?editStudentId=<?php echo $row['matricNo']; ?>" title="Edit Details">
+                                                        <i class="fa fa-edit fa-1x"></i>
+                                                    </a> -->
+
+                                                    <a onclick="return confirm('Are you sure you want to delete?')" href="deleteStudent.php?delid=<?php echo $row['matricNo']; ?>" title="Delete Student Details">
+                                                        <i class="fa fa-trash fa-1x"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         <?php
@@ -161,11 +165,11 @@ include('../includes/session.php');
     <!-- Right Panel -->
 
     <!-- Scripts -->
+    <script src="../assets/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="../assets/js/main.js"></script>
 
     <script src="../assets/js/lib/data-table/datatables.min.js"></script>
     <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
@@ -182,6 +186,7 @@ include('../includes/session.php');
     <script type="text/javascript">
         $(document).ready(function() {
             $('#bootstrap-data-table-export').DataTable();
+
         });
 
         // Menu Trigger
