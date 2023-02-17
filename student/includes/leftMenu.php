@@ -26,7 +26,7 @@ $departmentId = $row['departmentId'];
                         <li><i class="fa fa-eye"></i> <a href="studentGrades.php"> View Grades</a></li>
                         <li><i class="fa fa-eye"></i> <a href="finalStudentGrades.php?departmentId=<?php echo $row['departmentId']; ?>&StudentId=<?php echo $row['StudentId']; ?> "> View Final Grades</a></li>
                         <li><i class="fa fa-eye"></i> <a href="quizResult.php">Quiz Result</a></li>
-                        <li><i class="fa fa-eye"></i> <a href="gradingCriteria.php"> Grading Criteria</a></li>
+
                     </ul>
                 </li>
 

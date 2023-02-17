@@ -142,7 +142,7 @@ error_reporting(0);
                                                                 <th>2nd Grading</th>
                                                                 <th>3rd Grading</th>
                                                                 <th>4th Grading</th>
-                                                                <th>Final Result</th>
+
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -176,15 +176,15 @@ INNER JOIN tblcourse ON tblcourse.`departmentId` = tbldepartment.`departmentId` 
                                                                     <td><?php echo $row['levelName']; ?></td>
                                                                     <td><?php echo $row['departmentName']; ?></td>
 
-                                                                    <td><a href="viewGradeResult.php?subjectId=<?php echo $row['subjectId']; ?>&semesterId=1&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+                                                                    <td><a href="viewGradeResult.php?semesterId=1&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
 
-                                                                    <td><a href="viewGradeResult.php?subjectId=<?php echo $row['subjectId']; ?>&semesterId=2&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+                                                                    <td><a href="viewGradeResult.php?semesterId=2&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
 
-                                                                    <td><a href="viewGradeResult.php?subjectId=<?php echo $row['subjectId']; ?>&semesterId=3&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+                                                                    <td><a href="viewGradeResult.php?semesterId=3&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
 
-                                                                    <td><a href="viewGradeResult.php?subjectId=<?php echo $row['subjectId']; ?>&semesterId=4&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+                                                                    <td><a href="viewGradeResult.php?semesterId=4&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
 
-                                                                    <td><a href="finalStudentGrades.php?subjectId=<?= $row['subjectId'] ?>&departmentId=<?php echo $row['departmentId']; ?>&StudentId=<?php echo $row['StudentId']; ?> " title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
 
                                                                 </tr>
                                                             <?php

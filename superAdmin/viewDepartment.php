@@ -120,7 +120,7 @@ include('../includes/session.php');
                                                 <td><?php echo $row['departmentName']; ?></td>
                                                 <td><?php echo $row['levelName']; ?></td>
                                                 <td><?php echo $row['dateCreated']; ?></td>
-                                                <td><a href="editDepartment.php?editid=<?php echo $row['departmentId']; ?>" title="Edit Department"><i class="fa fa-edit fa-1x"></i></a>
+                                                <td><a href="editDepartment.php?sectionId=<?php echo $row['departmentId']; ?>" title="Edit Department"><i class="fa fa-edit fa-1x"></i></a>
                                                     <a onclick="return confirm('Are you sure you want to delete?')" href="deleteDepartment.php?delid=<?php echo $row['departmentId']; ?>" title="Delete Department"><i class="fa fa-trash fa-1x"></i></a>
                                                 </td>
                                             </tr>

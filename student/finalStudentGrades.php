@@ -152,7 +152,7 @@ if (isset($_GET['StudentId']) && isset($_GET['departmentId'])) {
 
                                                                 <th>ID #</th>
                                                                 <th>Subjects</th>
-                                                                <th>Final Subject Grade</th>
+                                                                <th>Grades</th>
                                                                 <th>Remarks</th>
                                                             </tr>
                                                         </thead>
@@ -228,7 +228,7 @@ if (isset($_GET['StudentId']) && isset($_GET['departmentId'])) {
                                                             <div class="col-md-12">
                                                                 <div class="card">
                                                                     <div class="card-header">
-                                                                        <h2 class="text-info">Final Grade</h2>
+                                                                        <h2 class="text-info">General Average</h2>
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <table id="bootstrap-data-table" class="table table-striped table-bordered">

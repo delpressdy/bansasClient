@@ -51,7 +51,7 @@
     <div class="container d-flex align-items-center">
       <a class="navbar-brand" href="index.php"><img src="img/profile.jpg" alt="Logo" style="width:70px;height:70px; border-radius: 26px;"></a>
       <h1 class="logo mr-auto"><a href="index.php"> Salug Daku Elementary</a></h1>
-      <nav class="nav-menu d-none d-lg-block">
+      <nav class="nav-menu d-lg-block">
         <ul>
 
 
@@ -106,7 +106,7 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
-  <div id="preloader"></div>
+
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/jquery/jquery.min.js"></script>

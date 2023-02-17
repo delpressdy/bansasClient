@@ -10,7 +10,7 @@ if ($row['adminTypeId'] === 1) {
 } else {
 
     $staffFullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
-    $staffRoom = $_SESSION['departmentId'];
+    // $staffRoom = $_SESSION['departmentId'];
 }
 ?>
 <aside id="left-panel" class="left-panel">

@@ -137,24 +137,24 @@ $row = mysqli_fetch_array($query)
                                     <tbody>
 
                                         <tr>
-                                            <td bgcolor="#32ff7e">Excellent</td>
-                                            <td bgcolor="#32ff7e">90% +</td>
+                                            <td bgcolor="#32ff7e">Outstanding</td>
+                                            <td bgcolor="#32ff7e">90-100</td>
                                         </tr>
                                         <tr>
-                                            <td bgcolor="#7bed9f">Very nice</td>
-                                            <td bgcolor="#7bed9f">85% +</td>
+                                            <td bgcolor="#7bed9f">Very Satisfactory</td>
+                                            <td bgcolor="#7bed9f">85-89</td>
                                         </tr>
                                         <tr>
-                                            <td bgcolor="#97fdae">Nice</td>
-                                            <td bgcolor="#97fdae">80% +</td>
+                                            <td bgcolor="#97fdae">Satisfactory</td>
+                                            <td bgcolor="#97fdae">80-84</td>
                                         </tr>
                                         <tr>
-                                            <td bgcolor="#fffa65">Good</td>
-                                            <td bgcolor="#fffa65">75% +</td>
+                                            <td bgcolor="#fffa65">Fairly Satisfactory</td>
+                                            <td bgcolor="#fffa65">75-79</td>
                                         </tr>
                                         <tr>
-                                            <td bgcolor="#ff4757">Failed</td>
-                                            <td bgcolor="#ff4757">Below 74</td>
+                                            <td bgcolor="#ff4757">Did Not Meet Expectations</td>
+                                            <td bgcolor="#ff4757">Below 75</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -169,20 +169,24 @@ $row = mysqli_fetch_array($query)
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>75 - 100</td>
+                                            <td>90 - 100</td>
                                             <td>A+</td>
                                         </tr>
                                         <tr>
-                                            <td>70 - 74</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>65 - 69</td>
+                                            <td>85 - 89</td>
                                             <td>B</td>
                                         </tr>
                                         <tr>
-                                            <td>60 - 64</td>
-                                            <td>Failed</td>
+                                            <td>80 - 84</td>
+                                            <td>C</td>
+                                        </tr>
+                                        <tr>
+                                            <td>75 - 79</td>
+                                            <td>D</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Below 74</td>
+                                            <td>F</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -213,7 +217,7 @@ $row = mysqli_fetch_array($query)
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">
-                                    <h3 align="center">Your Subjects</h3>
+                                    <h3 align="center">Student Records</h3>
                                 </strong>
                             </div>
                             <div class="card-body">
@@ -222,7 +226,7 @@ $row = mysqli_fetch_array($query)
                                         <tr>
 
                                             <th>ID #</th>
-                                            <th>Full Name</th>
+                                            <th>Subjects</th>
                                             <th>Grade lvl</th>
                                             <th>Section</th>
 
@@ -230,7 +234,7 @@ $row = mysqli_fetch_array($query)
                                             <th>2nd Grading</th>
                                             <th>3rd Grading</th>
                                             <th>4th Grading</th>
-                                            <th>Final Result</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -244,7 +248,7 @@ $row = mysqli_fetch_array($query)
     FROM tblstudent 
     INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` 
     INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` 
-    INNER JOIN tblcourse ON tblcourse.`departmentId` = tbldepartment.`departmentId` where tbldepartment.`departmentId` = ' $_SESSION[departmentId]' and tblstudent.StudentId =     ' $_SESSION[studentId] ' and tbldepartment.departmentId =    '$_SESSION[departmentId] '");
+    INNER JOIN tblcourse ON tblcourse.`departmentId` = tbldepartment.`departmentId` where tbldepartment.`departmentId` = ' $_SESSION[departmentId]' and tblstudent.StudentId =     ' $_SESSION[StudentId] ' and tbldepartment.departmentId = '$_SESSION[departmentId] '");
 
                                         while ($row = mysqli_fetch_array($sql)) {
                                         ?>
@@ -283,7 +287,7 @@ $row = mysqli_fetch_array($query)
 
                                                 <td><a href="viewGradeResult.php?subjectId=<?php echo $row['subjectId']; ?>&semesterId=4&matricNo=<?php echo $row['matricNo']; ?>&departmentId=<?php echo $row['departmentId']; ?>" title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
 
-                                                <td><a href="finalStudentGrades.php?subjectId=<?= $row['subjectId'] ?>&departmentId=<?php echo $row['departmentId']; ?>&StudentId=<?php echo $row['StudentId']; ?> " title="View Details"><i class="fa fa-eye fa-1x"></i> View</a></td>
+
 
                                             </tr>
                                         <?php

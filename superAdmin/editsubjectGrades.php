@@ -126,47 +126,26 @@ if (isset($_GET['matricNo']) && isset($_GET['departmentId']) && isset($_GET['sem
 
                                     if (isset($_POST['submitGrade'])) {
                                         $subject = $_POST['subject'];
-                                        $grade = $_POST['grade'];
-                                        $studentId =   $rowStd['StudentId'];
-                                        $date = date("Y-m-d");
-                                        $departmentId = $departmentId;
-                                        $grading = $semesterId;
 
 
-
-                                        $query = mysqli_query($con, "select * from tblresult where subjectId = '$subject' and StudentId = '$studentId' and gradingId = '$grading'");
-                                        if (mysqli_num_rows($query) > 0) { ?>
-                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                You already submitted grade to this subject.
+                                        $student =  mysqli_query($con, "select * from tblstudent where matricNo = '$matricNo'");
+                                        $student1 =  mysqli_fetch_array($student);
+                                        $query = mysqli_query($con, "update tblresult set grade = '$subject' where StudentId = '$student1[StudentId]'  AND gradingId = '$semesterId' and  subjectId = '$_GET[subjectId]' ");
+                                        if ($query == TRUE) { ?>
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                Grade Updated
                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <?php } else {
-                                            $insertGrade = "insert into tblresult(StudentId,subjectId,grade,dateAdded,departmentId,gradingId)
-                                        value('  $studentId','  $subject',' $grade','  $date','    $departmentId ','   $grading')";
 
-                                            if ($con->query($insertGrade) === TRUE) { ?>
-                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                    Grade Added
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                            <?php } else {   ?>
-                                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                    Failed to add grades
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                    <?php  }
+                                    <?php
                                         }
                                     }
                                     ?>
 
 
-
+                                    <h2 class="py-2 text-center text-info">Edit Grades</h2>
                                     <h3 class="py-2 text-center"><?= $rowStd['firstName'] . ' ' . $rowStd['lastName'] ?> </h3>
                                     <div class="card-header">
 
@@ -199,33 +178,31 @@ if (isset($_GET['matricNo']) && isset($_GET['departmentId']) && isset($_GET['sem
 
                                         <div class="form-group my-4">
                                             <label for="subject" class="form-label">Subject</label>
-                                            <select class="form-control" aria-label="Default select example" required name="subject">
-                                                <option selected>--Select Subject--</option>
 
 
-                                                <?php
-                                                $ret = mysqli_query($con, "SELECT  tblcourse.`subjectId`,tblcourse.`subjectTitle`, tblstudent.`StudentId` ,
-                                            tbldepartment.`departmentId` ,tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`contactNumber`,
-                                            tblstudent.`matricNo`,tblstudent.`otherName`,tblstudent.`schoolyear`, tbldepartment.`departmentName`,
-                                            tbllevel.`levelName` 
-                                            FROM tblstudent 
-                                            INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblstudent.`departmentId` 
-                                            INNER JOIN tbllevel ON tbllevel.`levelId` = tbldepartment.`levelId` 
-                                            INNER JOIN tblcourse ON tblcourse.`departmentId` = tbldepartment.`departmentId` where tblstudent.matricNo = '$matricNo'");
+                                            <?php
+                                            $ret = mysqli_query($con, "SELECT tblresult.`resultId`, tblresult.`grade` ,tblcourse.`subjectTitle` ,tblcourse.`subjectId`, tblstudent.`firstName`,
+                                            tblstudent.`lastName`,tblstudent.`schoolyear`, tblsemester.`grading`, tbllevel.`levelName` 
+                                            FROM tblresult 
+                                            INNER JOIN tblcourse ON tblcourse.`subjectId` = tblresult.`subjectId`
+                                            INNER JOIN tblstudent ON tblstudent.`StudentId` = tblresult.`StudentId`
+                                             INNER JOIN tblsemester ON tblsemester.`grading_Id`= tblresult.`gradingId`
+                                              INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblresult.`departmentId`
+                                               INNER JOIN tbllevel ON  tbllevel.`levelId` = tbldepartment.`levelId` where tblstudent.matricNo = '$matricNo'  AND tblsemester.`grading_Id` = '$semesterId' and  tblcourse.`subjectId` = '$_GET[subjectId]'");
+                                            $row = mysqli_fetch_array($ret);
+
+                                            ?>
+                                            <input type="text" disabled class="form-control" value="<?= $row['subjectTitle'] ?>" required>
+                                            <?php
+
+                                            ?>
 
 
-                                                while ($row = mysqli_fetch_array($ret)) {
-                                                ?>
-                                                    <option value="<?= $row['subjectId'] ?>"><?= $row['subjectTitle'] ?></option>
-                                                <?php
-
-                                                } ?>
-
-                                            </select>
                                         </div>
                                         <div class="form-group">
+
                                             <label class="form-label"></label>
-                                            <input type="text" class="form-control" name="grade" max="100" required placeholder="98">
+                                            <input type="text" class="form-control" name="subject" value="<?= $row['grade'] ?>" max="100" required placeholder="98">
 
                                         </div>
                                         <div class="form-group text-center">

@@ -130,24 +130,24 @@ if (isset($_GET['matricNo']) && isset($_GET['departmentId']) && isset($_GET['sem
                                     <tbody>
 
                                         <tr>
-                                            <td bgcolor="#32ff7e">Excellent</td>
-                                            <td bgcolor="#32ff7e">90% +</td>
+                                            <td bgcolor="#32ff7e">Outstanding</td>
+                                            <td bgcolor="#32ff7e">90-100</td>
                                         </tr>
                                         <tr>
-                                            <td bgcolor="#7bed9f">Very nice</td>
-                                            <td bgcolor="#7bed9f">85% +</td>
+                                            <td bgcolor="#7bed9f">Very Satisfactory</td>
+                                            <td bgcolor="#7bed9f">85-89</td>
                                         </tr>
                                         <tr>
-                                            <td bgcolor="#97fdae">Nice</td>
-                                            <td bgcolor="#97fdae">80% +</td>
+                                            <td bgcolor="#97fdae">Satisfactory</td>
+                                            <td bgcolor="#97fdae">80-84</td>
                                         </tr>
                                         <tr>
-                                            <td bgcolor="#fffa65">Good</td>
-                                            <td bgcolor="#fffa65">75% +</td>
+                                            <td bgcolor="#fffa65">Fairly Satisfactory</td>
+                                            <td bgcolor="#fffa65">75-79</td>
                                         </tr>
                                         <tr>
-                                            <td bgcolor="#ff4757">Fail</td>
-                                            <td bgcolor="#ff4757">Below 74</td>
+                                            <td bgcolor="#ff4757">Did Not Meet Expectations</td>
+                                            <td bgcolor="#ff4757">Below 75</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -162,20 +162,24 @@ if (isset($_GET['matricNo']) && isset($_GET['departmentId']) && isset($_GET['sem
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>75 - 100</td>
+                                            <td>90 - 100</td>
                                             <td>A+</td>
                                         </tr>
                                         <tr>
-                                            <td>70 - 74</td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>65 - 69</td>
+                                            <td>85 - 89</td>
                                             <td>B</td>
                                         </tr>
                                         <tr>
-                                            <td>60 - 64</td>
-                                            <td>Fail</td>
+                                            <td>80 - 84</td>
+                                            <td>C</td>
+                                        </tr>
+                                        <tr>
+                                            <td>75 - 79</td>
+                                            <td>D</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Below 74</td>
+                                            <td>F</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -219,11 +223,11 @@ if (isset($_GET['matricNo']) && isset($_GET['departmentId']) && isset($_GET['sem
 
                                         <?php
                                         if ($_SESSION['adminTypeId'] == 1) {
-                                            $ret = mysqli_query($con, "SELECT tblresult.`resultId`, tblresult.`grade` ,tblcourse.`subjectTitle`, tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`schoolyear`, tblsemester.`grading`, tbllevel.`levelName` FROM tblresult INNER JOIN tblcourse ON tblcourse.`subjectId` = tblresult.`subjectId`
+                                            $ret = mysqli_query($con, "SELECT tblresult.`resultId`, tblresult.`grade` ,tblcourse.`subjectTitle`,tblcourse.`subjectId`, tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`schoolyear`, tblsemester.`grading`, tbllevel.`levelName` FROM tblresult INNER JOIN tblcourse ON tblcourse.`subjectId` = tblresult.`subjectId`
                                             INNER JOIN tblstudent ON tblstudent.`StudentId` = tblresult.`StudentId` INNER JOIN tblsemester ON tblsemester.`grading_Id`= tblresult.`gradingId` INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblresult.`departmentId` INNER JOIN tbllevel ON  tbllevel.`levelId` = tbldepartment.`levelId` WHERE tblsemester.`grading_Id` = '$_GET[semesterId]' and  tblstudent.`matricNo` = '$_GET[matricNo]' 
                                             ");
                                         } else {
-                                            $ret = mysqli_query($con, "SELECT tblresult.`resultId`, tblresult.`grade` ,tblcourse.`subjectTitle`, tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`schoolyear`, tblsemester.`grading`, tbllevel.`levelName` FROM tblresult INNER JOIN tblcourse ON tblcourse.`subjectId` = tblresult.`subjectId`
+                                            $ret = mysqli_query($con, "SELECT tblresult.`resultId`, tblresult.`grade` ,tblcourse.`subjectTitle` ,tblcourse.`subjectId`, tblstudent.`firstName`,tblstudent.`lastName`,tblstudent.`schoolyear`, tblsemester.`grading`, tbllevel.`levelName` FROM tblresult INNER JOIN tblcourse ON tblcourse.`subjectId` = tblresult.`subjectId`
                                             INNER JOIN tblstudent ON tblstudent.`StudentId` = tblresult.`StudentId` INNER JOIN tblsemester ON tblsemester.`grading_Id`= tblresult.`gradingId` INNER JOIN tbldepartment ON tbldepartment.`departmentId` = tblresult.`departmentId` INNER JOIN tbllevel ON  tbllevel.`levelId` = tbldepartment.`levelId` WHERE tblstudent.`matricNo` = '$_GET[matricNo]' and tblsemester.`grading_Id` = '$_GET[semesterId]'");
                                         }
 
@@ -245,10 +249,14 @@ if (isset($_GET['matricNo']) && isset($_GET['departmentId']) && isset($_GET['sem
                                                     <!-- <a href="editStudent.php?editStudentId=<?php echo $row['matricNo']; ?>" title="Edit Details">
                                                         <i class="fa fa-edit fa-1x"></i>
                                                     </a> -->
-
+                                                    <!-- 
                                                     <a onclick="return confirm('Are you sure you want to delete?')" href="deleteStudent.php?delid=<?php echo $row['matricNo']; ?>" title="Delete Student Details">
                                                         <i class="fa fa-trash fa-1x"></i>
+                                                    </a> -->
+                                                    <a href="editsubjectGrades.php?matricNo=<?= $_GET['matricNo'] ?>&semesterId=<?= $_GET['semesterId'] ?>&departmentId=<?= $_GET['departmentId'] ?>&subjectId=<?= $row['subjectId'] ?>">
+                                                        <i class="fa fa-edit fa-1x"></i>
                                                     </a>
+
                                                 </td>
                                             </tr>
                                         <?php

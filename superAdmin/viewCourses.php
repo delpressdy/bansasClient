@@ -132,7 +132,7 @@ include('../includes/session.php');
                                                 <td><?php echo $row['levelName']; ?></td>
                                                 <td><?php echo $row['dateAdded']; ?></td>
                                                 <td>
-                                                    <a href="editCourses.php?editCourseId=<?php echo $row['subjectId']; ?>" title="Edit Details"><i class="fa fa-edit fa-1x"></i></a>
+                                                    <a href="editCourses.php?subjectId=<?php echo $row['subjectId']; ?>" title="Edit Details"><i class="fa fa-edit fa-1x"></i></a>
                                                     <a onclick="return confirm('Are you sure you want to delete?')" href="deleteCourse.php?delid=<?php echo $row['subjectId']; ?>" title="Delete Course"><i class="fa fa-trash fa-1x"></i></a>
                                                 </td>
                                             </tr>

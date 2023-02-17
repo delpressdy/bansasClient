@@ -118,7 +118,7 @@ if (isset($_GET['StudentId']) && isset($_GET['departmentId']) && isset($_GET['su
                             <div class="card-header">
                                 <h3 align="center" class="text-info"><?= $fullname ?></h3>
                                 <strong class="card-title">
-                                    <h2 align="center">FinalGrade</h2>
+                                    <h2 align="center">Final Grade</h2>
                                 </strong>
                             </div>
 
@@ -166,10 +166,29 @@ if (isset($_GET['StudentId']) && isset($_GET['departmentId']) && isset($_GET['su
                                                             $finalTotalAverage = 0.0;
                                                             $sql = mysqli_query($con, "SELECT tblcourse.`subjectId`, tblcourse.`subjectTitle`, ROUND(AVG(tblresult.grade),1) AS average , COUNT(tblresult.gradingId) AS grades FROM tblresult INNER JOIN tblcourse ON tblcourse.`subjectId` = tblresult.`subjectId` WHERE tblresult.StudentId =  '$_GET[StudentId]' AND tblresult.departmentId =  '$_GET[departmentId]' GROUP BY tblresult.subjectId");
                                                             while ($finalGrade = mysqli_fetch_array($sql)) {
-
+                                                                $_SESSION['finalGrade'] =  $finalGrade['grades'];
                                                                 $finalTotalAverage += $finalGrade['average'];
 
-                                                                if ($finalGradelength['totalSubject'] ==  $finalGrade['grades']) { ?>
+                                                                if ($finalGradelength['totalSubject'] ==  $finalGrade['grades']) {
+                                                            ?>
+                                                                    <tr>
+
+                                                                        <td> <?= $finalGrade['subjectId'] ?></td>
+                                                                        <td> <?= $finalGrade['subjectTitle'] ?></td>
+                                                                        <td> <?= $finalGrade['average'] ?></td>
+                                                                        <?php
+                                                                        if (isset($finalGrade['average'])) {
+                                                                            if ($finalGrade['average'] > 75) {    ?>
+                                                                                <td class="text-success">Passed</td>
+
+                                                                            <?php    } else { ?>
+
+                                                                                <td class="text-danger">Failed</td>
+                                                                        <?php      }
+                                                                        } ?>
+                                                                    <?php
+                                                                } else { ?>
+
                                                                     <tr>
 
                                                                         <td> <?= $finalGrade['subjectId'] ?></td>
@@ -187,7 +206,8 @@ if (isset($_GET['StudentId']) && isset($_GET['departmentId']) && isset($_GET['su
                                                                         } else { ?>
                                                                             <td>Pending</td>
                                                                         <?php   } ?>
-                                                                    <?php  }
+                                                                    <?php
+                                                                }
 
                                                                     ?>
 
@@ -199,7 +219,8 @@ if (isset($_GET['StudentId']) && isset($_GET['departmentId']) && isset($_GET['su
 
 
                                                                     </tr>
-                                                                <?php  }
+                                                                <?php
+                                                            }
 
                                                                 ?>
 
@@ -228,7 +249,7 @@ if (isset($_GET['StudentId']) && isset($_GET['departmentId']) && isset($_GET['su
                                                             <div class="col-md-12">
                                                                 <div class="card">
                                                                     <div class="card-header">
-                                                                        <h2 class="text-info">Final Grade</h2>
+                                                                        <h2 class="text-info">General Average</h2>
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
@@ -250,10 +271,23 @@ if (isset($_GET['StudentId']) && isset($_GET['departmentId']) && isset($_GET['su
                                                                                 AND tblresult.departmentId =  '$_GET[departmentId]' GROUP BY tblresult.subjectId");
                                                                                 $finalGrade = mysqli_fetch_array($sql);
                                                                                 ?>
+
                                                                                 <?php
-                                                                                if ($finalGradelength['totalSubject'] ==  $finalGrade['grades']) { ?>
-                                                                                    <tr>
+                                                                                ?>
+                                                                                <tr>
+                                                                                    <?php
+
+                                                                                    if ($finalTotalAverage == "") { ?>
+                                                                                        <td>Incomplete Grades</td>
+                                                                                    <?php } else {    ?>
                                                                                         <td><?= round($finalTotalAverage /  $finalGradelength['totalSubject'], 2) ?></td>
+                                                                                    <?php    }
+
+                                                                                    ?>
+                                                                                    <?php
+                                                                                    if ($finalTotalAverage == "") { ?>
+                                                                                        <td class="text-warning">Pending</td>
+                                                                                    <?php } else {    ?>
                                                                                         <?php if (round($finalTotalAverage /  $finalGradelength['totalSubject'], 2) > 75) {    ?>
                                                                                             <td class="text-success">Passed</td>
 
@@ -261,9 +295,14 @@ if (isset($_GET['StudentId']) && isset($_GET['departmentId']) && isset($_GET['su
 
                                                                                             <td class="text-danger">Failed</td>
                                                                                         <?php      } ?>
-                                                                                    </tr>
+                                                                                    <?php    }
 
-                                                                                <?php  }
+                                                                                    ?>
+
+
+                                                                                </tr>
+
+                                                                                <?php
 
                                                                                 ?>
 
